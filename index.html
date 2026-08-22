@@ -4,106 +4,122 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Klera</title>
-<meta name="description" content="Klera — coming soon.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#070707;
     --paper:#EAEAE8;
-    --dim:rgba(234,234,232,.3);
+    --faint:rgba(234,234,232,.28);
+    --track:rgba(234,234,232,.1);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{height:100%}
   body{
-    background:var(--ink);
-    color:var(--paper);
-    font-family:'IBM Plex Mono',ui-monospace,monospace;
-    min-height:100svh;
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
+    background:var(--ink);color:var(--paper);
+    font-family:'Geist Mono',ui-monospace,monospace;
+    min-height:100svh;display:flex;flex-direction:column;overflow:hidden;
   }
+  header{padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px)}
+  .mark{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint)}
 
-  header{
-    padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px);
-  }
-  .mark{
-    font-size:10px;
-    font-weight:400;
-    letter-spacing:.3em;
-    text-transform:uppercase;
-    color:var(--dim);
-  }
-
-  main{
-    flex:1;
-    display:grid;
-    place-items:center;
-    padding:0 24px;
-  }
+  main{flex:1;display:grid;place-items:center;padding:0 24px}
+  .block{text-align:center;width:min(400px,84vw)}
 
   h1{
-    font-weight:300;
-    font-size:clamp(21px,3.1vw,36px);
-    letter-spacing:-.01em;
-    white-space:nowrap;
-    opacity:0;
-    animation:fade 1.6s ease .3s forwards;
+    font-weight:300;font-size:clamp(17px,2.5vw,27px);line-height:1.45;
+    opacity:0;animation:fade 1.5s ease .25s forwards;
   }
   @keyframes fade{to{opacity:1}}
 
-  .cursor{
-    display:inline-block;
-    width:.5em;
-    height:.78em;
-    background:var(--paper);
-    vertical-align:-.03em;
-    margin-left:.14em;
-    animation:blink 1.2s steps(1) infinite;
+  .track{
+    margin-top:2.7em;height:1px;background:var(--track);
+    position:relative;overflow:hidden;
+    opacity:0;animation:fade 1.6s ease 1.1s forwards;
   }
-  @keyframes blink{50%{opacity:0}}
+  .fill{
+    position:absolute;inset:0 auto 0 0;width:0;
+    background:var(--paper);opacity:.5;
+    transition:width 3.4s cubic-bezier(.22,.9,.25,1);
+  }
+  /* marker sits at the leading edge of real progress */
+  .head{
+    position:absolute;top:-2px;bottom:-2px;width:1px;
+    background:var(--paper);opacity:0;left:0;
+    transition:left 3.4s cubic-bezier(.22,.9,.25,1);
+    animation:pulse 2.8s ease-in-out 4.4s infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:.75}
+    50%{opacity:.25}
+  }
+  .seg{
+    position:absolute;top:0;bottom:0;width:18%;
+    background:linear-gradient(90deg,transparent,var(--paper),transparent);
+    opacity:.45;
+    animation:sweep 3.6s cubic-bezier(.5,0,.5,1) 1.3s infinite;
+  }
+  @keyframes sweep{
+    0%{transform:translateX(-120%)}
+    100%{transform:translateX(640%)}
+  }
 
-  footer{
-    padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px);
-  }
+  footer{padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px)}
   .date{
-    font-size:10px;
-    font-weight:400;
-    letter-spacing:.3em;
-    text-transform:uppercase;
-    color:var(--paper);
-    animation:flicker 7s linear infinite;
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--paper);animation:flicker 7s linear infinite;
   }
-
   @keyframes flicker{
-    0%,100%{opacity:.5}
-    22%{opacity:.5}
-    23%{opacity:.14}
-    24%{opacity:.48}
-    57%{opacity:.5}
-    58%{opacity:.1}
-    59%{opacity:.44}
-    60%{opacity:.16}
-    62%{opacity:.5}
-    88%{opacity:.5}
-    89%{opacity:.18}
-    91%{opacity:.5}
+    0%,100%{opacity:.5}22%{opacity:.5}23%{opacity:.14}24%{opacity:.48}
+    57%{opacity:.5}58%{opacity:.1}59%{opacity:.44}60%{opacity:.16}62%{opacity:.5}
+    88%{opacity:.5}89%{opacity:.18}91%{opacity:.5}
   }
-
   @media (prefers-reduced-motion: reduce){
-    *{animation:none !important}
-    h1{opacity:1}
+    *{animation:none !important;transition:none !important}
+    h1,.track{opacity:1}
+    .head{opacity:.7}
+    .seg{display:none}
     .date{opacity:.5}
   }
 </style>
 </head>
 <body>
   <header><div class="mark">Klera</div></header>
-
-  <main><h1>Coming soon...<span class="cursor"></span></h1></main>
-
+  <main>
+    <div class="block">
+      <h1 id="line"></h1>
+      <div class="track">
+        <div class="fill" id="fill"></div>
+        <div class="head" id="head"></div>
+        <div class="seg"></div>
+      </div>
+    </div>
+  </main>
   <footer><div class="date">September 15th</div></footer>
+<script>
+const lines=["The answer was never the point.","Hesitation is data.","The pen knows first.","Nobody watches you think. Yet.","Show your working.","Most tutors arrive too late.","Built to be needed less.","A* is a habit, not a talent.","Every pause says something.","Learning how you learn."];
+document.getElementById("line").textContent=lines[Math.floor(Math.random()*lines.length)];
+
+// real progress across the build window
+const START  = new Date("2026-08-22T00:00:00Z").getTime();
+const LAUNCH = new Date("2026-09-15T00:00:00Z").getTime();
+
+const now = Date.now();
+let pct = (now - START) / (LAUNCH - START);
+pct = Math.max(0, Math.min(1, pct));
+
+const fill = document.getElementById("fill");
+const head = document.getElementById("head");
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function place(){
+  fill.style.width = (pct * 100).toFixed(2) + "%";
+  head.style.left  = (pct * 100).toFixed(2) + "%";
+}
+
+if(reduce){ place(); }
+else{ setTimeout(place, 1400); }
+</script>
 </body>
 </html>
