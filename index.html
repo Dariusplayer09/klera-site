@@ -23,16 +23,16 @@
   }
   header{padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px)}
   .mark{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint)}
-
+ 
   main{flex:1;display:grid;place-items:center;padding:0 24px}
   .block{text-align:center;width:min(400px,84vw)}
-
+ 
   h1{
     font-weight:300;font-size:clamp(17px,2.5vw,27px);line-height:1.45;
     opacity:0;animation:fade 1.5s ease .25s forwards;
   }
   @keyframes fade{to{opacity:1}}
-
+ 
   .track{
     margin-top:2.7em;height:1px;background:var(--track);
     position:relative;overflow:hidden;
@@ -64,7 +64,7 @@
     0%{transform:translateX(-120%)}
     100%{transform:translateX(640%)}
   }
-
+ 
   footer{padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px)}
   .date{
     font-size:10px;letter-spacing:.3em;text-transform:uppercase;
@@ -99,185 +99,42 @@
   <footer><div class="date">September 15th</div></footer>
 <script>
 const lines=["The answer was never the point.","Hesitation is data.","The pen knows first.","Nobody watches you think. Yet.","Show your working.","Most tutors arrive too late.","Built to be needed less.","A* is a habit, not a talent.","Every pause says something.","Learning how you learn."];
-
+ 
 // avoid repeating anything from the last few visits
 const KEY = "klera:seen";
 const MEMORY = 4;
-
+ 
 let seen = [];
 try { seen = JSON.parse(localStorage.getItem(KEY)) || []; } catch(e) { seen = []; }
-
+ 
 let pool = lines.filter((_, i) => !seen.includes(i));
 if (!pool.length) pool = lines;
-
+ 
 const pick = pool[Math.floor(Math.random() * pool.length)];
 document.getElementById("line").textContent = pick;
-
+ 
 try {
   seen.push(lines.indexOf(pick));
   localStorage.setItem(KEY, JSON.stringify(seen.slice(-MEMORY)));
 } catch(e) {}
-
+ 
 // real progress across the build window
 const START  = new Date("2026-08-22T00:00:00Z").getTime();
 const LAUNCH = new Date("2026-09-15T00:00:00Z").getTime();
-
+ 
 const now = Date.now();
 let pct = (now - START) / (LAUNCH - START);
 pct = Math.max(0, Math.min(1, pct));
-
+ 
 const fill = document.getElementById("fill");
 const head = document.getElementById("head");
 const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
+ 
 function place(){
   fill.style.width = (pct * 100).toFixed(2) + "%";
   head.style.left  = (pct * 100).toFixed(2) + "%";
 }
-
-if(reduce){ place(); }
-else{ setTimeout(place, 1400); }
-</script>
-</body>
-</html>  }
-  @keyframes sweep{
-    0%{transform:translateX(-120%)}
-    100%{transform:translateX(640%)}
-  }
-
-  footer{padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px)}
-  .date{
-    font-size:10px;letter-spacing:.3em;text-transform:uppercase;
-    color:var(--paper);animation:flicker 7s linear infinite;
-  }
-  @keyframes flicker{
-    0%,100%{opacity:.5}22%{opacity:.5}23%{opacity:.14}24%{opacity:.48}
-    57%{opacity:.5}58%{opacity:.1}59%{opacity:.44}60%{opacity:.16}62%{opacity:.5}
-    88%{opacity:.5}89%{opacity:.18}91%{opacity:.5}
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none !important;transition:none !important}
-    h1,.track{opacity:1}
-    .head{opacity:.7}
-    .seg{display:none}
-    .date{opacity:.5}
-  }
-</style>
-</head>
-<body>
-  <header><div class="mark">Klera</div></header>
-  <main>
-    <div class="block">
-      <h1 id="line"></h1>
-      <div class="track">
-        <div class="fill" id="fill"></div>
-        <div class="head" id="head"></div>
-        <div class="seg"></div>
-      </div>
-    </div>
-  </main>
-  <footer><div class="date">September 15th</div></footer>
-<script>
-const lines=["The answer was never the point.","Hesitation is data.","The pen knows first.","Nobody watches you think. Yet.","Show your working.","Most tutors arrive too late.","Built to be needed less.","A* is a habit, not a talent.","Every pause says something.","Learning how you learn."];
-
-// avoid repeating anything from the last few visits
-const KEY = "klera:seen";
-const MEMORY = 4;
-
-let seen = [];
-try { seen = JSON.parse(localStorage.getItem(KEY)) || []; } catch(e) { seen = []; }
-
-let pool = lines.filter((_, i) => !seen.includes(i));
-if (!pool.length) pool = lines;
-
-const pick = pool[Math.floor(Math.random() * pool.length)];
-document.getElementById("line").textContent = pick;
-
-try {
-  seen.push(lines.indexOf(pick));
-  localStorage.setItem(KEY, JSON.stringify(seen.slice(-MEMORY)));
-} catch(e) {}
-
-// real progress across the build window
-const START  = new Date("2026-08-22T00:00:00Z").getTime();
-const LAUNCH = new Date("2026-09-15T00:00:00Z").getTime();
-
-const now = Date.now();
-let pct = (now - START) / (LAUNCH - START);
-pct = Math.max(0, Math.min(1, pct));
-
-const fill = document.getElementById("fill");
-const head = document.getElementById("head");
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-function place(){
-  fill.style.width = (pct * 100).toFixed(2) + "%";
-  head.style.left  = (pct * 100).toFixed(2) + "%";
-}
-
-if(reduce){ place(); }
-else{ setTimeout(place, 1400); }
-</script>
-</body>
-</html>  }
-  @keyframes sweep{
-    0%{transform:translateX(-120%)}
-    100%{transform:translateX(640%)}
-  }
-
-  footer{padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px)}
-  .date{
-    font-size:10px;letter-spacing:.3em;text-transform:uppercase;
-    color:var(--paper);animation:flicker 7s linear infinite;
-  }
-  @keyframes flicker{
-    0%,100%{opacity:.5}22%{opacity:.5}23%{opacity:.14}24%{opacity:.48}
-    57%{opacity:.5}58%{opacity:.1}59%{opacity:.44}60%{opacity:.16}62%{opacity:.5}
-    88%{opacity:.5}89%{opacity:.18}91%{opacity:.5}
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none !important;transition:none !important}
-    h1,.track{opacity:1}
-    .head{opacity:.7}
-    .seg{display:none}
-    .date{opacity:.5}
-  }
-</style>
-</head>
-<body>
-  <header><div class="mark">Klera</div></header>
-  <main>
-    <div class="block">
-      <h1 id="line"></h1>
-      <div class="track">
-        <div class="fill" id="fill"></div>
-        <div class="head" id="head"></div>
-        <div class="seg"></div>
-      </div>
-    </div>
-  </main>
-  <footer><div class="date">September 15th</div></footer>
-<script>
-const lines=["The answer was never the point.","Hesitation is data.","The pen knows first.","Nobody watches you think. Yet.","Show your working.","Most tutors arrive too late.","Built to be needed less.","A* is a habit, not a talent.","Every pause says something.","Learning how you learn."];
-document.getElementById("line").textContent=lines[Math.floor(Math.random()*lines.length)];
-
-// real progress across the build window
-const START  = new Date("2026-08-22T00:00:00Z").getTime();
-const LAUNCH = new Date("2026-09-15T00:00:00Z").getTime();
-
-const now = Date.now();
-let pct = (now - START) / (LAUNCH - START);
-pct = Math.max(0, Math.min(1, pct));
-
-const fill = document.getElementById("fill");
-const head = document.getElementById("head");
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-function place(){
-  fill.style.width = (pct * 100).toFixed(2) + "%";
-  head.style.left  = (pct * 100).toFixed(2) + "%";
-}
-
+ 
 if(reduce){ place(); }
 else{ setTimeout(place, 1400); }
 </script>
