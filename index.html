@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klera</title>
+<meta name="description" content="Klera — coming soon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#070707;
+    --paper:#EAEAE8;
+    --dim:rgba(234,234,232,.3);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'IBM Plex Mono',ui-monospace,monospace;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+
+  header{
+    padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px);
+  }
+  .mark{
+    font-size:10px;
+    font-weight:400;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--dim);
+  }
+
+  main{
+    flex:1;
+    display:grid;
+    place-items:center;
+    padding:0 24px;
+  }
+
+  h1{
+    font-weight:300;
+    font-size:clamp(21px,3.1vw,36px);
+    letter-spacing:-.01em;
+    white-space:nowrap;
+    opacity:0;
+    animation:fade 1.6s ease .3s forwards;
+  }
+  @keyframes fade{to{opacity:1}}
+
+  .cursor{
+    display:inline-block;
+    width:.5em;
+    height:.78em;
+    background:var(--paper);
+    vertical-align:-.03em;
+    margin-left:.14em;
+    animation:blink 1.2s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0}}
+
+  footer{
+    padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px);
+  }
+  .date{
+    font-size:10px;
+    font-weight:400;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--paper);
+    animation:flicker 7s linear infinite;
+  }
+
+  @keyframes flicker{
+    0%,100%{opacity:.5}
+    22%{opacity:.5}
+    23%{opacity:.14}
+    24%{opacity:.48}
+    57%{opacity:.5}
+    58%{opacity:.1}
+    59%{opacity:.44}
+    60%{opacity:.16}
+    62%{opacity:.5}
+    88%{opacity:.5}
+    89%{opacity:.18}
+    91%{opacity:.5}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important}
+    h1{opacity:1}
+    .date{opacity:.5}
+  }
+</style>
+</head>
+<body>
+  <header><div class="mark">Klera</div></header>
+
+  <main><h1>Coming soon...<span class="cursor"></span></h1></main>
+
+  <footer><div class="date">September 15th</div></footer>
+</body>
+</html>
