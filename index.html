@@ -65,7 +65,18 @@
     100%{transform:translateX(640%)}
   }
  
-  footer{padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px)}
+  footer{
+    padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px);
+    display:flex;align-items:baseline;justify-content:space-between;gap:20px;
+  }
+  /* Way in to the full site. Deliberately quiet — the page is still a teaser. */
+  .enter{
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--faint);text-decoration:none;
+    opacity:0;animation:fade 1.6s ease 2.2s forwards;
+    transition:color .3s;
+  }
+  .enter:hover{color:var(--paper)}
   .date{
     font-size:10px;letter-spacing:.3em;text-transform:uppercase;
     color:var(--paper);animation:flicker 7s linear infinite;
@@ -81,6 +92,7 @@
     .head{opacity:.7}
     .seg{display:none}
     .date{opacity:.5}
+    .enter{opacity:1}
   }
 </style>
 </head>
@@ -96,7 +108,10 @@
       </div>
     </div>
   </main>
-  <footer><div class="date">September 15th</div></footer>
+  <footer>
+    <div class="date">September 15th</div>
+    <a class="enter" href="./how-it-works/">How it works &rsaquo;</a>
+  </footer>
 <script>
 const lines=["The answer was never the point","Hesitation is data","Clear in the unclear","The pen knows first","Show your working","Most tutors arrive too late","Built to be needed less","A* is a habit, not a talent","Every pause says something","Learning how you learn"];
  

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The learner profile</title>
+<meta name="description" content="Klera builds a baseline of how each student writes when calm, then measures deviation from it. Two students, two entirely different distress signals — with the measurements.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/klera.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="mark" href="../">Klera</a>
+  <nav class="nav">
+    <a href="../how-it-works/">How it works</a>
+    <a href="./" aria-current="page">Learner profile</a>
+    <a href="../exams/">Exams</a>
+    <a href="../about/">About</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+<section>
+  <span class="eyebrow">01 — The premise</span>
+  <h1>There is no such thing as what stuck looks like.</h1>
+  <div class="col">
+    <p class="lead">Every system that claims to detect struggle picks a signal — writing slows
+    down, the pen gets shaky, the erasing starts — and sets a threshold on it. That works until
+    you measure two actual people.</p>
+    <p>We did. The results are on this page, including the ones that were inconvenient.</p>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">02 — What it watches</span>
+  <h2>The pen says more than the answer does.</h2>
+  <div class="col">
+    <p>An Apple Pencil reports far more than position. Every stroke carries force, speed,
+    and the shape of its own acceleration; between strokes there are pauses. Klera records
+    four things per attempt, and none of them is what you wrote.</p>
+  </div>
+
+  <div class="grid g2" style="margin-top:30px">
+    <div class="card"><h3>Force</h3><p>How hard the pen is pressed into the glass, averaged across the attempt.</p></div>
+    <div class="card"><h3>Speed</h3><p>How fast the nib actually travels while writing.</p></div>
+    <div class="card"><h3>Jerkiness</h3><p>Variation in speed within a stroke — the physical signature of a hesitant line.</p></div>
+    <div class="card"><h3>Pause</h3><p>The dead time before a stroke begins. Thinking, or stalling.</p></div>
+  </div>
+
+  <p class="mono-note" style="margin-top:26px">None of this is content. The profile never stores
+  what a student wrote, only how they wrote it.</p>
+</section>
+
+<section>
+  <span class="eyebrow">03 — The mechanism</span>
+  <h2>Measured against you, not against everyone.</h2>
+  <div class="col">
+    <p>A fast writer is not a confident writer. A heavy hand is not a stressed hand. Raw
+    numbers mean nothing across people, so Klera never compares a student to a population.</p>
+    <p>Instead it spends the first part of a session building a <strong>baseline of that student's
+    own calm work</strong> — and only calm work. An attempt that involved erase bursts, help taps
+    or frustrated language is refused entry to the baseline, so "normal" never quietly absorbs a
+    bad day. Once twelve clean samples exist, and not one attempt before, deviation from that
+    personal normal starts being meaningful.</p>
+  </div>
+
+  <figure>
+    <div class="figbody">
+      <svg viewBox="0 0 940 176" role="img" aria-label="Pipeline from pen signals to a personal baseline to deviation">
+        <defs>
+          <marker id="a2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L8,4 L0,8" fill="none" stroke="rgba(234,234,232,.4)" stroke-width="1.2"/>
+          </marker>
+        </defs>
+        <g font-family="'Geist Mono',monospace">
+          <rect x="2" y="46" width="176" height="72" fill="none" stroke="rgba(234,234,232,.22)"/>
+          <text x="18" y="72" font-size="11" fill="#EAEAE8">Every stroke</text>
+          <text x="18" y="92" font-size="10" fill="rgba(234,234,232,.46)">force · speed · jerk · pause</text>
+
+          <line x1="180" y1="82" x2="216" y2="82" stroke="rgba(234,234,232,.4)" marker-end="url(#a2)"/>
+
+          <rect x="220" y="46" width="176" height="72" fill="none" stroke="#3987e5"/>
+          <text x="236" y="72" font-size="11" fill="#EAEAE8">Calm only</text>
+          <text x="236" y="92" font-size="10" fill="rgba(234,234,232,.46)">erases + help refused</text>
+
+          <line x1="398" y1="82" x2="434" y2="82" stroke="rgba(234,234,232,.4)" marker-end="url(#a2)"/>
+
+          <rect x="438" y="46" width="176" height="72" fill="none" stroke="#3987e5"/>
+          <text x="454" y="72" font-size="11" fill="#EAEAE8">Your baseline</text>
+          <text x="454" y="92" font-size="10" fill="rgba(234,234,232,.46)">opens at 12 samples</text>
+
+          <line x1="616" y1="82" x2="652" y2="82" stroke="rgba(234,234,232,.4)" marker-end="url(#a2)"/>
+
+          <rect x="656" y="46" width="176" height="72" fill="none" stroke="#C47A24"/>
+          <text x="672" y="72" font-size="11" fill="#EAEAE8">Deviation</text>
+          <text x="672" y="92" font-size="10" fill="rgba(234,234,232,.46)">distance from your normal</text>
+
+          <text x="2" y="156" font-size="10" fill="rgba(234,234,232,.28)" letter-spacing="1.6">BEFORE TWELVE CLEAN SAMPLES THE SYSTEM REPORTS NOTHING — NOT ZERO, NOTHING</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption>The gate at the end is deliberate. A number derived from four samples is noise
+    wearing a decimal point, and the honest output is silence.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <span class="eyebrow">04 — The finding</span>
+  <h2>Two students. Two completely different tells.</h2>
+  <div class="col">
+    <p>We ran the measurement on ourselves, on separate iPads, with separate baselines. Each of
+    us did easy problems calmly until the baseline opened, then genuinely fought problems we
+    could not do — no acting.</p>
+    <p class="lead" style="margin-top:26px">One of us struggles by <strong>pressing harder</strong>.
+    The other struggles by <strong>going still</strong>.</p>
+    <p>Neither signal detects the other person. The pressure reading that catches the first student
+    is flat for the second. The pause that gives the second away never moves for the first. A single
+    fixed threshold — the thing every competing approach ships — would have been blind to one of
+    us, and we only had two people.</p>
+  </div>
+
+  <div class="grid g2" style="margin-top:36px">
+    <div class="card">
+      <h3>Student A</h3>
+      <p style="color:var(--paper);font-size:15px;margin-bottom:8px">Presses harder.</p>
+      <p>Pressure strain rose to more than double the top of his calm range while stuck. His
+      handwriting stayed perfectly smooth throughout — the jerkiness signal read slightly
+      <em>below</em> his own normal.</p>
+    </div>
+    <div class="card">
+      <h3>Student B</h3>
+      <p style="color:var(--paper);font-size:15px;margin-bottom:8px">Goes still.</p>
+      <p>Pressure never moved at all. What moved was the pause before starting a stroke — far
+      outside anything in his calm band, on the hardest problem of the session.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">05 — The evidence</span>
+  <h2>The actual numbers.</h2>
+  <div class="col">
+    <p>This is the layer for people who want to check the claim rather than take it. It includes
+    the measurements that did not support us.</p>
+  </div>
+
+  <details>
+    <summary>Open the measurements</summary>
+    <div class="inner">
+
+      <div class="legend">
+        <span><i class="swatch s-calm"></i>calm attempts (the student's own range)</span>
+        <span><i class="swatch s-struggle"></i>genuine struggle attempts</span>
+      </div>
+
+      <h3>Detector readings, both students</h3>
+      <figure style="margin-top:14px">
+        <div class="figbody"><div id="chart-detectors"></div></div>
+        <figcaption>Each row is one detector on a 0–1 scale. The bar is the range across that
+        student's calm attempts; the marks are individual struggle attempts. The dashed rule is the
+        firing threshold. <b>A detector only works if the marks sit clear of the bar</b> — and for
+        each student, only one row does.</figcaption>
+      </figure>
+
+      <h3 style="margin-top:40px">Pause, student B</h3>
+      <figure style="margin-top:14px">
+        <div class="figbody"><div id="chart-pause"></div></div>
+        <figcaption>Shown separately because the unit is different — standard deviations from
+        that student's own mean, not a 0–1 score. The hardest struggle attempt sat at
+        <b>+7.32</b> against a calm band of −0.51 to +0.65. This is the clearest separation
+        anywhere in our data, and the detector that reads it was dead at the time of the
+        measurement.</figcaption>
+      </figure>
+
+      <h3 style="margin-top:40px">The same data as a table</h3>
+      <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th>Student</th><th>Signal</th><th>Calm range</th><th>While struggling</th><th>Threshold</th><th>Separates?</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>pressure strain</td><td class="v">0.03 – 0.24</td><td class="v">0.56</td><td class="v">0.60</td><td>yes, cleanly</td></tr>
+            <tr><td>A</td><td>unproductive struggle</td><td class="v">0.00 – 0.25</td><td class="v">0.60</td><td class="v">0.60</td><td>yes — this is what fired</td></tr>
+            <tr><td>A</td><td>dysfluency</td><td class="v">0.03 – 0.34</td><td class="v">0.30</td><td class="v">0.70</td><td>no</td></tr>
+            <tr><td>B</td><td>pressure strain</td><td class="v">0.05 – 0.12</td><td class="v">0.06 · 0.11 · 0.12</td><td class="v">0.60</td><td>no — completely flat</td></tr>
+            <tr><td>B</td><td>dysfluency</td><td class="v">0.13 – 0.57</td><td class="v">0.26 · 0.56 · 0.39</td><td class="v">0.70</td><td>no — ranges overlap</td></tr>
+            <tr><td>B</td><td>unproductive struggle</td><td class="v">0.25</td><td class="v">0.50</td><td class="v">0.60</td><td>partial — never crosses</td></tr>
+            <tr><td>B</td><td>pause (z)</td><td class="v">−0.51 – +0.65</td><td class="v">−0.36 · +1.21 · +7.32</td><td>—</td><td>2 of 3, far outside</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:40px">What this does not prove</h3>
+      <p>Two students. Four genuine struggle attempts between them. That is enough to falsify
+      "one signal fits everyone" — a single counterexample does that — and nowhere near enough to
+      set a threshold on. We have not moved one.</p>
+      <p>One measurement actively cuts against us: student B produced a <strong>calm, solved,
+      unaided</strong> attempt reading 0.57 on dysfluency, and a genuinely stuck attempt reading
+      0.56. Fast confident writing and stuck writing are indistinguishable on that channel for
+      that person. Any proposal to lower the dysfluency threshold toward those values would fire
+      on confident work — so that proposal is dead, and it is recorded as dead.</p>
+      <p>We also found, while writing this, that the detector which best separated student B was
+      structurally unable to fire: one stale lookup upstream starved it of the data it needed.
+      It is fixed and unverified. The next measurement session is its first real test.</p>
+    </div>
+  </details>
+</section>
+
+<section>
+  <span class="eyebrow">06 — What it changes</span>
+  <h2>Support that can only be added, never taken away.</h2>
+  <div class="col">
+    <p>When the evidence says a student is in difficulty, the tutor moves to its most generous
+    level of help, and the read of their state shifts toward confusion rather than flow. The rule
+    is deliberately one-directional: <strong>physical distress may add support, but nothing
+    inferred is ever allowed to withdraw it</strong>.</p>
+    <p>It is an asymmetry we apply everywhere. When a sample is too small to judge, it returns
+    nothing rather than a confident zero. When the system has not seen enough of a student to
+    name a weakness, it says nothing about their weaknesses. An invented claim about a student
+    reaches the tutor as fact, and a tutor that believes a student has a misconception they do
+    not have is worse than one that knows nothing.</p>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">07 — Next</span>
+  <h2>Where this shows up.</h2>
+  <div class="col">
+    <p style="margin-top:8px"><a class="inline" href="../exams/">Exam simulation and the grader →</a></p>
+    <p><a class="inline" href="../how-it-works/">How the board and handwriting work →</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="fl">
+    <span class="date">Klera</span>
+    <nav class="nav">
+      <a href="../how-it-works/">How it works</a>
+      <a href="./">Learner profile</a>
+      <a href="../exams/">Exams</a>
+      <a href="../about/">About</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+
+/* Range-and-points plot. The job is "does a set of points sit clear of a band",
+   so the band is a bar and each struggle attempt is its own labelled mark —
+   never an average, which would hide exactly the spread being argued about. */
+function rangePlot(mount,{rows,min,max,ticks,threshold,unit}){
+  const L=176,R=54,rowH=58,top=34,W=900,H=top+rows.length*rowH+34;
+  const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,role:'img'});
+  const x=v=>L+(v-min)/(max-min)*(W-L-R);
+
+  ticks.forEach(t=>{
+    svg.appendChild(el('line',{x1:x(t),y1:top-8,x2:x(t),y2:top+rows.length*rowH-14,
+      stroke:'rgba(234,234,232,.08)','stroke-width':1}));
+    const lb=el('text',{x:x(t),y:H-12,'font-size':10,fill:'rgba(234,234,232,.28)',
+      'text-anchor':'middle','font-family':"'Geist Mono',monospace"});
+    lb.textContent=t; svg.appendChild(lb);
+  });
+
+  if(threshold!=null){
+    svg.appendChild(el('line',{x1:x(threshold),y1:top-14,x2:x(threshold),y2:top+rows.length*rowH-10,
+      stroke:'rgba(234,234,232,.42)','stroke-width':1,'stroke-dasharray':'3 4'}));
+    const tl=el('text',{x:x(threshold),y:top-20,'font-size':9,fill:'rgba(234,234,232,.46)',
+      'text-anchor':'middle','letter-spacing':'1.4','font-family':"'Geist Mono',monospace"});
+    tl.textContent='THRESHOLD'; svg.appendChild(tl);
+  }
+
+  rows.forEach((r,i)=>{
+    const y=top+i*rowH+10;
+    const label=el('text',{x:0,y:y+4,'font-size':11,fill:'rgba(234,234,232,.72)','font-family':"'Geist Mono',monospace"});
+    label.textContent=r.label; svg.appendChild(label);
+    if(r.sub){
+      const s=el('text',{x:0,y:y+18,'font-size':9,fill:'rgba(234,234,232,.28)','font-family':"'Geist Mono',monospace"});
+      s.textContent=r.sub; svg.appendChild(s);
+    }
+    // calm band — 4px rounded ends, thin mark
+    const x0=x(r.calm[0]),x1=x(r.calm[1]);
+    const bar=el('rect',{x:x0,y:y-4,width:Math.max(3,x1-x0),height:8,rx:4,fill:'var(--calm)',opacity:.95});
+    bar.appendChild(el('title')).textContent=`${r.label} — calm range ${r.calm[0]} to ${r.calm[1]}${unit}`;
+    svg.appendChild(bar);
+
+    if(r.fires!=null){
+      svg.appendChild(el('line',{x1:x(r.fires),y1:y-15,x2:x(r.fires),y2:y+15,
+        stroke:'rgba(234,234,232,.38)','stroke-width':1,'stroke-dasharray':'2 3'}));
+      const ft=el('text',{x:x(r.fires),y:y+27,'font-size':9,fill:'rgba(234,234,232,.34)',
+        'text-anchor':'middle','font-family':"'Geist Mono',monospace"});
+      ft.textContent='fires'; svg.appendChild(ft);
+    }
+    r.struggle.forEach(v=>{
+      // 2px surface ring so overlapping marks stay countable
+      svg.appendChild(el('circle',{cx:x(v),cy:y,r:6.5,fill:'var(--ink)'}));
+      const c=el('circle',{cx:x(v),cy:y,r:4.5,fill:'var(--struggle)'});
+      c.appendChild(el('title')).textContent=`${r.label} — struggle attempt ${v}${unit}`;
+      svg.appendChild(c);
+      const lb=el('text',{x:x(v),y:y-13,'font-size':10,fill:'#C47A24','text-anchor':'middle',
+        'font-family':"'Geist Mono',monospace"});
+      lb.textContent=v; svg.appendChild(lb);
+    });
+  });
+  mount.appendChild(svg);
+}
+
+rangePlot(document.getElementById('chart-detectors'),{
+  min:0,max:1,ticks:[0,.25,.5,.75,1],threshold:null,unit:'',
+  rows:[
+    {label:'pressure strain',sub:'student A',calm:[0.03,0.24],struggle:[0.56],fires:0.60},
+    {label:'unproductive',   sub:'student A',calm:[0.00,0.25],struggle:[0.60],fires:0.60},
+    {label:'dysfluency',     sub:'student A',calm:[0.03,0.34],struggle:[0.30],fires:0.70},
+    {label:'pressure strain',sub:'student B',calm:[0.05,0.12],struggle:[0.06,0.11,0.12],fires:0.60},
+    {label:'unproductive',   sub:'student B',calm:[0.25,0.25],struggle:[0.50],fires:0.60},
+    {label:'dysfluency',     sub:'student B',calm:[0.13,0.57],struggle:[0.26,0.39,0.56],fires:0.70}
+  ]
+});
+
+rangePlot(document.getElementById('chart-pause'),{
+  min:-2,max:8,ticks:[-2,0,2,4,6,8],threshold:null,unit:'σ',
+  rows:[{label:'pause',sub:'student B · z-score',calm:[-0.51,0.65],struggle:[-0.36,1.21,7.32]}]
+});
+</script>
+</body>
+</html>
