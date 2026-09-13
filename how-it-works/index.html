@@ -4,17 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How Klera works</title>
-<meta name="description" content="Klera is an AI tutor that watches you work on an iPad whiteboard and writes back in handwriting. How the board, the five actions and the handwriting engine work.">
+<meta name="description" content="Klera watches you solve maths on an iPad and writes help back onto the board, in handwriting. How the board, the five actions and the handwriting engine work.">
+<meta name="theme-color" content="#070B14">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/klera.css">
+<script src="../assets/klera.js" defer></script>
+<script type="module" src="../assets/ink-scene.js"></script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<header class="top">
-  <a class="mark" href="../">Klera</a>
-  <nav class="nav">
+<header class="nav">
+  <a class="brand" href="../" translate="no">Klera</a>
+  <nav class="nav-links" aria-label="Primary">
     <a href="./" aria-current="page">How it works</a>
     <a href="../learner-profile/">Learner profile</a>
     <a href="../exams/">Exams</a>
@@ -22,239 +27,223 @@
   </nav>
 </header>
 
-<main class="wrap">
+<main id="main">
 
-<section>
-  <span class="eyebrow">01 — The idea</span>
-  <h1>Most tutors arrive too late.</h1>
-  <div class="col">
-    <p class="lead">By the time a student asks for help, the struggle already happened. The
-    pause before the wrong line, the pressure in the pen, the line rewritten three times — all
-    of it is gone by the time anyone says "I'm stuck".</p>
-    <p>Klera is an iPad whiteboard that watches the work as it happens. You write maths with an
-    Apple Pencil the way you always would. It reads the ink, judges the working, and when it
-    helps, it <strong>writes back onto the board in handwriting</strong> — not a chat bubble, not
-    a wall of text. A line of maths, in the place the line belongs.</p>
-  </div>
-</section>
-
-<section>
-  <span class="eyebrow">02 — The board</span>
-  <h2>Write anywhere. Nothing is a text box.</h2>
-  <div class="col">
-    <p>The canvas is infinite and free-form. Klera finds the problems by itself — it groups
-    strokes into <strong>clusters</strong>, one per problem, and tracks each one as a separate
-    piece of work with its own history. Write six problems down the page and it is following
-    six independent attempts.</p>
-  </div>
-
-  <figure>
-    <div class="figbody">
-      <svg viewBox="0 0 900 260" role="img" aria-labelledby="boardtitle">
-        <title id="boardtitle">Three handwritten problems on one canvas, each detected as a separate cluster</title>
-        <rect x="1" y="1" width="898" height="258" fill="none" stroke="rgba(234,234,232,.10)"/>
-        <g class="ink" stroke-width="2">
-          <!-- cluster 1 -->
-          <g id="c1">
-            <path d="M40,60 C44,46 70,44 72,60 C74,74 50,82 38,98 L76,98"/>
-            <path d="M96,68 L128,98"/><path d="M128,68 L96,98"/>
-            <path d="M150,83 L184,83"/><path d="M167,66 L167,100"/>
-            <path d="M238,58 L208,58 L205,76 C224,70 244,76 242,86 C240,98 218,104 204,96"/>
-            <path d="M262,76 L300,76"/><path d="M262,90 L300,90"/>
-            <path d="M324,66 L334,58 L334,100"/>
-            <path d="M356,60 C364,48 386,50 384,64 C382,74 370,76 364,76 C376,74 388,78 386,90 C384,102 362,104 354,96"/>
-          </g>
-          <!-- cluster 2 -->
-          <g id="c2">
-            <path d="M40,170 L72,170"/><path d="M56,154 L56,188"/>
-            <path d="M96,156 L96,190 L128,190"/>
-            <path d="M152,158 C160,150 178,152 178,164 C178,180 152,182 152,196 L180,196"/>
-            <path d="M204,174 L238,174"/>
-            <path d="M262,156 L262,196"/><path d="M262,156 C286,156 292,176 262,176"/>
-          </g>
-          <!-- cluster 3 -->
-          <g id="c3">
-            <path d="M560,60 C568,48 590,50 588,64 C586,74 574,76 568,76 C580,74 592,78 590,90 C588,102 566,104 558,96"/>
-            <path d="M616,68 L648,98"/><path d="M648,68 L616,98"/>
-            <path d="M672,83 L706,83"/>
-            <path d="M730,58 C738,46 762,44 764,60 C766,74 742,82 730,98 L768,98"/>
-            <path d="M792,76 L830,76"/><path d="M792,90 L830,90"/>
-          </g>
-        </g>
-        <!-- cluster outlines -->
-        <g fill="none" stroke="#3987e5" stroke-width="1" stroke-dasharray="3 4" opacity=".75">
-          <rect x="24" y="38" width="380" height="80"/>
-          <rect x="24" y="140" width="272" height="72"/>
-          <rect x="544" y="38" width="302" height="80"/>
-        </g>
-        <g font-size="10" fill="#3987e5" letter-spacing="2" font-family="'Geist Mono',monospace">
-          <text x="24" y="30">CLUSTER 1</text>
-          <text x="24" y="132">CLUSTER 2</text>
-          <text x="544" y="30">CLUSTER 3</text>
-        </g>
-      </svg>
-    </div>
-    <figcaption>Stroke clustering is geometric, not a text box. Each cluster carries a stable
-    identity across every stroke added to it, so one problem is <b>one attempt</b> — with its own
-    stroke count, pauses, erasures, help history and outcome.</figcaption>
-  </figure>
-</section>
-
-<section>
-  <span class="eyebrow">03 — The five actions</span>
-  <h2>Five ways to ask. Each one refuses to do the others' job.</h2>
-  <div class="col">
-    <p>The failure mode of an AI tutor is that every button quietly becomes "give me the
-    answer". Klera's five actions have <strong>strict, separately enforced scopes</strong>. Explain
-    is forbidden from solving the problem. Next Step is forbidden from working toward the final
-    answer. Only Solve finishes anything.</p>
-  </div>
-
-  <div class="row" role="group" aria-label="Tutor actions">
-    <button class="chip" data-act="hint" aria-pressed="true">Hint</button>
-    <button class="chip" data-act="mistake" aria-pressed="false">Mistake</button>
-    <button class="chip" data-act="next" aria-pressed="false">Next Step</button>
-    <button class="chip" data-act="explain" aria-pressed="false">Explain</button>
-    <button class="chip" data-act="solve" aria-pressed="false">Solve</button>
-  </div>
-
-  <figure>
-    <div class="figbody">
-      <div class="grid g2">
-        <div>
-          <h3>Scope contract</h3>
-          <p id="act-scope" style="color:var(--paper);font-size:13px"></p>
-          <h3 style="margin-top:22px">Forbidden</h3>
-          <p id="act-forbid" style="font-size:13px"></p>
-        </div>
-        <div>
-          <h3>What reaches the board</h3>
-          <p id="act-board" style="font-size:13px"></p>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-grid">
+      <div>
+        <h1 id="hero-title">Most tutors arrive too late.</h1>
+        <p class="lead">Klera watches you solve maths on an iPad and writes help back onto the board, in handwriting.</p>
+        <div class="actions">
+          <a class="btn" href="../learner-profile/" data-magnetic>See how it reads the pen</a>
+          <a class="btn btn-quiet" href="#actions" data-magnetic>Try the five actions</a>
         </div>
       </div>
-    </div>
-    <figcaption>Each action carries its own behavioural contract into the model request. The
-    scopes are deliberately non-overlapping so the actions stay distinguishable to a student —
-    and so "Explain" can never quietly become "Solve".</figcaption>
-  </figure>
-</section>
 
-<section>
-  <span class="eyebrow">04 — The handwriting engine</span>
-  <h2>It writes. It does not type.</h2>
-  <div class="col">
-    <p>When Klera answers on the board, the answer is drawn stroke by stroke, in a hand. This is
-    the part of the app that took the longest and is the easiest to get wrong: the target is a
-    <strong>calm, deliberate, premium tutor's hand</strong> — not shaky, not artistic, not
-    over-humanised, and above all not visibly generated.</p>
-  </div>
-
-  <figure>
-    <div class="figbody" style="text-align:center">
-      <svg id="writer" class="ink" viewBox="0 0 460 120" role="img" aria-label="The expression 2x + 5 = 13 being written by hand">
-        <path d="M42,44 C46,30 72,28 74,44 C76,58 52,66 40,82 L78,82"/>
-        <path d="M102,52 L134,82"/>
-        <path d="M134,52 L102,82"/>
-        <path d="M158,67 L192,67"/>
-        <path d="M175,50 L175,84"/>
-        <path d="M246,42 L216,42 L213,60 C232,54 252,60 250,70 C248,82 226,88 212,80"/>
-        <path d="M272,60 L310,60"/>
-        <path d="M272,74 L310,74"/>
-        <path d="M336,50 L346,42 L346,84"/>
-        <path d="M372,44 C380,32 402,34 400,48 C398,58 386,60 380,60 C392,58 404,62 402,74 C400,86 378,88 370,80"/>
-      </svg>
-      <div class="row" style="justify-content:center;margin:22px 0 0">
-        <button class="chip" id="rewrite" aria-pressed="false">Write it again</button>
+      <div>
+        <div class="stage">
+          <canvas id="scene" aria-label="A glass board in 3D with 2x + 5 = 13 being written on it in ink" role="img"></canvas>
+          <svg class="ink ink-fallback" viewBox="0 0 460 120" aria-hidden="true">
+            <path d="M42,44 C46,30 72,28 74,44 C76,58 52,66 40,82 L78,82"/>
+            <path d="M102,52 L134,82"/><path d="M134,52 L102,82"/>
+            <path d="M158,67 L192,67"/><path d="M175,50 L175,84"/>
+            <path d="M246,42 L216,42 L213,60 C232,54 252,60 250,70 C248,82 226,88 212,80"/>
+            <path d="M272,60 L310,60"/><path d="M272,74 L310,74"/>
+            <path d="M336,50 L346,42 L346,84"/>
+            <path d="M372,44 C380,32 402,34 400,48 C398,58 386,60 380,60 C392,58 404,62 402,74 C400,86 378,88 370,80"/>
+          </svg>
+        </div>
+        <div class="stage-controls">
+          <button class="btn btn-quiet btn-small" id="scene-replay" type="button">Write it again</button>
+          <button class="btn btn-quiet btn-small" id="scene-pause" type="button" aria-pressed="false">Pause animation</button>
+        </div>
+        <p class="stage-hint">Move your pointer over the board. Click it to write the line again.</p>
       </div>
     </div>
-    <figcaption>Rendered live in your browser from the same idea the app uses: an expression is
-    not an image, it is an <b>ordered set of strokes</b> with their own timing. Stroke order,
-    pen-lift pauses and the rhythm between glyphs are what make a hand read as a hand.</figcaption>
-  </figure>
+  </section>
 
-  <h3 style="margin-top:44px">The pipeline</h3>
-  <figure>
-    <div class="figbody">
-      <svg viewBox="0 0 940 150" role="img" aria-label="Four stage handwriting pipeline">
-        <defs>
-          <marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
-            <path d="M0,0 L8,4 L0,8" fill="none" stroke="rgba(234,234,232,.4)" stroke-width="1.2"/>
-          </marker>
-        </defs>
-        <g font-family="'Geist Mono',monospace">
-          <g>
-            <rect x="2" y="34" width="196" height="66" fill="none" stroke="rgba(234,234,232,.22)"/>
-            <text x="18" y="60" font-size="11" fill="#EAEAE8">Parser</text>
-            <text x="18" y="80" font-size="10" fill="rgba(234,234,232,.46)">text → AST</text>
+  <section class="section wrap" aria-labelledby="idea-title">
+    <h2 class="statement" id="idea-title">By the time a student says they are stuck, the struggle has already happened.</h2>
+    <p class="lead">The pause before the wrong line, the pressure in the pen, the line rewritten three times. A tutor who only hears &ldquo;I&rsquo;m stuck&rdquo; missed all of it. Klera reads the work while it is happening.</p>
+  </section>
+
+  <section class="section wrap" aria-labelledby="board-title">
+    <h2 id="board-title">Write anywhere. Nothing is a text box.</h2>
+    <p>The canvas is infinite and free-form. Klera finds the problems on its own: it groups strokes into clusters, one per problem, and follows each one as its own attempt. Write six problems down the page and it is tracking six pieces of work.</p>
+
+    <figure class="fig">
+      <div class="panel" data-tilt>
+        <svg class="diagram" viewBox="0 0 900 250" role="img" aria-labelledby="clusters-title">
+          <title id="clusters-title">Three handwritten problems on one canvas, each detected as a separate cluster</title>
+          <g class="ink" data-ink-group>
+            <path d="M40,64 C44,50 70,48 72,64 C74,78 50,86 38,102 L76,102"/>
+            <path d="M96,72 L128,102"/><path d="M128,72 L96,102"/>
+            <path d="M150,87 L184,87"/><path d="M167,70 L167,104"/>
+            <path d="M238,62 L208,62 L205,80 C224,74 244,80 242,90 C240,102 218,108 204,100"/>
+            <path d="M262,80 L300,80"/><path d="M262,94 L300,94"/>
+            <path d="M324,70 L334,62 L334,104"/>
+            <path d="M356,64 C364,52 386,54 384,68 C382,78 370,80 364,80 C376,78 388,82 386,94 C384,106 362,108 354,100"/>
+            <path d="M40,176 L72,176"/><path d="M56,160 L56,194"/>
+            <path d="M96,162 L96,196 L128,196"/>
+            <path d="M152,164 C160,156 178,158 178,170 C178,186 152,188 152,202 L180,202"/>
+            <path d="M204,180 L238,180"/>
+            <path d="M262,162 L262,202"/><path d="M262,162 C286,162 292,182 262,182"/>
+            <path d="M560,64 C568,52 590,54 588,68 C586,78 574,80 568,80 C580,78 592,82 590,94 C588,106 566,108 558,100"/>
+            <path d="M616,72 L648,102"/><path d="M648,72 L616,102"/>
+            <path d="M672,87 L706,87"/>
+            <path d="M730,62 C738,50 762,48 764,64 C766,78 742,86 730,102 L768,102"/>
+            <path d="M792,80 L830,80"/><path d="M792,94 L830,94"/>
           </g>
-          <line x1="200" y1="67" x2="238" y2="67" stroke="rgba(234,234,232,.4)" stroke-width="1" marker-end="url(#ar)"/>
-          <g>
-            <rect x="242" y="34" width="196" height="66" fill="none" stroke="rgba(234,234,232,.22)"/>
-            <text x="258" y="60" font-size="11" fill="#EAEAE8">Layout engine</text>
-            <text x="258" y="80" font-size="10" fill="rgba(234,234,232,.46)">where each glyph sits</text>
-          </g>
-          <line x1="440" y1="67" x2="478" y2="67" stroke="rgba(234,234,232,.4)" stroke-width="1" marker-end="url(#ar)"/>
-          <g>
-            <rect x="482" y="34" width="196" height="66" fill="none" stroke="rgba(234,234,232,.22)"/>
-            <text x="498" y="60" font-size="11" fill="#EAEAE8">Stroke composer</text>
-            <text x="498" y="80" font-size="10" fill="rgba(234,234,232,.46)">glyphs → pen strokes</text>
-          </g>
-          <line x1="680" y1="67" x2="718" y2="67" stroke="rgba(234,234,232,.4)" stroke-width="1" marker-end="url(#ar)"/>
-          <g>
-            <rect x="722" y="34" width="196" height="66" fill="none" stroke="rgba(234,234,232,.22)"/>
-            <text x="738" y="60" font-size="11" fill="#EAEAE8">Animator</text>
-            <text x="738" y="80" font-size="10" fill="rgba(234,234,232,.46)">stroke timing, pen lifts</text>
-          </g>
-          <text x="2" y="128" font-size="10" fill="rgba(234,234,232,.28)" letter-spacing="1.6">FALLS BACK TO A GLYPH-STAMP RENDERER IF ANY STAGE FAILS — THE BOARD NEVER SHOWS NOTHING</text>
-        </g>
-      </svg>
+          <rect class="c-cluster" x="24" y="42" width="380" height="80" rx="10"/>
+          <rect class="c-cluster" x="24" y="146" width="272" height="72" rx="10"/>
+          <rect class="c-cluster" x="544" y="42" width="302" height="80" rx="10"/>
+          <text class="c-cluster-label" x="24" y="32">cluster 1</text>
+          <text class="c-cluster-label" x="24" y="240">cluster 2</text>
+          <text class="c-cluster-label" x="544" y="32">cluster 3</text>
+        </svg>
+      </div>
+      <figcaption>Clustering is geometric. Each cluster keeps a stable identity across every stroke added to it, so one problem is one attempt, with its own pauses, erasures, help history and outcome.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section wrap" id="actions" aria-labelledby="actions-title">
+    <h2 id="actions-title">Five ways to ask. Only one gives the answer.</h2>
+    <p>The usual failure of an AI tutor is that every button quietly turns into &ldquo;tell me the answer&rdquo;. Klera&rsquo;s five actions have strict scopes that are enforced separately. Open one to see what it is allowed to do.</p>
+
+    <div class="picker" role="group" aria-label="Tutor actions">
+      <button class="btn btn-quiet" type="button" data-sheet="sheet-hint" data-magnetic>Hint</button>
+      <button class="btn btn-quiet" type="button" data-sheet="sheet-mistake" data-magnetic>Mistake</button>
+      <button class="btn btn-quiet" type="button" data-sheet="sheet-next" data-magnetic>Next step</button>
+      <button class="btn btn-quiet" type="button" data-sheet="sheet-explain" data-magnetic>Explain</button>
+      <button class="btn btn-quiet" type="button" data-sheet="sheet-solve" data-magnetic>Solve</button>
     </div>
-    <figcaption>Three generations of this engine exist in the app and coexist on purpose. The
-    newest is AST-based: the expression is parsed into structure first, so a fraction knows it is
-    a fraction and an exponent knows it is raised. If any stage fails, rendering falls back to the
-    older glyph-stamp engine rather than failing in front of a student.</figcaption>
-  </figure>
-</section>
+  </section>
 
-<section>
-  <span class="eyebrow">05 — Visualisation</span>
-  <h2>When a picture is the explanation.</h2>
-  <div class="col">
-    <p>Some ideas are not sentences. For those, Klera offers a dynamic visualisation — and
-    only when the concept genuinely has one. The model is explicitly instructed to omit the
-    suggestion when a picture would add nothing, which is why you do not get a decorative
-    diagram on every problem.</p>
-    <p>Every showing is also <strong>measured</strong>: whether the student then solved the
-    problem, asked for a hint instead, or dismissed it in two seconds. That is a
-    before-and-after on whether the picture actually taught anything —
-    <a class="inline" href="../learner-profile/">which feeds the learner profile</a>.</p>
-  </div>
+  <section class="section wrap" aria-labelledby="engine-title">
+    <h2 id="engine-title">It writes. It does not type.</h2>
+    <p>When Klera answers on the board, the answer is drawn stroke by stroke. The target is a calm, deliberate tutor&rsquo;s hand: not shaky, not decorative, and never visibly generated.</p>
 
-  <div class="grid g3" style="margin-top:34px">
-    <div class="card"><h3>Offered, not imposed</h3><p>A visualisation is a one-line invitation, never an interruption. Decline it and nothing changes.</p></div>
-    <div class="card"><h3>Concept-gated</h3><p>No picture is generated unless the underlying idea has a genuinely useful dynamic form.</p></div>
-    <div class="card"><h3>Scored afterwards</h3><p>Solved-after, hint-after and closed-quickly are recorded per template, so effectiveness is measurable rather than assumed.</p></div>
-  </div>
-</section>
+    <div class="bento">
+      <div class="panel panel-ink span-4 tall" data-tilt>
+        <h3>An expression is a set of strokes</h3>
+        <p>Stroke order, pen lifts and the rhythm between glyphs are what make a hand read as a hand. A picture of handwriting shows none of that.</p>
+        <svg class="ink" id="ink-demo" data-ink viewBox="0 0 460 120" role="img" aria-label="The expression 2x + 5 = 13 written by hand" style="margin-top:34px">
+          <path d="M42,44 C46,30 72,28 74,44 C76,58 52,66 40,82 L78,82"/>
+          <path d="M102,52 L134,82"/><path d="M134,52 L102,82"/>
+          <path d="M158,67 L192,67"/><path d="M175,50 L175,84"/>
+          <path d="M246,42 L216,42 L213,60 C232,54 252,60 250,70 C248,82 226,88 212,80"/>
+          <path d="M272,60 L310,60"/><path d="M272,74 L310,74"/>
+          <path d="M336,50 L346,42 L346,84"/>
+          <path d="M372,44 C380,32 402,34 400,48 C398,58 386,60 380,60 C392,58 404,62 402,74 C400,86 378,88 370,80"/>
+        </svg>
+        <div class="actions"><button class="btn btn-quiet btn-small" type="button" data-ink-replay="ink-demo">Write it again</button></div>
+      </div>
 
-<section>
-  <span class="eyebrow">06 — Next</span>
-  <h2>The part that is actually hard.</h2>
-  <div class="col">
-    <p>Everything above is the surface. The thing underneath — the reason Klera can tell the
-    difference between a student who is thinking and a student who is stuck — is the learner
-    profile. It is built per student, from their own pen, and it does not work the way you would
-    guess.</p>
-    <p style="margin-top:26px"><a class="inline" href="../learner-profile/">Read how the learner profile works →</a></p>
-  </div>
-</section>
+      <div class="panel panel-flush span-2 tall">
+        <div class="ph" style="--ar:3/4">
+          <!-- ✱ REPLACE: portrait photo, 1200 x 1600. Keep alt text accurate to the photo. -->
+          <span><b>✱ Replace</b>Close-up photo of Klera writing an answer onto an iPad screen beside a student&rsquo;s own handwriting. Portrait, 1200 x 1600.</span>
+        </div>
+      </div>
+
+      <div class="panel span-3">
+        <h3>Structure before strokes</h3>
+        <p>The newest engine parses an expression into structure first, so a fraction knows it is a fraction and an exponent knows it is raised. Then it lays out glyphs, composes pen strokes, and times them.</p>
+      </div>
+
+      <div class="panel panel-warm span-3">
+        <h3>Never a blank board</h3>
+        <p>Three generations of the engine coexist on purpose. If any stage of the newest one fails, rendering falls back to an older glyph-stamp engine instead of failing in front of a student.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="viz-title">
+    <div class="split flip">
+      <div>
+        <h2 id="viz-title">When a picture is the explanation.</h2>
+        <p>Some ideas are not sentences. For those, Klera offers a dynamic visualisation, and only when the concept genuinely has one. The model is told to leave the suggestion out when a picture would add nothing.</p>
+        <p>Every showing is measured afterwards: did the student solve the problem, ask for a hint instead, or close it within seconds? That makes it possible to know which visualisations teach anything.</p>
+      </div>
+      <div class="ph" style="--ar:16/10">
+        <!-- ✱ REPLACE: landscape screenshot, 1600 x 1000. -->
+        <span><b>✱ Replace</b>Screenshot from the iPad of a Klera visualisation open next to handwritten work on the board. Landscape, 1600 x 1000.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight wrap" aria-labelledby="next-title">
+    <h2 id="next-title">The part that is actually hard.</h2>
+    <p>Everything above is surface. Underneath is the learner profile: how Klera tells a student who is thinking from a student who is stuck, built from each person&rsquo;s own pen.</p>
+    <div class="actions"><a class="btn" href="../learner-profile/" data-magnetic>Read about the learner profile</a></div>
+  </section>
 
 </main>
 
-<footer class="site">
-  <div class="fl">
-    <span class="date">Klera</span>
-    <nav class="nav">
+<dialog class="sheet" id="sheet-hint" aria-labelledby="sheet-hint-t">
+  <div class="sheet-body">
+    <button class="sheet-close" type="button" data-sheet-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <h3 id="sheet-hint-t">Hint</h3>
+    <dl>
+      <div><dt>What it does</dt><dd>Gives exactly one nudge, phrased as a question or a pointer. Enough to get moving again, never enough to finish.</dd></div>
+      <div><dt>What it will not do</dt><dd>Reveal the answer, show the full solution, or write anything on the board.</dd></div>
+      <div><dt>What reaches the board</dt><dd>Nothing. The board stays yours until you earn the next line.</dd></div>
+    </dl>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="sheet-mistake" aria-labelledby="sheet-mistake-t">
+  <div class="sheet-body">
+    <button class="sheet-close" type="button" data-sheet-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <h3 id="sheet-mistake-t">Mistake</h3>
+    <dl>
+      <div><dt>What it does</dt><dd>Finds where the reasoning first broke and names the strategy for correcting it.</dd></div>
+      <div><dt>What it will not do</dt><dd>Solve the rest of the problem or continue past the error.</dd></div>
+      <div><dt>What reaches the board</dt><dd>Nothing. It tells you where to look, not what to write.</dd></div>
+    </dl>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="sheet-next" aria-labelledby="sheet-next-t">
+  <div class="sheet-body">
+    <button class="sheet-close" type="button" data-sheet-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <h3 id="sheet-next-t">Next step</h3>
+    <dl>
+      <div><dt>What it does</dt><dd>Gives exactly one step, continuing from the work already on the board.</dd></div>
+      <div><dt>What it will not do</dt><dd>Restate what you already wrote, hand the original problem back, or work toward the final answer.</dd></div>
+      <div><dt>What reaches the board</dt><dd>One new line in handwriting below your work: the actual result of taking that single step.</dd></div>
+    </dl>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="sheet-explain" aria-labelledby="sheet-explain-t">
+  <div class="sheet-body">
+    <button class="sheet-close" type="button" data-sheet-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <h3 id="sheet-explain-t">Explain</h3>
+    <dl>
+      <div><dt>What it does</dt><dd>Teaches the concept: what kind of problem this is, the key principle, and why the method works. Ends with a question to check understanding.</dd></div>
+      <div><dt>What it will not do</dt><dd>Solve this problem, walk through its particular steps, or give the final answer.</dd></div>
+      <div><dt>What reaches the board</dt><dd>Nothing. Explain is about understanding, so it leaves the board untouched.</dd></div>
+    </dl>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="sheet-solve" aria-labelledby="sheet-solve-t">
+  <div class="sheet-body">
+    <button class="sheet-close" type="button" data-sheet-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <h3 id="sheet-solve-t">Solve</h3>
+    <dl>
+      <div><dt>What it does</dt><dd>Finishes the problem, lists every solution, and checks the result.</dd></div>
+      <div><dt>What it will not do</dt><dd>Nothing is off limits here. It is the one action allowed to complete the work, and it is recorded as reliance.</dd></div>
+      <div><dt>What reaches the board</dt><dd>The full worked solution, written line by line. Using it counts against independence, which the learner profile reads.</dd></div>
+    </dl>
+  </div>
+</dialog>
+
+<footer class="foot wrap">
+  <div class="foot-row">
+    <a class="brand" href="../" translate="no">Klera</a>
+    <nav aria-label="Footer">
       <a href="./">How it works</a>
       <a href="../learner-profile/">Learner profile</a>
       <a href="../exams/">Exams</a>
@@ -262,71 +251,5 @@
     </nav>
   </div>
 </footer>
-
-<script>
-// ---- handwriting: measure each path, then draw them in order with pen-lift gaps
-const writer = document.getElementById('writer');
-function write(svg, {step=0.34, base=0.22}={}){
-  const paths=[...svg.querySelectorAll('path')];
-  svg.classList.remove('writing');
-  void svg.offsetWidth;                        // restart the animation
-  let t=base;
-  paths.forEach(p=>{
-    const len=p.getTotalLength();
-    p.style.setProperty('--len',len);
-    p.style.setProperty('--dur',Math.max(0.18,len/260)+'s');
-    p.style.setProperty('--delay',t.toFixed(3)+'s');
-    t+=Math.max(0.16,len/260)+step*0.42;       // pen lift between strokes
-  });
-  svg.classList.add('writing');
-}
-write(writer);
-document.getElementById('rewrite').addEventListener('click',()=>write(writer));
-
-// draw the board figure once it scrolls into view
-const board=document.querySelector('#c1')?.closest('svg');
-if(board){
-  const g=board.querySelector('.ink');
-  const io=new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting){ write(g,{step:0.12,base:0.1}); io.disconnect(); }
-  }),{threshold:.3});
-  io.observe(board);
-}
-
-// ---- the five actions
-const ACTIONS={
-  hint:{
-    scope:'Exactly one nudge, phrased as a question or a pointer. Enough to get moving again, never enough to finish.',
-    forbid:'Revealing the answer. Showing the full solution. Writing anything on the board at all.',
-    board:'Nothing. A hint stays in the panel by design — the board belongs to the student until they earn the next line.'},
-  mistake:{
-    scope:'Finds where the reasoning first broke, and names the correction strategy.',
-    forbid:'Solving the rest of the problem. Continuing past the error.',
-    board:'Nothing. It tells you where to look, not what to write.'},
-  next:{
-    scope:'Exactly one step, continuing from the work already on the board.',
-    forbid:'Restating what you already wrote. Giving the original problem back. Working toward the final answer.',
-    board:'One new line — the actual result of taking that single step. The factored form, or the next transformed equation, written in handwriting below your work.'},
-  explain:{
-    scope:'Teaches the concept and the theory: what kind of problem this is, the key principle, and why the method works. Ends with a check-up question.',
-    forbid:'Solving this specific problem. Walking through these particular steps. Giving the final answer.',
-    board:'Nothing. Explain is about understanding, so it deliberately leaves the board untouched.'},
-  solve:{
-    scope:'Finishes the problem, lists every solution, and verifies the result.',
-    forbid:'Nothing — this is the one action allowed to complete the work. It is also recorded as reliance.',
-    board:'The full worked solution, written line by line in handwriting. Tapping it is counted against your independence, which the learner profile reads.'}
-};
-const scope=document.getElementById('act-scope'),
-      forbid=document.getElementById('act-forbid'),
-      boardEl=document.getElementById('act-board'),
-      chips=[...document.querySelectorAll('.chip[data-act]')];
-function show(key){
-  const a=ACTIONS[key];
-  scope.textContent=a.scope; forbid.textContent=a.forbid; boardEl.textContent=a.board;
-  chips.forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.act===key)));
-}
-chips.forEach(c=>c.addEventListener('click',()=>show(c.dataset.act)));
-show('hint');
-</script>
 </body>
 </html>

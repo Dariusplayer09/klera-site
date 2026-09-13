@@ -4,17 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About Klera</title>
-<meta name="description" content="Why Klera exists, the principles it is built on, and the people building it.">
+<meta name="description" content="Why Klera exists, the principles it is built on, and the two people building it.">
+<meta name="theme-color" content="#070B14">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/klera.css">
+<script src="../assets/klera.js" defer></script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<header class="top">
-  <a class="mark" href="../">Klera</a>
-  <nav class="nav">
+<header class="nav">
+  <a class="brand" href="../" translate="no">Klera</a>
+  <nav class="nav-links" aria-label="Primary">
     <a href="../how-it-works/">How it works</a>
     <a href="../learner-profile/">Learner profile</a>
     <a href="../exams/">Exams</a>
@@ -22,125 +25,108 @@
   </nav>
 </header>
 
-<main class="wrap">
+<main id="main">
 
-<section>
-  <span class="eyebrow">01 — Why</span>
-  <h1>Built to be needed less.</h1>
-  <div class="col">
-    <p class="lead">Every tutoring product is paid by the hour, which means every tutoring product
-    is quietly incentivised to be used more. The better it works, the more you need it.</p>
-    <p>We wanted to build the opposite thing: a tutor whose job is to make itself unnecessary. That
-    single decision explains most of what is strange about Klera — why four of the five help
-    actions <em>refuse</em> to give you the answer, why tapping Solve is recorded against your
-    independence, and why the system spends so much effort working out whether you are actually
-    stuck or merely thinking.</p>
-    <p>Thinking looks like doing nothing. Getting that distinction wrong is how a tutor
-    interrupts someone at the exact moment they were about to get it.</p>
-  </div>
-</section>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-grid">
+      <div>
+        <h1 id="hero-title">Built to be needed less.</h1>
+        <p class="lead">Tutoring is paid by the hour, so it quietly profits from being needed more. We built the opposite.</p>
+      </div>
+      <div class="ph" style="--ar:3/2">
+        <!-- ✱ REPLACE: landscape photo of the two founders, 1800 x 1200. -->
+        <span><b>✱ Replace</b>A candid photo of the two of you working on Klera together, with the iPad visible. Not posed, not stock. 1800 x 1200.</span>
+      </div>
+    </div>
+  </section>
 
-<section>
-  <span class="eyebrow">02 — Principles</span>
-  <h2>What we decided early and kept.</h2>
+  <section class="section wrap" aria-labelledby="why-title">
+    <h2 class="statement" id="why-title">Thinking looks exactly like doing nothing.</h2>
+    <p class="lead">Get that wrong and a tutor interrupts someone at the moment they were about to get it.</p>
+    <p>That single problem explains most of what is unusual about Klera: why four of the five help actions refuse to give the answer, why tapping Solve counts against independence, and why so much of the system exists to tell a student who is stuck from one who is simply thinking.</p>
+  </section>
 
-  <div class="grid g2" style="margin-top:32px">
-    <div class="card">
-      <h3>Silence over a confident guess</h3>
-      <p>When there is not enough evidence, the system reports nothing — not a zero, not a
-      default, not an illustrative example. A zero looks like a measurement. Nothing looks
-      like nothing, which is the truth.</p>
-    </div>
-    <div class="card">
-      <h3>Never invent a student</h3>
-      <p>Anything the tutor is told about a learner must be derived from that learner's
-      recorded work or left out. An early version shipped placeholder text claiming every
-      student "tends to drop negative signs". It reached live prompts. It is the mistake
-      we are most careful about now.</p>
-    </div>
-    <div class="card">
-      <h3>Support is one-directional</h3>
-      <p>Evidence of difficulty can add help. Nothing inferred is ever allowed to take help
-      away. If we are wrong in that direction, a student gets more support than they needed —
-      which is a survivable error.</p>
-    </div>
-    <div class="card">
-      <h3>Measure before steering</h3>
-      <p>When we added a way to tell whether a visualisation helped, we deliberately did not
-      let it change which visualisation gets shown. Change the behaviour first and you lose
-      the baseline that would have told you whether the change worked.</p>
-    </div>
-    <div class="card">
-      <h3>The board belongs to the student</h3>
-      <p>Help arrives as a line of handwriting in the place the line belongs, and only when
-      asked for. No pop-ups over your working, no assistant hovering in a sidebar predicting
-      what you meant.</p>
-    </div>
-    <div class="card">
-      <h3>Write down what failed</h3>
-      <p>Our own engineering notes record the runs that produced nothing and the theories
-      that turned out wrong, because the alternative is paying for the same mistake twice.
-      Some of that is quoted directly on the
-      <a class="inline" href="../learner-profile/">learner profile page</a>.</p>
-    </div>
-  </div>
-</section>
+  <section class="section wrap" aria-labelledby="principles-title">
+    <h2 id="principles-title">What we decided early and kept.</h2>
 
-<section>
-  <span class="eyebrow">03 — Inspirations</span>
-  <h2>What we were looking at.</h2>
-  <div class="col">
-    <p><strong>The one-to-one tutor.</strong> The reason a good human tutor works is not that
-    they know more maths. It is that they are watching you, and they intervene at the right
-    moment with the smallest possible nudge. Almost everything in Klera is an attempt to
-    reproduce that specific behaviour rather than the explaining.</p>
-    <p><strong>Paper.</strong> Not a text editor with a maths mode. Not an equation palette.
-    A student's real working is messy, spatial, and crossed out — and all of that mess is
-    signal. So the surface had to be ink, and the tutor had to answer in ink too.</p>
-    <p><strong>Instruments, not dashboards.</strong> A good instrument reports what it measured
-    and is honest about its own uncertainty. We took the idea that a reading below the
-    reliability gate should refuse to display at all from measurement, not from software.</p>
-  </div>
-
-  <figure style="margin-top:38px">
-    <div class="figbody" style="text-align:center;padding:clamp(30px,6vw,64px) 20px">
-      <p id="aph" style="color:var(--paper);font-size:clamp(15px,2.2vw,21px);margin:0;line-height:1.5"></p>
+    <div class="bento">
+      <div class="panel panel-ink span-4" data-tilt>
+        <h3>Silence over a confident guess</h3>
+        <p>When there is not enough evidence, the system reports nothing. A zero looks like a measurement. Nothing looks like nothing, which is the truth.</p>
+      </div>
+      <div class="panel span-2" data-tilt>
+        <h3>Never invent a student</h3>
+        <p>Anything the tutor is told about a learner comes from that learner&rsquo;s own recorded work, or it is left out.</p>
+      </div>
+      <div class="panel span-2" data-tilt>
+        <h3>Support only adds</h3>
+        <p>Evidence of difficulty can add help. Nothing inferred can take it away.</p>
+      </div>
+      <div class="panel panel-warm span-4" data-tilt>
+        <h3>We wrote down the mistake</h3>
+        <p>An early version shipped placeholder text claiming every student &ldquo;tends to drop negative signs&rdquo;, and it reached live prompts. It is the mistake we guard against hardest, and it is why the rule above exists.</p>
+      </div>
+      <div class="panel span-3" data-tilt>
+        <h3>Measure before steering</h3>
+        <p>When we added a way to tell whether a visualisation helped, we did not let it change which one is shown. Change behaviour first and the baseline that would judge the change is gone.</p>
+      </div>
+      <div class="panel span-3" data-tilt>
+        <h3>The board belongs to the student</h3>
+        <p>Help arrives as a line of handwriting where the line belongs, and only when asked for. No assistant hovering over your working.</p>
+      </div>
     </div>
-    <figcaption>Lines we kept coming back to while building it.</figcaption>
-  </figure>
-</section>
+  </section>
 
-<section>
-  <span class="eyebrow">04 — Who</span>
-  <h2>Two of us.</h2>
-  <div class="col">
-    <p>Klera is built by two people. We are also, at the moment, its only two measured
-    students — which is why the learner-profile page can tell you exactly how each of us
-    struggles, and is careful to say that two people is not a study.</p>
-  </div>
-
-  <div class="grid g2" style="margin-top:32px">
-    <div class="card">
-      <h3>Filip</h3>
-      <p><!-- TODO: one or two sentences — what you do on Klera, and the one-line version
-      of why you started it. Keep it plain; the rest of the site earns the credibility. --></p>
+  <section class="section wrap" aria-labelledby="insp-title">
+    <div class="split flip">
+      <div>
+        <h2 id="insp-title">What we were looking at.</h2>
+        <p><strong>A good one-to-one tutor.</strong> They do not know more maths. They watch, and they step in at the right moment with the smallest nudge that works. Klera tries to reproduce that behaviour, not the lecturing.</p>
+        <p><strong>Paper.</strong> Real working is messy, spatial and crossed out, and all of that mess is signal. So the surface had to be ink, and the tutor had to answer in ink.</p>
+        <p><strong>Instruments.</strong> A good instrument reports what it measured and is honest about its uncertainty. The rule that a reading below the reliability gate shows nothing at all came from there.</p>
+      </div>
+      <div class="panel panel-ink" data-tilt>
+        <p class="aph" id="aph" aria-live="polite"></p>
+        <div class="actions"><button class="btn btn-quiet btn-small" type="button" id="aph-next" data-magnetic>Another line</button></div>
+      </div>
     </div>
-    <div class="card">
-      <h3>Darius</h3>
-      <p><!-- TODO: same, in his own words. --></p>
-    </div>
-  </div>
+  </section>
 
-  <p class="mono-note" style="margin-top:28px">Get in touch:
-  <!-- TODO: add a contact email or form link here before launch. --></p>
-</section>
+  <section class="section wrap" aria-labelledby="who-title">
+    <h2 id="who-title">Two of us.</h2>
+    <p>Klera is built by two people, who are also, for now, its only two measured students. That is why the learner profile page can say exactly how each of us struggles, and why it is careful to say two people is not a study.</p>
+
+    <div class="bento">
+      <div class="panel span-3">
+        <div class="ph" style="--ar:4/5">
+          <!-- ✱ REPLACE: portrait of Filip, 1200 x 1500. -->
+          <span><b>✱ Replace</b>Portrait of Filip. Natural light, 1200 x 1500.</span>
+        </div>
+        <h3 style="margin-top:22px">Filip</h3>
+        <!-- ✱ REPLACE: one or two plain sentences on what you do and why you started Klera. -->
+        <p class="todo">✱ Replace with one or two sentences: what you work on at Klera, and why you started it.</p>
+      </div>
+      <div class="panel span-3">
+        <div class="ph" style="--ar:4/5">
+          <!-- ✱ REPLACE: portrait of Darius, 1200 x 1500. -->
+          <span><b>✱ Replace</b>Portrait of Darius. Natural light, 1200 x 1500.</span>
+        </div>
+        <h3 style="margin-top:22px">Darius</h3>
+        <!-- ✱ REPLACE: Darius's bio, in his own words. -->
+        <p class="todo">✱ Replace with one or two sentences from Darius, in his own words.</p>
+      </div>
+    </div>
+
+    <!-- ✱ REPLACE: real contact address before launch. -->
+    <p style="margin-top:34px">Get in touch: <span class="todo">✱ Replace with a contact email address</span></p>
+  </section>
 
 </main>
 
-<footer class="site">
-  <div class="fl">
-    <span class="date">Klera</span>
-    <nav class="nav">
+<footer class="foot wrap">
+  <div class="foot-row">
+    <a class="brand" href="../" translate="no">Klera</a>
+    <nav aria-label="Footer">
       <a href="../how-it-works/">How it works</a>
       <a href="../learner-profile/">Learner profile</a>
       <a href="../exams/">Exams</a>
@@ -150,21 +136,20 @@
 </footer>
 
 <script>
-// the teaser's own lines, cycling slowly
-const lines=["The answer was never the point","Hesitation is data","Clear in the unclear",
-"The pen knows first","Show your working","Most tutors arrive too late","Built to be needed less",
-"A* is a habit, not a talent","Every pause says something","Learning how you learn"];
-const node=document.getElementById('aph');
-let i=Math.floor(Math.random()*lines.length);
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-node.textContent=lines[i];
-if(!reduce){
-  node.style.transition='opacity .7s ease';
-  setInterval(()=>{
-    node.style.opacity=0;
-    setTimeout(()=>{ i=(i+1)%lines.length; node.textContent=lines[i]; node.style.opacity=1; },700);
-  },5200);
-}
+/* Lines from the teaser. They change when asked, not on a timer: an endless autoplay loop
+   beside reading content would need its own pause control. */
+(() => {
+  const lines = ["The answer was never the point", "Hesitation is data", "Clear in the unclear",
+    "The pen knows first", "Show your working", "Most tutors arrive too late", "Built to be needed less",
+    "A* is a habit, not a talent", "Every pause says something", "Learning how you learn"];
+  const node = document.getElementById("aph");
+  let i = Math.floor(Math.random() * lines.length);
+  node.textContent = lines[i];
+  document.getElementById("aph-next").addEventListener("click", () => {
+    i = (i + 1) % lines.length;
+    node.textContent = lines[i];
+  });
+})();
 </script>
 </body>
 </html>
