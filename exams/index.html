@@ -6,6 +6,8 @@
 <title>Klera exams and the grader</title>
 <meta name="description" content="Upload a past paper, sit it by hand on the iPad, and get it marked against the official mark scheme with corrections placed on your own working.">
 <meta name="theme-color" content="#070B14">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -16,7 +18,7 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
-  <a class="brand" href="../" translate="no">Klera</a>
+  <a class="brand" href="../" translate="no"><img src="../assets/klera-mark-512.png" alt="" width="28" height="28">Klera</a>
   <nav class="nav-links" aria-label="Primary">
     <a href="../how-it-works/">How it works</a>
     <a href="../learner-profile/">Learner profile</a>
@@ -37,8 +39,8 @@
         </div>
       </div>
       <div class="ph" style="--ar:4/3">
-        <!-- ✱ REPLACE: landscape photo, 1600 x 1200. -->
-        <span><b>✱ Replace</b>Photo of a student sitting an exam on the iPad in Klera: the question at the top, handwritten working below, a timer visible. 1600 x 1200.</span>
+        <!-- ✱ REPLACE: iPad screenshot, 1600 x 1200. -->
+        <span><b>✱ Replace</b>Screenshot from the iPad of an exam in progress in Klera: the question at the top, handwritten working below, the timer visible. 1600 x 1200.</span>
       </div>
     </div>
   </section>
@@ -82,43 +84,14 @@
     <div class="split">
       <div>
         <h2 id="corrections-title">Marked on your own paper.</h2>
-        <p>Feedback you have to mentally re-attach to your working is feedback you will not use. Corrections come back placed on your script, against the line that went wrong, the way a teacher marks in the margin.</p>
-        <div class="actions">
-          <button class="btn" type="button" id="mark-btn" aria-pressed="false" data-magnetic>Mark it</button>
+        <p>Feedback you have to mentally re-attach to your working is feedback you will not use. Klera returns a corrected image of your own answer, with the marks placed against the line that went wrong, the way a teacher marks in the margin.</p>
+      </div>
+      <div class="device">
+        <div class="ph" style="--ar:16/10">
+          <!-- ✱ REPLACE: real screenshot of a graded answer with Klera's correction marks, 1600 x 1000. -->
+          <span><b>✱ Replace</b>Screenshot of a graded question in Klera&rsquo;s exam results: the student&rsquo;s own handwritten answer with the correction marks the grader draws onto it. 1600 x 1000.</span>
         </div>
       </div>
-
-      <figure>
-        <div class="panel" data-tilt>
-          <svg class="diagram" id="marking" viewBox="0 0 620 260" role="img" aria-labelledby="marking-title">
-            <title id="marking-title">A handwritten solution; marking circles the line where a sign was dropped</title>
-            <g class="ink" id="marking-ink" data-ink>
-              <path d="M40,48 C44,34 70,32 72,48 C74,62 50,70 38,86 L76,86"/>
-              <path d="M96,56 L128,86"/><path d="M128,56 L96,86"/>
-              <path d="M150,71 L184,71"/><path d="M167,54 L167,88"/>
-              <path d="M236,46 L206,46 L203,64 C222,58 242,64 240,74 C238,86 216,92 202,84"/>
-              <path d="M262,64 L300,64"/><path d="M262,78 L300,78"/>
-              <path d="M324,54 L334,46 L334,88"/>
-              <path d="M356,48 C364,36 386,38 384,52 C382,62 370,64 364,64 C376,62 388,66 386,78 C384,90 362,92 354,84"/>
-              <path d="M40,150 L72,150"/><path d="M56,134 L56,168"/>
-              <path d="M96,136 L96,170 L128,170"/>
-              <path d="M152,152 L186,152"/>
-              <path d="M212,134 C220,126 238,128 238,140 C238,156 212,158 212,172 L240,172"/>
-              <path d="M40,226 L72,226"/><path d="M56,210 L56,244"/>
-              <path d="M96,212 L96,246 L128,246"/>
-              <path d="M152,228 L186,228"/>
-              <path d="M212,210 C220,202 238,204 238,216 C238,232 212,234 212,248 L240,248"/>
-            </g>
-            <g class="mk" id="mk">
-              <ellipse class="d-mark" cx="226" cy="152" rx="44" ry="27"/>
-              <line class="d-arrow" x1="270" y1="146" x2="318" y2="138"/>
-              <text class="d-mark-label" x="326" y="136">Sign dropped here</text>
-              <text class="d-mark-sub" x="326" y="156">Minus 1 mark, method still credited</text>
-            </g>
-          </svg>
-        </div>
-        <figcaption>A reconstruction drawn in the browser. What it shows is real: corrections go against the line that produced the error, and method marks survive an arithmetic slip.</figcaption>
-      </figure>
     </div>
   </section>
 
@@ -132,7 +105,7 @@
 
 <footer class="foot wrap">
   <div class="foot-row">
-    <a class="brand" href="../" translate="no">Klera</a>
+    <a class="brand" href="../" translate="no"><img src="../assets/klera-mark-512.png" alt="" width="28" height="28">Klera</a>
     <nav aria-label="Footer">
       <a href="../how-it-works/">How it works</a>
       <a href="../learner-profile/">Learner profile</a>
@@ -141,18 +114,5 @@
     </nav>
   </div>
 </footer>
-
-<script>
-(() => {
-  const btn = document.getElementById("mark-btn");
-  const mark = document.getElementById("mk");
-  btn.addEventListener("click", () => {
-    const on = !mark.classList.contains("on");
-    mark.classList.toggle("on", on);
-    btn.setAttribute("aria-pressed", String(on));
-    btn.textContent = on ? "Clear the marking" : "Mark it";
-  });
-})();
-</script>
 </body>
 </html>

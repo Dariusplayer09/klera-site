@@ -98,42 +98,22 @@
     dialog.addEventListener("close", () => dialog.klOpener?.focus());
   });
 
-  /* ---------------------------------------------------------- 2D ink writing
-     Each path is measured and drawn in order with a pen-lift pause between strokes,
-     because stroke order and rhythm are what make a hand read as a hand. */
-  const write = (svg) => {
-    if (!svg) return;
-    const paths = [...svg.querySelectorAll("path")];
-    if (reduce) {
-      svg.classList.remove("writing");
-      return;
-    }
-    svg.classList.remove("writing");
-    void svg.getBBox();
-    let t = 0.15;
-    paths.forEach((p) => {
-      const len = p.getTotalLength();
-      const dur = Math.max(0.16, len / 280);
-      p.style.setProperty("--len", len.toFixed(1));
-      p.style.setProperty("--dur", `${dur.toFixed(3)}s`);
-      p.style.setProperty("--delay", `${t.toFixed(3)}s`);
-      t += dur + 0.12;
-    });
-    requestAnimationFrame(() => svg.classList.add("writing"));
-  };
-
-  const inkObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      write(entry.target);
-      inkObserver.unobserve(entry.target);
-    });
-  }, { threshold: 0.35 });
-  doc.querySelectorAll("svg[data-ink]").forEach((svg) => inkObserver.observe(svg));
-
-  doc.querySelectorAll("[data-ink-replay]").forEach((btn) => {
-    btn.addEventListener("click", () => write(doc.getElementById(btn.dataset.inkReplay)));
+  /* ---------------------------------------------------------- real demo recording
+     The recording is a GIF captured from the app, and a GIF cannot be paused. The markup
+     loads a still frame from the same recording; the toggle swaps between the two. Reduced
+     motion stays on the still until the visitor asks to play. */
+  doc.querySelectorAll("img[data-demo]").forEach((img) => {
+    const toggle = doc.querySelector(`[data-demo-toggle="${img.id}"]`);
+    const { gif, still } = img.dataset;
+    let playing = !reduce;
+    const apply = () => {
+      img.src = playing ? gif : still;
+      if (toggle) {
+        toggle.textContent = playing ? "Pause demo" : "Play demo";
+        toggle.setAttribute("aria-pressed", String(!playing));
+      }
+    };
+    toggle?.addEventListener("click", () => { playing = !playing; apply(); });
+    apply();
   });
-
-  window.Klera = { write, reducedMotion: () => reduce };
 })();

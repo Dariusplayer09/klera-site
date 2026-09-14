@@ -1,7 +1,7 @@
 /* Klera site design system. Rationale and token contrast ratios live in DESIGN.md.
    Layered so component selectors never have to fight base selectors on specificity. */
 
-@layer reset, base, layout, components, charts, motion;
+@layer reset, base, layout, components, scene, charts, motion;
 
 /* ------------------------------------------------------------------ reset */
 @layer reset {
@@ -10,6 +10,7 @@
   button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
   a { color: inherit; }
   table { border-collapse: collapse; }
+  [hidden] { display: none !important; }
 }
 
 /* ------------------------------------------------------------------ tokens + base */
@@ -32,7 +33,6 @@
     --calm: #3987e5;
     --struggle: #C47A24;
 
-    /* Shadows tinted toward the navy ground, one light source from above. */
     --shadow: 0 1px 0 rgba(236, 234, 228, .05) inset,
               0 30px 60px -30px rgba(1, 4, 14, .95),
               0 10px 26px -14px rgba(14, 28, 70, .5);
@@ -92,7 +92,7 @@
     text-wrap: balance;
   }
   h1 {
-    font-size: clamp(42px, 6.4vw, 86px);
+    font-size: clamp(42px, 6.2vw, 84px);
     line-height: 1.02;
     letter-spacing: -.028em;
     font-variation-settings: "opsz" 144;
@@ -146,8 +146,6 @@
   .section { padding-block: clamp(80px, 11vw, 150px) clamp(92px, 12.5vw, 172px); }
   .section-tight { padding-block: clamp(48px, 7vw, 96px) clamp(64px, 8vw, 110px); }
 
-  .stack > * + * { margin-top: 18px; }
-
   .split {
     display: grid;
     gap: clamp(32px, 5vw, 72px);
@@ -169,6 +167,10 @@
     .span-6 { grid-column: span 6; }
     .tall { grid-row: span 2; }
   }
+
+  /* A real sequence of captured frames, in order. */
+  .filmstrip { display: grid; gap: 14px; margin-top: 44px; }
+  @media (min-width: 760px) { .filmstrip { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 }
 
 /* ------------------------------------------------------------------ components */
@@ -190,7 +192,7 @@
     width: min(var(--max), 100% - 2 * var(--pad));
     height: 60px;
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    padding: 0 8px 0 20px;
+    padding: 0 8px 0 14px;
     border-radius: var(--r-pill);
     background: rgba(13, 19, 34, .62);
     border: 1px solid var(--line);
@@ -203,11 +205,13 @@
 
   .brand {
     flex: none;
+    display: inline-flex; align-items: center; gap: 10px;
     font-family: var(--display); font-size: 22px; font-weight: 420;
     letter-spacing: -.02em; color: var(--paper); text-decoration: none;
     font-variation-settings: "opsz" 72;
-    padding: 6px 2px;
+    padding: 6px 4px;
   }
+  .brand img { width: 28px; height: 28px; border-radius: 8px; }
   .nav-links {
     display: flex; gap: 2px; min-width: 0; overflow-x: auto; scrollbar-width: none;
     mask-image: linear-gradient(90deg, #000 86%, transparent);
@@ -246,6 +250,8 @@
   .btn-small { min-height: 44px; padding: 0 18px; font-size: 14px; }
   .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 32px; }
 
+  .kicker { display: inline-block; color: var(--accent); font-size: 15px; font-weight: 500; margin-bottom: 20px; }
+
   /* Panels: solid tinted surfaces with a pointer spotlight. */
   .panel {
     --mx: 50%; --my: 0%; --rx: 0deg; --ry: 0deg;
@@ -266,6 +272,7 @@
   .panel-warm { background: linear-gradient(200deg, #1c1810, var(--panel) 60%); }
   .panel-flush { padding: 0; }
   .panel-flush > .ph { border-radius: 0; box-shadow: none; height: 100%; }
+  .panel .go { display: inline-flex; margin-top: 18px; }
 
   [data-tilt] {
     transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));
@@ -273,7 +280,24 @@
   }
   [data-tilt].is-hot { transition: transform .12s linear; }
 
-  /* ✱ photo slot: reserves space, tells you exactly what to shoot. */
+  /* Device frame around real captures from the app. */
+  .device {
+    --mx: 50%; --my: 0%; --rx: 0deg; --ry: 0deg;
+    position: relative;
+    padding: 10px;
+    border-radius: 28px;
+    background: linear-gradient(160deg, #1d2745, #0b1020 70%);
+    box-shadow: 0 0 0 1px var(--line-strong), var(--shadow), 0 60px 120px -50px rgba(57, 135, 229, .35);
+  }
+  .device > img, .device > .ph { width: 100%; height: auto; border-radius: 19px; }
+  .device-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+  .device-bar p { font-size: 14px; }
+
+  figure.shot img { width: 100%; height: auto; border-radius: var(--r-md); box-shadow: 0 0 0 1px var(--line-strong); }
+  figure.shot figcaption { font-size: 14px; margin-top: 10px; }
+  figure.shot figcaption b { color: var(--paper); font-weight: 500; display: block; }
+
+  /* ✱ photo slot: reserves space, tells you exactly what to capture. */
   .ph {
     position: relative; width: 100%;
     aspect-ratio: var(--ar, 4 / 3);
@@ -298,16 +322,9 @@
     padding-bottom: 48px;
     display: grid; align-items: center;
   }
-  .hero-grid { display: grid; gap: 28px; align-items: center; }
+  .hero-grid { display: grid; gap: 40px; align-items: center; }
   @media (min-width: 960px) { .hero-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); } }
   .hero .lead { margin-top: 24px; max-width: 32ch; }
-  .stage { position: relative; aspect-ratio: 16 / 11; width: 100%; border-radius: var(--r-lg); }
-  .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .stage .ink-fallback { position: absolute; inset: 12% 8%; width: 84%; height: auto; }
-  .has-webgl .stage .ink-fallback { display: none; }
-  .stage-controls { display: flex; gap: 10px; flex-wrap: wrap; }
-  .stage-hint { font-size: 13.5px; color: var(--graphite); margin-top: 10px; }
-  @media not ((hover: hover) and (pointer: fine)) { .stage-hint { display: none; } }
 
   .picker { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
 
@@ -394,21 +411,6 @@
   details.more .inner h3 { margin-top: 36px; }
   details.more .inner h3:first-child { margin-top: 0; }
 
-  /* Inline SVG diagrams */
-  .ink path { fill: none; stroke: var(--paper); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-  .diagram text { font-family: var(--body); }
-  .diagram .c-cluster { fill: none; stroke: var(--accent); stroke-dasharray: 3 5; opacity: .85; }
-  .diagram .c-cluster-label { fill: var(--accent); font-size: 12px; font-family: var(--mono); }
-  .diagram .d-box { fill: rgba(236, 234, 228, .025); stroke: var(--line-strong); }
-  .diagram .d-title { fill: var(--paper); font-size: 15px; }
-  .diagram .d-sub { fill: var(--graphite); font-size: 12.5px; }
-  .diagram .d-arrow { stroke: var(--dim); fill: none; }
-  .diagram .d-mark { fill: none; stroke: var(--struggle); stroke-width: 2.2; }
-  .diagram .d-mark-label { fill: var(--paper); font-size: 13px; }
-  .diagram .d-mark-sub { fill: var(--graphite); font-size: 12px; }
-  .mk { opacity: 0; transition: opacity .5s; }
-  .mk.on { opacity: 1; }
-
   .aph {
     font-family: var(--display); color: var(--paper);
     font-size: clamp(26px, 3.2vw, 40px); line-height: 1.2; letter-spacing: -.015em;
@@ -421,6 +423,58 @@
   .foot nav { display: flex; flex-wrap: wrap; gap: 6px 22px; }
   .foot nav a { color: var(--graphite); text-decoration: none; font-size: 14px; min-height: 44px; display: inline-flex; align-items: center; }
   .foot nav a:hover { color: var(--paper); }
+}
+
+/* ------------------------------------------------------------------ 3D measurement explorer */
+@layer scene {
+  .explore-grid { display: grid; gap: 14px; margin-top: 44px; }
+  @media (min-width: 980px) { .explore-grid { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); } }
+
+  .signal-stage {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 55%, rgba(57, 135, 229, .12), transparent 62%), var(--panel);
+    box-shadow: var(--shadow);
+    touch-action: pan-y;
+  }
+  @media (min-width: 700px) { .signal-stage { aspect-ratio: 16 / 11; } }
+  .signal-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  .scene-fallback { position: absolute; inset: 0; display: grid; place-items: center; padding: 30px; text-align: center; font-size: 15px; }
+  .has-webgl .scene-fallback { display: none; }
+
+  .scene-labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .scene-label {
+    position: absolute; left: 0; top: 0;
+    font-size: 12.5px; color: var(--graphite); white-space: nowrap;
+  }
+  .scene-label.axis { color: var(--paper); }
+  .scene-label.calm::before {
+    content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px;
+    background: var(--calm); margin-right: 6px;
+  }
+
+  .orb-tip {
+    position: absolute; left: 0; top: 0; pointer-events: none;
+    background: rgba(22, 30, 50, .94); color: var(--paper);
+    font-size: 13px; font-weight: 500; white-space: nowrap;
+    padding: 8px 12px; border-radius: 10px;
+    box-shadow: 0 0 0 1px var(--line-strong), 0 14px 30px -12px rgba(0, 0, 0, .85);
+  }
+
+  .explore-side { display: grid; gap: 14px; align-content: start; }
+  .readout strong { display: block; color: var(--paper); font-weight: 500; font-size: 17px; margin-bottom: 8px; }
+  .readout span { display: block; font-size: 15.5px; }
+
+  .attempts { display: grid; gap: 8px; }
+  .attempt { justify-content: flex-start; width: 100%; padding: 0 18px; }
+  .attempt::before {
+    content: ""; flex: none; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--struggle); box-shadow: 0 0 0 3px rgba(196, 122, 36, .22);
+  }
+  .attempt[aria-pressed="true"]::before { box-shadow: 0 0 0 3px rgba(7, 11, 20, .25); }
 }
 
 /* ------------------------------------------------------------------ charts */
@@ -447,18 +501,10 @@
     @starting-style { .sheet[open] { opacity: 0; transform: translateY(16px) scale(.98); } }
     .sheet::backdrop { transition: opacity .3s, overlay .45s allow-discrete, display .45s allow-discrete; }
     @starting-style { .sheet[open]::backdrop { opacity: 0; } }
-
-    .ink.writing path {
-      stroke-dasharray: var(--len);
-      stroke-dashoffset: var(--len);
-      animation: ink-draw var(--dur, .5s) cubic-bezier(.33, .1, .36, 1) forwards;
-      animation-delay: var(--delay, 0s);
-    }
   }
-  @keyframes ink-draw { to { stroke-dashoffset: 0; } }
 
   @media (prefers-reduced-motion: reduce) {
     [data-tilt], .btn { transform: none !important; transition: none; }
-    .panel::before, .mk { transition: none; }
+    .panel::before { transition: none; }
   }
 }

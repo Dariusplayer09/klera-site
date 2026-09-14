@@ -3,155 +3,140 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Klera</title>
+<title>Klera, the tutor that watches the pen</title>
+<meta name="description" content="Klera is an iPad whiteboard tutor. It reads how you write, not just what you write, and answers on the board in handwriting.">
+<meta name="theme-color" content="#070B14">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#070707;
-    --paper:#EAEAE8;
-    --faint:rgba(234,234,232,.28);
-    --track:rgba(234,234,232,.1);
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    background:var(--ink);color:var(--paper);
-    font-family:'Geist Mono',ui-monospace,monospace;
-    min-height:100svh;display:flex;flex-direction:column;overflow:hidden;
-  }
-  header{padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px)}
-  .mark{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint)}
- 
-  main{flex:1;display:grid;place-items:center;padding:0 24px}
-  .block{text-align:center;width:min(400px,84vw)}
- 
-  h1{
-    font-weight:300;font-size:clamp(17px,2.5vw,27px);line-height:1.45;
-    opacity:0;animation:fade 1.5s ease .25s forwards;
-  }
-  @keyframes fade{to{opacity:1}}
- 
-  .track{
-    margin-top:2.7em;height:1px;background:var(--track);
-    position:relative;overflow:hidden;
-    opacity:0;animation:fade 1.6s ease 1.1s forwards;
-  }
-  .fill{
-    position:absolute;inset:0 auto 0 0;width:0;
-    background:var(--paper);opacity:.5;
-    transition:width 3.4s cubic-bezier(.22,.9,.25,1);
-  }
-  /* marker sits at the leading edge of real progress */
-  .head{
-    position:absolute;top:-2px;bottom:-2px;width:1px;
-    background:var(--paper);opacity:0;left:0;
-    transition:left 3.4s cubic-bezier(.22,.9,.25,1);
-    animation:pulse 2.8s ease-in-out 4.4s infinite;
-  }
-  @keyframes pulse{
-    0%,100%{opacity:.75}
-    50%{opacity:.25}
-  }
-  .seg{
-    position:absolute;top:0;bottom:0;width:18%;
-    background:linear-gradient(90deg,transparent,var(--paper),transparent);
-    opacity:.45;
-    animation:sweep 3.6s cubic-bezier(.5,0,.5,1) 1.3s infinite;
-  }
-  @keyframes sweep{
-    0%{transform:translateX(-120%)}
-    100%{transform:translateX(640%)}
-  }
- 
-  footer{
-    padding:clamp(22px,3.6vw,40px) clamp(22px,4vw,44px);
-    display:flex;align-items:baseline;justify-content:space-between;gap:20px;
-  }
-  /* Way in to the full site. Deliberately quiet — the page is still a teaser. */
-  .enter{
-    font-size:10px;letter-spacing:.3em;text-transform:uppercase;
-    color:var(--faint);text-decoration:none;
-    opacity:0;animation:fade 1.6s ease 2.2s forwards;
-    transition:color .3s;
-  }
-  .enter:hover{color:var(--paper)}
-  .date{
-    font-size:10px;letter-spacing:.3em;text-transform:uppercase;
-    color:var(--paper);animation:flicker 7s linear infinite;
-  }
-  @keyframes flicker{
-    0%,100%{opacity:.5}22%{opacity:.5}23%{opacity:.14}24%{opacity:.48}
-    57%{opacity:.5}58%{opacity:.1}59%{opacity:.44}60%{opacity:.16}62%{opacity:.5}
-    88%{opacity:.5}89%{opacity:.18}91%{opacity:.5}
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none !important;transition:none !important}
-    h1,.track{opacity:1}
-    .head{opacity:.7}
-    .seg{display:none}
-    .date{opacity:.5}
-    .enter{opacity:1}
-  }
-</style>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/klera.css">
+<script src="assets/klera.js" defer></script>
+<script type="module" src="assets/signal-scene.js"></script>
 </head>
 <body>
-  <header><div class="mark">Klera</div></header>
-  <main>
-    <div class="block">
-      <h1 id="line"></h1>
-      <div class="track">
-        <div class="fill" id="fill"></div>
-        <div class="head" id="head"></div>
-        <div class="seg"></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="./" translate="no"><img src="assets/klera-mark-512.png" alt="" width="28" height="28">Klera</a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="how-it-works/">How it works</a>
+    <a href="learner-profile/">Learner profile</a>
+    <a href="exams/">Exams</a>
+    <a href="about/">About</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-grid">
+      <div>
+        <span class="kicker">Launching 15 September</span>
+        <h1 id="hero-title">The tutor that watches the pen.</h1>
+        <p class="lead">Klera is an iPad whiteboard tutor. It reads how you write, not just what, and answers in handwriting.</p>
+        <div class="actions">
+          <a class="btn" href="how-it-works/" data-magnetic>See how it works</a>
+          <a class="btn btn-quiet" href="#explore" data-magnetic>Explore the measurements</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="device" data-tilt>
+          <img id="hero-demo" src="assets/demo/board-question.png" data-demo data-gif="assets/demo/board-demo.gif" data-still="assets/demo/board-question.png"
+               width="800" height="565" fetchpriority="high"
+               alt="A real recording from the Klera app. A student has written the integral from 0 to 5 of 2x cos(x squared) dx in blue ink, and Klera writes the worked solution below it in pink handwriting, one step at a time.">
+        </div>
+        <div class="device-bar">
+          <button class="btn btn-quiet btn-small" type="button" data-demo-toggle="hero-demo" aria-pressed="false">Pause demo</button>
+          <p>Recorded in the app. Blue is the student. Pink is Klera.</p>
+        </div>
       </div>
     </div>
-  </main>
-  <footer>
-    <div class="date">September 15th</div>
-    <a class="enter" href="./how-it-works/">How it works &rsaquo;</a>
-  </footer>
-<script>
-const lines=["The answer was never the point","Hesitation is data","Clear in the unclear","The pen knows first","Show your working","Most tutors arrive too late","Built to be needed less","A* is a habit, not a talent","Every pause says something","Learning how you learn"];
- 
-// avoid repeating anything from the last few visits
-const KEY = "klera:seen";
-const MEMORY = 4;
- 
-let seen = [];
-try { seen = JSON.parse(localStorage.getItem(KEY)) || []; } catch(e) { seen = []; }
- 
-let pool = lines.filter((_, i) => !seen.includes(i));
-if (!pool.length) pool = lines;
- 
-const pick = pool[Math.floor(Math.random() * pool.length)];
-document.getElementById("line").textContent = pick;
- 
-try {
-  seen.push(lines.indexOf(pick));
-  localStorage.setItem(KEY, JSON.stringify(seen.slice(-MEMORY)));
-} catch(e) {}
- 
-// real progress across the build window
-const START  = new Date("2026-08-22T00:00:00Z").getTime();
-const LAUNCH = new Date("2026-09-15T00:00:00Z").getTime();
- 
-const now = Date.now();
-let pct = (now - START) / (LAUNCH - START);
-pct = Math.max(0, Math.min(1, pct));
- 
-const fill = document.getElementById("fill");
-const head = document.getElementById("head");
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
- 
-function place(){
-  fill.style.width = (pct * 100).toFixed(2) + "%";
-  head.style.left  = (pct * 100).toFixed(2) + "%";
-}
- 
-if(reduce){ place(); }
-else{ setTimeout(place, 1400); }
-</script>
+  </section>
+
+  <section class="section wrap" aria-labelledby="late-title">
+    <h2 class="statement" id="late-title">By the time a student says they are stuck, the struggle has already happened.</h2>
+    <p class="lead">The pause before the wrong line. The pressure in the pen. The line rewritten three times. Klera reads that while it happens, instead of waiting to be asked.</p>
+  </section>
+
+  <section class="section wrap" id="explore" aria-labelledby="explore-title">
+    <h2 id="explore-title">Two students. Two different ways of being stuck.</h2>
+    <p>These are real measurements from the two of us, taken on separate iPads. Each blue box is one student&rsquo;s calm range. Each orange orb is one attempt where that student was genuinely stuck. Move your pointer to turn the space, and hover an orb to read it.</p>
+
+    <div class="explore-grid">
+      <div class="signal-stage">
+        <canvas id="signal-scene" role="img" aria-label="3D chart of pressure strain, dysfluency and unproductive struggle for two students: calm ranges as boxes, struggle attempts as orbs"></canvas>
+        <div class="scene-labels" aria-hidden="true"></div>
+        <div class="orb-tip" hidden aria-hidden="true"></div>
+        <p class="scene-fallback">The 3D view needs WebGL. Choose an attempt to read its measurements.</p>
+      </div>
+
+      <div class="explore-side">
+        <div class="panel readout" id="scene-detail" aria-live="polite"></div>
+        <div class="attempts" role="group" aria-label="Struggle attempts">
+          <button class="btn btn-quiet attempt" type="button" data-attempt="a-1" aria-pressed="false">Student A, stuck</button>
+          <button class="btn btn-quiet attempt" type="button" data-attempt="b-22" aria-pressed="false">Student B, six minutes</button>
+          <button class="btn btn-quiet attempt" type="button" data-attempt="b-23" aria-pressed="false">Student B, stuck</button>
+          <button class="btn btn-quiet attempt" type="button" data-attempt="b-25" aria-pressed="false">Student B, hardest problem</button>
+        </div>
+        <button class="btn btn-quiet btn-small" id="scene-pause" type="button" aria-pressed="false">Pause motion</button>
+      </div>
+    </div>
+    <p style="margin-top:22px">Student A&rsquo;s stuck attempt sits far outside his calm box on pressure. Student B&rsquo;s never leave his: his tell was the pause before writing, which this chart cannot show. <a href="learner-profile/">Read the full measurements</a>.</p>
+  </section>
+
+  <section class="section wrap" aria-labelledby="inside-title">
+    <h2 id="inside-title">What is inside.</h2>
+
+    <div class="bento">
+      <div class="panel panel-ink span-4" data-tilt>
+        <h3>Five ways to ask, one that gives the answer</h3>
+        <p>Hint, Mistake, Next step and Explain each refuse to finish the problem. Only Solve completes the work, and using it counts against independence.</p>
+        <a class="btn btn-quiet btn-small go" href="how-it-works/#actions">See the five actions</a>
+      </div>
+      <div class="panel span-2" data-tilt>
+        <h3>Answers in handwriting</h3>
+        <p>Help arrives as lines of ink on the board, written stroke by stroke.</p>
+        <a class="btn btn-quiet btn-small go" href="how-it-works/#engine">Watch it write</a>
+      </div>
+      <div class="panel span-2" data-tilt>
+        <h3>Past papers, marked</h3>
+        <p>Sit a real paper by hand and get marked against the official scheme.</p>
+        <a class="btn btn-quiet btn-small go" href="exams/">How exams work</a>
+      </div>
+      <div class="panel panel-warm span-4" data-tilt>
+        <h3>A profile built from your own pen</h3>
+        <p>Klera learns how you write when calm and measures drift from it. It never compares you to anyone else, and it says nothing until it has enough of you to be right.</p>
+        <a class="btn btn-quiet btn-small go" href="learner-profile/">How the profile works</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight wrap" aria-labelledby="close-title">
+    <div class="split">
+      <h2 class="statement" id="close-title">Built to be needed less.</h2>
+      <div>
+        <p class="lead">Tutoring is paid by the hour, so it quietly profits from being needed more. Klera is built to make itself unnecessary.</p>
+        <div class="actions"><a class="btn" href="about/" data-magnetic>Why we built it</a></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot wrap">
+  <div class="foot-row">
+    <a class="brand" href="./" translate="no"><img src="assets/klera-mark-512.png" alt="" width="28" height="28">Klera</a>
+    <nav aria-label="Footer">
+      <a href="how-it-works/">How it works</a>
+      <a href="learner-profile/">Learner profile</a>
+      <a href="exams/">Exams</a>
+      <a href="about/">About</a>
+    </nav>
+  </div>
+</footer>
 </body>
 </html>
