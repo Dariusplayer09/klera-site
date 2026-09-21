@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For engineers</title>
+<meta name="description" content="How Klera works: the handwriting pipeline, the visualisation cascade, and the learner-profile maths with the real device measurements from two students.">
+<meta name="theme-color" content="#FEFCF3">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/klera.css">
+<script src="../assets/site-config.js"></script>
+<script src="../assets/klera.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="../" translate="no"><img src="../assets/klera-wordmark.png" alt="Klera" width="422" height="136"></a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="../for-students/">For students</a>
+    <a href="../for-investors/">For investors</a>
+    <a href="./" aria-current="page">For engineers</a>
+    <a href="../about/">About</a>
+    <a href="../#early-access">Early access</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-grid">
+      <div>
+        <span class="kicker">For engineers</span>
+        <h1 id="hero-title">Three systems, and the <span class="sweep">measurements</span> behind them.</h1>
+        <p class="lead">The handwriting engine that writes maths as pen strokes, the visualisation cascade that refuses to draw a wrong diagram, and the learner profile that models a student against their own baseline. Every number on this page comes from an instrumented run on a physical iPad, including the ones that went the wrong way.</p>
+        <div class="actions">
+          <a class="btn btn-quiet" href="#handwriting" data-magnetic>Handwriting</a>
+          <a class="btn btn-quiet" href="#visual" data-magnetic>Visual engine</a>
+          <a class="btn" href="#profile" data-magnetic>Learner profile</a>
+        </div>
+      </div>
+      <div>
+        <div class="device" data-tilt>
+          <img id="e-demo" src="../assets/demo/board-question.png" data-demo data-gif="../assets/demo/board-demo.gif" data-still="../assets/demo/board-question.png"
+               width="800" height="565"
+               alt="A real recording from the Klera app. A student's handwritten integral in blue ink, with Klera's worked solution appearing beneath it in pink handwriting, stroke by stroke.">
+        </div>
+        <div class="device-bar">
+          <button class="btn btn-quiet btn-small" type="button" data-demo-toggle="e-demo" aria-pressed="false">Pause demo</button>
+          <p>Every pink stroke is a PKStroke composed at run time, not a font and not a video.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ handwriting -->
+  <section class="section wrap" id="handwriting" aria-labelledby="hw-title">
+    <h2 id="hw-title">The handwriting system</h2>
+    <p class="lead">The tutor's answer has to arrive as ink on the student's own canvas: erasable, selectable, at the same zoom, in the same coordinate space. That rules out rendering text and rules out playing a video. It has to be strokes, composed at run time.</p>
+
+    <div class="diagram is-wide" style="margin-top:2rem">
+      <img src="../assets/figures/handwriting-pipeline.svg" width="1180" height="470" loading="lazy"
+           alt="A five stage pipeline. MathExpressionParser turns LaTeX into an AST, HandwrittenLayoutEngine turns the AST into geometry, ExpressionStrokeComposer turns geometry into ink, SemanticStrokeScheduler turns ink into a timeline, and Handwriting2Animator plays the timeline onto the canvas. A dashed branch from the first stage falls back to the older MathHandwritingRenderer on any parse or layout failure.">
+    </div>
+    <p class="scroll-hint">Scroll the diagram sideways.</p>
+
+    <div class="grid grid-2" style="margin-top:2.4rem;align-items:start">
+      <div>
+        <h3>Why the stages split where they do</h3>
+        <p>Each stage emits a different kind of thing, and that is the whole reason the split exists. The layout engine emits geometry and is forbidden from touching ink properties. The composer applies personality and never moves a glyph. The scheduler owns timing and nothing else.</p>
+        <p>That last one was a refactor, not the original design. The animator used to inline its own duration and pause arithmetic, which meant the live render, the debug overlay and the tests could each compute a slightly different timeline. Pulling the schedule out into one pure function made the three agree by construction.</p>
+
+        <h3 style="margin-top:2rem">Determinism, and the one exception</h3>
+        <p>The schedule is a pure function of stroke metadata, line breaks and tuning. The only stochastic element is the noise on inter-stroke pauses. Everything else is seeded, so the same string renders identically twice and a test can assert the timeline rather than a human judging a screenshot.</p>
+      </div>
+      <div>
+        <h3>What the composer does per stroke</h3>
+        <ol class="steps" style="margin-top:1rem">
+          <li><div><h3>Control points</h3><p>From the glyph polyline or a primitive shape.</p></div></li>
+          <li><div><h3>Jitter</h3><p>Small per-point displacement, scaled by the style profile.</p></div></li>
+          <li><div><h3>Baseline drift</h3><p>y shifts as a function of global x, so a long line sags the way a real one does.</p></div></li>
+          <li><div><h3>Slant</h3><p>A horizontal shear around the <em>expression's</em> baseline, not the glyph's own. That is what makes a numerator and its denominator share one slant instead of leaning independently.</p></div></li>
+          <li><div><h3>Densify and pack</h3><p>Resample to a maximum point spacing, then pack into PKStrokePoints with width, force and opacity from the profile.</p></div></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="panel panel-drawn" style="margin-top:2.4rem">
+      <h3>Three generations, on purpose</h3>
+      <p>There is an older CALayer text-mask engine, a glyph-stamp engine, and the AST pipeline above. The glyph-stamp engine is still shipped, because it is the fallback: if the parser or the layout engine refuses a string, the render falls through to it rather than to nothing. A tutor that silently writes nothing is a worse failure than a tutor whose handwriting is a generation behind.</p>
+      <p>The aesthetic target is deliberately narrow: a calm, deliberate, premium hand. Not shaky, not artistic, not over-humanised. Every constant that controls it is live-tunable in an in-app lab, and the lab's defaults match the baked constants byte for byte, so having the lab available does not change what production renders.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ visual engine -->
+  <section class="section wrap" id="visual" aria-labelledby="viz-title">
+    <h2 id="viz-title">The visual engine</h2>
+    <p class="lead">When a diagram would help, Klera generates an interactive one. The hard part is not generating it. The hard part is refusing to show one that is wrong, because a confidently wrong diagram teaches a student something false.</p>
+
+    <div class="diagram is-wide" style="margin-top:2rem">
+      <img src="../assets/figures/viz-cascade.svg" width="1180" height="470" loading="lazy"
+           alt="Detection feeds a 3D router, which feeds a cascade of five tiers: a curated template, a validated 3D spec, a generated JSXGraph script, a generated HTML widget, and a local fallback that never fails. A refusal at any tier drops to the next. A two part quality gate sits between the generated tiers and the screen.">
+    </div>
+    <p class="scroll-hint">Scroll the diagram sideways.</p>
+
+    <div class="grid grid-2" style="margin-top:2.4rem;align-items:start">
+      <div>
+        <h3>The model recommends, the engine decides</h3>
+        <p>The model may ask for a 3D render on anything. The router grants it only when the third spatial dimension earns its place: a surface, a plane in three-space, a cross product, a volume. A parabola drawn as a ribbon in space is worse than a parabola, so a topic that reads as standard 2D falls back to the flat cascade even when the model asked for depth.</p>
+
+        <h3 style="margin-top:2rem">The gate has two halves</h3>
+        <p>The static half scans generated code for escape hatches and rejects it before it reaches a web view. That sits on top of a content security policy that already blocks the network, which is defence in depth rather than belt and braces: the AI supplies parameter values, so a template must never become an injection vector.</p>
+        <p>The dynamic half renders the widget once off-screen and requires it to clear instrumentation minimums. A widget that renders but does nothing, for instance a JSXGraph board that is only a slider, is refused too.</p>
+      </div>
+      <div>
+        <h3>The bottom tier cannot fail</h3>
+        <p>Tier 3 is deterministic, local, and never invents mathematics. It has three moves, in order:</p>
+        <ol class="steps" style="margin-top:1rem">
+          <li><div><h3>Nearest curated template</h3><p>With the problem's own parameters if they validate.</p></div></li>
+          <li><div><h3>The template's example parameters</h3><p>Clearly labelled a general example, never passed off as this student's problem.</p></div></li>
+          <li><div><h3>A retry card</h3><p>Unknown topic, so it shows the problem text back and offers a fresh generation. No made-up numbers, no fake graph.</p></div></li>
+        </ol>
+        <p style="margin-top:1.4rem">The whole sandbox, JSXGraph and KaTeX included, is served from the app bundle over <code>file://</code>. Instant, offline, no network dependency at the moment a student is waiting.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ learner profile -->
+  <section class="section wrap" id="profile" aria-labelledby="lp-title">
+    <h2 id="lp-title">The learner profile</h2>
+    <p class="lead">This is the part that does not exist anywhere else, so it is the part worth showing in full, including the two runs where the numbers said we were wrong.</p>
+
+    <div class="diagram is-wide" style="margin-top:2rem">
+      <img src="../assets/figures/profile-pipeline.svg" width="1180" height="500" loading="lazy"
+           alt="Pencil samples become per attempt features, which feed a per student robust baseline, which produces standard scores, which feed the detectors, which produce a teaching context for the prompt. Two yellow gates stand in the way: twelve clean samples before the baseline opens, and a minimum of five strokes and five active seconds before an attempt can be scored at all.">
+    </div>
+    <p class="scroll-hint">Scroll the diagram sideways.</p>
+
+    <h3 style="margin-top:2.6rem">Why per-student, and not a population threshold</h3>
+    <p>The obvious design is a fixed threshold: this much pressure means stress, this much jerk means struggle. We built per-student baselines because the theory said population thresholds would not transfer. Two device runs turned that from theory into evidence, and the evidence was stronger than the theory.</p>
+
+    <figure class="fig" style="margin-top:1.8rem">
+      <ul class="legend">
+        <li><span class="key" style="background:#2563EB;opacity:.45"></span>Calm attempts, measured range</li>
+        <li><span class="key" style="background:#C2410C"></span>One genuinely stuck attempt</li>
+      </ul>
+      <img src="../assets/figures/two-students.svg" width="840" height="292" loading="lazy"
+           alt="Pressure strain for two students on the same scale. Student A's calm attempts span 0.03 to 0.24 and their stuck attempt reads 0.56, well outside the range. Student B's calm attempts span 0.05 to 0.12 and all three stuck attempts read 0.06, 0.11 and 0.12, inside the range.">
+      <figcaption>The same detector, on two students, on the same axis. Student A struggles by pressing harder, and pressure strain separates their stuck attempt cleanly. Student B's stuck attempts are indistinguishable from their calm ones on exactly that signal. A single population threshold on pressure would catch one of these students and be blind to the other.</figcaption>
+    </figure>
+
+    <p>What separates student B is a different channel entirely: the pause before they start writing.</p>
+
+    <figure class="fig" style="margin-top:1.4rem">
+      <ul class="legend">
+        <li><span class="key" style="background:#2563EB;opacity:.45"></span>Calm attempts, measured range</li>
+        <li><span class="key" style="background:#C2410C"></span>Stuck attempts</li>
+      </ul>
+      <img src="../assets/figures/pause-run005.svg" width="840" height="194" loading="lazy"
+           alt="Pre-stroke pause z-scores for student B. Seven calm attempts span minus 0.51 to plus 0.65. Three stuck attempts read minus 0.36, plus 1.21 and plus 7.32.">
+      <figcaption>Pre-stroke pause, as a z-score against this student's own pace baseline. The hardest stuck attempt reads +7.32 against a calm band of −0.51 to +0.65. This is the largest separation anywhere in either run, and it is on the one signal whose detector could not fire during the session. More on that below.</figcaption>
+    </figure>
+
+    <p>So the finding is sharper than "students differ in scale". The <strong>direction and the channel</strong> of distress differ per student. Student A's only separator is student B's flattest signal, and the reverse. That is an argument for per-student baselines that no amount of tuning a global constant can answer.</p>
+
+    <h3 style="margin-top:2.6rem">The maths, exactly as it runs</h3>
+    <div class="formula">dysfluency = sigmoid( 0.7 · zJerk + 0.5 · max(0, −zSpeed) − 1.0 )
+<span class="why">Jerky strokes push it up. So does writing unusually slowly, but only in the slow direction, which is why the speed term is one-sided. The −1.0 offset means an unremarkable sample lands at sigmoid(−1.0) = 0.27, not at 0.5.</span></div>
+
+    <div class="formula">strain = sigmoid( 0.8 · zForce − 1.0 ) · paired
+<span class="why">paired is 1.0 when the attempt is known not to have progressed, or shows two or more erase bursts, and 0.3 otherwise. Pressing hard on work that is going fine is not strain; pressing hard on work that is going nowhere is.</span></div>
+
+    <div class="panel panel-drawn" style="margin-top:2rem">
+      <h3>The bug that taught us the most</h3>
+      <p><code>paired</code> used to take the full 1.0 whenever the attempt's outcome was unknown, because "not known to have progressed" was being read as "did not progress". Those are not the same claim. An outcome is unknown when our background verifier did not get round to judging the work, which is a fact about <em>our compute budget</em>, not about the student.</p>
+      <p>The cost was measurable. One run posted its highest strain reading of the whole session, <strong>0.51</strong>, on a calm attempt with zero erasures, purely because nothing had marked it yet. That is the app inventing a struggling student out of its own queue depth.</p>
+      <p>The fix makes progress three-state. Abandonment is the only outcome that pairs as no-progress; absence of evidence takes the unpaired weight. The same mistake was found in two other places in the codebase once we knew its shape.</p>
+    </div>
+
+    <h3 style="margin-top:2.6rem">An estimator can talk over the student</h3>
+    <p>The baseline is a running robust centre and median absolute deviation, advanced by an exponentially weighted average at <code>alpha = 0.05</code>. Seeded on the first sample, its accumulated weight after twelve observations is only <strong>0.46</strong>. The centre had travelled less than half way to the true mean, and the deviation was under-converged by the same factor.</p>
+    <p>That is not an abstract concern. The first clean sample of one run happened to be the session's smoothest writing, so the centre stayed anchored near it and every post-baseline jerk z-score came back positive.</p>
+
+    <figure class="fig" style="margin-top:1.6rem">
+      <img src="../assets/figures/baseline-debias.svg" width="840" height="340" loading="lazy"
+           alt="Run 002 produced five jerk z-scores, all positive, between plus 0.80 and plus 1.12. After the warm-up debias, run 004 spanned minus 3.39 to plus 0.51 with eight of nine negative.">
+      <figcaption>Five same-sign z-scores against a student's own normal is the estimator talking, not the student. The fix divides both accumulators by <code>1 − (1−alpha)^count</code> at every step, so the stored properties hold already-debiased values and the serialised shape is unchanged. Blobs written by the biased version still decode, reinterpreted as debiased estimates, which is the closest honest reading of them.</figcaption>
+    </figure>
+
+    <p>The arithmetic closed exactly, which is how we knew it was the estimator and not the student. A biased <code>zJerk = +1.10</code> gives <code>sigmoid(0.7 · 1.10 − 1.0) = 0.44</code>, and the log said 0.45. At an unbiased <code>zJerk = 0</code> the same formula gives 0.27. Calm, unaided, seven-second work had been sitting at 64 percent of its threshold for no reason at all.</p>
+
+    <h3 style="margin-top:2.6rem">Every attempt from the second run</h3>
+    <p>Not a selected subset. Attempts before the fifteenth are omitted only because the baseline gate had not opened, which means every read on them is zero by construction rather than by measurement.</p>
+
+    <div class="table-scroll">
+      <table>
+        <caption>Run 005, 2026-09-13, iPad Air 13-inch. Post-gate attempts. Shaded rows are attempts where the student was genuinely stuck, unaided, and said so out loud. zF, zS, zJ and zPause are z-scores against this student's own baselines.</caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th><th scope="col">Kind</th><th scope="col" class="num">Active</th>
+            <th scope="col" class="num">zF</th><th scope="col" class="num">zS</th><th scope="col" class="num">zJ</th>
+            <th scope="col" class="num">zPause</th><th scope="col" class="num">Dysfluency</th>
+            <th scope="col" class="num">Strain</th><th scope="col" class="num">Unproductive</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">15</th><td>calm</td><td class="num">32 s</td><td class="num">+0.12</td><td class="num">−0.65</td><td class="num">−0.36</td><td class="num">−0.51</td><td class="num">0.28</td><td class="num">0.09</td><td class="num">0.25</td></tr>
+          <tr><th scope="row">16</th><td>calm</td><td class="num">25 s</td><td class="num">+0.74</td><td class="num">+0.15</td><td class="num">−1.16</td><td class="num">−0.44</td><td class="num">0.14</td><td class="num">0.12</td><td class="num">0.25</td></tr>
+          <tr><th scope="row">17</th><td>slow, 1 erase</td><td class="num">129 s</td><td class="num">−0.09</td><td class="num">+0.07</td><td class="num">−0.38</td><td class="num">+0.11</td><td class="num">0.22</td><td class="num">0.08</td><td class="num">0.25</td></tr>
+          <tr><th scope="row">18</th><td>calm</td><td class="num">27 s</td><td class="num">+0.52</td><td class="num">+0.39</td><td class="num">+0.14</td><td class="num">+0.65</td><td class="num">0.29</td><td class="num">0.11</td><td class="num">0.25</td></tr>
+          <tr><th scope="row">19</th><td>calm</td><td class="num">30 s</td><td class="num">+0.63</td><td class="num">+0.87</td><td class="num">−1.24</td><td class="num">−0.37</td><td class="num">0.13</td><td class="num">0.11</td><td class="num">0.25</td></tr>
+          <tr><th scope="row">20</th><td>calm</td><td class="num">43 s</td><td class="num">−0.83</td><td class="num">−0.47</td><td class="num">+0.32</td><td class="num">−0.34</td><td class="num">0.37</td><td class="num">0.05</td><td class="num">0.25</td></tr>
+          <tr><th scope="row">21</th><td>calm</td><td class="num">97 s</td><td class="num">−0.38</td><td class="num">−0.39</td><td class="num">+0.33</td><td class="num">+0.23</td><td class="num">0.36</td><td class="num">0.06</td><td class="num">0.25</td></tr>
+          <tr class="is-struggle"><th scope="row">22</th><td>stuck</td><td class="num">360 s</td><td class="num">−0.60</td><td class="num">−0.32</td><td class="num">−0.27</td><td class="num">−0.36</td><td class="num">0.26</td><td class="num">0.06</td><td class="num">0.50</td></tr>
+          <tr class="is-struggle"><th scope="row">23</th><td>stuck</td><td class="num">219 s</td><td class="num">+0.53</td><td class="num">+0.74</td><td class="num">+1.78</td><td class="num">+1.21</td><td class="num">0.56</td><td class="num">0.11</td><td class="num">0.50</td></tr>
+          <tr><th scope="row">24</th><td>calm</td><td class="num">95 s</td><td class="num">+0.45</td><td class="num">+2.30</td><td class="num">+1.86</td><td class="num">−0.43</td><td class="num">0.57</td><td class="num">0.10</td><td class="num">0.25</td></tr>
+          <tr class="is-struggle"><th scope="row">25</th><td>stuck</td><td class="num">242 s</td><td class="num">+0.68</td><td class="num">+2.41</td><td class="num">+0.76</td><td class="num">+7.32</td><td class="num">0.39</td><td class="num">0.12</td><td class="num">0.50</td></tr>
+          <tr><th scope="row">26</th><td>3-stroke probe</td><td class="num">0 s</td><td class="num">nil</td><td class="num">nil</td><td class="num">nil</td><td class="num">nil</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">0.25</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure class="fig" style="margin-top:1.4rem">
+      <ul class="legend">
+        <li><span class="key" style="background:#2563EB;opacity:.45"></span>Calm attempts, measured range</li>
+        <li><span class="key" style="background:#C2410C"></span>Stuck attempts</li>
+      </ul>
+      <img src="../assets/figures/separation-run005.svg" width="840" height="294" loading="lazy"
+           alt="Three detectors for student B. Pressure strain: calm range 0.05 to 0.12, stuck values 0.06, 0.11 and 0.12. Dysfluency: calm range 0.13 to 0.57, stuck values 0.26, 0.56 and 0.39. Unproductive struggle: calm 0.25 for all seven, stuck 0.50 for all three. The firing threshold at 0.60 is to the right of every value.">
+      <figcaption>The same run, detector by detector. Pressure strain is flat. Dysfluency's ranges overlap outright. Unproductive struggle splits calm from stuck by a clean factor of two, and still never reaches the 0.60 that would make it fire.</figcaption>
+    </figure>
+
+    <div class="panel panel-drawn" style="margin-top:2rem">
+      <h3>The row we will not tune away</h3>
+      <p>Attempt 24 was calm. No erasures, no negative language, solved. It read <strong>dysfluency 0.57</strong>, <code>zJerk +1.86</code>, <code>zSpeed +2.30</code>. Attempt 23, genuinely stuck, read <strong>0.56</strong>.</p>
+      <p>Fast confident writing and stuck writing are indistinguishable on this student's dysfluency channel. Any proposal to lower the 0.70 threshold toward these values fires on confident work, which is the worst possible false positive: interrupting a student who is doing well. The threshold stays where it is until there is data that justifies moving it, and a threshold sweep on the four struggle rows we have across two students would be fitting to noise.</p>
+    </div>
+
+    <h3 style="margin-top:2.6rem">The open defect, stated plainly</h3>
+    <p>Every one of those twenty-six attempts finalised with <code>outcome=unknown</code> and <code>difficulty=unknown</code>, while the background verifier was demonstrably working and judging correctly at full confidence. The verdict lands and credits mastery; it just never reaches the attempt record.</p>
+    <p>That cascades exactly one way:</p>
+    <div class="formula">verdict does not attach  →  difficulty stays nil  →  pace baseline is never fed
+                         →  pause detector returns none on every attempt</div>
+    <p>Which means the signal that separates this student by a factor of eleven is the one signal structurally unable to fire. Two previously separate bookkeeping items in our tracker turned out to be the same defect, hiding the same thing.</p>
+    <p>A note for anyone chasing it: comparing the attempt's cluster hash against the verify hash proves nothing. The attempt's hash is set once at the first stroke and never reassigned, while the verify hash is a digest of the mature cluster. They are different by construction and will never match. We went down that path first.</p>
+
+    <h3 style="margin-top:2.6rem">Three things that will cost you a session each</h3>
+    <div class="grid grid-3" style="margin-top:1.6rem">
+      <div class="panel">
+        <h3>Attempts bank on shrink, not on finish</h3>
+        <p>Pruning folds only clusters at or beyond the current count, and it is driven by the cluster count changing. Writing more problems raises the count and prunes nothing, so attempts stay open indefinitely while the verifier keeps judging them and crediting mastery. The app looks completely alive with the observation count frozen. One run sat at 11 of 12 through a dozen problems for exactly this reason.</p>
+      </div>
+      <div class="panel">
+        <h3>Zero by construction is not calm</h3>
+        <p>Before the baseline gate opens at twelve clean samples, every dysfluency and strain figure is zero because nothing can be computed, not because the student is relaxed. Reading a low value as calm before the header says the baseline is ready is reading the absence of a measurement as a measurement.</p>
+      </div>
+      <div class="panel">
+        <h3>A tiny attempt is garbage, not data</h3>
+        <p>A three-stroke probe produced a raw speed two to three times anything else in the run. An earlier run let a sample like that through and got a z-score of +10.73. The guard now rejects anything under five strokes or five active seconds and returns nil, so a discarded sample adds no support rather than removing any, and it does not pollute the baseline either.</p>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:2rem">
+      <h3>What we are not claiming</h3>
+      <p>Four struggle attempts across two students is not a dataset. We cannot run a threshold sweep on it and we have not tried. One of our two students shows jerk z-scores that are eight of nine negative, which is plausibly real within-session smoothing rather than residual estimator bias, and one session cannot separate the two. The keyword list that scores a student's own words has a documented inversion, where "idk how to solve this" scored as a constructive question because the constructive list matched inside it. The language model read the same sentence as confusion at 0.90 confidence on the next log line.</p>
+      <p>All of that is on this page because a page that showed only the parts that worked would tell you nothing about whether the parts that worked are real.</p>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="cta-title">
+    <div class="waitlist">
+      <h2 id="cta-title">If this is your kind of problem</h2>
+      <p class="lead">Instrumented runs on real devices, a signal that half our students do not produce, and a measurement layer we are still arguing with. We are two people and there is more of this than we can get through.</p>
+      <div class="actions">
+        <a class="btn" href="../#early-access" data-magnetic>Join early access</a>
+        <a class="btn btn-quiet" href="mailto:hello@klera.app" data-magnetic>Email us</a>
+      </div>
+      <p class="form-note">✱ Replace the address above with the real contact email.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <p style="margin:0">Klera. Built by two people who got tired of tutors that cannot see the page.</p>
+    <nav aria-label="Footer">
+      <a href="../">Home</a>
+      <a href="../for-students/">For students</a>
+      <a href="../for-investors/">For investors</a>
+      <a href="../about/">About</a>
+      <a href="https://fifilukasiewicz.github.io/neuraboard-legal/">Privacy</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

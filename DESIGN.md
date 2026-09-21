@@ -4,10 +4,28 @@ The source of truth for how every page looks and moves.
 
 ## Design read
 
-A product site for an iPad AI tutor, for students and investors, with a dark ink-on-glass
-language, built on native CSS, one Three.js scene and pointer-reactive depth.
+A product site for an iPad AI tutor, split into three audiences (students, investors,
+engineers), in the logo's own paper-and-ink language: cream stock, one warm yellow, a
+hand-drawn line quality, real captures instead of imitations.
 
-**Dials:** `DESIGN_VARIANCE 7`, `MOTION_INTENSITY 7`, `VISUAL_DENSITY 3`.
+**Dials:** `DESIGN_VARIANCE 6`, `MOTION_INTENSITY 4`, `VISUAL_DENSITY 4`.
+
+## Structure
+
+`/` is a hub, not a pitch. It states what Klera is, then sends the visitor to the page
+written for them. The three audience pages are the site; everything else supports them.
+
+| Path | For | Contains |
+|---|---|---|
+| `/` | everyone | Hero, the three doors, what it is, early access |
+| `/for-students/` | the person who uses it | How it feels, the five-rung help ladder, the real filmstrip, exams, early access |
+| `/for-investors/` | the person who funds it | Problem, the three moats, comparison, business model and pricing, honest status |
+| `/for-engineers/` | the person who would build it | Handwriting pipeline, visualisation cascade, learner-profile maths and real measurements |
+| `/about/` | context | Who is building it, how we work |
+
+`/how-it-works/`, `/learner-profile/` and `/exams/` were folded into those three. Each keeps
+an `index.html` that redirects and still reads if the redirect is blocked; GitHub Pages has
+no server-side redirect.
 
 ## The rule that overrides the rest: never fake the product
 
@@ -16,61 +34,86 @@ standing in for the engine. Hand-built imitations of handwriting look fake next 
 app actually produces, and a site about a handwriting engine cannot afford that.
 
 Everything that shows the product is a real capture from the app, or a visible ✱ slot waiting
-for one. Everything that shows data is a real measurement from the calibration findings, or it
-is not drawn.
-
-## The one bold thing
-
-The homepage explorer (`#explore`, `assets/signal-scene.js`): the two students' real
-learner-profile measurements as a 3D space. Calm ranges are boxes with their measured extents;
-genuine struggle attempts are orbs at their measured coordinates. The pointer turns the space,
-hovering an orb opens a pop-up, and a button list gives the same readout without a pointer or
-without WebGL. Everything else stays quiet; motion elsewhere only answers a person.
-
-## Real assets
-
-| File | What it is |
-|---|---|
-| `assets/demo/board-demo.gif` | Real recording from the app, 800 x 565, 121 frames, 12.1 s: Solve writing the answer to an integral in handwriting |
-| `assets/demo/board-question.png` | First frame of that recording: the student's question inside a detected cluster box |
-| `assets/demo/solve-step-2.png`, `-3`, `-5` | Frames at 3.1 s, 9.1 s and 12.1 s of the same recording |
-| `assets/klera-mark-512.png`, `apple-touch-icon.png`, `favicon-32.png` | The app icon |
-
-The recording is a GIF because no video encoder was available when the site was built. A GIF
-cannot pause, so markup loads the still and `klera.js` swaps between still and GIF behind a
-visible toggle; reduced motion starts on the still. Replace with an MP4 in a `<video>` when one
-can be encoded.
+for one. Everything that shows data is a real measurement from a device run, or it is not
+drawn. When a run publishes a range but not its individual values, the figure draws the range
+and says so; it does not interpolate points to make the row look fuller.
 
 ## Tokens
 
 | Token | Value | Role |
 |---|---|---|
-| `--ground` | `#070B14` | page background, ink navy |
-| `--panel` | `#0D1322` | raised surfaces |
-| `--raised` | `#161E32` | sheets, popovers |
-| `--paper` | `#ECEAE4` | primary text, 16.4:1 on ground |
-| `--graphite` | `#9BA3B4` | secondary text, 7.8:1 on ground, 6.6:1 on raised |
-| `--accent` | `#8DB0FF` | the single UI accent: links, focus, 9.2:1 |
-| `--calm` | `#3987e5` | data only |
-| `--struggle` | `#C47A24` | data only |
+| `--paper` | `#FEFCF3` | page ground. Sampled from the logo's own background |
+| `--card` | `#FFFDF7` | raised surfaces |
+| `--sunk` | `#F7F1DF` | wells, code blocks, formula blocks |
+| `--ink` | `#171307` | primary text, 18.0:1 on paper |
+| `--ink-soft` | `#5B5340` | secondary text, 7.4:1 |
+| `--muted` | `#7D7360` | tertiary text, 4.6:1 |
+| `--rule` | `#E6DCC2` | hairlines, decorative only |
+| `--rule-firm` | `#CFC2A0` | borders around interactive things |
+| `--yellow` | `#E9B11E` | the logo's exact ink. **Graphic colour only** |
+| `--yellow-pale` | `#FBEDC4` | washes |
+| `--amber` | `#7A4E00` | accent text and links, 7.00:1 |
+| `--calm` | `#2563EB` | data only |
+| `--struggle` | `#C2410C` | data only |
 
-Data colors were validated on both `#070B14` and `#0D1322`: lightness band, chroma floor, CVD
-separation (dE 26.7 protan), normal-vision floor (dE 29.3), 3:1 contrast all pass. Never use
-them as UI color, and never pick replacements by eye. `#6E7689` exists for hairlines only.
+**The yellow is 1.90:1 on cream.** It can be a fill, a highlighter sweep, a step marker, a
+button background (ink on yellow is 9.51:1), a border. It can never be text, and never a
+hairline that has to be read. Anything that must be read and is not ink uses `--amber`.
+
+Data colours were validated as a categorical pair on `#FEFCF3`: lightness band, chroma floor,
+CVD separation (dE 31.7 protan, 31.6 tritan), normal-vision floor (dE 36.1) and 5.0:1
+contrast, all pass. The palette is capped at two on purpose, because the data itself is
+two-valued (calm range, struggle points). A third series gets small multiples, not a third
+hue picked by eye. Never use these as UI colour.
 
 ## Type
 
 - **Display:** Fraunces, variable, `opsz` high, weight ~380. Headlines only. Sentence case.
-- **Body:** Geist, 17px base, line-height 1.6, measure 64ch.
-- **Data:** Geist Mono with `tabular-nums`, inside charts and tables only.
+- **Body:** Geist, 17px base, line-height 1.62, measure 64ch.
+- **Data:** Geist Mono with `tabular-nums`, inside figures, tables, formulas and kickers only.
+
+## The hand-drawn line
+
+The logo is one continuous uneven stroke, so the boxes that matter echo it: `--drawn` is four
+unequal corner radii, used on the three doors, prose panels (`.panel-drawn`), the early-access
+block and the numbered step markers. Everything else keeps an even `--radius`. Used on every
+box it would read as a gimmick; used on the ones carrying an argument it reads as the logo.
 
 ## Layout
 
-- **Nav:** floating glass pill with the app mark, one line, 64px max.
-- **Hero:** text left, a real capture in a device frame right; stacked on mobile.
-- **Families:** hero, statement, 3D explorer, split with real frame, picker with sheets,
-  filmstrip of real frames in order, asymmetric bento, stepper only for real sequences, data
-  figure with disclosure. No family twice on a page.
+- **Nav:** floating cream pill, the wordmark at 26px, current page marked with a yellow chip.
+- **Hero:** text left, a real capture in a device frame right; stacked below 900px.
+- **Families:** hero, three doors, statement grid, stepper, filmstrip of real frames,
+  data figure with legend and caption, wide diagram in a scroller, comparison table,
+  stat tiles, the early-access block. No family twice on a page.
+- **Prose panels are capped at 78ch**, not stretched to the grid, so a paragraph never runs
+  to a 110-character measure.
+
+## Figures and diagrams
+
+Both are generated, not hand-placed, and the generators are committed:
+
+    python3 tools/build_figures.py     # the four data figures
+    python3 tools/build_diagrams.py    # the three architecture diagrams
+
+Output lands in `assets/figures/` and is committed too, because the site has no build step.
+Re-run and commit whenever a number or a pipeline changes. Every figure carries real alt text
+describing the values, and the engineering page also prints the underlying run as a table, so
+the data is reachable without seeing the picture.
+
+Diagrams are wide by nature. They keep their width inside a `.diagram` scroller rather than
+shrinking their labels to nothing, with a `.scroll-hint` line below that hides above 1200px.
+
+## Early access
+
+One form, on `/` and `/for-students/`, posting straight to Supabase PostgREST. The key in
+`assets/site-config.js` is a publishable key and is meant to be public; `supabase/waitlist.sql`
+grants it INSERT on the waitlist table and nothing else, with no SELECT policy and no SELECT
+grant, so it cannot read the list back. Run that SQL once per project. If the key is missing
+the form disables itself and says so rather than silently dropping signups.
+
+The offer, stated the same way everywhere: **anyone who signs up and tests the app keeps
+unlimited Klera Premium for life.**
 
 ## Interaction and motion
 
@@ -78,32 +121,37 @@ them as UI color, and never pick replacements by eye. `#6E7689` exists for hairl
 - Panels and device frames: pointer spotlight and up to 5deg tilt, fine pointers only.
 - Magnetic buttons move up to 6px toward the pointer.
 - Pop-ups are native `<dialog>` sheets opened only by a click.
-- The 3D scene: pointer events, one raycaster, loop stopped offscreen, in hidden tabs and on
-  pause; `boot()` called at the bottom of its module; constant scale; reduced motion renders on
-  demand with no drift.
 - The system cursor is never replaced.
+- Nothing moves on its own. Every effect answers a pointer or a click.
 
 ## Copy
 
-No em or en dashes. Sentence case. No eyebrow labels (the homepage launch kicker is the single
-allowed one). No arrows on links. Curly quotes.
+No em or en dashes (a true minus sign in a negative number is not a dash). Sentence case.
+No eyebrow labels beyond one `kicker` per page naming the audience. No arrows on links.
+Curly quotes. Say the uncomfortable number rather than rounding it away.
 
 ## Images: the ✱ rule
 
 Where a real capture belongs and none exists yet, a visible `.ph` slot marked **✱ Replace**
 states the exact shot and size. Search the repo for `✱`. Each slot reserves its space.
 
+Outstanding: the exam screenshot, the about hero, both founder portraits and bios, and the
+contact email (currently `hello@klera.app` in `assets/site-config.js` and three mailto links).
+
 ## Theme
 
-Dark only, locked. `color-scheme: dark`, `theme-color` matches `--ground`.
+Light only, locked. `color-scheme: light`, `theme-color` matches `--paper`. The previous
+ink-navy dark theme and its WebGL measurement explorer (`assets/signal-scene.js`) were
+retired in this repaint; the explorer's content is now the four static data figures, which
+are accessible and need no WebGL. Both are recoverable from commit `34b538e`.
 
 ## Pre-flight checklist
 
 - [ ] No handwriting drawn in code anywhere
 - [ ] Zero em or en dashes in visible text
-- [ ] At most one eyebrow per three sections
+- [ ] Every number traceable to a device run, and ranges drawn as ranges
 - [ ] Every interactive element: visible `:focus-visible`, 44px target, hover state
 - [ ] `prefers-reduced-motion` verified on every animated element
 - [ ] Images carry width, height and accurate alt text; ✱ slots reserve space
-- [ ] Charts and the 3D explorer use real measurements only, with a non-visual alternative
-- [ ] Audited against the Vercel Web Interface Guidelines
+- [ ] Nothing but diagrams, tables, formulas and `pre` may scroll sideways
+- [ ] Rendered and looked at, at 1440px and at 390px

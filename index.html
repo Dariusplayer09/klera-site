@@ -4,28 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Klera, the tutor that watches the pen</title>
-<meta name="description" content="Klera is an iPad whiteboard tutor. It reads how you write, not just what you write, and answers on the board in handwriting.">
-<meta name="theme-color" content="#070B14">
+<meta name="description" content="Klera is an iPad whiteboard tutor. It reads how a student writes, not just what they write, and answers on the board in real handwriting.">
+<meta name="theme-color" content="#FEFCF3">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/klera.css">
+<script src="assets/site-config.js"></script>
 <script src="assets/klera.js" defer></script>
-<script type="module" src="assets/signal-scene.js"></script>
+<script src="assets/waitlist.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
-  <a class="brand" href="./" translate="no"><img src="assets/klera-mark-512.png" alt="" width="28" height="28">Klera</a>
+  <a class="brand" href="./" translate="no" aria-current="page"><img src="assets/klera-wordmark.png" alt="Klera" width="422" height="136"></a>
   <nav class="nav-links" aria-label="Primary">
-    <a href="how-it-works/">How it works</a>
-    <a href="learner-profile/">Learner profile</a>
-    <a href="exams/">Exams</a>
+    <a href="for-students/">For students</a>
+    <a href="for-investors/">For investors</a>
+    <a href="for-engineers/">For engineers</a>
     <a href="about/">About</a>
+    <a href="#early-access">Early access</a>
   </nav>
 </header>
 
@@ -34,12 +35,12 @@
   <section class="hero wrap" aria-labelledby="hero-title">
     <div class="hero-grid">
       <div>
-        <span class="kicker">Launching 15 September</span>
-        <h1 id="hero-title">The tutor that watches the pen.</h1>
-        <p class="lead">Klera is an iPad whiteboard tutor. It reads how you write, not just what, and answers in handwriting.</p>
+        <img class="hero-mark" src="assets/klera-wordmark.png" alt="Klera" width="422" height="136" fetchpriority="high">
+        <h1 id="hero-title">The tutor that <span class="sweep">watches the pen</span>.</h1>
+        <p class="lead">Every AI tutor can mark an answer. None of them know the student froze for twelve seconds before writing it. Klera does, because it watches the Apple Pencil, and it answers on the board in real handwriting.</p>
         <div class="actions">
-          <a class="btn" href="how-it-works/" data-magnetic>See how it works</a>
-          <a class="btn btn-quiet" href="#explore" data-magnetic>Explore the measurements</a>
+          <a class="btn" href="#early-access" data-magnetic>Get free early access</a>
+          <a class="btn btn-quiet" href="#doors" data-magnetic>Pick your way in</a>
         </div>
       </div>
 
@@ -57,84 +58,118 @@
     </div>
   </section>
 
-  <section class="section wrap" aria-labelledby="late-title">
-    <h2 class="statement" id="late-title">By the time a student says they are stuck, the struggle has already happened.</h2>
-    <p class="lead">The pause before the wrong line. The pressure in the pen. The line rewritten three times. Klera reads that while it happens, instead of waiting to be asked.</p>
+  <section class="section wrap" id="doors" aria-labelledby="doors-title">
+    <h2 id="doors-title">Three ways to read this site</h2>
+    <p class="lead">Same product, three different questions. Start wherever you actually are.</p>
+    <div class="doors" style="margin-top:2.2rem">
+      <a class="door" href="for-students/">
+        <span class="door-num">01</span>
+        <h3>For students</h3>
+        <p>What it feels like to study with Klera, what it does when you are stuck, and how to get on the early-access list.</p>
+        <span class="door-go">See how it teaches</span>
+      </a>
+      <a class="door" href="for-investors/">
+        <span class="door-num">02</span>
+        <h3>For investors</h3>
+        <p>What the product is, why it is hard to copy, who pays for it and how the business is meant to work.</p>
+        <span class="door-go">Read the case</span>
+      </a>
+      <a class="door" href="for-engineers/">
+        <span class="door-num">03</span>
+        <h3>For engineers</h3>
+        <p>The handwriting pipeline, the visualisation cascade, and the learner-profile maths with real device measurements from two students.</p>
+        <span class="door-go">Open the internals</span>
+      </a>
+    </div>
   </section>
 
-  <section class="section wrap" id="explore" aria-labelledby="explore-title">
-    <h2 id="explore-title">Two students. Two different ways of being stuck.</h2>
-    <p>These are real measurements from the two of us, taken on separate iPads. Each blue box is one student&rsquo;s calm range. Each orange orb is one attempt where that student was genuinely stuck. Move your pointer to turn the space, and hover an orb to read it.</p>
-
-    <div class="explore-grid">
-      <div class="signal-stage">
-        <canvas id="signal-scene" role="img" aria-label="3D chart of pressure strain, dysfluency and unproductive struggle for two students: calm ranges as boxes, struggle attempts as orbs"></canvas>
-        <div class="scene-labels" aria-hidden="true"></div>
-        <div class="orb-tip" hidden aria-hidden="true"></div>
-        <p class="scene-fallback">The 3D view needs WebGL. Choose an attempt to read its measurements.</p>
+  <section class="section wrap" aria-labelledby="what-title">
+    <h2 id="what-title">What it actually is</h2>
+    <div class="grid grid-3" style="margin-top:1.8rem">
+      <div class="panel">
+        <h3>An iPad whiteboard</h3>
+        <p>You write a problem with your Apple Pencil, the way you would on paper. Nothing to type, nothing to photograph, no chat box.</p>
       </div>
+      <div class="panel">
+        <h3>A tutor that writes back</h3>
+        <p>Klera answers in pen strokes on your own canvas, next to your working, and talks you through it. Not a wall of text beside the page.</p>
+      </div>
+      <div class="panel">
+        <h3>A read on how you are doing</h3>
+        <p>Pressure, speed, hesitation before a stroke, erase bursts. Measured against your own normal, not a population average, and never shown to you as a score.</p>
+      </div>
+    </div>
+  </section>
 
-      <div class="explore-side">
-        <div class="panel readout" id="scene-detail" aria-live="polite"></div>
-        <div class="attempts" role="group" aria-label="Struggle attempts">
-          <button class="btn btn-quiet attempt" type="button" data-attempt="a-1" aria-pressed="false">Student A, stuck</button>
-          <button class="btn btn-quiet attempt" type="button" data-attempt="b-22" aria-pressed="false">Student B, six minutes</button>
-          <button class="btn btn-quiet attempt" type="button" data-attempt="b-23" aria-pressed="false">Student B, stuck</button>
-          <button class="btn btn-quiet attempt" type="button" data-attempt="b-25" aria-pressed="false">Student B, hardest problem</button>
+  <section class="section wrap" id="early-access" aria-labelledby="ea-title">
+    <div class="waitlist">
+      <span class="perk">Test Klera and keep Klera Premium free, for life</span>
+      <h2 id="ea-title">Early access</h2>
+      <p class="lead">We are handing out the first builds to a small group of students who will actually use it and tell us what is wrong. Everyone on this list who tests the app keeps <strong>unlimited Klera Premium for life</strong>, whatever we charge for it later.</p>
+
+      <form id="waitlist-form" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="wl-email">Email</label>
+            <input id="wl-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com">
+          </div>
+          <div class="field">
+            <label for="wl-name">Name (optional)</label>
+            <input id="wl-name" name="name" type="text" autocomplete="name" placeholder="What should we call you">
+          </div>
         </div>
-        <button class="btn btn-quiet btn-small" id="scene-pause" type="button" aria-pressed="false">Pause motion</button>
-      </div>
-    </div>
-    <p style="margin-top:22px">Student A&rsquo;s stuck attempt sits far outside his calm box on pressure. Student B&rsquo;s never leave his: his tell was the pause before writing, which this chart cannot show. <a href="learner-profile/">Read the full measurements</a>.</p>
-  </section>
+        <div class="form-row" style="margin-top:.8rem">
+          <div class="field">
+            <label for="wl-role">You are a</label>
+            <select id="wl-role" name="role">
+              <option value="student">Student</option>
+              <option value="parent">Parent</option>
+              <option value="teacher">Teacher</option>
+              <option value="other">Something else</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="wl-device">Your setup</label>
+            <select id="wl-device" name="device">
+              <option value="ipad-pencil">iPad and an Apple Pencil</option>
+              <option value="ipad-no-pencil">iPad, no Pencil</option>
+              <option value="no-ipad">No iPad yet</option>
+              <option value="unsure" selected>Not sure</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row" style="margin-top:.8rem">
+          <div class="field">
+            <label for="wl-note">What are you studying? (optional)</label>
+            <input id="wl-note" name="note" type="text" maxlength="500" placeholder="A level maths, calculus, resitting an exam">
+          </div>
+        </div>
 
-  <section class="section wrap" aria-labelledby="inside-title">
-    <h2 id="inside-title">What is inside.</h2>
+        <div aria-hidden="true" style="position:absolute;left:-9999px">
+          <label for="wl-company">Company</label>
+          <input id="wl-company" name="company" type="text" tabindex="-1" autocomplete="off">
+        </div>
 
-    <div class="bento">
-      <div class="panel panel-ink span-4" data-tilt>
-        <h3>Five ways to ask, one that gives the answer</h3>
-        <p>Hint, Mistake, Next step and Explain each refuse to finish the problem. Only Solve completes the work, and using it counts against independence.</p>
-        <a class="btn btn-quiet btn-small go" href="how-it-works/#actions">See the five actions</a>
-      </div>
-      <div class="panel span-2" data-tilt>
-        <h3>Answers in handwriting</h3>
-        <p>Help arrives as lines of ink on the board, written stroke by stroke.</p>
-        <a class="btn btn-quiet btn-small go" href="how-it-works/#engine">Watch it write</a>
-      </div>
-      <div class="panel span-2" data-tilt>
-        <h3>Past papers, marked</h3>
-        <p>Sit a real paper by hand and get marked against the official scheme.</p>
-        <a class="btn btn-quiet btn-small go" href="exams/">How exams work</a>
-      </div>
-      <div class="panel panel-warm span-4" data-tilt>
-        <h3>A profile built from your own pen</h3>
-        <p>Klera learns how you write when calm and measures drift from it. It never compares you to anyone else, and it says nothing until it has enough of you to be right.</p>
-        <a class="btn btn-quiet btn-small go" href="learner-profile/">How the profile works</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-tight wrap" aria-labelledby="close-title">
-    <div class="split">
-      <h2 class="statement" id="close-title">Built to be needed less.</h2>
-      <div>
-        <p class="lead">Tutoring is paid by the hour, so it quietly profits from being needed more. Klera is built to make itself unnecessary.</p>
-        <div class="actions"><a class="btn" href="about/" data-magnetic>Why we built it</a></div>
-      </div>
+        <div class="actions">
+          <button class="btn" type="submit" data-magnetic>Reserve my lifetime Premium</button>
+        </div>
+        <p class="form-note">One email, when there is a build to give you. No newsletter, no sharing your address with anyone. An Apple Pencil is what makes Klera different, so testers with one get in first.</p>
+      </form>
+      <p class="form-status" id="waitlist-status" role="status" aria-live="polite"></p>
     </div>
   </section>
 
 </main>
 
-<footer class="foot wrap">
-  <div class="foot-row">
-    <a class="brand" href="./" translate="no"><img src="assets/klera-mark-512.png" alt="" width="28" height="28">Klera</a>
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <p style="margin:0">Klera. Built by two people who got tired of tutors that cannot see the page.</p>
     <nav aria-label="Footer">
-      <a href="how-it-works/">How it works</a>
-      <a href="learner-profile/">Learner profile</a>
-      <a href="exams/">Exams</a>
+      <a href="for-students/">For students</a>
+      <a href="for-investors/">For investors</a>
+      <a href="for-engineers/">For engineers</a>
       <a href="about/">About</a>
+      <a href="https://fifilukasiewicz.github.io/neuraboard-legal/">Privacy</a>
     </nav>
   </div>
 </footer>

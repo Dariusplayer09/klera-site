@@ -1,37 +1,51 @@
 # klera-site
 
-The Klera website. Static HTML, no build step, no dependencies to install.
+The Klera marketing site. Static HTML, CSS and JavaScript. **No build step and no
+dependencies** — what is in the repo is what is served.
 
-```
-index.html              homepage: real app recording, 3D measurement explorer
-how-it-works/           the board, the five actions, the handwriting engine
-learner-profile/        the pen-signal work: plain version first, then the data
-exams/                  exam simulation and the grader
-about/                  principles, inspirations, who
-assets/klera.css        design system
-assets/klera.js         pointer effects, pop-up sheets, demo play/pause
-assets/signal-scene.js  the 3D explorer (Three.js from jsDelivr)
-assets/demo/            real recording and frames from the app
-DESIGN.md               design rules and the reasons behind them
-```
+Live at <https://dariusplayer09.github.io/klera-site/> from `main`.
 
 ## Run it locally
 
-```bash
-python3 -m http.server 8000
-# then open http://localhost:8000
-```
+    python3 -m http.server 8000
 
-## Rules that matter
+Then open <http://127.0.0.1:8000/>. Open it over HTTP rather than `file://`, or the relative
+paths and the waitlist fetch will not behave the way they do in production.
 
-- **Never fake the product.** Handwriting is never drawn in code. Product visuals are real
-  captures from the app or visible `✱ Replace` slots. See `DESIGN.md`.
-- **Every number is a real measurement** from the device calibration runs in the app repo
-  (`PEN_CALIBRATION_FINDINGS.md`, `RUN_005_FINDINGS.md`). If a figure changes there, change
-  it here in both `learner-profile/index.html` and `assets/signal-scene.js`.
-- **Data colors are validated, not chosen by eye.** Re-validate if you change them.
-- **Motion respects `prefers-reduced-motion`** everywhere.
+## Layout
 
-## Companion repo
+    index.html              the hub
+    for-students/           for the person who uses it
+    for-investors/          for the person who funds it
+    for-engineers/          for the person who would build it
+    about/                  who is building it
+    how-it-works/           redirect, folded into for-students
+    learner-profile/        redirect, folded into for-engineers
+    exams/                  redirect, folded into for-students
+    assets/klera.css        the whole stylesheet
+    assets/klera.js         pointer effects, sheets, the demo toggle
+    assets/waitlist.js      the early-access form
+    assets/site-config.js   Supabase URL and publishable key
+    assets/demo/            real captures from the app
+    assets/figures/         generated SVG figures and diagrams
+    tools/                  the generators for assets/figures
+    supabase/waitlist.sql   the waitlist table, run once per project
 
-The app lives in `NeuraBoard-HKTE`. Clone the two side by side.
+## Before changing anything
+
+Read `DESIGN.md`. It holds the tokens, the rule that handwriting is never drawn in code,
+the rule that every number is a real measurement, and the pre-flight checklist.
+
+## Regenerating the figures
+
+    python3 tools/build_figures.py
+    python3 tools/build_diagrams.py
+
+Both write into `assets/figures/`, which is committed because there is no build step.
+
+## The waitlist
+
+`supabase/waitlist.sql` creates the table and locks the publishable key to INSERT only, with
+no way to read the list back from the browser. Run it once against the Supabase project, then
+read signups from the dashboard. Without a key configured, the form disables itself and points
+at the contact email instead of silently dropping signups.

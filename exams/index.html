@@ -3,116 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Klera exams and the grader</title>
-<meta name="description" content="Upload a past paper, sit it by hand on the iPad, and get it marked against the official mark scheme with corrections placed on your own working.">
-<meta name="theme-color" content="#070B14">
+<title>Moved to For students</title>
+<link rel="canonical" href="../for-students/#exam-title">
+<meta http-equiv="refresh" content="0; url=../for-students/#exam-title">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FEFCF3">
 <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/klera.css">
-<script src="../assets/klera.js" defer></script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-
-<header class="nav">
-  <a class="brand" href="../" translate="no"><img src="../assets/klera-mark-512.png" alt="" width="28" height="28">Klera</a>
-  <nav class="nav-links" aria-label="Primary">
-    <a href="../how-it-works/">How it works</a>
-    <a href="../learner-profile/">Learner profile</a>
-    <a href="./" aria-current="page">Exams</a>
-    <a href="../about/">About</a>
-  </nav>
-</header>
-
-<main id="main">
-
-  <section class="hero wrap" aria-labelledby="hero-title">
-    <div class="hero-grid">
-      <div>
-        <h1 id="hero-title">A past paper you can actually sit.</h1>
-        <p class="lead">Upload the PDF, write every answer by hand, and get marked against the real mark scheme.</p>
-        <div class="actions">
-          <a class="btn" href="#grader" data-magnetic>How the marking works</a>
-        </div>
-      </div>
-      <div class="ph" style="--ar:4/3">
-        <!-- ✱ REPLACE: iPad screenshot, 1600 x 1200. -->
-        <span><b>✱ Replace</b>Screenshot from the iPad of an exam in progress in Klera: the question at the top, handwritten working below, the timer visible. 1600 x 1200.</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="section wrap" aria-labelledby="flow-title">
-    <h2 id="flow-title">From PDF to marked script.</h2>
-    <p>Past papers are the most effective revision there is, and almost nobody uses them properly. Klera turns one into a paper you sit, then marks it the way an examiner would.</p>
-
-    <ol class="steps">
-      <li class="panel"><h3>Upload the paper</h3><p>Any past paper as a PDF.</p></li>
-      <li class="panel"><h3>Questions are parsed</h3><p>Each question and its real mark allocation.</p></li>
-      <li class="panel panel-ink"><h3>Write it by hand</h3><p>On the same ink canvas as the whiteboard, timed if you want.</p></li>
-      <li class="panel"><h3>Graded</h3><p>Against the official mark scheme.</p></li>
-      <li class="panel panel-warm"><h3>Corrected</h3><p>Marks placed on your own working.</p></li>
-    </ol>
-  </section>
-
-  <section class="section wrap" id="grader" aria-labelledby="grader-title">
-    <h2 class="statement" id="grader-title">The mark scheme wins. Every time.</h2>
-    <p class="lead">The hard part of automated marking is not reading handwriting. It is stopping the model from being clever.</p>
-    <p>A language model asked to grade will work the answer out itself and mark you against its own version. When those disagree, a correct student gets zero. So when a mark scheme is supplied, Klera&rsquo;s grader is told plainly that the scheme is correct by definition: do not re-derive it, do not substitute your own answer, and if your reasoning disagrees, the scheme wins.</p>
-    <p>Without a mark scheme it has to solve the paper first. That is a weaker mode, and Klera does not present it as the same thing.</p>
-
-    <div class="bento">
-      <div class="panel panel-ink span-4" data-tilt>
-        <h3>Marks out of the real maximum</h3>
-        <p>The total for each question comes from the paper itself, never invented. Blank answers are marked as not attempted without spending a call on them.</p>
-      </div>
-      <div class="panel span-2" data-tilt>
-        <h3>Where the marks went</h3>
-        <p>Feedback tied to the line that cost the mark, not a general reminder to show your working.</p>
-      </div>
-      <div class="panel panel-warm span-6" data-tilt>
-        <h3>The answer the scheme wanted</h3>
-        <p>The model solution is always the mark scheme&rsquo;s answer, never the grader&rsquo;s own contradicting version.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section wrap" aria-labelledby="corrections-title">
-    <div class="split">
-      <div>
-        <h2 id="corrections-title">Marked on your own paper.</h2>
-        <p>Feedback you have to mentally re-attach to your working is feedback you will not use. Klera returns a corrected image of your own answer, with the marks placed against the line that went wrong, the way a teacher marks in the margin.</p>
-      </div>
-      <div class="device">
-        <div class="ph" style="--ar:16/10">
-          <!-- ✱ REPLACE: real screenshot of a graded answer with Klera's correction marks, 1600 x 1000. -->
-          <span><b>✱ Replace</b>Screenshot of a graded question in Klera&rsquo;s exam results: the student&rsquo;s own handwritten answer with the correction marks the grader draws onto it. 1600 x 1000.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-tight wrap" aria-labelledby="feeds-title">
-    <h2 id="feeds-title">A clean signal, labelled honestly.</h2>
-    <p>An exam question is the least ambiguous evidence a tutor can have: a correct answer, a real maximum and an official scheme. That makes exam results the most reliable input the <a href="../learner-profile/">learner profile</a> could have.</p>
-    <p>To be straight about it: that connection is not built yet. The grading works today. Feeding its results into the profile is in progress, and until it ships, we do not claim it.</p>
-  </section>
-
+<main id="main" class="section wrap">
+  <h1>This page moved</h1>
+  <p class="lead">It is now part of <a href="../for-students/#exam-title">For students</a>.</p>
+  <p><a class="btn" href="../for-students/#exam-title">Continue</a></p>
 </main>
-
-<footer class="foot wrap">
-  <div class="foot-row">
-    <a class="brand" href="../" translate="no"><img src="../assets/klera-mark-512.png" alt="" width="28" height="28">Klera</a>
-    <nav aria-label="Footer">
-      <a href="../how-it-works/">How it works</a>
-      <a href="../learner-profile/">Learner profile</a>
-      <a href="./">Exams</a>
-      <a href="../about/">About</a>
-    </nav>
-  </div>
-</footer>
 </body>
 </html>

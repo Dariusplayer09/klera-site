@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For investors</title>
+<meta name="description" content="Klera is an iPad tutor that reads a student through their Apple Pencil. What it is, why it is hard to copy, who pays for it, and where it is today.">
+<meta name="theme-color" content="#FEFCF3">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/klera.css">
+<script src="../assets/site-config.js"></script>
+<script src="../assets/klera.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="../" translate="no"><img src="../assets/klera-wordmark.png" alt="Klera" width="422" height="136"></a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="../for-students/">For students</a>
+    <a href="./" aria-current="page">For investors</a>
+    <a href="../for-engineers/">For engineers</a>
+    <a href="../about/">About</a>
+    <a href="../#early-access">Early access</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-grid">
+      <div>
+        <span class="kicker">For investors</span>
+        <h1 id="hero-title">Every tutor can mark the answer. <span class="sweep">We can see the student.</span></h1>
+        <p class="lead">Klera is an iPad tutor that watches a student work through their Apple Pencil, and writes back on their page in real handwriting. It knows when someone is struggling before they admit it, which is the thing no chat-based product can do.</p>
+        <div class="actions">
+          <a class="btn" href="#model" data-magnetic>How the business works</a>
+          <a class="btn btn-quiet" href="#status" data-magnetic>Where we are today</a>
+        </div>
+      </div>
+      <div>
+        <div class="device" data-tilt>
+          <img id="i-demo" src="../assets/demo/board-question.png" data-demo data-gif="../assets/demo/board-demo.gif" data-still="../assets/demo/board-question.png"
+               width="800" height="565"
+               alt="A real recording from the Klera app. A student has written an integral in blue ink and Klera writes the worked solution below it in pink handwriting.">
+        </div>
+        <div class="device-bar">
+          <button class="btn btn-quiet btn-small" type="button" data-demo-toggle="i-demo" aria-pressed="false">Pause demo</button>
+          <p>The working product, recorded in the app. Nothing here is a render.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="problem-title">
+    <h2 id="problem-title">The problem with AI tutors</h2>
+    <p class="lead">They answer questions. Good teaching is not answering questions.</p>
+    <div class="grid grid-3" style="margin-top:1.8rem">
+      <div class="panel">
+        <h3>They are blind between messages</h3>
+        <p>A chatbot sees a student twice: when the question is typed and when the next one is. Everything a real tutor watches for, the long stare at a blank page, the pressing harder, the rubbing out, happens in the gap.</p>
+      </div>
+      <div class="panel">
+        <h3>They hand over the answer</h3>
+        <p>The fastest way to satisfy a student is to solve it for them, and that is exactly what does not teach them. Products optimised for a satisfying reply are optimised against learning.</p>
+      </div>
+      <div class="panel">
+        <h3>They live in the wrong place</h3>
+        <p>Maths is done by hand. Making a student photograph their page, or retype an equation into a text box, breaks the work in half and loses everything about how they wrote it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="moat-title">
+    <h2 id="moat-title">Why we are hard to copy</h2>
+    <p class="lead">Three things, and each one is a different kind of difficulty.</p>
+
+    <div class="grid" style="margin-top:2rem;gap:1.2rem">
+      <div class="panel panel-drawn">
+        <h3>One. We have data nobody else can collect</h3>
+        <p>Pressure, speed, smoothness, the pause before a stroke, bursts of rubbing out. This only exists on a native tablet canvas with a pressure-sensitive pen. A web or chat competitor cannot get it by trying harder, or by buying it. They would have to become a different kind of product first.</p>
+        <p>We have run this on real devices with real students. On one student, distress showed up as pressing harder. On another, it showed up as going completely still before writing, and pressure barely moved at all. A single industry-standard threshold would have missed one of them entirely. Our model is built per student, which is why it catches both. <a href="../for-engineers/#profile">The measurements are published on the engineering page</a>, not summarised.</p>
+      </div>
+      <div class="panel panel-drawn">
+        <h3>Two. It teaches like a person, not like a page of text</h3>
+        <p>Klera writes its maths as actual pen strokes on the student's own canvas, at the right size, in the right place, at reading speed, and talks while it does it. This took us three generations of engine to get right and it is the difference between a tutor sitting at your desk and a website open beside it. It is also an enormous amount of unglamorous engineering, which is its own kind of moat.</p>
+      </div>
+      <div class="panel panel-drawn">
+        <h3>Three. It gets better the longer a student stays</h3>
+        <p>The model of a student is personal and it takes weeks of real work to build. A student two months in is getting help calibrated to them specifically. Starting again somewhere else means starting from a blank sheet, which is a real reason to stay that has nothing to do with a contract.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="vs-title">
+    <h2 id="vs-title">Against what people use today</h2>
+    <div class="table-scroll" style="margin-top:1.6rem">
+      <table>
+        <caption>How the three common options compare on the things that decide whether a student learns.</caption>
+        <thead>
+          <tr><th scope="col">&nbsp;</th><th scope="col">A chat AI</th><th scope="col">A human tutor</th><th scope="col">Klera</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Student writes by hand</th><td>No</td><td>Yes</td><td>Yes</td></tr>
+          <tr><th scope="row">Sees the student while they work</th><td>No</td><td>Yes</td><td>Yes</td></tr>
+          <tr><th scope="row">Notices struggle unprompted</th><td>No</td><td>Yes</td><td>Yes</td></tr>
+          <tr><th scope="row">Available at 11pm the night before</th><td>Yes</td><td>No</td><td>Yes</td></tr>
+          <tr><th scope="row">Cost per hour</th><td>Near zero</td><td>High</td><td>Near zero</td></tr>
+          <tr><th scope="row">Remembers you across months</th><td>Barely</td><td>Yes</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The interesting column is the middle one. We are not trying to beat chat AI on answering questions; that fight is over and it is a commodity. We are trying to take the part of a private tutor that costs the most and cannot scale, which is a person watching you work, and make it cost nothing.</p>
+  </section>
+
+  <section class="section wrap" id="model" aria-labelledby="model-title">
+    <h2 id="model-title">The business model</h2>
+    <p class="lead">A consumer subscription first, because students and parents already pay for tutoring. Schools second, because they buy slowly and in bulk and they are a much better business once you are in.</p>
+
+    <div class="grid grid-3" style="margin-top:2rem">
+      <div class="panel">
+        <h3>Free</h3>
+        <p class="mono" style="font-size:1.4rem;color:var(--amber);margin:.2rem 0 .8rem">£0</p>
+        <p>The whole tutor, with a daily cap on how much help it will give. Enough to do your homework with it, enough to feel the difference, not enough to revise a whole syllabus on.</p>
+      </div>
+      <div class="panel">
+        <h3>Klera Premium</h3>
+        <p class="mono" style="font-size:1.4rem;color:var(--amber);margin:.2rem 0 .8rem">around £8 to £12 a month</p>
+        <p>Uncapped help, exam simulation from your own past papers, and the learner profile carried across devices. Priced against a single hour of tutoring a month, which is what it replaces several of.</p>
+      </div>
+      <div class="panel">
+        <h3>Schools</h3>
+        <p class="mono" style="font-size:1.4rem;color:var(--amber);margin:.2rem 0 .8rem">per seat, per year</p>
+        <p>Classes, assigned papers, automatic marking, and per-question analytics showing a teacher which topics a class actually lost marks on. Sold per department, renewed annually.</p>
+      </div>
+    </div>
+
+    <p class="form-note" style="max-width:64ch">Prices are our current plan, not a live price list. Nothing is purchasable yet and the app is free during early access. We will set the real numbers when we choose the first market.</p>
+
+    <h3 style="margin-top:2.5rem">Why these three, in this order</h3>
+    <p>Consumer first gives us the thing we most need, which is a lot of students using it on real work so the model of a student gets sharper. That usage is also the demo: a school does not buy an idea, it buys something its students are already asking for.</p>
+    <p>The school tier is where the money is, and it arrives on the back of the consumer one. The per-question marking analytics are genuinely painful work that a department currently does by hand, so the value is easy to state and easy to price.</p>
+  </section>
+
+  <section class="section wrap" aria-labelledby="market-title">
+    <h2 id="market-title">Who this is for</h2>
+    <div class="grid grid-3" style="margin-top:1.8rem">
+      <div class="panel">
+        <h3>The student</h3>
+        <p>Fifteen to eighteen, working toward exams that decide where they go next, already doing maths on an iPad because that is what school gave them.</p>
+      </div>
+      <div class="panel">
+        <h3>The parent</h3>
+        <p>Already paying for tutoring, or wanting to and finding it costs more per hour than they can justify weekly. They are the one who pays for Premium.</p>
+      </div>
+      <div class="panel">
+        <h3>The department</h3>
+        <p>A head of maths with thirty students and no way to see which topics a class is quietly losing marks on until the mock results come back.</p>
+      </div>
+    </div>
+    <p style="margin-top:1.6rem">We are starting with maths, because it is the subject where working by hand matters most and where marks are the most objective. The engine is not maths-specific: anything a student works out on a page is reachable from here. The first market is being chosen now, and the curriculum layer is built to be swapped rather than rewritten.</p>
+  </section>
+
+  <section class="section wrap" id="status" aria-labelledby="status-title">
+    <h2 id="status-title">Where we actually are</h2>
+    <p class="lead">Written plainly, because the version where everything is going well is not useful to you.</p>
+    <div class="stats" style="margin-top:1.6rem">
+      <div class="stat"><span class="num">Built</span><span class="lbl">The app works end to end on a real iPad: handwriting in, handwriting out, exam marking, the pen-signal model</span></div>
+      <div class="stat"><span class="num">5</span><span class="lbl">Instrumented study sessions on device, two students, every measurement logged and published</span></div>
+      <div class="stat"><span class="num">0</span><span class="lbl">Revenue. Nothing is purchasable and the app is free during early access</span></div>
+      <div class="stat"><span class="num">2</span><span class="lbl">People. Both technical, both still at school or just out of it</span></div>
+    </div>
+    <h3 style="margin-top:2.5rem">What we are doing next</h3>
+    <ol class="steps" style="margin-top:1.4rem">
+      <li><div><h3>Get it into hands</h3><p>Early access to a small group of students on their own homework, which is also the thing that makes the pen model sharper.</p></div></li>
+      <li><div><h3>Finish the signal work</h3><p>One of our two measured distress signals cannot currently fire because of a bug in how a result attaches to an attempt. It is found and understood, and it is the next thing fixed.</p></div></li>
+      <li><div><h3>Pick the first market and ship it</h3><p>App Store soft launch in one country, free, then monetisation once retention is real rather than assumed.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="section wrap" aria-labelledby="talk-title">
+    <div class="waitlist">
+      <h2 id="talk-title">Talk to us</h2>
+      <p class="lead">If you want the detail behind any of this, the engineering page has the raw measurements, the formulas and the failure cases, including the ones that did not work. We would rather show you those than a deck.</p>
+      <div class="actions">
+        <a class="btn" href="../for-engineers/" data-magnetic>See the internals</a>
+        <a class="btn btn-quiet" href="mailto:hello@klera.app" data-magnetic>Email us</a>
+      </div>
+      <p class="form-note">✱ Replace the address above with the real contact email.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <p style="margin:0">Klera. Built by two people who got tired of tutors that cannot see the page.</p>
+    <nav aria-label="Footer">
+      <a href="../">Home</a>
+      <a href="../for-students/">For students</a>
+      <a href="../for-engineers/">For engineers</a>
+      <a href="../about/">About</a>
+      <a href="https://fifilukasiewicz.github.io/neuraboard-legal/">Privacy</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
