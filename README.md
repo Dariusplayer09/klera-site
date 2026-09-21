@@ -54,7 +54,10 @@ Anything with narration must ship with `controls` and must not autoplay.
 
 ## The waitlist
 
-`supabase/waitlist.sql` creates the table and locks the publishable key to INSERT only, with
-no way to read the list back from the browser. Run it once against the Supabase project, then
-read signups from the dashboard. Without a key configured, the form disables itself and points
-at the contact email instead of silently dropping signups.
+**Not switched on yet.** `supabase/waitlist.sql` has to be run once against the Supabase
+project before the form works; until then it shows an error rather than dropping signups
+silently. Step by step instructions, including a message you can forward to whoever has
+dashboard access, are in [`supabase/SETUP.md`](supabase/SETUP.md).
+
+The SQL creates the table and locks the publishable key to INSERT only, with no way to read
+the list back from the browser.
