@@ -43,15 +43,14 @@
         </div>
       </div>
       <div>
-        <div class="device" data-tilt>
-          <img id="i-demo" src="../assets/demo/board-question.png" data-demo data-gif="../assets/demo/board-demo.gif" data-still="../assets/demo/board-question.png"
-               width="800" height="565"
-               alt="A real recording from the Klera app. A student has written an integral in blue ink and Klera writes the worked solution below it in pink handwriting.">
+        <div class="device is-portrait">
+          <video id="i-solve" width="392" height="720" controls preload="metadata"
+                 poster="../assets/demo/solve-poster.png" playsinline>
+            <source src="../assets/demo/solve-handwriting.mp4" type="video/mp4">
+            A recording from the app: a student's quadratic in blue ink, with Klera writing the full worked solution beneath it in handwriting.
+          </video>
         </div>
-        <div class="device-bar">
-          <button class="btn btn-quiet btn-small" type="button" data-demo-toggle="i-demo" aria-pressed="false">Pause demo</button>
-          <p>The working product, recorded in the app. Nothing here is a render.</p>
-        </div>
+        <p class="media-note">The working product, recorded in the app with the voice tutor running. Nothing here is a render.</p>
       </div>
     </div>
   </section>
@@ -83,15 +82,17 @@
       <div class="panel panel-drawn">
         <h3>One. We have data nobody else can collect</h3>
         <p>Pressure, speed, smoothness, the pause before a stroke, bursts of rubbing out. This only exists on a native tablet canvas with a pressure-sensitive pen. A web or chat competitor cannot get it by trying harder, or by buying it. They would have to become a different kind of product first.</p>
-        <p>We have run this on real devices with real students. On one student, distress showed up as pressing harder. On another, it showed up as going completely still before writing, and pressure barely moved at all. A single industry-standard threshold would have missed one of them entirely. Our model is built per student, which is why it catches both. <a href="../for-engineers/#profile">The measurements are published on the engineering page</a>, not summarised.</p>
+        <p>And it is not one clever measurement. Klera runs six families of signal at once and combines them: how the pen moves, how the student asks for help, what their working actually contains, what we silently marked while they were not looking, what they said out loud, and which difficulty levels they have genuinely cleared. Thousands of raw measurements a session, folded into one model of one person.</p>
+        <p>That combination is the point. We have run this on real devices with real students, and the two we have measured are nothing alike: for one, distress shows up as pressing harder; for the other, pressure is completely flat and distress shows up as going still before the pen touches the page, eleven times further from their normal than anything they do when they are fine. A single industry-standard threshold would have caught one and been blind to the other. Because we measure six things and calibrate each one to the individual, we catch both. <a href="../for-engineers/#profile">The measurements are published in full on the engineering page</a>, not summarised.</p>
       </div>
       <div class="panel panel-drawn">
         <h3>Two. It teaches like a person, not like a page of text</h3>
         <p>Klera writes its maths as actual pen strokes on the student's own canvas, at the right size, in the right place, at reading speed, and talks while it does it. This took us three generations of engine to get right and it is the difference between a tutor sitting at your desk and a website open beside it. It is also an enormous amount of unglamorous engineering, which is its own kind of moat.</p>
       </div>
       <div class="panel panel-drawn">
-        <h3>Three. It gets better the longer a student stays</h3>
+        <h3>Three. It gets better the longer a student stays, and it checks its own work</h3>
         <p>The model of a student is personal and it takes weeks of real work to build. A student two months in is getting help calibrated to them specifically. Starting again somewhere else means starting from a blank sheet, which is a real reason to stay that has nothing to do with a contract.</p>
+        <p>It also grades itself. Every time Klera chooses how to help, it scores what the student did next and feeds that back in, so an approach that does not work for this particular student stops being used on them. Most tutoring products never close that loop: they pick a style, deliver it forever, and never find out.</p>
       </div>
     </div>
   </section>
@@ -188,9 +189,8 @@
       <p class="lead">If you want the detail behind any of this, the engineering page has the raw measurements, the formulas and the failure cases, including the ones that did not work. We would rather show you those than a deck.</p>
       <div class="actions">
         <a class="btn" href="../for-engineers/" data-magnetic>See the internals</a>
-        <a class="btn btn-quiet" href="mailto:hello@klera.app" data-magnetic>Email us</a>
+        <a class="btn btn-quiet" href="mailto:lukasiewiczfilip07@gmail.com?subject=Klera" data-magnetic>Email us</a>
       </div>
-      <p class="form-note">✱ Replace the address above with the real contact email.</p>
     </div>
   </section>
 

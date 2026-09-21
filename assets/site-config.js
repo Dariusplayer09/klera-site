@@ -7,5 +7,5 @@
 window.KLERA = {
   supabaseUrl: "https://mstrcjcgsieixmlevrtv.supabase.co",
   supabaseKey: "sb_publishable__u4e-CWw7kYToPIRPlLW3A_UnDgrpSK",
-  contactEmail: "hello@klera.app",
+  contactEmail: "lukasiewiczfilip07@gmail.com",
 };

@@ -26,7 +26,7 @@ paths and the waitlist fetch will not behave the way they do in production.
     assets/klera.js         pointer effects, sheets, the demo toggle
     assets/waitlist.js      the early-access form
     assets/site-config.js   Supabase URL and publishable key
-    assets/demo/            real captures from the app
+    assets/demo/            real captures from the app (mp4 clips, poster and filmstrip frames)
     assets/figures/         generated SVG figures and diagrams
     tools/                  the generators for assets/figures
     supabase/waitlist.sql   the waitlist table, run once per project
@@ -42,6 +42,15 @@ the rule that every number is a real measurement, and the pre-flight checklist.
     python3 tools/build_diagrams.py
 
 Both write into `assets/figures/`, which is committed because there is no build step.
+
+## Regenerating the clips
+
+There is no ffmpeg on the build machine. Clips are trimmed with the system `avconvert`:
+
+    avconvert -s <source>.mov -o out.m4v -p PresetAppleM4V720pHD --start 7.0 --duration 9.1 --replace
+
+then renamed to `.mp4`. Frames come from a short AVFoundation script run with `swift`.
+Anything with narration must ship with `controls` and must not autoplay.
 
 ## The waitlist
 

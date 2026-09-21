@@ -45,15 +45,14 @@
       </div>
 
       <div>
-        <div class="device" data-tilt>
-          <img id="hero-demo" src="assets/demo/board-question.png" data-demo data-gif="assets/demo/board-demo.gif" data-still="assets/demo/board-question.png"
-               width="800" height="565" fetchpriority="high"
-               alt="A real recording from the Klera app. A student has written the integral from 0 to 5 of 2x cos(x squared) dx in blue ink, and Klera writes the worked solution below it in pink handwriting, one step at a time.">
+        <div class="device is-portrait">
+          <video id="h-solve" width="392" height="720" controls preload="metadata"
+                 poster="assets/demo/solve-poster.png" playsinline>
+            <source src="assets/demo/solve-handwriting.mp4" type="video/mp4">
+            A recording from the app: a student's quadratic in blue ink, with Klera writing the full worked solution beneath it in handwriting.
+          </video>
         </div>
-        <div class="device-bar">
-          <button class="btn btn-quiet btn-small" type="button" data-demo-toggle="hero-demo" aria-pressed="false">Pause demo</button>
-          <p>Recorded in the app. Blue is the student. Pink is Klera.</p>
-        </div>
+        <p class="media-note">Recorded in the app, sound on. Blue is the student, black is Klera, and it narrates each line as it writes it.</p>
       </div>
     </div>
   </section>
@@ -77,7 +76,7 @@
       <a class="door" href="for-engineers/">
         <span class="door-num">03</span>
         <h3>For engineers</h3>
-        <p>The handwriting pipeline, the visualisation cascade, and the learner-profile maths with real device measurements from two students.</p>
+        <p>The captured-template handwriting pipeline, the visualisation cascade, and the six-family learner profile with real device measurements from two students. We are also hiring.</p>
         <span class="door-go">Open the internals</span>
       </a>
     </div>
@@ -96,7 +95,7 @@
       </div>
       <div class="panel">
         <h3>A read on how you are doing</h3>
-        <p>Pressure, speed, hesitation before a stroke, erase bursts. Measured against your own normal, not a population average, and never shown to you as a score.</p>
+        <p>Six different families of signal at once: how you write, how you ask for help, what your working actually contains, what we quietly verified, what you said, and what level you have cleared. Measured against your own normal, never shown to you as a score.</p>
       </div>
     </div>
   </section>

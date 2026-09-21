@@ -98,22 +98,42 @@
     dialog.addEventListener("close", () => dialog.klOpener?.focus());
   });
 
-  /* ---------------------------------------------------------- real demo recording
-     The recording is a GIF captured from the app, and a GIF cannot be paused. The markup
-     loads a still frame from the same recording; the toggle swaps between the two. Reduced
-     motion stays on the still until the visitor asks to play. */
-  doc.querySelectorAll("img[data-demo]").forEach((img) => {
-    const toggle = doc.querySelector(`[data-demo-toggle="${img.id}"]`);
-    const { gif, still } = img.dataset;
-    let playing = !reduce;
-    const apply = () => {
-      img.src = playing ? gif : still;
-      if (toggle) {
-        toggle.textContent = playing ? "Pause demo" : "Play demo";
-        toggle.setAttribute("aria-pressed", String(!playing));
-      }
+  /* ---------------------------------------------------------- real recordings
+     Two kinds. A clip with narration gets native controls and never autoplays, because
+     starting audio at someone is rude. A silent clip loops as ambient motion, and under
+     reduced motion it holds on its poster until the visitor presses play. */
+  doc.querySelectorAll("video[data-loop]").forEach((video) => {
+    const toggle = doc.querySelector(`[data-video-toggle="${video.id}"]`);
+    let playing = false;
+
+    const label = () => {
+      if (!toggle) return;
+      toggle.textContent = playing ? "Pause" : "Play";
+      toggle.setAttribute("aria-pressed", String(playing));
     };
-    toggle?.addEventListener("click", () => { playing = !playing; apply(); });
-    apply();
+
+    const play = () => {
+      /* play() rejects on its own in several ordinary cases (a background tab, iOS low
+         power mode). Swallow it: the poster is still showing and the toggle still works. */
+      video.play().then(() => { playing = true; label(); }).catch(() => { playing = false; label(); });
+    };
+
+    if (!reduce) play(); else label();
+
+    toggle?.addEventListener("click", () => {
+      if (playing) { video.pause(); playing = false; label(); } else { play(); }
+    });
+    video.addEventListener("pause", () => { playing = false; label(); });
+    video.addEventListener("play", () => { playing = true; label(); });
+
+    /* Stop decoding once it is off screen. A looping video in a closed tab is pure battery. */
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { if (!reduce && !playing) play(); }
+          else if (playing) { video.pause(); }
+        });
+      }, { threshold: 0.15 }).observe(video);
+    }
   });
 })();

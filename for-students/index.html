@@ -44,15 +44,14 @@
         </div>
       </div>
       <div>
-        <div class="device" data-tilt>
-          <img id="s-demo" src="../assets/demo/board-question.png" data-demo data-gif="../assets/demo/board-demo.gif" data-still="../assets/demo/board-question.png"
-               width="800" height="565"
-               alt="A real recording from the Klera app. A student has written an integral in blue ink and Klera writes the worked solution below it in pink handwriting, one step at a time.">
+        <div class="device is-portrait">
+          <video id="s-solve" width="392" height="720" controls preload="metadata"
+                 poster="../assets/demo/solve-poster.png" playsinline>
+            <source src="../assets/demo/solve-handwriting.mp4" type="video/mp4">
+            A recording from the app: a student's quadratic in blue ink, with Klera writing the full worked solution beneath it in handwriting.
+          </video>
         </div>
-        <div class="device-bar">
-          <button class="btn btn-quiet btn-small" type="button" data-demo-toggle="s-demo" aria-pressed="false">Pause demo</button>
-          <p>Real recording. Blue is the student. Pink is Klera.</p>
-        </div>
+        <p class="media-note">Recorded in the app, sound on. You write in blue, Klera writes in black, and it talks you through each line as it writes it.</p>
       </div>
     </div>
   </section>
@@ -70,7 +69,7 @@
       </div>
       <div class="panel">
         <h3>It notices before you say anything</h3>
-        <p>How hard you press, how long you hover before the first stroke, how often you rub something out. It builds a picture of your normal and notices when you leave it. You never see a score for this. It just makes the help better.</p>
+        <p>How hard you press and how long you hover before the first stroke, but also whether you tried before asking, where your working first went wrong, and how you sound when you talk to it. Six different things at once, measured against your normal rather than an average person. You never see a score for any of it. It just makes the help better.</p>
       </div>
     </div>
   </section>
@@ -114,23 +113,77 @@
 
   <section class="section wrap" aria-labelledby="film-title">
     <h2 id="film-title">One problem, start to finish</h2>
-    <p class="lead">Four frames out of the same twelve-second recording, in order. Nothing here is a mock-up.</p>
+    <p class="lead">Four frames out of the same recording, in order. Nothing here is a mock-up and nothing is sped up.</p>
     <div class="grid grid-2" style="margin-top:1.8rem">
       <figure>
-        <div class="device"><img src="../assets/demo/board-question.png" width="800" height="565" loading="lazy" alt="The student's handwritten integral in blue ink, with a faint box around it where Klera has detected it as one problem."></div>
-        <figcaption>0.0 s. You write the question. Klera works out on its own which strokes belong to one problem.</figcaption>
+        <div class="device"><img src="../assets/demo/solve-step-1.png" width="392" height="720" loading="lazy" alt="The student's handwritten quadratic, six x squared plus eight x plus two equals zero, in blue ink inside a detected problem box."></div>
+        <figcaption>You write the question. Klera works out on its own which strokes belong to one problem.</figcaption>
       </figure>
       <figure>
-        <div class="device"><img src="../assets/demo/solve-step-2.png" width="800" height="565" loading="lazy" alt="Klera has begun writing the substitution step in pink handwriting beneath the student's question."></div>
-        <figcaption>3.1 s. The first step appears in handwriting, under your working, while it talks you through it.</figcaption>
+        <div class="device"><img src="../assets/demo/solve-step-2.png" width="392" height="720" loading="lazy" alt="Klera has written two lines of working in black handwriting below the question: the simplified equation and the quadratic formula with the values substituted in."></div>
+        <figcaption>It starts writing underneath, in handwriting, while it explains what it is doing out loud.</figcaption>
       </figure>
       <figure>
-        <div class="device"><img src="../assets/demo/solve-step-3.png" width="800" height="565" loading="lazy" alt="More pink handwritten working, showing the integral rewritten in terms of the substitution."></div>
-        <figcaption>9.1 s. It keeps going at reading pace, not instantly, so you can follow the line being formed.</figcaption>
+        <div class="device"><img src="../assets/demo/solve-step-3.png" width="392" height="720" loading="lazy" alt="More black handwritten working, showing the discriminant evaluated under the square root."></div>
+        <figcaption>It goes at reading pace, not instantly, so you can follow the line actually being formed.</figcaption>
       </figure>
       <figure>
-        <div class="device"><img src="../assets/demo/solve-step-5.png" width="800" height="565" loading="lazy" alt="The finished solution in pink handwriting below the student's original blue question."></div>
-        <figcaption>12.1 s. Finished. Your question and its solution, on one page, in ink.</figcaption>
+        <div class="device"><img src="../assets/demo/solve-step-4.png" width="392" height="720" loading="lazy" alt="The finished solution in black handwriting, ending with x equals minus one third and minus one, below the student's original blue question."></div>
+        <figcaption>Finished. Your question and its full solution, on one page, in ink you can rub out.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="see-title">
+    <h2 id="see-title">It notices things you never told it</h2>
+    <p class="lead">This is the part that is hard to believe until it happens to you. Klera is reading how the work is going the whole time, not just when you ask it something.</p>
+    <div class="grid grid-3" style="margin-top:1.8rem">
+      <div class="panel">
+        <h3>Bored is not the same as stuck</h3>
+        <p>If you are getting everything right, fast, on problems that are too easy, that is a problem too. Klera treats it as one and makes the next question harder instead of helpfully explaining something you already knew.</p>
+      </div>
+      <div class="panel">
+        <h3>Stuck is not the same as struggling well</h3>
+        <p>Rubbing something out and then fixing it yourself is the best thing that can happen in a session, and it gets left alone. Rubbing something out three times and getting nowhere is a different state, and that one gets help.</p>
+      </div>
+      <div class="panel">
+        <h3>It marks work you never asked about</h3>
+        <p>When you finish something and move on, it quietly checks whether it was right. You are not told, nothing pops up, no tick appears. It just means the next thing it gives you is better aimed.</p>
+      </div>
+      <div class="panel">
+        <h3>It knows if you tried first</h3>
+        <p>Solving something after one small hint and asking for the whole answer straight away are very different, and they count very differently. You cannot accidentally teach it that you are better than you are.</p>
+      </div>
+      <div class="panel">
+        <h3>It works out your normal</h3>
+        <p>Everything is measured against how you usually write, not against an average person. Some people press harder when they are stuck. Some go completely still before the pen touches the page. It learns which one you are.</p>
+      </div>
+      <div class="panel">
+        <h3>You never see a score</h3>
+        <p>No percentage, no streak, no progress bar, no levels. Being told you are at 71 percent does not help you do the next question, and it makes people work for the number instead of the maths.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="viz-title">
+    <h2 id="viz-title">When a picture would help, you get one you can pull apart</h2>
+    <div class="grid grid-2" style="margin-top:1.8rem;align-items:start">
+      <div>
+        <p>Klera decides on its own when a diagram is worth drawing, builds it from your actual problem, and puts it on the board beside your working. It is a real thing you can use, not a picture of one.</p>
+        <p>Here it has read a quadratic off the page and drawn it. Dragging the slider changes the equation and everything recomputes live, so you can watch the two roots slide together and merge at the exact moment the curve lifts off the axis. That is a much faster way to understand a discriminant than being told what one is.</p>
+        <p>If it cannot build something honest for your problem, it says so and offers to try again. It will never invent a graph with made-up numbers on it.</p>
+      </div>
+      <figure style="margin:0">
+        <div class="device">
+          <video id="s-viz" width="960" height="672" muted loop playsinline preload="metadata"
+                 poster="../assets/demo/viz-explore-poster.png" data-loop>
+            <source src="../assets/demo/viz-explore.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="device-bar">
+          <button class="btn btn-quiet btn-small" type="button" data-video-toggle="s-viz" aria-pressed="false">Pause</button>
+          <p>Silent. Recorded in the app.</p>
+        </div>
       </figure>
     </div>
   </section>
@@ -141,9 +194,11 @@
       <div>
         <p>Give Klera a past paper as a PDF. It pulls out the questions and the mark scheme, then lays the paper out on the canvas so you can sit it properly, by hand, under time.</p>
         <p>When you finish, it marks each answer against the scheme and then teaches the corrections instead of just listing them. The questions you lost marks on come back later as practice, slightly harder than where you are now rather than at the level you already cleared.</p>
-        <p>It never shows you a mastery percentage. Being told you are at 71 percent does not help you do the next question.</p>
       </div>
-      <div class="ph">✱ Replace<br>Screenshot, 1600 x 1000<br>A past paper laid out on the Klera canvas mid-exam, timer visible</div>
+      <div>
+        <p>That "slightly harder" is deliberate and it is calculated, not guessed. Klera keeps a running record of which difficulty levels you attempt and which you finish without help, and it ages that record out over months so last term does not hold you back. The next problem is aimed just above your demonstrated ceiling.</p>
+        <p>Too easy and you switch off. Too hard and you give up. The whole point of the model it builds of you is to keep finding the narrow band in between.</p>
+      </div>
     </div>
   </section>
 

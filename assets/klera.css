@@ -382,6 +382,14 @@ dialog.sheet::backdrop { background: rgba(23, 19, 7, .46); backdrop-filter: blur
   .panel, .device { transform: none !important; }
 }
 
+/* ------------------------------------------------------------------ video
+   Real recordings from the app. The portrait clip is a recording of the iPad held
+   upright, so it keeps its shape and is capped by height rather than stretched. */
+.device video { display: block; width: 100%; height: auto; border-radius: 12px; background: var(--sunk); }
+.device.is-portrait { max-width: 420px; margin-inline: auto; }
+.device.is-portrait video { max-height: 70vh; width: auto; margin-inline: auto; }
+.media-note { color: var(--muted); font-size: .86rem; margin: .7rem 0 0; }
+
 /* ------------------------------------------------------------------ diagrams
    Wide by nature. They keep their width and scroll sideways inside their own
    container rather than shrinking their labels to nothing on a phone. */

@@ -68,49 +68,59 @@ def gate(x, y, label):
 
 # --------------------------------------------------------------- handwriting pipeline
 def handwriting():
-    """Rows, top to bottom: the five stage boxes, the fallback branch hanging off stage one,
-    then the determinism note as a full-width strip. The fallback arrow used to cross the
-    determinism strip, which is why the strip is last rather than in the middle."""
-    W, H = 1180, 470
-    bw, bh, y = 178, 112, 96
-    xs = [28, 258, 488, 718, 948]
-    stages = [
-        ("MathExpressionParser", "LaTeX to AST", ["A tight LaTeX subset:", "fractions, radicals,", "super and subscripts"]),
-        ("HandwrittenLayoutEngine", "AST to geometry", ["Positions every glyph.", "Emits geometry only,", "never ink properties"]),
-        ("ExpressionStrokeComposer", "geometry to ink", ["Jitter, baseline drift,", "slant sheared on the", "expression baseline"]),
-        ("SemanticStrokeScheduler", "ink to timeline", ["The single source of", "timing truth. Pure", "function of its input"]),
-        ("Handwriting2Animator", "timeline to canvas", ["Plays the schedule", "onto the student's", "own PKCanvasView"]),
+    """Handwriting 3: the shipped path. Two rows snaking left to right, then the fallback
+    ladder as its own band, because the fallback is layered (glyph, line, bundle) and drawing
+    it as one arrow understated it."""
+    W, H = 1180, 560
+    bw, bh = 250, 128
+    xs = [28, 308, 588, 868]
+
+    row1 = [
+        ("Parse and lay out", "shared front end", ["A tight LaTeX subset becomes an AST,", "then a stream of positioned slots.", "Geometry only, no ink yet."]),
+        ("Layout humanizer", "one hand, not noise", ["Slant, size bias and a baseline wave", "drawn ONCE per render and applied to", "every slot, so the line shares a lean."]),
+        ("Phrase and template match", "captured, not synthesised", ["Picks real captured handwriting per", "symbol, or one phrase template across", "a run. Phrases win where they exist."]),
+        ("Template warper", "fit without mush", ["Affine into the slot, baseline aligned.", "Horizontal scale clamped to within 33%", "of vertical; phrases warp aspect-locked."]),
     ]
-    o = [text(28, 34, "Handwriting 2: how a string becomes pen strokes", 15, INK, weight=500),
-         text(28, 56, "Five pure stages. Each one emits a different kind of thing, which is why they can be tested separately.", 12, MUTED)]
-    for i, (t, sub, lines) in enumerate(stages):
-        o.append(box(xs[i], y, bw, bh, t, lines, accent=YELLOW if i == 0 else RULE_FIRM, sub=sub))
+    row2 = [
+        ("Stroke composer", "real pen attributes", ["Carries the captured pressure, width", "and timing through into PKStrokes."]),
+        ("SemanticStrokeScheduler", "the timing truth", ["One pure function. Live render, debug", "overlay and tests agree by construction."]),
+        ("Handwriting2Animator", "onto their canvas", ["Plays the schedule stroke by stroke", "onto the student's own PKCanvasView."]),
+    ]
+
+    o = [text(28, 34, "Handwriting 3: how a string becomes real pen strokes", 15, INK, weight=500),
+         text(28, 56, "The glyphs are captured human handwriting, warped into a typeset layout. Nothing here is a font and nothing is drawn by formula.", 12, MUTED)]
+
+    y1 = 92
+    for i, (t, sub, lines) in enumerate(row1):
+        o.append(box(xs[i], y1, bw, bh, t, lines, accent=YELLOW if i in (0, 2) else RULE_FIRM, sub=sub))
         if i:
-            o.append(arrow(xs[i - 1] + bw + 6, y + bh / 2, xs[i] - 6, y + bh / 2))
+            o.append(arrow(xs[i - 1] + bw + 4, y1 + bh / 2, xs[i] - 4, y1 + bh / 2))
 
-    # the fallback branch, hanging straight down off stage one
-    fy = y + bh + 46
-    ax = xs[0] + 88
-    o.append(arrow(ax, y + bh + 6, ax, fy - 6, None, "arw-fb", STRUGGLE, "6 5"))
-    o.append(text(ax + 14, y + bh + 30, "on any parse or layout failure", 10.5, STRUGGLE, mono=True))
-    o.append(box(xs[0], fy, 330, 92, "MathHandwritingRenderer",
-                 ["The previous glyph-stamp engine.", "Still shipped, still the fallback."],
-                 accent=STRUGGLE, sub="production fallback"))
-    o.append(box(xs[0] + 360, fy, 360, 92, "Real pen strokes, not a font",
-                 ["PKStroke objects on the student's canvas.", "Erasable, selectable, zoomable like their own ink."],
-                 accent=YELLOW))
-    o.append(box(xs[0] + 750, fy, 402, 92, "Handwriting Lab",
-                 ["Every constant above is live-tunable in the app.", "Its defaults match the baked v2 values exactly."],
-                 sub="the iteration surface"))
+    # Row two runs RIGHT TO LEFT, directly under row one, so the turn is a short vertical
+    # drop instead of a long line travelling back across boxes it would otherwise cross.
+    y2 = y1 + bh + 56
+    o.append(arrow(xs[3] + bw / 2, y1 + bh + 4, xs[3] + bw / 2, y2 - 4))
+    seq = list(reversed(row2)) + [("Real strokes, not a font", "the output",
+                                   ["Erasable, selectable and zoomable", "exactly like the student's own ink,",
+                                    "in their own coordinate space."])]
+    # seq[0] sits furthest right and the chain walks left
+    for i, (t, sub, lines) in enumerate(seq):
+        x = xs[3 - i]
+        o.append(box(x, y2, bw, bh, t, lines, accent=YELLOW if i == 3 else RULE_FIRM, sub=sub))
+        if i:
+            o.append(arrow(xs[3 - i + 1] - 4, y2 + bh / 2, x + bw + 4, y2 + bh / 2))
 
-    # the determinism note, full width, last so nothing crosses it
-    dy = fy + 112
-    o.append(f'<rect x="{xs[0]}" y="{dy}" width="{1152 - xs[0]}" height="54" rx="12" fill="{CARD}" stroke="{RULE}" stroke-width="2" stroke-dasharray="6 5"/>')
-    o.append(text(xs[0] + 16, dy + 24, "Deterministic given a seed", 12, INK, weight=500))
-    o.append(text(xs[0] + 16, dy + 42, "The only stochastic element is inter-stroke pause noise. The same string and seed produce the same strokes, so the schedule can be asserted in a test rather than eyeballed.", 11.5, MUTED))
-    return svg(W, H, "The Handwriting 2 pipeline",
-               "Five stages: parser, layout engine, stroke composer, scheduler, animator. Any parse or "
-               "layout failure falls back to the older glyph-stamp renderer.", "".join(o))
+    fy = y2 + bh + 34
+    o.append(f'<rect x="28" y="{fy}" width="{W - 56}" height="86" rx="12" fill="{SUNK}" stroke="{STRUGGLE}" stroke-width="2"/>')
+    o.append(text(48, fy + 26, "The fallback is a ladder, not a switch", 13, INK, weight=500))
+    o.append(text(48, fy + 46, "A missing glyph mixes in Handwriting 2 ink for that one symbol.  A line with poor template coverage, or one that will not parse, is rendered", 11.5, MUTED))
+    o.append(text(48, fy + 63, "wholesale by Handwriting 2.  A missing or corrupt template bundle degrades to an empty store, which makes coverage zero and hands the whole render back.", 11.5, MUTED))
+    o.append(text(48, fy + 80, "Every level is silent and none of them can produce garbage ink. A tutor that writes nothing is a worse failure than one whose hand is a generation old.", 11.5, MUTED))
+    return svg(W, H, "The Handwriting 3 pipeline",
+               "Parse and lay out, humanize the layout, match captured templates per symbol or "
+               "phrase, warp them into the slots, compose strokes carrying real pen attributes, "
+               "schedule the timing, animate onto the canvas. The fallback to Handwriting 2 is "
+               "layered at the glyph, line and bundle level.", "".join(o))
 
 
 # --------------------------------------------------------------- visualisation cascade
@@ -152,43 +162,81 @@ def visualisation():
 
 # --------------------------------------------------------------- learner profile
 def profile():
-    W, H = 1180, 500
-    o = [text(28, 34, "The learner profile: from pen samples to what the tutor says", 15, INK, weight=500),
-         text(28, 56, "Yellow badges are gates. Before a gate opens, every read downstream of it is zero by construction, not by measurement.", 12, MUTED)]
+    """The profile as six stacked bands, not a wide left-to-right chain.
 
-    y, bh = 100, 116
-    cols = [
-        (28, 206, "Pencil samples", "PKStroke", ["Force, azimuth, altitude,", "timestamp, per point,", "at the tablet's own rate"]),
-        (264, 206, "Per-attempt features", "Kinematics", ["Mean force, speed,", "jerkiness, pre-stroke", "pause, erase bursts"]),
-        (500, 206, "Per-student baseline", "RobustStat", ["Running centre and MAD,", "debiased for warm-up.", "One baseline per student"]),
-        (736, 206, "Standard scores", "KinematicZ", ["zForce, zSpeed, zJerk,", "and a separate pause z", "from the pace baseline"]),
-        (972, 180, "Detectors", "PenSignalDetectors", ["dysfluency, strain,", "struggle, pause kind"]),
+    The chain version ran to 1180px and had to scroll on every screen the site is read on.
+    Bands also match the real shape of the thing: each one is a different KIND of work
+    (measure, normalise, score, interpret, remember, act) and each has several members, which
+    a single row of boxes could not show without going wider still."""
+    W = 900
+    bands = [
+        ("Measure", "every attempt, continuously",
+         ["Pen kinematics:  force, speed, jerkiness, pre-stroke pause, erase bursts, stroke fluency",
+          "Help behaviour:  which rung of the ladder, whether they tried first, how fast a hint is taken up",
+          "Work structure:  valid steps, the line the error starts on, self-correction, copy likelihood",
+          "Silent verification:  the background check that marks finished work nobody asked us to mark",
+          "Language:  distress and constructive-question hits, plus a model read of how they sound",
+          "Difficulty:  what they attempt and what they finish unaided, per level, decayed over months"],
+         YELLOW),
+        ("Normalise", "against this student, never a population",
+         ["Robust running centre and deviation per signal, warm-up debiased so an early sample",
+          "cannot anchor the estimate. Two gates: 12 clean samples before the kinematic baseline",
+          "opens, and at least 5 strokes and 5 active seconds before an attempt may be scored."],
+         RULE_FIRM),
+        ("Score", "standard scores and four detectors",
+         ["zForce, zSpeed, zJerk against the kinematic baseline. A separate pause z against the",
+          "pace baseline, bucketed by difficulty. From those: dysfluency, pressure strain,",
+          "productive and unproductive struggle, and the kind of pause."],
+         RULE_FIRM),
+        ("Interpret", "two layers, deliberately separate",
+         ["Six composite reads per attempt, each with its own confidence: productive struggle,",
+          "destructive struggle, anxiety risk, boredom risk, flow-like, help dependence.",
+          "Five live flow bands: apathy, boredom, flow, confusion, frustration."],
+         CALM),
+        ("Remember", "slowly, across sessions",
+         ["Five traits folded by EWMA with a 120-day half-life and a five-observation floor:",
+          "help orientation, competence, frustration tendency, uptake speed, constructive",
+          "engagement. Plus a demonstrated difficulty ceiling and one readiness verdict."],
+         RULE_FIRM),
+        ("Act, then check it worked", "the loop that closes",
+         ["A prompt-ready teaching context picks the rung, the tone, the pace and what comes next.",
+          "Every intervention is then scored by what the student did next and folded back into the",
+          "arm that produced it, so a mapping that is wrong for this student stops being used."],
+         STRUGGLE),
     ]
-    for i, (x, w, t, sub, lines) in enumerate(cols):
-        o.append(box(x, y, w, bh, t, lines, accent=YELLOW if i == 4 else RULE_FIRM, sub=sub))
+    # Height per band follows its line count; the Measure band carries six and used to
+    # overflow a fixed 108px box.
+    gap, top = 14, 92
+    heights = [64 + 15 * len(b[2]) for b in bands]
+    H = top + sum(heights) + gap * len(bands) + 74
+    o = [text(28, 34, "The learner profile: six kinds of work on one student", 15, INK, weight=500),
+         text(28, 56, "No single signal decides anything. Each band is weak on its own and the fusion is what is accurate.", 12, MUTED)]
+
+    ys = []
+    _y = top
+    for hgt in heights:
+        ys.append(_y); _y += hgt + gap
+    for i, (name, sub, lines, accent) in enumerate(bands):
+        y, bh = ys[i], heights[i]
+        o.append(f'<rect x="28" y="{y}" width="{W - 56}" height="{bh}" rx="12" fill="{SUNK}" stroke="{accent}" stroke-width="2"/>')
+        o.append(f'<rect x="28" y="{y}" width="6" height="{bh}" rx="3" fill="{accent}"/>')
+        o.append(text(48, y + 26, name, 14, INK, weight=500))
+        o.append(text(48, y + 44, sub, 10.5, AMBER, mono=True))
+        for j, ln in enumerate(lines):
+            o.append(text(48, y + 64 + j * 15, ln, 11, MUTED))
         if i:
-            px = cols[i - 1][0] + cols[i - 1][1]
-            o.append(arrow(px + 6, y + bh / 2, x - 6, y + bh / 2))
+            o.append(arrow(W / 2, y - gap + 1, W / 2, y - 2))
 
-    o.append(gate(500 + 103, y + bh + 14, "12 clean samples before it opens"))
-    o.append(gate(736 + 103, y + bh + 14, ">=5 strokes and >=5s, else nil"))
-
-    fy = y + bh + 76
-    o.append(f'<rect x="28" y="{fy}" width="1124" height="120" rx="12" fill="{SUNK}" stroke="{RULE}" stroke-width="2"/>')
-    o.append(text(48, fy + 26, "The two reads, exactly as they are computed", 13, INK, weight=500))
-    o.append(text(48, fy + 52, "dysfluency  =  sigmoid( 0.7 * zJerk  +  0.5 * max(0, -zSpeed)  -  1.0 )", 13, INK, mono=True))
-    o.append(text(48, fy + 74, "strain      =  sigmoid( 0.8 * zForce  -  1.0 )  *  paired", 13, INK, mono=True))
-    o.append(text(48, fy + 98, "paired is 1.0 when the attempt is known not to have progressed or has two erase bursts, and 0.3 otherwise. An unjudged attempt takes the 0.3, because whether our verifier got round to marking the work is a fact about our budget, not about the student.", 11.5, MUTED))
-
-    ty = fy + 146
-    o.append(box(28, ty, 300, 86, "TeachingContext", ["A prompt-ready summary. The engine", "that builds it is pure and stateless."], accent=YELLOW, sub="LearnerGuidanceEngine"))
-    o.append(arrow(334, ty + 43, 380, ty + 43))
-    o.append(box(386, ty, 300, 86, "The tutor's next turn", ["Which hint, what tone, how fast to", "reveal, what difficulty comes next."]))
-    o.append(box(744, ty, 408, 86, "Never shown to the student", ["No score, no streak, no progress bar. A student told they are", "at 71 percent does not learn anything from the number."], accent=STRUGGLE))
-    return svg(W, H, "The learner-profile pipeline",
-               "Pencil samples become per-attempt features, which feed a per-student baseline, which "
-               "produces standard scores, which feed four detectors. Two gates stand in the way, and "
-               "before either opens the reads downstream are zero by construction.", "".join(o))
+    # the return path: effectiveness folds back into how the student is taught
+    ry = ys[-1] + heights[-1] / 2
+    o.append(f'<path d="M {W - 28} {ry} H {W - 14} V {top + heights[0] / 2} H {W - 28}" fill="none" stroke="{STRUGGLE}" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arw-fb)"/>')
+    o.append(text(W - 34, top - 8, "what worked feeds back in", 10.5, STRUGGLE, "end", mono=True))
+    o.append(text(28, H - 40, "Never shown to the student. No score, no streak, no progress bar.", 12, INK, weight=500))
+    o.append(text(28, H - 22, "A student told they are at 71 percent learns nothing from the number, and starts working for the number instead of the problem.", 11.5, MUTED))
+    return svg(W, H, "The learner-profile stack",
+               "Six bands, top to bottom: measure, normalise against this student, score, interpret, "
+               "remember across sessions, and act then check it worked, with the effectiveness result "
+               "feeding back into how the student is taught.", "".join(o))
 
 
 for name, fn in [("handwriting-pipeline", handwriting), ("viz-cascade", visualisation), ("profile-pipeline", profile)]:

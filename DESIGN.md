@@ -18,9 +18,9 @@ written for them. The three audience pages are the site; everything else support
 | Path | For | Contains |
 |---|---|---|
 | `/` | everyone | Hero, the three doors, what it is, early access |
-| `/for-students/` | the person who uses it | How it feels, the five-rung help ladder, the real filmstrip, exams, early access |
+| `/for-students/` | the person who uses it | How it feels, the five-rung help ladder, the real filmstrip, what it notices, the interactive diagram, exams, early access |
 | `/for-investors/` | the person who funds it | Problem, the three moats, comparison, business model and pricing, honest status |
-| `/for-engineers/` | the person who would build it | Handwriting pipeline, visualisation cascade, learner-profile maths and real measurements |
+| `/for-engineers/` | the person who would build it | Handwriting pipeline, visualisation cascade, the six-family learner profile with real measurements, hiring |
 | `/about/` | context | Who is building it, how we work |
 
 `/how-it-works/`, `/learner-profile/` and `/exams/` were folded into those three. Each keeps
@@ -130,13 +130,35 @@ No em or en dashes (a true minus sign in a negative number is not a dash). Sente
 No eyebrow labels beyond one `kicker` per page naming the audience. No arrows on links.
 Curly quotes. Say the uncomfortable number rather than rounding it away.
 
+## Media
+
+Real recordings from the app, trimmed from screen captures with `avconvert` (no ffmpeg on this
+machine; `--start` and `--duration` trim, and `PresetAppleM4V720pHD` writes `.m4v`, renamed to
+`.mp4`). Frames are pulled with a small AVFoundation script run through `swift`, not a GUI.
+
+| File | What it is |
+|---|---|
+| `solve-handwriting.mp4` | 24 s, portrait. The current engine writing a full quadratic solution in captured handwriting, with the voice tutor narrating. **Has audio**, so it ships with `controls` and never autoplays. |
+| `solve-step-1..4.png` | Four frames from that same recording, in order, for the filmstrip |
+| `viz-detect.mp4` | 6.6 s, silent. A handwritten quadratic detected, and a live card generated from it. The internal flow read-out is visible top left |
+| `viz-explore.mp4` | 9.1 s, silent. The card full screen, with the discriminant slider dragged and roots merging |
+| `*-poster.png` | Poster frames, so nothing loads as a black rectangle |
+
+Silent clips carry `data-loop` and are handled by `klera.js`: they autoplay muted, pause when
+scrolled off screen, hold on their poster under `prefers-reduced-motion`, and have a visible
+play/pause button either way. `video.play()` rejecting is caught and ignored, because it does
+so routinely in a background tab or low power mode and the poster is a fine resting state.
+
+The previous pink-ink GIF and its frames are gone: they were the old engine, and showing an
+outdated render of the thing the product is judged on is worse than showing nothing.
+
 ## Images: the ✱ rule
 
 Where a real capture belongs and none exists yet, a visible `.ph` slot marked **✱ Replace**
 states the exact shot and size. Search the repo for `✱`. Each slot reserves its space.
 
-Outstanding: the exam screenshot, the about hero, both founder portraits and bios, and the
-contact email (currently `hello@klera.app` in `assets/site-config.js` and three mailto links).
+Outstanding, and deliberately confined to `/about/`: the about hero photo, and both founder
+portraits and bios. Every other page ships with real media only. Contact is a real address.
 
 ## Theme
 
@@ -150,6 +172,8 @@ are accessible and need no WebGL. Both are recoverable from commit `34b538e`.
 - [ ] No handwriting drawn in code anywhere
 - [ ] Zero em or en dashes in visible text
 - [ ] Every number traceable to a device run, and ranges drawn as ranges
+- [ ] No ✱ placeholder outside `/about/`
+- [ ] Any clip with audio has `controls` and does not autoplay
 - [ ] Every interactive element: visible `:focus-visible`, 44px target, hover state
 - [ ] `prefers-reduced-motion` verified on every animated element
 - [ ] Images carry width, height and accurate alt text; ✱ slots reserve space
