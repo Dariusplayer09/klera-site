@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About Klera</title>
-<meta name="description" content="Klera is built by two people who wanted a tutor that could see the page. What we are building, and why we publish the measurements that went against us.">
+<meta name="description" content="Klera is built by Filip Lukasiewicz and Darius Farcas. What we are building, why we build it this way, and how to reach us.">
 <meta name="theme-color" content="#FEFCF3">
 <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
@@ -36,25 +36,38 @@
       <div>
         <span class="kicker">About</span>
         <h1 id="hero-title">We wanted a tutor that could <span class="sweep">see the page</span>.</h1>
-        <p class="lead">Klera started from a small, annoying observation: every AI that helps with maths makes you leave the page to ask it something, and then answers somewhere that is not the page. The bit a real tutor does, sitting next to you, watching the pen, was missing from all of them.</p>
+        <p class="lead">Klera started from a small, annoying observation: every AI that helps with maths makes you leave the page to ask it something, and then answers somewhere that is not the page. The thing a real tutor does, sitting next to you, watching the pen, was missing from all of them.</p>
+        <p class="lead">So we built the version that sits at the desk. It watches how you work, it writes back in handwriting on your own canvas, and it makes you produce the next line yourself when it judges you can.</p>
       </div>
-      <div class="ph">✱ Replace<br>Photo, 1200 x 900<br>The two of us working, candid, not posed</div>
+      <div>
+        <div class="device" data-tilt>
+          <img src="../assets/photos/filip-darius.jpg" width="1000" height="564" alt="Filip Lukasiewicz and Darius Farcas, the two founders of Klera, sitting together on a flight." fetchpriority="high">
+        </div>
+        <p class="media-note">Filip and Darius, somewhere over Europe.</p>
+      </div>
     </div>
   </section>
 
   <section class="section wrap" aria-labelledby="who-title">
     <h2 id="who-title">Who is building it</h2>
     <div class="grid grid-2" style="margin-top:1.8rem;align-items:start">
+
       <div class="panel">
-        <div class="ph" style="aspect-ratio:1;margin-bottom:1.2rem">✱ Replace<br>Portrait, 800 x 800</div>
         <h3>Filip Lukasiewicz</h3>
-        <p>✱ Replace with a short bio: what you work on in Klera, and one line of background.</p>
+        <p class="kicker" style="margin:.2rem 0 1rem">Co-founder and CEO</p>
+        <p>Owns company strategy, go to market, fundraising, operations and AI product strategy. Designed Klera's learner-profiling architecture: live behavioural signals, confidence-weighted inference, long-term ability tracking and recurring error-pattern detection, combined into how the tutor decides to teach.</p>
+        <p>Previously go-to-market and growth lead at Flashka, where he built and led a 70-plus person ambassador network, helped scale the product past 1.5 million users, and cut Polish customer acquisition cost by close to 80 percent. He owns Flashka's expansion playbook across partnerships, pricing, payments, logistics and operations, now in use across Poland, DACH and the UK, and built an AI-driven content system that took a channel from zero to 12,000 followers and eight-figure views in 60 days.</p>
+        <p>Winner of the OpenAI and Bocconi hackathon, selected from over 1,000 applicants, and selected for the EuroTech and Hong Kong Talent Engage innovation programme in Munich. Studies International Economics and Finance at Bocconi University, where he is operations lead at the Entrepreneurship Club and president of AI projects at the Bocconi AI Lab.</p>
       </div>
+
       <div class="panel">
-        <div class="ph" style="aspect-ratio:1;margin-bottom:1.2rem">✱ Replace<br>Portrait, 800 x 800</div>
-        <h3>Darius</h3>
-        <p>✱ Replace with a short bio: what you work on in Klera, and one line of background.</p>
+        <h3>Darius Farcas</h3>
+        <p class="kicker" style="margin:.2rem 0 1rem">Co-founder</p>
+        <p>Owns technical architecture, AI systems, product engineering and UX design. Leads the tutoring experience itself: how the AI tutor, the student's handwriting, the Apple Pencil input and the learner profile fit together as one thing rather than four.</p>
+        <p>He lived the problem from both sides, through the Romanian state-school system and then the British A-level system, which is a direct education in the gap between what a classroom can give thirty people and what one tutor can give one person.</p>
+        <p>Background in software engineering, applied AI and interface development. Completed CS50 and CS50AI and has shipped several AI and software projects. Brings the product-design instinct the profile is built around: where students actually disengage, which kinds of explanation restore understanding, and how pacing, visual structure and intervention style have to change from one learner to the next. Multiple hackathon wins and two UKMT silver awards.</p>
       </div>
+
     </div>
   </section>
 
@@ -63,15 +76,15 @@
     <div class="grid grid-3" style="margin-top:1.8rem">
       <div class="panel">
         <h3>We show the product, never an imitation of it</h3>
-        <p>Every image of Klera on this site is a real capture from the app. We do not draw handwriting in code to illustrate a handwriting engine, and where a real shot does not exist yet there is a visible gap instead of a mock-up.</p>
+        <p>Every image and clip of Klera on this site is a real capture from the app. We do not draw handwriting in code to illustrate a handwriting engine, and we do not ship a recording of an older engine because it is the one we happen to have.</p>
       </div>
       <div class="panel">
-        <h3>We publish the runs that went badly</h3>
-        <p>The engineering page includes the sessions where our own estimator was talking over the student, and the reading that invented a struggling student out of queue depth. Those are the measurements that tell you whether the rest is real.</p>
+        <h3>We separate what we measured from what we model</h3>
+        <p>The engineering page publishes real per-attempt tables from instrumented device runs, including the sessions where our own estimator was talking over the student. Anything modelled rather than measured says so on the figure itself.</p>
       </div>
       <div class="panel">
         <h3>We do not score the student</h3>
-        <p>The model of a student is detailed and it is never shown to them. No percentage, no streak, no progress bar. Being told you are at 71 percent does not help anyone do the next question.</p>
+        <p>The model of a student is detailed and it is never shown to them. No percentage, no streak, no progress bar. Being told you are at 71 percent does not help anyone do the next question, and it makes people work for the number instead of the maths.</p>
       </div>
     </div>
   </section>
@@ -79,7 +92,7 @@
   <section class="section wrap" aria-labelledby="contact-title">
     <div class="waitlist">
       <h2 id="contact-title">Get in touch</h2>
-      <p class="lead">Students wanting early access, investors wanting the detail, engineers who find this interesting. All the same inbox.</p>
+      <p class="lead">Students wanting early access, investors wanting the detail, engineers who find this interesting. All the same inbox, and we answer.</p>
       <div class="actions">
         <a class="btn" href="../#early-access" data-magnetic>Join early access</a>
         <a class="btn btn-quiet" href="mailto:lukasiewiczfilip07@gmail.com?subject=Klera" data-magnetic>Email us</a>
@@ -91,7 +104,7 @@
 
 <footer class="foot">
   <div class="wrap foot-grid">
-    <p style="margin:0">Klera. Built by two people who got tired of tutors that cannot see the page.</p>
+    <p style="margin:0">Klera. Founded by two people who got tired of tutors that cannot see the page.</p>
     <nav aria-label="Footer">
       <a href="../">Home</a>
       <a href="../for-students/">For students</a>

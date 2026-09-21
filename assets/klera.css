@@ -87,17 +87,25 @@ small, .small { font-size: .875rem; }
 a { color: var(--amber); text-decoration-color: var(--yellow); text-underline-offset: 3px; text-decoration-thickness: 2px; }
 a:hover { text-decoration-color: var(--amber); }
 
-/* the highlighter sweep. a yellow bar laid behind a word, like a marker pass */
+/* The highlighter sweep.
+
+   A flat rectangle sitting on the baseline reads as a strikethrough, not as a marker, and it
+   cut through descenders. This is a ragged marker swipe drawn as an inline SVG, sized to cover
+   the lower two thirds of the glyphs the way a real highlighter pass does, with uneven top and
+   bottom edges so it belongs to the same hand as the logo.
+
+   `nowrap` matters: a swept phrase that breaks across two lines leaves an orphan word wearing
+   half a highlight, which is exactly what looked broken. Keep swept phrases to two or three
+   words so the nowrap can never overflow a narrow screen. */
 .sweep {
-  /* clone, so a headline that wraps gets one sweep per line instead of a single band
-     painted across the whole inline fragment and landing mid-text on line two */
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
-  background-image: linear-gradient(var(--yellow), var(--yellow));
+  white-space: nowrap;
+  padding: 0 .14em;
   background-repeat: no-repeat;
-  background-size: 100% .34em;
-  background-position: 0 84%;
-  padding: 0 .06em;
+  background-size: 100% 0.72em;
+  background-position: 0 72%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 48' preserveAspectRatio='none'%3E%3Cpath d='M1,9 C55,3 110,7 165,4 C215,2 265,6 299,10 L298,39 C250,45 195,39 140,42 C90,45 40,41 2,36 Z' fill='%23E9B11E'/%3E%3C/svg%3E");
 }
 
 .kicker {

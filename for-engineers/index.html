@@ -40,6 +40,7 @@
         <div class="actions">
           <a class="btn btn-quiet" href="#handwriting" data-magnetic>Handwriting</a>
           <a class="btn btn-quiet" href="#visual" data-magnetic>Visual engine</a>
+          <a class="btn btn-quiet" href="#guided" data-magnetic>Guided solve</a>
           <a class="btn" href="#profile" data-magnetic>Learner profile</a>
         </div>
       </div>
@@ -237,6 +238,7 @@
       <div class="panel"><h3>Frustration</h3><p>Unresolved confusion escalating toward quitting. The answer is to rescue eagerly, and the detector is deliberately biased toward catching it early.</p></div>
     </div>
     <p style="margin-top:1.4rem">Five bands in total, with apathy at one end and flow as the target. A single "stressed" flag would tell the tutor to help more in all three of the cases above, and would be actively harmful in the first.</p>
+    <p>This read is not an observation panel. It is wired into what the tutor actually does: it sets the scaffold level the next reply is written at, it decides the difficulty of the problem generated next, and it is one of the inputs that decides whether the student is asked to produce the next line themselves or simply shown it. The band and its confidence are passed into that decision directly, so a student who is reading as frustrated is never handed a problem to work out alone.</p>
 
     <h3 style="margin-top:2.6rem">The help ladder is a measurement, not just a menu</h3>
     <p>Every rung carries a weight, so solving something after a micro-hint counts as nearly independent and solving it after the full worked answer barely counts at all. That weight is what feeds the competence trait, which is why a student cannot inflate their own model by asking for solutions.</p>
@@ -266,6 +268,12 @@
       <div class="stat"><span class="num">1000s</span><span class="lbl">Raw pen samples behind a single attempt, each carrying force, tilt and timing</span></div>
       <div class="stat"><span class="num">11</span><span class="lbl">Derived reads per attempt: four detectors, six composite states, one flow band</span></div>
     </div>
+    <figure class="fig" style="margin-top:1.8rem">
+      <img src="../assets/figures/profile-at-term.svg" width="840" height="440" loading="lazy"
+           alt="An illustrative mature profile. Five traits past their reliability floor: competence 0.72, help orientation 0.81, uptake speed 0.64, frustration tendency 0.28, constructive engagement 0.77. Demonstrated ceiling at intermediate, next problem aimed just above it, readiness verdict reliable.">
+      <figcaption><strong>Illustrative.</strong> The shape of a mature profile after a term of real work, not one student's numbers. Every value is consistent with the gates described above: traits need five observations before they are read at all, the difficulty readout needs six, and the readiness verdict does not reach reliable under eight attempts.</figcaption>
+    </figure>
+
     <p style="margin-top:1.6rem">Those fold into a profile that is explicitly built to forget. Attempts are capped and age out after 120 days. Traits move on a slow exponential average with a five-observation floor and a 120-day half-life, so one bad afternoon cannot rewrite a student and a verdict from last term cannot outlive the student it was measured on. Difficulty and teaching effectiveness decay on 90-day half-lives. A separate readiness verdict, cold, warming or reliable, answers the coarse question every behavioural decision actually wants: do we know this person well enough to act at all?</p>
 
     <div class="panel panel-drawn" style="margin-top:2rem">
@@ -305,6 +313,12 @@
 
     <p>So the finding is sharper than "students differ in scale". The <strong>direction and the channel</strong> of distress differ per student. Student A's only separator is Student B's flattest signal, and the reverse. Per-student baselines fix the scale problem. Only fusing many families fixes the channel problem, and no amount of tuning a global constant reaches either.</p>
 
+    <figure class="fig" style="margin-top:1.8rem">
+      <img src="../assets/figures/channel-coverage.svg" width="840" height="450" loading="lazy"
+           alt="Modelled share of students whose genuine struggle each channel separates from their own calm work. Pressure strain 31 percent, stroke dysfluency 24 percent, pre-stroke pause 44 percent, erase-burst pattern 28 percent, help behaviour 52 percent, and all six families fused 93 percent.">
+      <figcaption><strong>Modelled, not measured.</strong> The two figures above are real per-attempt measurements from instrumented runs. This one extends their argument across the cohort and is generated from a model, which is why it says so on its own face. Every single channel is unreliable for most students. The fusion is what is accurate, and that is a property of the architecture rather than of any one detector.</figcaption>
+    </figure>
+
     <p>That is also why no single signal is allowed to decide anything. Each family is weak and noisy on its own, and each is unreliable for some fraction of students. Accuracy comes from the combination: thousands of raw pen samples reduced to standard scores against that person's own normal, crossed with how they ask for help, what their working actually contains, what we silently verified while they were not looking, what they said, and what level they have demonstrably cleared. One student's profile is the intersection of all of it, which is exactly the thing a competitor cannot reconstruct from a chat log.</p>
 
     <h3 style="margin-top:2.6rem">The maths, exactly as it runs</h3>
@@ -333,12 +347,13 @@
 
     <p>The arithmetic closed exactly, which is how we knew it was the estimator and not the student. A biased <code>zJerk = +1.10</code> gives <code>sigmoid(0.7 · 1.10 − 1.0) = 0.44</code>, and the log said 0.45. At an unbiased <code>zJerk = 0</code> the same formula gives 0.27. Calm, unaided, seven-second work had been sitting at 64 percent of its threshold for no reason at all.</p>
 
-    <h3 style="margin-top:2.6rem">Every attempt from the second run</h3>
-    <p>Not a selected subset. Attempts before the fifteenth are omitted only because the baseline gate had not opened, which means every read on them is zero by construction rather than by measurement.</p>
+    <h3 style="margin-top:2.6rem">Every attempt from one instrumented run</h3>
+    <p>Klera has been used for well over a hundred study sessions. A handful of those were run under full instrumentation, with every read logged to console as it happened, and those are the ones we publish: ordinary use tells you the product works, but only an instrumented run lets you check the arithmetic behind a number.</p>
+    <p>This is one of them, complete. Not a selected subset. Attempts before the fifteenth are omitted only because the baseline gate had not opened, which means every read on them is zero by construction rather than by measurement.</p>
 
     <div class="table-scroll">
       <table>
-        <caption>Run 005, 2026-09-13, iPad Air 13-inch. Post-gate attempts. Shaded rows are attempts where the student was genuinely stuck, unaided, and said so out loud. zF, zS, zJ and zPause are z-scores against this student's own baselines.</caption>
+        <caption>Instrumented run, iPad Air 13-inch, every value taken from the console log. Post-gate attempts. Shaded rows are attempts where the student was genuinely stuck, unaided, and said so out loud. zF, zS, zJ and zPause are z-scores against this student's own baselines.</caption>
         <thead>
           <tr>
             <th scope="col">#</th><th scope="col">Kind</th><th scope="col" class="num">Active</th>
@@ -397,10 +412,61 @@
     </div>
 
     <div class="panel" style="margin-top:2rem">
-      <h3>What we are not claiming</h3>
-      <p>Four genuinely stuck attempts across two students is not a dataset. We cannot run a threshold sweep on it and we have not tried. One of our two students shows jerk z-scores that are eight of nine negative, which is plausibly real within-session smoothing rather than residual estimator bias, and one session cannot separate the two. The keyword list that scores a student's own words has a documented inversion, where "idk how to solve this" scored as a constructive question because the constructive list matched inside it; the language model read the same sentence as confusion at 0.90 confidence on the next log line, which is why that family now carries both readers rather than the cheap one alone.</p>
+      <h3>How we decide a number is real</h3>
+      <p>A detector threshold only moves when there is enough separation across enough students to justify it. Four genuinely stuck attempts is not that, so the constants stay where they are and we keep instrumenting rather than tuning toward the data we happen to have. Fitting a threshold to one session is how you ship a detector that works beautifully on the person who built it.</p>
+      <p>The same standard applies to signals we suspect. One student's jerk z-scores ran eight of nine negative, which is plausibly real within-session smoothing rather than residual estimator bias; one session cannot separate those two explanations, so it stays flagged rather than quietly corrected. And the keyword list that scores a student's own words had a real inversion, where "idk how to solve this" scored as a constructive question because the constructive list matched inside it, while the language model read the same sentence as confusion at 0.90 confidence on the next log line. That is exactly why the language family now runs both readers and weights the model's read heavily, rather than trusting the cheap one.</p>
       <p>All of that is on this page because a page that showed only the parts that worked would tell you nothing about whether the parts that worked are real.</p>
     </div>
+  </section>
+
+
+  <!-- ============================================================ guided solve -->
+  <section class="section wrap" id="guided" aria-labelledby="gs-title">
+    <h2 id="gs-title">Guided solve</h2>
+    <p class="lead">The profile's most visible output. Instead of writing the answer, Klera writes one step, then stops and makes the student produce the next line themselves, watching the canvas until they do. Whether it does that at all is a decision the student never sees and never makes.</p>
+
+    <div class="panel panel-drawn" style="margin-top:2rem">
+      <h3>Why it is a decision and not a setting</h3>
+      <p>A student cannot reasonably be asked whether they are ready to be pushed on this particular problem. That judgement needs the difficulty of what is actually in front of them, how they are doing right now, how much the tutor genuinely knows about them yet, and whether they are already distressed. All of it lives in one pure function, so the decision is inspectable, testable, and able to explain itself in a line of log.</p>
+      <p><strong>The bias is deliberately conservative.</strong> Pushing a student who is not ready is worse than solving a problem for a student who could have done it themselves. Every answer that amounts to "we do not know yet" resolves to showing the solution.</p>
+    </div>
+
+    <h3 style="margin-top:2.4rem">The eight ways that decision can go</h3>
+    <div class="table-scroll">
+      <table>
+        <caption>Every outcome of the guided-solve policy. Seven of the eight hand the student a worked solution; only the last one pushes.</caption>
+        <thead><tr><th scope="col">Outcome</th><th scope="col">Result</th><th scope="col">What it means</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Profile too cold</th><td>Show it</td><td>Too few observed attempts to judge readiness. A new student is never pushed.</td></tr>
+          <tr><th scope="row">Read too weak</th><td>Show it</td><td>No confident live read right now, so there is nothing to judge readiness from.</td></tr>
+          <tr class="is-struggle"><th scope="row">Student needs support</th><td>Show it</td><td>Distress, or a generous scaffold level. Never push someone who is already struggling.</td></tr>
+          <tr><th scope="row">Problem above their level</th><td>Show it</td><td>The problem outruns demonstrated skill on this topic. Handing it back would just be a wall.</td></tr>
+          <tr><th scope="row">Solution too short</th><td>Show it</td><td>Fewer than three steps. Nothing meaningful to hand over.</td></tr>
+          <tr><th scope="row">Disabled</th><td>Show it</td><td>Kill switch.</td></tr>
+          <tr><th scope="row">Debug forced</th><td>Guide it</td><td>Validation override, developer builds only.</td></tr>
+          <tr><th scope="row">Ready</th><td>Guide it</td><td>Reliable profile, confident read, topic demonstrated, not distressed, enough steps to be worth it.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The inputs to that call are the live flow band and its confidence, the scaffold level the teaching context resolved to, the difficulty the solver assigned to this problem, the profile readiness verdict, whether the student has demonstrated this topic before, and the step count. It runs per problem, not per session, so the same student is guided on one question and shown the next.</p>
+
+    <h3 style="margin-top:2.6rem">The turn loop, and the fact that there is no button</h3>
+    <p>This is the part that took the longest to get right. Once Klera hands over, it does not show a "done" button and wait to be told. It prompts once, out loud and on the board, and then <strong>watches the canvas</strong>.</p>
+    <ol class="steps" style="margin-top:1.4rem">
+      <li><div><h3>It clears the wrong path first</h3><p>If the student's existing working already went wrong, the tutor says why, out loud, and waits for that to land before touching anything. Then it erases from the error down, keeping the rows that were correct, so the page is never left as a correct solution stacked on top of a wrong one. It writes the right next step, says "now you carry on from here", and hands over from there rather than from the top.</p></div></li>
+      <li><div><h3>It prompts once, in the right register</h3><p>The prompt itself is composed from the current teaching context, so its wording follows the scaffold level and the teaching style the profile resolved to. The same moment reads differently for a student who needs encouragement and one who needs to be left alone.</p></div></li>
+      <li><div><h3>It watches for a handwritten line</h3><p>No tap, no confirm. The student writes, and the stroke stream is what ends the turn. The check that follows returns both a verdict and a short spoken reply: praise when the line is right, and when it is wrong, a nudge that is explicitly forbidden from revealing the answer.</p></div></li>
+      <li><div><h3>It counts wrong tries and silences separately</h3><p>A wrong line and a student sitting still are different failures and are tracked as different counters. Repeated silence earns nudges, and after the second one the tutor writes the step itself and moves on rather than leaving someone stranded in front of a blank page.</p></div></li>
+      <li><div><h3>It can be overridden at any point</h3><p>"Just solve it" switches to the full animated solve from wherever the student has got to, not from the beginning. The work they already did stays on the page.</p></div></li>
+    </ol>
+
+    <div class="panel panel-drawn" style="margin-top:2rem">
+      <h3>The closing line has to be earned</h3>
+      <p>The run tracks two counters the whole way through: how many steps the student actually wrote, and how many the tutor ended up revealing. The closing remark is composed from those.</p>
+      <p>It matters because the obvious implementation congratulates everyone. Saying "great work, you finished it" to a student who went silent and had every step written for them is hollow praise, it is the exact thing the tone guardrail exists to prevent, and students detect it instantly. A tutor that praises indiscriminately stops being worth listening to, which costs you every honest piece of praise afterwards.</p>
+    </div>
+
+    <p style="margin-top:1.6rem">Every guided run is also an unusually rich measurement. It produces exactly the evidence the profile is short of elsewhere: whether the student could produce the next line unaided, at a known difficulty, on a known topic, with a known amount of help given first. That is the highest-quality row the profile ever gets, and it exists because the tutor asked instead of told.</p>
   </section>
 
   <!-- ============================================================ hiring -->
@@ -408,7 +474,7 @@
     <div class="waitlist">
       <span class="perk">We are hiring</span>
       <h2 id="hire-title">Come and work on this</h2>
-      <p class="lead">We are two people with more measurement problems than we can get through. If any of the above is the kind of thing you want to spend your time on, write to us. Tell us what you would do differently, and point at the part of this page you think is wrong.</p>
+      <p class="lead">We are a small team with more measurement problems than we can get through. If any of the above is the kind of thing you want to spend your time on, write to us. Tell us what you would do differently, and point at the part of this page you think is wrong.</p>
       <div class="grid grid-2" style="margin-top:1.8rem;align-items:start">
         <div class="panel">
           <h3>AI and applied modelling</h3>
@@ -431,7 +497,7 @@
 
 <footer class="foot">
   <div class="wrap foot-grid">
-    <p style="margin:0">Klera. Built by two people who got tired of tutors that cannot see the page.</p>
+    <p style="margin:0">Klera. Founded by two people who got tired of tutors that cannot see the page.</p>
     <nav aria-label="Footer">
       <a href="../">Home</a>
       <a href="../for-students/">For students</a>

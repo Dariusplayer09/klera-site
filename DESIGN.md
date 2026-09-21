@@ -72,12 +72,35 @@ hue picked by eye. Never use these as UI colour.
 - **Body:** Geist, 17px base, line-height 1.62, measure 64ch.
 - **Data:** Geist Mono with `tabular-nums`, inside figures, tables, formulas and kickers only.
 
+## Measured vs modelled
+
+The site makes two different kinds of numeric claim and they are never allowed to blur.
+
+- **Measured.** Real per-attempt values from instrumented device runs. These carry the run
+  context in the caption and appear in `two-students.svg`, `pause-run005.svg`,
+  `separation-run005.svg`, `baseline-debias.svg` and the attempt table.
+- **Modelled or illustrative.** Everything else. `channel-coverage.svg` and
+  `profile-at-term.svg` are generated from a model to show the shape of the thing at scale.
+  Each says so **inside the figure itself**, not only in the caption, and the caption repeats
+  it in bold.
+
+Never relabel a modelled figure as measured, never put one next to a measured table without
+the word, and never invent rows for a table that is presented as a log. The engineering page
+is the page that makes the rest of the site believable; a single fabricated row there costs
+more than every figure on it is worth.
+
 ## The hand-drawn line
 
 The logo is one continuous uneven stroke, so the boxes that matter echo it: `--drawn` is four
 unequal corner radii, used on the three doors, prose panels (`.panel-drawn`), the early-access
 block and the numbered step markers. Everything else keeps an even `--radius`. Used on every
 box it would read as a gimmick; used on the ones carrying an argument it reads as the logo.
+
+**The sweep** is the same idea on text: a ragged marker swipe drawn as an inline SVG, covering
+the lower two thirds of the glyphs. It replaced a flat rectangle sitting on the baseline, which
+read as a strikethrough and cut through descenders. It sets `white-space: nowrap`, because a
+swept phrase breaking across two lines leaves an orphan word wearing half a highlight. **Keep
+swept phrases to two or three words**, or the nowrap overflows a narrow screen. One per page.
 
 ## Layout
 
@@ -172,7 +195,9 @@ are accessible and need no WebGL. Both are recoverable from commit `34b538e`.
 - [ ] No handwriting drawn in code anywhere
 - [ ] Zero em or en dashes in visible text
 - [ ] Every number traceable to a device run, and ranges drawn as ranges
-- [ ] No ✱ placeholder outside `/about/`
+- [ ] No ✱ placeholder anywhere
+- [ ] Every figure is captioned measured, modelled or illustrative, and says which on its face
+- [ ] Swept phrases are three words or fewer
 - [ ] Any clip with audio has `controls` and does not autoplay
 - [ ] Every interactive element: visible `:focus-visible`, 44px target, hover state
 - [ ] `prefers-reduced-motion` verified on every animated element

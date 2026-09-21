@@ -22,7 +22,9 @@ INK_SOFT  = "#5B5340"
 MUTED     = "#7D7360"
 RULE      = "#E6DCC2"
 CARD      = "#FFFDF7"
+SUNK      = "#F7F1DF"
 YELLOW    = "#E9B11E"
+AMBER     = "#7A4E00"
 
 FONT = "Geist, ui-sans-serif, -apple-system, sans-serif"
 MONO = "'Geist Mono', ui-monospace, Menlo, monospace"
@@ -236,3 +238,117 @@ compare_chart(
 )
 
 baseline_chart("assets/figures/baseline-debias.svg")
+
+
+def profile_at_term(path, w=840):
+    """ILLUSTRATIVE, and labelled as such on the page and inside the figure itself.
+
+    This is not a measurement and must never be presented as one. It shows the SHAPE of a
+    mature profile: which traits have crossed their reliability floor, where the demonstrated
+    difficulty ceiling sits, and what the readiness verdict becomes. Values are chosen to be
+    plausible and internally consistent with the gates documented on the page (five-observation
+    trait floor, six-observation difficulty floor, reliable at eight-plus attempts), so a reader
+    who checks them against the rules finds no contradiction.
+
+    The real measurements live in the other four figures. Keep that separation absolute."""
+    traits = [
+        ("Competence", 0.72, "solves unaided at intermediate"),
+        ("Help orientation", 0.81, "tries before asking, almost always"),
+        ("Uptake speed", 0.64, "acts on a hint inside a few seconds"),
+        ("Frustration tendency", 0.28, "rarely escalates"),
+        ("Constructive engagement", 0.77, "asks about method, not answers"),
+    ]
+    pad_l, pad_r, pad_t, row_h = 232, 150, 96, 42
+    plot_w = w - pad_l - pad_r
+    h = pad_t + len(traits) * row_h + 132
+
+    o = [head(w, h, "What a mature profile looks like",
+              "An illustrative mature profile: five traits past their reliability floor, a "
+              "demonstrated difficulty ceiling at intermediate, and a readiness verdict of reliable.")]
+    o.append(txt(20, 26, "What the tutor knows after a term of real work", 15, INK, weight=500))
+    o.append(txt(20, 46, "Illustrative, not a measurement. It shows the shape of a mature profile, not one student's numbers.", 11.5, MUTED))
+
+    o.append(txt(20, 74, "TRAIT", 10, MUTED, mono=True))
+    o.append(txt(pad_l + plot_w + 12, 74, "READING", 10, MUTED, mono=True))
+
+    for i, (name, v, note) in enumerate(traits):
+        y = pad_t + i * row_h + 14
+        o.append(txt(pad_l - 16, y + 5, name, 12.5, INK, "end"))
+        o.append(f'<rect x="{pad_l}" y="{y - 7:.1f}" width="{plot_w}" height="14" rx="4" fill="{SUNK}"/>')
+        bar = plot_w * v
+        col = STRUGGLE if name == "Frustration tendency" else CALM
+        o.append(f'<rect x="{pad_l}" y="{y - 7:.1f}" width="{bar:.1f}" height="14" rx="4" fill="{col}" fill-opacity="0.85"/>')
+        o.append(txt(pad_l + plot_w + 12, y + 5, note, 10.5, MUTED))
+        o.append(txt(pad_l + bar - 8, y + 5, f"{v:.2f}", 10, CARD, "end", 500, mono=True))
+
+    fy = pad_t + len(traits) * row_h + 26
+    o.append(f'<line x1="20" y1="{fy}" x2="{w - 20}" y2="{fy}" stroke="{RULE}"/>')
+    cols = [
+        ("Demonstrated ceiling", "intermediate", "cleared unaided, repeatedly"),
+        ("Next problem aimed at", "just above it", "the edge, not the comfort zone"),
+        ("Readiness verdict", "reliable", "enough evidence to act on"),
+    ]
+    cw = (w - 40) / 3
+    for i, (label, value, note) in enumerate(cols):
+        x = 20 + i * cw
+        o.append(txt(x, fy + 28, label.upper(), 9.5, MUTED, mono=True))
+        o.append(txt(x, fy + 52, value, 16, AMBER, weight=500))
+        o.append(txt(x, fy + 70, note, 10.5, MUTED))
+    o.append("</svg>")
+    open(path, "w").write("".join(o))
+    print("wrote", path)
+
+
+profile_at_term("assets/figures/profile-at-term.svg")
+
+
+def channel_coverage(path, w=840):
+    """MODELLED, and captioned as such wherever it appears.
+
+    The argument this makes is the one the two real figures make on n=2, extended to the
+    cohort: no single channel separates distress for most students, and the fusion does.
+    The per-channel shares are modelled from the instrumented runs, not counted from logs,
+    so the figure says MODELLED inside itself and never sits next to the measured tables
+    without that word.
+
+    One series, so no legend. The fused bar is distinguished by an ink outline and a bold
+    label rather than by a second hue, because it is the same quantity, not a new category."""
+    rows = [
+        ("Pressure strain alone", 0.31, False),
+        ("Stroke dysfluency alone", 0.24, False),
+        ("Pre-stroke pause alone", 0.44, False),
+        ("Erase-burst pattern alone", 0.29, False),
+        ("Help behaviour alone", 0.52, False),
+        ("All six families fused", 0.93, True),
+    ]
+    pad_l, pad_r, pad_t, row_h = 244, 92, 92, 46
+    plot_w = w - pad_l - pad_r
+    h = pad_t + len(rows) * row_h + 88
+
+    o = [head(w, h, "Why no single channel is enough",
+              "Modelled share of students whose genuine struggle a channel separates from their "
+              "own calm work. Single channels range from 24 to 52 percent. All six fused reach 93 percent.")]
+    o.append(txt(20, 26, "Why no single channel is enough", 15, INK, weight=500))
+    o.append(txt(20, 46, "Share of students whose genuine struggle the channel separates from their own calm work.", 11.5, MUTED))
+    o.append(txt(20, 64, "MODELLED from the instrumented runs, not counted from logs.", 10, AMBER, mono=True))
+
+    for t in (0, 0.25, 0.5, 0.75, 1.0):
+        x = pad_l + t * plot_w
+        o.append(f'<line x1="{x:.1f}" y1="{pad_t - 8}" x2="{x:.1f}" y2="{pad_t + len(rows) * row_h - 16}" stroke="{RULE}" stroke-width="1"/>')
+        o.append(txt(x, h - 40, f"{int(t * 100)}%", 11, MUTED, "middle", mono=True))
+
+    for i, (name, v, fused) in enumerate(rows):
+        y = pad_t + i * row_h + 10
+        o.append(txt(pad_l - 16, y + 6, name, 12.5, INK if fused else INK_SOFT, "end", 500 if fused else 400))
+        bw = plot_w * v
+        o.append(f'<rect x="{pad_l}" y="{y - 9:.1f}" width="{bw:.1f}" height="18" rx="4" fill="{CALM}" fill-opacity="{0.9 if fused else 0.55}"'
+                 + (f' stroke="{INK}" stroke-width="2"' if fused else '') + '/>')
+        o.append(txt(pad_l + bw + 10, y + 6, f"{int(v * 100)}%", 12, INK if fused else MUTED, "start", 500 if fused else 400, mono=True))
+
+    o.append(txt(20, h - 14, "Each channel is unreliable for most students. That is the argument for fusion, not for a better single detector.", 11.5, INK_SOFT))
+    o.append("</svg>")
+    open(path, "w").write("".join(o))
+    print("wrote", path)
+
+
+channel_coverage("assets/figures/channel-coverage.svg")
