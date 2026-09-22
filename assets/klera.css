@@ -162,7 +162,7 @@ pre {
   min-height: 60px;
 }
 .brand { display: inline-flex; align-items: center; gap: .55rem; font: 500 1.02rem/1 var(--body); color: var(--ink); text-decoration: none; }
-.brand img { height: 26px; width: auto; display: block; }
+.brand img { height: 34px; width: auto; display: block; }
 .nav-links { display: flex; gap: .3rem; margin-left: auto; flex-wrap: wrap; }
 .nav-links a {
   display: inline-flex; align-items: center; min-height: 40px;
