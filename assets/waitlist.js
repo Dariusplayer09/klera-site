@@ -73,7 +73,7 @@
       if (res.ok) {
         sent = true;
         form.hidden = true;
-        say("You are in. Your lifetime Klera Premium is reserved against this email, and we will write when the first build is ready to hand out.", "ok");
+        say("You are in. Your year of free Klera Premium is reserved against this email, and we will write when the first build is ready to hand out.", "ok");
         return;
       }
 
@@ -82,7 +82,7 @@
       if (res.status === 409) {
         sent = true;
         form.hidden = true;
-        say("This email is already on the list, and your lifetime Premium is already reserved. Nothing else to do.", "ok");
+        say("This email is already on the list, and your free year of Premium is already reserved. Nothing else to do.", "ok");
         return;
       }
 
