@@ -19,9 +19,8 @@ table. **Until step 1 is done, the form shows an error instead of signing anyone
       usually about a day). Needs the paid Apple Developer Program.
 - [ ] **5. Invite in batches** (see "Running early access"). Pencil owners first.
 - [ ] **6. Grant the free year of Premium** to everyone who actually used the build.
-- [ ] **7. Rename the privacy repo** `neuraboard-legal` to `klera-legal` (GitHub keeps a
-      redirect) and add a line to the policy covering the waitlist: what is stored (the form
-      fields), why (early-access invites), how to get deleted (email filip@klera.tech).
+- [x] **7. Privacy policy** renamed to Klera AI, now at
+      <https://fifilukasiewicz.github.io/klera-legal/>, with a section covering the waitlist.
 
 ## Switching it on (step 1)
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Klera, the tutor that watches the pen</title>
-<meta name="description" content="Klera is an iPad whiteboard tutor. It watches how you solve with Apple Pencil and helps only as much as you need.">
+<meta name="description" content="Klera is an iPad whiteboard tutor that watches how you solve with Apple Pencil and gives just enough help. Pick your way in: student, investor or engineer.">
 <meta name="theme-color" content="#FAF7F0">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="assets/klera.css">
 <script src="assets/site-config.js"></script>
 <script src="assets/klera.js" defer></script>
-<script src="assets/waitlist.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -27,7 +26,7 @@
       <a href="for-investors/">For investors</a>
       <a href="for-engineers/">For engineers</a>
       <a href="about/">About</a>
-      <a class="nav-cta" href="#early-access">Early access</a>
+      <a class="nav-cta" href="for-students/#early-access">Early access</a>
     </nav>
   </div>
 </header>
@@ -37,149 +36,79 @@
   <section class="cover wrap" aria-labelledby="hero-title">
     <img class="cover-mark" src="assets/klera-logo-full.png" alt="" width="1864" height="330" fetchpriority="high">
     <h1 id="hero-title" class="cover-title">The benefits of a private tutor, for every student with an iPad.</h1>
-    <p class="lead">Write with Apple Pencil the way you already study. Klera watches how you solve, sees where you get stuck, and answers on your page in real handwriting.</p>
-    <div class="actions center">
-      <a class="btn btn-dark" href="#early-access" data-magnetic>Get free early access</a>
-      <a class="btn btn-quiet" href="#doors" data-magnetic>Pick your way in</a>
-    </div>
-    <div style="margin-top:3.2rem">
-      <div class="slot is-wide" role="img" aria-label="Placeholder for Hero. iPad landscape screenshot of the whiteboard with a solved problem: student work in blue, Klera's handwritten working in black. 2400 x 1350."><b>Slot H1</b><span>Hero. iPad landscape screenshot of the whiteboard with a solved problem: student work in blue, Klera's handwritten working in black. 2400 x 1350.</span></div>
+    <p class="lead">Klera is an iPad whiteboard that watches how you solve with Apple Pencil, notices where you get stuck, and helps only as much as you need, in real handwriting on your own page.</p>
+
+    <h2 class="who-title" id="who">Who are you?</h2>
+    <div class="who" role="list">
+      <a class="who-card" role="listitem" href="for-students/">
+        <span class="who-im">I'm a</span>
+        <span class="who-name">Student</span>
+        <span class="who-line">How it teaches, what it does when you're stuck, and a free year of Premium for early testers.</span>
+        <span class="who-go">Show me how it works</span>
+      </a>
+      <a class="who-card is-yellow" role="listitem" href="for-investors/">
+        <span class="who-im">I'm an</span>
+        <span class="who-name">Investor</span>
+        <span class="who-line">Why tutoring is the biggest lever in education, why AI answers made it worse, and why we can fix it.</span>
+        <span class="who-go">Read the case</span>
+      </a>
+      <a class="who-card" role="listitem" href="for-engineers/">
+        <span class="who-im">I'm an</span>
+        <span class="who-name">Engineer</span>
+        <span class="who-line">The theory behind the handwriting engine, the visual engine and the learner profile. We're hiring.</span>
+        <span class="who-go">Read the theory</span>
+      </a>
     </div>
   </section>
 
   <section class="section wrap" aria-labelledby="sol-title">
     <div class="sec-head">
-      <h2 id="sol-title">How it works</h2>
-      <p class="sub">An iPad whiteboard that watches how you solve, and helps only as much as you need.</p>
+      <h2 id="sol-title">Klera in ten seconds</h2>
+      <p class="sub">Like a tutor sitting next to you, without the hourly rate.</p>
     </div>
     <div class="circles">
-      <div class="circle"><span class="n">1</span><p>You write with Apple Pencil</p></div>
-      <div class="circle"><span class="n">2</span><p>Klera sees where you get stuck</p></div>
-      <div class="circle"><span class="n">3</span><p>It hints, asks, or stays silent</p></div>
+      <div class="circle"><span class="n">1</span><p>Work the problem by hand</p></div>
+      <div class="circle"><span class="n">2</span><p>Klera watches how it's going</p></div>
+      <div class="circle"><span class="n">3</span><p>Just enough help, in handwriting</p></div>
     </div>
-    <div class="grid grid-3" style="margin-top:2.6rem">
-      <div class="slot" role="img" aria-label="Placeholder for Student writing a problem on the whiteboard with Apple Pencil. 1600 x 1200."><b>Slot H2</b><span>Student writing a problem on the whiteboard with Apple Pencil. 1600 x 1200.</span></div>
-      <div class="slot" role="img" aria-label="Placeholder for Klera's hint appearing in handwriting under the student's work. 1600 x 1200."><b>Slot H3</b><span>Klera's hint appearing in handwriting under the student's work. 1600 x 1200.</span></div>
-      <div class="slot" role="img" aria-label="Placeholder for An interactive visualisation on the board next to the working. 1600 x 1200."><b>Slot H4</b><span>An interactive visualisation on the board next to the working. 1600 x 1200.</span></div>
-    </div>
-    <p class="pillbar">Every session updates your learner profile, so you need less help next time.</p>
+    <p class="pillbar">The more you use it, the better it knows how you learn.</p>
   </section>
 
   <section class="section wrap" aria-labelledby="diff-title">
     <div class="sec-head">
       <h2 id="diff-title">Why it's different</h2>
-      <p class="sub">Same wrong answer on the same problem. Two different students.</p>
+      <p class="sub">A chatbot answers the question. A tutor answers the student.</p>
     </div>
     <div class="grid grid-2">
       <div class="card panel">
-        <p class="card-label">Student A</p>
-        <p class="lead" style="color:var(--ink)">Usually works alone. Today: a long pause and three erasures.</p>
-        <p class="result">Klera gives one small hint.</p>
+        <p class="card-label">A chatbot</p>
+        <p class="lead" style="color:var(--ink)">Waits to be asked, then hands over the full solution. Same answer for everyone, whether they were one step away or completely lost.</p>
+        <p class="result">Homework done. Nothing learned.</p>
       </div>
       <div class="card is-yellow panel">
-        <p class="card-label">Student B</p>
-        <p class="lead" style="color:var(--ink)">Asks for help within twenty seconds, every time.</p>
-        <p class="result">Klera holds back: &ldquo;What's your first step?&rdquo;</p>
+        <p class="card-label">Klera</p>
+        <p class="lead" style="color:var(--ink)">Notices the long pause and the rubbing out, knows how this student usually works, and gives the smallest nudge that gets them moving again.</p>
+        <p class="result">The student solves it. And remembers how.</p>
       </div>
     </div>
-    <p class="sub" style="margin-top:1.8rem;font-weight:700">ChatGPT gives both the same answer. Klera gives each what they need.</p>
   </section>
 
-  <section class="section wrap" id="doors" aria-labelledby="doors-title">
-    <div class="sec-head">
-      <h2 id="doors-title">Three ways in</h2>
-      <p class="sub">Same product, three different questions. Start wherever you are.</p>
-    </div>
-    <div class="doors">
-      <a class="door" href="for-students/">
-        <span class="n">01</span>
-        <h3>For students</h3>
-        <p>What studying with Klera feels like, what it does when you are stuck, and how to get in early.</p>
-        <span class="go">See how it teaches</span>
-      </a>
-      <a class="door" href="for-investors/">
-        <span class="n">02</span>
-        <h3>For investors</h3>
-        <p>The problem, what we have built, the market, the business model and the next seven weeks.</p>
-        <span class="go">Read the case</span>
-      </a>
-      <a class="door" href="for-engineers/">
-        <span class="n">03</span>
-        <h3>For engineers</h3>
-        <p>The ideas behind the handwriting engine, the visual engine and the learner profile. We are hiring.</p>
-        <span class="go">Read the theory</span>
-      </a>
-    </div>
-  </section>
-
-  <section class="section wrap" id="early-access" aria-labelledby="ea-title">
-    <div class="cta-block">
-      <span class="perk">Test Klera now, keep Klera Premium free for a year</span>
-      <h2 id="ea-title">Early access</h2>
-      <p class="lead">The first builds go out on TestFlight to a small group who will use Klera on real coursework and tell us what is broken. Everyone on this list who tests the app keeps <strong>Klera Premium free for a year</strong>, whatever we charge for it later. No card, no trial that quietly turns into a subscription.</p>
-
-      <form id="waitlist-form" novalidate>
-        <div class="form-row">
-          <div class="field">
-            <label for="wl-email">Email</label>
-            <input id="wl-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@studbocconi.it">
-          </div>
-          <div class="field">
-            <label for="wl-name">Name (optional)</label>
-            <input id="wl-name" name="name" type="text" autocomplete="name" placeholder="What should we call you">
-          </div>
+  <section class="section wrap" aria-labelledby="team-title">
+    <div class="split">
+      <div>
+        <img class="shot" src="assets/photos/filip-darius.jpg" width="1000" height="564" loading="lazy" alt="Filip Lukasiewicz and Darius Farcas, the two founders of Klera, sitting together on a flight.">
+      </div>
+      <div>
+        <div class="sec-head">
+          <h2 id="team-title">Built by students, for students</h2>
+          <p class="sub">Two Bocconi students building the tutor we wished we'd had.</p>
         </div>
-        <div class="form-row">
-          <div class="field">
-            <label for="wl-role">You are a</label>
-            <select id="wl-role" name="role">
-              <option value="student">University student</option>
-              <option value="school-student">High school student</option>
-              <option value="parent">Parent</option>
-              <option value="teacher">Teacher or tutor</option>
-              <option value="other">Something else</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="wl-uni">University or school (optional)</label>
-            <input id="wl-uni" name="university" type="text" autocomplete="organization" maxlength="120" placeholder="Bocconi, PoliMi, ...">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="field">
-            <label for="wl-device">Your setup</label>
-            <select id="wl-device" name="device">
-              <option value="ipad-pencil">iPad and an Apple Pencil</option>
-              <option value="ipad-no-pencil">iPad, no Pencil</option>
-              <option value="no-ipad">No iPad yet</option>
-              <option value="unsure" selected>Not sure</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="wl-note">What are you studying? (optional)</label>
-            <input id="wl-note" name="note" type="text" maxlength="500" placeholder="Maths for economics, statistics, an exam resit">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="field">
-            <label for="wl-apple">Apple ID email for TestFlight, if different (optional)</label>
-            <input id="wl-apple" name="apple_id_email" type="email" autocomplete="off" inputmode="email" placeholder="The address your iPad is signed in with">
-          </div>
-        </div>
-
-        <label class="check"><input id="wl-consent" name="consent" type="checkbox" required> <span>Email me about Klera early access and TestFlight invites. I can ask for my details to be deleted at any time by writing to filip@klera.tech. See the <a href="https://fifilukasiewicz.github.io/neuraboard-legal/">privacy policy</a>.</span></label>
-
-        <div class="hp" aria-hidden="true">
-          <label for="wl-company">Company</label>
-          <input id="wl-company" name="company" type="text" tabindex="-1" autocomplete="off">
-        </div>
-
+        <p>We sit handwritten STEM exams every semester. We are the users. Klera starts at Bocconi and PoliMi, and grows one campus at a time.</p>
         <div class="actions">
-          <button class="btn btn-dark" type="submit" data-magnetic>Reserve my free year</button>
+          <a class="btn btn-quiet" href="about/" data-magnetic>Meet the team</a>
+          <a class="btn btn-dark" href="for-students/#early-access" data-magnetic>Get free early access</a>
         </div>
-        <p class="form-note">Apple Pencil owners get invited first, because the Pencil is what makes Klera different. No newsletter, and your address is never shared.</p>
-      </form>
-      <p class="form-status" id="waitlist-status" role="status" aria-live="polite"></p>
+      </div>
     </div>
   </section>
 
@@ -195,7 +124,7 @@
       <a href="for-engineers/">For engineers</a>
       <a href="about/">About</a>
       <a href="mailto:filip@klera.tech,darius@klera.tech?subject=Klera">filip@klera.tech</a>
-      <a href="https://fifilukasiewicz.github.io/neuraboard-legal/">Privacy</a>
+      <a href="https://fifilukasiewicz.github.io/klera-legal/">Privacy</a>
     </nav>
   </div>
 </footer>
