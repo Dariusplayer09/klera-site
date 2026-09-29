@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>For engineers</title>
-<meta name="description" content="How Klera works: the captured-template handwriting pipeline, the visualisation cascade, and the learner profile that fuses six families of signal into one per-student model.">
-<meta name="theme-color" content="#FEFCF3">
+<meta name="description" content="The ideas behind Klera: a handwriting engine that writes with human ink, a visual engine that refuses to mislead, and a learner profile built on per-student evidence.">
+<meta name="theme-color" content="#FAF7F0">
 <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/klera.css">
 <script src="../assets/site-config.js"></script>
 <script src="../assets/klera.js" defer></script>
@@ -19,477 +19,221 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
-  <a class="brand" href="../" translate="no"><img src="../assets/klera-wordmark.png" alt="Klera" width="422" height="136"></a>
-  <nav class="nav-links" aria-label="Primary">
-    <a href="../for-students/">For students</a>
-    <a href="../for-investors/">For investors</a>
-    <a href="./" aria-current="page">For engineers</a>
-    <a href="../about/">About</a>
-    <a href="../#early-access">Early access</a>
-  </nav>
+  <div class="wrap nav-inner">
+    <a class="brand" href="../" translate="no"><img src="../assets/klera-wordmark.png" alt="Klera" width="422" height="136"></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../for-students/">For students</a>
+      <a href="../for-investors/">For investors</a>
+      <a href="../for-engineers/" aria-current="page">For engineers</a>
+      <a href="../about/">About</a>
+      <a class="nav-cta" href="../#early-access">Early access</a>
+    </nav>
+  </div>
 </header>
 
 <main id="main">
 
   <section class="hero wrap" aria-labelledby="hero-title">
-    <div class="hero-grid">
+    <div class="split">
       <div>
         <span class="kicker">For engineers</span>
-        <h1 id="hero-title">Three systems, and the <span class="sweep">measurements</span> behind them.</h1>
-        <p class="lead">A handwriting engine that writes with captured human ink, a visualisation cascade that refuses to draw a wrong diagram, and a learner profile that fuses six families of signal into one per-student model. Every number on this page comes from an instrumented run on a physical iPad, including the ones that went the wrong way.</p>
+        <h1 id="hero-title">The theory behind a tutor that can see the page.</h1>
+        <p class="lead">Three systems, and the ideas that shaped them. This page is about why Klera is built the way it is, not how the code is written. Implementation details stay private; we are happy to go deeper in conversation.</p>
         <div class="actions">
+          <a class="btn btn-quiet" href="#principles" data-magnetic>Principles</a>
           <a class="btn btn-quiet" href="#handwriting" data-magnetic>Handwriting</a>
           <a class="btn btn-quiet" href="#visual" data-magnetic>Visual engine</a>
-          <a class="btn btn-quiet" href="#guided" data-magnetic>Guided solve</a>
-          <a class="btn" href="#profile" data-magnetic>Learner profile</a>
+          <a class="btn btn-dark" href="#profile" data-magnetic>Learner profile</a>
         </div>
       </div>
       <div>
-        <div class="device is-portrait">
-          <video id="e-solve" width="392" height="720" controls preload="metadata"
-                 poster="../assets/demo/solve-poster.png" playsinline>
-            <source src="../assets/demo/solve-handwriting.mp4" type="video/mp4">
-            A recording from the app: the student's quadratic in blue ink, and Klera writing the full worked solution beneath it in handwriting.
-          </video>
-        </div>
-        <p class="media-note">Recorded in the app, with the voice tutor narrating. Sound on. Blue is the student, black is Klera, and every black stroke is a PKStroke composed at run time.</p>
+        <div class="slot" role="img" aria-label="Placeholder for Close-up silent clip, 5 to 8 s: black handwriting being written stroke by stroke on the canvas. 1600 x 1200."><b>Slot E1</b><span>Close-up silent clip, 5 to 8 s: black handwriting being written stroke by stroke on the canvas. 1600 x 1200.</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================ handwriting -->
+  <section class="section wrap" id="principles" aria-labelledby="pr-title">
+    <div class="sec-head">
+      <h2 id="pr-title">Five principles</h2>
+      <p class="sub">Every design decision on this page traces back to one of these.</p>
+    </div>
+    <div class="grid grid-5">
+      <div class="card panel"><p class="card-label">01</p><h3>Ink, not text</h3><p>The tutor's answer must be erasable, selectable ink on the student's own canvas, in the same coordinate space. A rendered string or a video does not belong to the page.</p></div>
+      <div class="card panel"><p class="card-label">02</p><h3>The individual, not the population</h3><p>Every signal is read against the student's own normal. A threshold that works on the average student is wrong for most real ones.</p></div>
+      <div class="card panel"><p class="card-label">03</p><h3>Fusion, not a detector</h3><p>No single signal is allowed to decide anything. Each is weak and noisy on its own; accuracy comes from the combination.</p></div>
+      <div class="card panel"><p class="card-label">04</p><h3>Withhold by default</h3><p>The hardest thing in tutoring is not answering. When uncertain, show; when confident a student is ready, make them do it.</p></div>
+      <div class="card is-yellow panel"><p class="card-label">05</p><h3>Refuse rather than mislead</h3><p>A confidently wrong diagram or a wrong verdict teaches something false. Every generative step can be refused, and the floor cannot fail.</p></div>
+    </div>
+  </section>
+
   <section class="section wrap" id="handwriting" aria-labelledby="hw-title">
-    <h2 id="hw-title">The handwriting system</h2>
-    <p class="lead">The tutor's answer has to arrive as ink on the student's own canvas: erasable, selectable, at the same zoom, in the same coordinate space. That rules out rendering text and rules out playing a video. It has to be strokes, composed at run time.</p>
-
-    <div class="diagram is-wide" style="margin-top:2rem">
-      <img src="../assets/figures/handwriting-pipeline.svg" width="1180" height="560" loading="lazy"
-           alt="Handwriting 3 in two rows. Parse and lay out, layout humanizer, phrase and template match, template warper, then right to left: stroke composer, semantic stroke scheduler, Handwriting2Animator, and real strokes on the canvas. A band below describes the three level fallback ladder to Handwriting 2.">
+    <div class="sec-head">
+      <h2 id="hw-title">Handwriting</h2>
+      <p class="sub">Why generated maths looks generated, and what to do about it.</p>
     </div>
-    <p class="scroll-hint">Scroll the diagram sideways.</p>
-
-    <div class="panel panel-drawn" style="margin-top:2.4rem">
-      <h3>The glyphs are real handwriting, not a formula</h3>
-      <p>The current engine draws from a bundle of <strong>captured human strokes</strong>. A symbol is a real template; a common run like a fraction bar under a radical can be a single captured <em>phrase</em> template covering the whole run, because a phrase's internal structure is fragile and redrawing it symbol by symbol is what makes generated maths look generated.</p>
-      <p>Warping is where this goes wrong if you are careless. The template is affine-mapped into its layout slot and its baseline aligned onto the slot baseline, but the horizontal scale is clamped to within 33 percent of the vertical, so a glyph is never stretched into mush. Points are only mapped, never re-smoothed or re-sampled, so the human irregularity of the original polyline survives intact. Captured pressure, width and timing are carried all the way through into the final PKStroke.</p>
-    </div>
-
-    <div class="grid grid-2" style="margin-top:1.6rem;align-items:start">
+    <div class="split" style="align-items:start">
       <div>
-        <h3>Correlated noise, not per-glyph jitter</h3>
-        <p>The failure mode of every synthetic handwriting engine is independent randomness: each glyph wobbles on its own, and the result reads as a machine imitating a person rather than as a person.</p>
-        <p>So the humanizer draws a small set of hand parameters <strong>once per render</strong> from the seed, a global slant, a size bias, a baseline wave phase and slope, and applies them uniformly to every slot. Baseline drift is a smooth function of x, so neighbouring symbols get almost the same vertical nudge and the line waves organically with no seams. Inter-symbol spacing is cumulative, so operators loosen and letters inside a word compress the way real writing does. Only a tiny bounded per-slot jitter is independent, and it is clamped to a fraction of the slot so a glyph can never leave its readable position.</p>
+        <h3>Human ink, arranged by a typesetter</h3>
+        <p>Synthesising strokes from a formula produces handwriting that is too regular to read as human. Klera instead draws from captured human strokes and places them into a mathematical layout, so the geometry is correct and the line quality is real. Common multi-symbol runs are captured as whole phrases, because their internal spacing is exactly what symbol-by-symbol drawing gets wrong.</p>
+        <h3 style="margin-top:1.8rem">Correlated variation, not jitter</h3>
+        <p>The tell of synthetic handwriting is independent randomness: every glyph wobbles on its own. A real hand varies <em>coherently</em>. Slant, size and baseline drift are properties of the writer on that day, and they change slowly across a line. So the variation is decided once per piece of writing and applied smoothly, with only a small, bounded amount left independent per symbol.</p>
       </div>
       <div>
-        <h3>Four generations, three still shipped</h3>
-        <ol class="steps" style="margin-top:1rem">
-          <li><div><h3>CALayer text mask</h3><p>The original. Revealed a rendered string behind a moving mask. Retired.</p></div></li>
-          <li><div><h3>Glyph stamp</h3><p>Procedural strokes per symbol. Still in the binary as the last line of defence.</p></div></li>
-          <li><div><h3>AST pipeline</h3><p>Parser, layout engine, composer, scheduler. Still the layout front end and still the fallback renderer.</p></div></li>
-          <li><div><h3>Captured templates</h3><p>The shipped path. Real human ink warped into that layout, with a phrase matcher on top.</p></div></li>
-        </ol>
-        <p style="margin-top:1.2rem">Old generations stay because the fallback is a ladder. A missing glyph mixes in previous-generation ink for that one symbol. A line with poor template coverage, or one that will not parse, is rendered wholesale by the previous generation. A missing or corrupt template bundle degrades to an empty store, which drives coverage to zero and hands the whole render back to the caller. Every level is silent, and none of them can emit garbage ink.</p>
+        <h3>Degrade gracefully, never visibly</h3>
+        <p>Coverage is never complete. When a symbol has no captured template, older rendering generations step in for that symbol, that line, or the whole render, in that order. Every level is silent, and none of them can emit garbage ink. Keeping the old engines is not nostalgia; it is the fallback.</p>
+        <h3 style="margin-top:1.8rem">Deterministic by design</h3>
+        <p>The same input renders identically twice. Timing is derived from the strokes themselves, and one schedule is the single source of truth for the animation, the debug overlay and the tests. That turns &ldquo;does this look right?&rdquo; from a human judging screenshots into an assertion.</p>
+        <h3 style="margin-top:1.8rem">Written at reading pace</h3>
+        <p>Strokes appear at the speed of a calm, deliberate tutor, so a student can follow the line being formed. Instant output is faster and teaches less.</p>
       </div>
-    </div>
-
-    <div class="panel" style="margin-top:1.6rem">
-      <h3>Determinism, and the one exception</h3>
-      <p>The stroke schedule is a pure function of stroke metadata, line breaks and tuning. The only stochastic element is the noise on inter-stroke pauses. Everything else keys off a seed, so the same string renders identically twice and a test asserts the timeline rather than a human judging a screenshot. That schedule is also the single source of timing truth: the live animator, the in-app debug overlay and the tests all read it, so they agree by construction rather than by three copies of the same arithmetic staying in step.</p>
     </div>
   </section>
 
-  <!-- ============================================================ visual engine -->
   <section class="section wrap" id="visual" aria-labelledby="viz-title">
-    <h2 id="viz-title">The visual engine</h2>
-    <p class="lead">When a diagram would help, Klera generates an interactive one and puts it on the board next to the working. The hard part is not generating it. The hard part is refusing to show one that is wrong, because a confidently wrong diagram teaches a student something false.</p>
-
-    <div class="grid grid-2" style="margin-top:2rem;align-items:start">
-      <figure>
-        <div class="device">
-          <video id="viz-detect" width="960" height="672" muted loop playsinline preload="metadata"
-                 poster="../assets/demo/viz-detect-poster.png" data-loop>
-            <source src="../assets/demo/viz-detect.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="device-bar">
-          <button class="btn btn-quiet btn-small" type="button" data-video-toggle="viz-detect" aria-pressed="false">Pause</button>
-          <p>Silent. The card is generated from the handwritten quadratic.</p>
-        </div>
-        <figcaption>The student writes a quadratic; the engine detects it as one problem, decides a picture earns its place, and renders a live card. Top left is the internal flow read-out, visible only with developer read-outs turned on: the live band, its confidence, what scaffold level it drives and the difficulty it would pick next.</figcaption>
-      </figure>
-      <figure>
-        <div class="device">
-          <video id="viz-explore" width="960" height="672" muted loop playsinline preload="metadata"
-                 poster="../assets/demo/viz-explore-poster.png" data-loop>
-            <source src="../assets/demo/viz-explore.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="device-bar">
-          <button class="btn btn-quiet btn-small" type="button" data-video-toggle="viz-explore" aria-pressed="false">Pause</button>
-          <p>Silent. Real parameters, recomputed live.</p>
-        </div>
-        <figcaption>Opened full screen, the card is a real widget rather than a picture. Dragging <code>c</code> moves the parabola and the discriminant, vertex and roots recompute from the actual function, so the two roots visibly merge as the curve lifts onto the axis.</figcaption>
-      </figure>
+    <div class="sec-head">
+      <h2 id="viz-title">The visual engine</h2>
+      <p class="sub">Generating a diagram is easy. Refusing a wrong one is the work.</p>
     </div>
-
-    <div class="diagram is-wide" style="margin-top:2.4rem">
-      <img src="../assets/figures/viz-cascade.svg" width="1180" height="470" loading="lazy"
-           alt="Detection feeds a 3D router, which feeds a cascade of five tiers: a curated template, a validated 3D spec, a generated JSXGraph script, a generated HTML widget, and a local fallback that never fails. A refusal at any tier drops to the next. A two part quality gate sits between the generated tiers and the screen.">
-    </div>
-    <p class="scroll-hint">Scroll the diagram sideways.</p>
-
-    <div class="grid grid-2" style="margin-top:2.4rem;align-items:start">
+    <div class="split">
       <div>
         <h3>The model recommends, the engine decides</h3>
-        <p>The model may ask for a 3D render on anything. The router grants it only when the third spatial dimension earns its place: a surface, a plane in three-space, a cross product, a volume. A parabola drawn as a ribbon in space is worse than a parabola, so a topic that reads as standard 2D falls back to the flat cascade even when the model asked for depth.</p>
-
-        <h3 style="margin-top:2rem">The gate has two halves</h3>
-        <p>The static half scans generated code for escape hatches and rejects it before it reaches a web view. That sits on top of a content security policy that already blocks the network, which is defence in depth rather than belt and braces: the AI supplies parameter values, so a template must never become an injection vector.</p>
-        <p>The dynamic half renders the widget once off screen and requires it to clear instrumentation minimums. A widget that renders but does nothing, for instance a board that turns out to be only a slider, is refused too.</p>
+        <p>A language model is good at noticing that a picture would help and bad at knowing when its picture is wrong. So its role is advisory. Deterministic rules decide what kind of visual a problem actually earns, for example refusing a third dimension unless the maths genuinely lives in space.</p>
+        <h3 style="margin-top:1.8rem">A cascade, from most trusted to least</h3>
+        <p>Hand-built, validated templates come first. Generated visuals are tried only when no template fits, and each one must pass a gate: a static check on what it is allowed to do, and a behavioural check that it actually renders something meaningful. A refusal at any level falls through to the next.</p>
+        <h3 style="margin-top:1.8rem">A floor that cannot fail</h3>
+        <p>The last level is local and deterministic, and it never invents mathematics. If nothing honest can be drawn for this problem, it says so and offers to try again. Everything runs on the device, so there is no network between a student and their diagram.</p>
       </div>
       <div>
-        <h3>The bottom tier cannot fail</h3>
-        <p>The last tier is deterministic, local, and never invents mathematics. It has three moves, in order:</p>
-        <ol class="steps" style="margin-top:1rem">
-          <li><div><h3>Nearest curated template</h3><p>With the problem's own parameters, if they validate against the whitelist.</p></div></li>
-          <li><div><h3>The template's example parameters</h3><p>Clearly labelled a general example, never passed off as this student's problem.</p></div></li>
-          <li><div><h3>A retry card</h3><p>Unknown topic, so it shows the problem text back and offers a fresh generation. No made-up numbers, no fake graph.</p></div></li>
-        </ol>
-        <p style="margin-top:1.4rem">The whole sandbox, the geometry library and the maths typesetting included, is served from the app bundle over <code>file://</code>. Instant, offline, no network dependency at the moment a student is waiting.</p>
+        <div class="slot" role="img" aria-label="Placeholder for Silent clip or screenshot: a live graph generated from a handwritten problem, placed beside the working on the board. 1600 x 1200."><b>Slot E2</b><span>Silent clip or screenshot: a live graph generated from a handwritten problem, placed beside the working on the board. 1600 x 1200.</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================ learner profile -->
   <section class="section wrap" id="profile" aria-labelledby="lp-title">
-    <h2 id="lp-title">The learner profile</h2>
-    <p class="lead">This is the part that does not exist anywhere else. It is not a pen-pressure gimmick: it is six families of signal, each solving a different thing ordinary tutoring software gets wrong, fused into one model of one student.</p>
-
-    <div class="diagram" style="margin-top:2rem">
-      <img src="../assets/figures/profile-pipeline.svg" width="900" height="740" loading="lazy"
-           alt="Six stacked bands. Measure gathers pen kinematics, help behaviour, work structure, silent verification, language and difficulty. Normalise builds per student baselines behind two gates. Score produces z-scores and four detectors. Interpret produces six composite reads and five flow bands. Remember folds five slow traits, a difficulty ceiling and a readiness verdict. Act picks the teaching, then scores whether it worked and feeds that back to the top.">
+    <div class="sec-head">
+      <h2 id="lp-title">The learner profile</h2>
+      <p class="sub">A model of one student, built from evidence a transcript cannot contain.</p>
     </div>
+    <p class="lead">A chat tutor sees a student twice per exchange. Everything a human tutor reacts to happens in between. The profile exists to capture that gap, and to be honest about how much it actually knows.</p>
 
-    <h3 style="margin-top:2.6rem">Six families, six different problems</h3>
+    <h3 style="margin-top:2.4rem">Six families of evidence</h3>
     <div class="table-scroll">
       <table>
-        <caption>Each row is a thing a transcript-based tutor cannot see, and what we measure instead.</caption>
-        <thead>
-          <tr><th scope="col">Family</th><th scope="col">What it measures</th><th scope="col">The failure it exists to fix</th></tr>
-        </thead>
+        <caption>Each family answers a question a transcript-based tutor cannot.</caption>
+        <thead><tr><th scope="col">Family</th><th scope="col">What it observes</th><th scope="col">Why it matters</th></tr></thead>
         <tbody>
-          <tr>
-            <th scope="row">Pen kinematics</th>
-            <td>Force, speed, jerkiness, pre-stroke pause, erase bursts, stroke fluency, at the tablet's own sample rate</td>
-            <td>A chat tutor sees a student twice: when the question arrives and when the next one does. Everything a human tutor reacts to happens in the gap.</td>
-          </tr>
-          <tr>
-            <th scope="row">Help behaviour</th>
-            <td>Which rung of the ladder was taken, whether they attempted anything before asking, how quickly a hint was acted on, whether help escalated</td>
-            <td>"Solved it after a nudge" and "asked for the answer immediately" are the same row in a transcript and opposite facts about a student.</td>
-          </tr>
-          <tr>
-            <th scope="row">Work structure</th>
-            <td>Valid step count, the line the first error appears on, whether they self-corrected, whether a correction improved things, copy likelihood</td>
-            <td>Knowing an answer is wrong is close to useless. Knowing it went wrong on line three, and that they fixed it themselves on line four, is teaching.</td>
-          </tr>
-          <tr>
-            <th scope="row">Silent verification</th>
-            <td>A background correctness check fired when a student leaves a problem, cached by content hash and credited once</td>
-            <td>Students do not report the ones they got wrong and quietly moved on from. Those are exactly the ones worth knowing about.</td>
-          </tr>
-          <tr>
-            <th scope="row">Language</th>
-            <td>Distress and constructive-question hits in what they say, plus a separate model read of how they sound in the dialogue</td>
-            <td>The cheapest signal in the room is a student saying "I have no idea", and most products treat it as just another message to answer.</td>
-          </tr>
-          <tr>
-            <th scope="row">Difficulty</th>
-            <td>What they attempt and what they finish unaided, per level, tallied across sessions and decayed with a 90-day half-life</td>
-            <td>"Good at maths" is not a level. A demonstrated ceiling that ages out is, and it is what lets the next problem sit just above them.</td>
-          </tr>
+          <tr><th scope="row">Pen behaviour</th><td>How the pen moves: hesitation, fluency, pressure, erasing</td><td>The long stare at a blank page never reaches a chat window.</td></tr>
+          <tr><th scope="row">Help behaviour</th><td>How much help was asked for, and whether they tried first</td><td>&ldquo;Solved after a nudge&rdquo; and &ldquo;asked for the answer&rdquo; look identical in a transcript.</td></tr>
+          <tr><th scope="row">Work structure</th><td>Where the working first went wrong, and whether they fixed it themselves</td><td>Knowing an answer is wrong is close to useless. Knowing where is teaching.</td></tr>
+          <tr><th scope="row">Silent verification</th><td>A quiet check of work the student never asked about</td><td>The problems a student got wrong and moved on from are the most informative ones.</td></tr>
+          <tr><th scope="row">Language</th><td>How they sound when they talk to the tutor</td><td>&ldquo;I have no idea&rdquo; is the cheapest signal in the room.</td></tr>
+          <tr><th scope="row">Difficulty</th><td>What they attempt and what they finish unaided</td><td>&ldquo;Good at maths&rdquo; is not a level. A demonstrated ceiling is.</td></tr>
         </tbody>
       </table>
     </div>
 
-    <h3 style="margin-top:2.6rem">Stuck is not the same as slow, and bored is not the same as stressed</h3>
-    <p>Two interpretation layers run over those measurements, deliberately kept apart. The first produces six composite reads per attempt, each carrying its own confidence, because an attempt with four signals behind it should not move the model as far as one with one.</p>
-
-    <div class="table-scroll">
-      <table>
-        <caption>The six composite reads. Recall-biased means we would rather over-detect than miss it; evidence-biased means the opposite, and the read requires the full combination rather than any single cheap signal.</caption>
-        <thead><tr><th scope="col">Read</th><th scope="col">Bias</th><th scope="col">What has to be true</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Productive struggle</th><td>evidence</td><td>Real difficulty, then progress: an erasure followed by a correction that improved things, a hint actually taken up, or a long think that ended in a solve. This is the good state and it is protected rather than interrupted.</td></tr>
-          <tr class="is-struggle"><th scope="row">Destructive struggle</th><td>recall</td><td>Erase bursts with no improvement, no progress, or explicit distress in what they say.</td></tr>
-          <tr class="is-struggle"><th scope="row">Anxiety risk</th><td>recall</td><td>A long hesitation before starting, or reaching straight for the full solution without attempting, or distress language.</td></tr>
-          <tr><th scope="row">Flow-like</th><td>evidence</td><td>Fluent, unaided, correct, no erase bursts, and a start time in line with their own pace baseline.</td></tr>
-          <tr><th scope="row">Boredom risk</th><td>evidence</td><td>The whole combination: an easy problem, solved independently, started faster than their own normal, in three strokes or fewer. No single one of those counts.</td></tr>
-          <tr><th scope="row">Help dependence</th><td>evidence</td><td>Deep help taken, no attempt made first, and the problem still not finished independently.</td></tr>
-        </tbody>
-      </table>
+    <h3 style="margin-top:2.6rem">From raw signal to a teaching decision</h3>
+    <div class="stack">
+      <div><h3>Measure</h3><p>Every family is observed on every attempt, continuously and invisibly.</p></div>
+      <div><h3>Normalise</h3><p>Each signal becomes a deviation from this student's own baseline, never a population average. Nothing is scored until the baseline has seen enough clean work.</p></div>
+      <div><h3>Interpret</h3><p>Deviations are combined into states, each carrying its own confidence. An attempt with four agreeing signals moves the model further than one with a single signal.</p></div>
+      <div><h3>Remember</h3><p>Slow traits accumulate across sessions and deliberately decay. One bad afternoon cannot rewrite a student, and last term's verdict cannot outlive the student it described.</p></div>
+      <div><h3>Act, then check</h3><p>The profile chooses how to teach, and every choice is scored by what the student did next.</p></div>
     </div>
 
-    <p>The second layer is a live flow band, and this is where most affect models go wrong. They collapse everything unpleasant into one "struggling" bucket. Two of those states need <strong>opposite</strong> responses.</p>
-
-    <div class="grid grid-3" style="margin-top:1.6rem">
-      <div class="panel"><h3>Boredom</h3><p>Skill has outrun the challenge. The answer is to make it harder, immediately. Helping more here is the wrong move and makes it worse.</p></div>
-      <div class="panel"><h3>Confusion</h3><p>Stuck, no clear next step, but still attempting. This is where learning happens. The answer is the <em>smallest</em> possible nudge, and then leaving them alone.</p></div>
-      <div class="panel"><h3>Frustration</h3><p>Unresolved confusion escalating toward quitting. The answer is to rescue eagerly, and the detector is deliberately biased toward catching it early.</p></div>
-    </div>
-    <p style="margin-top:1.4rem">Five bands in total, with apathy at one end and flow as the target. A single "stressed" flag would tell the tutor to help more in all three of the cases above, and would be actively harmful in the first.</p>
-    <p>This read is not an observation panel. It is wired into what the tutor actually does: it sets the scaffold level the next reply is written at, it decides the difficulty of the problem generated next, and it is one of the inputs that decides whether the student is asked to produce the next line themselves or simply shown it. The band and its confidence are passed into that decision directly, so a student who is reading as frustrated is never handed a problem to work out alone.</p>
-
-    <h3 style="margin-top:2.6rem">The help ladder is a measurement, not just a menu</h3>
-    <p>Every rung carries a weight, so solving something after a micro-hint counts as nearly independent and solving it after the full worked answer barely counts at all. That weight is what feeds the competence trait, which is why a student cannot inflate their own model by asking for solutions.</p>
-    <div class="table-scroll">
-      <table>
-        <caption>Help depth and the credit a solve receives at that depth.</caption>
-        <thead><tr><th scope="col">Rung</th><th scope="col" class="num">Credit</th><th scope="col">Reading</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">No help</th><td class="num">1.00</td><td>Fully independent.</td></tr>
-          <tr><th scope="row">Micro hint</th><td class="num">0.85</td><td>They had it; they needed a pointer.</td></tr>
-          <tr><th scope="row">Concept explanation</th><td class="num">0.70</td><td>The method was missing, the execution was theirs.</td></tr>
-          <tr><th scope="row">Find my mistake</th><td class="num">0.60</td><td>They could do it, they could not see it.</td></tr>
-          <tr><th scope="row">Next step</th><td class="num">0.40</td><td>We moved the work forward for them.</td></tr>
-          <tr><th scope="row">Full solve</th><td class="num">0.10</td><td>Almost no evidence about the student at all.</td></tr>
-        </tbody>
-      </table>
+    <h3 style="margin-top:2.6rem">Confusion and frustration need opposite responses</h3>
+    <p>Most affect models collapse everything unpleasant into one &ldquo;struggling&rdquo; bucket. Learning research says that is a mistake. We follow the flow model: challenge and skill have to stay in balance, and the states either side of that balance call for different moves.</p>
+    <div class="grid grid-3" style="margin-top:1.4rem">
+      <div class="card panel"><h3>Boredom</h3><p>Skill has outrun the challenge. The answer is to make it harder. Helping more makes it worse.</p></div>
+      <div class="card panel"><h3>Confusion</h3><p>Stuck but still attempting. This is where learning happens. The smallest possible nudge, then leave them alone.</p></div>
+      <div class="card is-yellow panel"><h3>Frustration</h3><p>Confusion escalating toward giving up. Rescue early; the read is deliberately biased toward catching it.</p></div>
     </div>
 
-    <h3 style="margin-top:2.6rem">It marks work nobody asked it to mark</h3>
-    <p>When a student leaves a problem, either by writing somewhere else or by going quiet long enough, a background check reads that cluster and decides whether it is correct and whether it is actually finished. The verdict is cached against the cluster's content hash and credited exactly once. The student is never told any of this happened.</p>
-    <p>That is what closes the biggest hole in self-reported learning: the problems a student got wrong, shrugged at, and moved on from. They never come up in conversation, and they are the most informative attempts in the session.</p>
-
-    <h3 style="margin-top:2.6rem">How much is actually being fused</h3>
-    <div class="stats" style="margin-top:1.4rem">
-      <div class="stat"><span class="num">6</span><span class="lbl">Signal families, every one of them live on every attempt</span></div>
-      <div class="stat"><span class="num">25+</span><span class="lbl">Distinct measurements recorded per problem attempt</span></div>
-      <div class="stat"><span class="num">1000s</span><span class="lbl">Raw pen samples behind a single attempt, each carrying force, tilt and timing</span></div>
-      <div class="stat"><span class="num">11</span><span class="lbl">Derived reads per attempt: four detectors, six composite states, one flow band</span></div>
-    </div>
-    <figure class="fig" style="margin-top:1.8rem">
-      <img src="../assets/figures/profile-at-term.svg" width="840" height="440" loading="lazy"
-           alt="An illustrative mature profile. Five traits past their reliability floor: competence 0.72, help orientation 0.81, uptake speed 0.64, frustration tendency 0.28, constructive engagement 0.77. Demonstrated ceiling at intermediate, next problem aimed just above it, readiness verdict reliable.">
-      <figcaption><strong>Illustrative.</strong> The shape of a mature profile after a term of real work, not one student's numbers. Every value is consistent with the gates described above: traits need five observations before they are read at all, the difficulty readout needs six, and the readiness verdict does not reach reliable under eight attempts.</figcaption>
-    </figure>
-
-    <p style="margin-top:1.6rem">Those fold into a profile that is explicitly built to forget. Attempts are capped and age out after 120 days. Traits move on a slow exponential average with a five-observation floor and a 120-day half-life, so one bad afternoon cannot rewrite a student and a verdict from last term cannot outlive the student it was measured on. Difficulty and teaching effectiveness decay on 90-day half-lives. A separate readiness verdict, cold, warming or reliable, answers the coarse question every behavioural decision actually wants: do we know this person well enough to act at all?</p>
-
-    <div class="panel panel-drawn" style="margin-top:2rem">
-      <h3>The loop that closes</h3>
-      <p>The adaptation layer used to be open. The profile chose a teaching style and a support level, the tutor delivered it, and nothing ever checked whether it helped. Two students with identical evidence got identical treatment forever, and a mapping that was wrong for one particular student stayed wrong for as long as they used the product.</p>
-      <p>Now every intervention is an <strong>arm</strong>, one pairing of style and support level, and every arm is scored by what the student did next. The rates are averaged, aged, and gated on a minimum sample, so a lucky first hint cannot brand an approach as the right one. The profile does not just model the student. It models <em>how this student responds to being taught a given way</em>, which is the part a fixed rule set can never reach.</p>
-    </div>
-
-    <h3 style="margin-top:2.6rem">Why fusion, and not a threshold</h3>
-    <p>The obvious design is a fixed threshold: this much pressure means stress, this much jerk means struggle. We built per-student baselines because the theory said population thresholds would not transfer. Two device runs turned that from theory into evidence, and the evidence was stronger than the theory.</p>
-
-    <figure class="fig" style="margin-top:1.8rem">
+    <h3 style="margin-top:2.6rem">Why per-student, and why fusion</h3>
+    <p>The obvious design is a global threshold: this much pressure means stress. Instrumented sessions on real iPads showed why that fails. For one student, being stuck shows up as pressing harder. For another, pressure is completely flat, and being stuck shows up as going still before the pen touches the page. The channel that separates one student is flat for the other.</p>
+    <figure class="fig">
       <ul class="legend">
         <li><span class="key" style="background:#2563EB;opacity:.45"></span>Calm attempts, measured range</li>
         <li><span class="key" style="background:#C2410C"></span>Genuinely stuck attempts</li>
       </ul>
       <img src="../assets/figures/two-students.svg" width="840" height="292" loading="lazy"
-           alt="Pressure strain for two students on the same scale. Student A's calm attempts span 0.03 to 0.24 and their stuck attempt reads 0.56, well outside the range. Student B's calm attempts span 0.05 to 0.12 and all three stuck attempts read 0.06, 0.11 and 0.12, inside the range.">
-      <figcaption>The same detector, on two students, on the same axis. Student A struggles by pressing harder, and pressure separates their stuck attempt cleanly. Student B's stuck attempts are indistinguishable from their calm ones on exactly that signal.</figcaption>
+           alt="The same pressure detector on two students. For student A, the stuck attempt sits well outside the calm range. For student B, all three stuck attempts sit inside the calm range.">
+      <figcaption>The same detector, two students, one scale. Per-student baselines fix the difference in scale. Only combining several families fixes the difference in channel, and no tuning of a global constant reaches either.</figcaption>
     </figure>
 
-    <div class="panel panel-drawn">
-      <h3>So the engine does not rely on pressure</h3>
-      <p>This is the whole reason the profile is built the way it is. Pressure is not a detector; it is <em>one of six families</em>, and its job is to carry weight for the students it happens to be informative about. For Student B it carries none, and something else does.</p>
-      <p>For that student the separating channel was the pause before the pen touched the page, and the separation was enormous.</p>
-    </div>
-
-    <figure class="fig" style="margin-top:1.4rem">
-      <ul class="legend">
-        <li><span class="key" style="background:#2563EB;opacity:.45"></span>Calm attempts, measured range</li>
-        <li><span class="key" style="background:#C2410C"></span>Stuck attempts</li>
-      </ul>
-      <img src="../assets/figures/pause-run005.svg" width="840" height="194" loading="lazy"
-           alt="Pre-stroke pause z-scores for student B. Seven calm attempts span minus 0.51 to plus 0.65. Three stuck attempts read minus 0.36, plus 1.21 and plus 7.32.">
-      <figcaption>Pre-stroke pause, as a z-score against this student's own pace baseline. The hardest stuck attempt reads +7.32 against a calm band of −0.51 to +0.65: roughly eleven times the width of everything that student does when they are fine.</figcaption>
-    </figure>
-
-    <p>So the finding is sharper than "students differ in scale". The <strong>direction and the channel</strong> of distress differ per student. Student A's only separator is Student B's flattest signal, and the reverse. Per-student baselines fix the scale problem. Only fusing many families fixes the channel problem, and no amount of tuning a global constant reaches either.</p>
-
-    <figure class="fig" style="margin-top:1.8rem">
-      <img src="../assets/figures/channel-coverage.svg" width="840" height="450" loading="lazy"
-           alt="Modelled share of students whose genuine struggle each channel separates from their own calm work. Pressure strain 31 percent, stroke dysfluency 24 percent, pre-stroke pause 44 percent, erase-burst pattern 28 percent, help behaviour 52 percent, and all six families fused 93 percent.">
-      <figcaption><strong>Modelled, not measured.</strong> The two figures above are real per-attempt measurements from instrumented runs. This one extends their argument across the cohort and is generated from a model, which is why it says so on its own face. Every single channel is unreliable for most students. The fusion is what is accurate, and that is a property of the architecture rather than of any one detector.</figcaption>
-    </figure>
-
-    <p>That is also why no single signal is allowed to decide anything. Each family is weak and noisy on its own, and each is unreliable for some fraction of students. Accuracy comes from the combination: thousands of raw pen samples reduced to standard scores against that person's own normal, crossed with how they ask for help, what their working actually contains, what we silently verified while they were not looking, what they said, and what level they have demonstrably cleared. One student's profile is the intersection of all of it, which is exactly the thing a competitor cannot reconstruct from a chat log.</p>
-
-    <h3 style="margin-top:2.6rem">The maths, exactly as it runs</h3>
-    <div class="formula">dysfluency = sigmoid( 0.7 · zJerk + 0.5 · max(0, −zSpeed) − 1.0 )
-<span class="why">Jerky strokes push it up. So does writing unusually slowly, but only in the slow direction, which is why the speed term is one-sided. The −1.0 offset means an unremarkable sample lands at sigmoid(−1.0) = 0.27, not at 0.5.</span></div>
-
-    <div class="formula">strain = sigmoid( 0.8 · zForce − 1.0 ) · paired
-<span class="why">paired is 1.0 when the attempt is known not to have progressed, or shows two or more erase bursts, and 0.3 otherwise. Pressing hard on work that is going fine is not strain; pressing hard on work that is going nowhere is.</span></div>
-
-    <div class="panel panel-drawn" style="margin-top:2rem">
-      <h3>The bug that taught us the most</h3>
-      <p><code>paired</code> used to take the full 1.0 whenever the attempt's outcome was unknown, because "not known to have progressed" was being read as "did not progress". Those are not the same claim. An outcome is unknown when our background verifier did not get round to judging the work, which is a fact about <em>our compute budget</em>, not about the student.</p>
-      <p>The cost was measurable. One run posted its highest strain reading of the whole session, <strong>0.51</strong>, on a calm attempt with zero erasures, purely because nothing had marked it yet. That is the app inventing a struggling student out of its own queue depth.</p>
-      <p>The fix makes progress three-state. Abandonment is the only outcome that pairs as no-progress; absence of evidence takes the unpaired weight. The same mistake was found in two other places in the codebase once we knew its shape, which is the real value of finding it.</p>
-    </div>
-
-    <h3 style="margin-top:2.6rem">An estimator can talk over the student</h3>
-    <p>The baseline is a running robust centre and median absolute deviation, advanced by an exponentially weighted average. Seeded on the first sample, its accumulated weight after twelve observations is only <strong>0.46</strong>. The centre had travelled less than half way to the true mean, and the deviation was under-converged by the same factor.</p>
-    <p>That is not an abstract concern. The first clean sample of one run happened to be the session's smoothest writing, so the centre stayed anchored near it and every post-baseline jerk z-score came back positive.</p>
-
-    <figure class="fig" style="margin-top:1.6rem">
-      <img src="../assets/figures/baseline-debias.svg" width="840" height="340" loading="lazy"
-           alt="Run 002 produced five jerk z-scores, all positive, between plus 0.80 and plus 1.12. After the warm-up debias, run 004 spanned minus 3.39 to plus 0.51 with eight of nine negative.">
-      <figcaption>Five same-sign z-scores against a student's own normal is the estimator talking, not the student. The fix divides both accumulators by <code>1 − (1−alpha)^count</code> at every step, so the stored properties hold already-debiased values and the serialised shape is unchanged. Blobs written by the biased version still decode, reinterpreted as debiased estimates, which is the closest honest reading of them.</figcaption>
-    </figure>
-
-    <p>The arithmetic closed exactly, which is how we knew it was the estimator and not the student. A biased <code>zJerk = +1.10</code> gives <code>sigmoid(0.7 · 1.10 − 1.0) = 0.44</code>, and the log said 0.45. At an unbiased <code>zJerk = 0</code> the same formula gives 0.27. Calm, unaided, seven-second work had been sitting at 64 percent of its threshold for no reason at all.</p>
-
-    <h3 style="margin-top:2.6rem">Every attempt from one instrumented run</h3>
-    <p>Klera is used on real homework every day, but ordinary use only tells you the product works. An instrumented run is different: every internal read is logged to console as it happens, so the arithmetic behind each number can be checked afterwards. Those are the runs we publish.</p>
-    <p>This is one of them, complete. Not a selected subset. Attempts before the fifteenth are omitted only because the baseline gate had not opened, which means every read on them is zero by construction rather than by measurement.</p>
-
-    <div class="table-scroll">
-      <table>
-        <caption>Instrumented run, iPad Air 13-inch, every value taken from the console log. Post-gate attempts. Shaded rows are attempts where the student was genuinely stuck, unaided, and said so out loud. zF, zS, zJ and zPause are z-scores against this student's own baselines.</caption>
-        <thead>
-          <tr>
-            <th scope="col">#</th><th scope="col">Kind</th><th scope="col" class="num">Active</th>
-            <th scope="col" class="num">zF</th><th scope="col" class="num">zS</th><th scope="col" class="num">zJ</th>
-            <th scope="col" class="num">zPause</th><th scope="col" class="num">Dysfluency</th>
-            <th scope="col" class="num">Strain</th><th scope="col" class="num">Unproductive</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">15</th><td>calm</td><td class="num">32 s</td><td class="num">+0.12</td><td class="num">−0.65</td><td class="num">−0.36</td><td class="num">−0.51</td><td class="num">0.28</td><td class="num">0.09</td><td class="num">0.25</td></tr>
-          <tr><th scope="row">16</th><td>calm</td><td class="num">25 s</td><td class="num">+0.74</td><td class="num">+0.15</td><td class="num">−1.16</td><td class="num">−0.44</td><td class="num">0.14</td><td class="num">0.12</td><td class="num">0.25</td></tr>
-          <tr><th scope="row">17</th><td>slow, 1 erase</td><td class="num">129 s</td><td class="num">−0.09</td><td class="num">+0.07</td><td class="num">−0.38</td><td class="num">+0.11</td><td class="num">0.22</td><td class="num">0.08</td><td class="num">0.25</td></tr>
-          <tr><th scope="row">18</th><td>calm</td><td class="num">27 s</td><td class="num">+0.52</td><td class="num">+0.39</td><td class="num">+0.14</td><td class="num">+0.65</td><td class="num">0.29</td><td class="num">0.11</td><td class="num">0.25</td></tr>
-          <tr><th scope="row">19</th><td>calm</td><td class="num">30 s</td><td class="num">+0.63</td><td class="num">+0.87</td><td class="num">−1.24</td><td class="num">−0.37</td><td class="num">0.13</td><td class="num">0.11</td><td class="num">0.25</td></tr>
-          <tr><th scope="row">20</th><td>calm</td><td class="num">43 s</td><td class="num">−0.83</td><td class="num">−0.47</td><td class="num">+0.32</td><td class="num">−0.34</td><td class="num">0.37</td><td class="num">0.05</td><td class="num">0.25</td></tr>
-          <tr><th scope="row">21</th><td>calm</td><td class="num">97 s</td><td class="num">−0.38</td><td class="num">−0.39</td><td class="num">+0.33</td><td class="num">+0.23</td><td class="num">0.36</td><td class="num">0.06</td><td class="num">0.25</td></tr>
-          <tr class="is-struggle"><th scope="row">22</th><td>stuck</td><td class="num">360 s</td><td class="num">−0.60</td><td class="num">−0.32</td><td class="num">−0.27</td><td class="num">−0.36</td><td class="num">0.26</td><td class="num">0.06</td><td class="num">0.50</td></tr>
-          <tr class="is-struggle"><th scope="row">23</th><td>stuck</td><td class="num">219 s</td><td class="num">+0.53</td><td class="num">+0.74</td><td class="num">+1.78</td><td class="num">+1.21</td><td class="num">0.56</td><td class="num">0.11</td><td class="num">0.50</td></tr>
-          <tr><th scope="row">24</th><td>calm</td><td class="num">95 s</td><td class="num">+0.45</td><td class="num">+2.30</td><td class="num">+1.86</td><td class="num">−0.43</td><td class="num">0.57</td><td class="num">0.10</td><td class="num">0.25</td></tr>
-          <tr class="is-struggle"><th scope="row">25</th><td>stuck</td><td class="num">242 s</td><td class="num">+0.68</td><td class="num">+2.41</td><td class="num">+0.76</td><td class="num">+7.32</td><td class="num">0.39</td><td class="num">0.12</td><td class="num">0.50</td></tr>
-          <tr><th scope="row">26</th><td>3-stroke probe</td><td class="num">0 s</td><td class="num">nil</td><td class="num">nil</td><td class="num">nil</td><td class="num">nil</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">0.25</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <figure class="fig" style="margin-top:1.4rem">
-      <ul class="legend">
-        <li><span class="key" style="background:#2563EB;opacity:.45"></span>Calm attempts, measured range</li>
-        <li><span class="key" style="background:#C2410C"></span>Stuck attempts</li>
-      </ul>
-      <img src="../assets/figures/separation-run005.svg" width="840" height="294" loading="lazy"
-           alt="Three detectors for student B. Pressure strain: calm range 0.05 to 0.12, stuck values 0.06, 0.11 and 0.12. Dysfluency: calm range 0.13 to 0.57, stuck values 0.26, 0.56 and 0.39. Unproductive struggle: calm 0.25 for all seven, stuck 0.50 for all three. The firing threshold at 0.60 is to the right of every value.">
-      <figcaption>The same run, detector by detector, on the pen-kinematic family alone. Pressure is flat. Dysfluency's ranges overlap outright. Unproductive struggle, which already mixes in help behaviour and language, splits calm from stuck by a clean factor of two. This is the argument for fusion drawn as a picture.</figcaption>
-    </figure>
-
-    <div class="panel panel-drawn" style="margin-top:2rem">
-      <h3>The row we will not tune away</h3>
-      <p>Attempt 24 was calm. No erasures, no distress, solved. It read <strong>dysfluency 0.57</strong>, <code>zJerk +1.86</code>, <code>zSpeed +2.30</code>. Attempt 23, genuinely stuck, read <strong>0.56</strong>.</p>
-      <p>Fast confident writing and stuck writing are indistinguishable on this student's dysfluency channel. Any proposal to lower that detector's threshold toward these values fires on confident work, which is the worst possible false positive: interrupting a student who is doing well. This is exactly the situation the other five families exist for, and exactly why a single-signal product would have shipped the wrong behaviour here without ever finding out.</p>
-    </div>
-
-    <h3 style="margin-top:2.6rem">Three things that will cost you a session each</h3>
-    <div class="grid grid-3" style="margin-top:1.6rem">
-      <div class="panel">
-        <h3>Attempts bank on shrink, not on finish</h3>
-        <p>Pruning folds only clusters at or beyond the current count, and it is driven by the cluster count changing. Writing more problems raises the count and prunes nothing, so attempts stay open indefinitely while the verifier keeps judging them and crediting mastery. The app looks completely alive with the observation count frozen. One run sat at 11 of 12 through a dozen problems for exactly this reason.</p>
+    <div class="grid grid-2" style="margin-top:2.4rem">
+      <div class="card is-white">
+        <h3>Help is a measurement, not just a menu</h3>
+        <p>A solve after a small hint is strong evidence of skill; a solve after the full answer is almost none. Weighting evidence by the help that preceded it means a student cannot inflate their own model by asking for solutions.</p>
       </div>
-      <div class="panel">
-        <h3>Zero by construction is not calm</h3>
-        <p>Before the baseline gate opens at twelve clean samples, every dysfluency and strain figure is zero because nothing can be computed, not because the student is relaxed. Reading a low value as calm before the header says the baseline is ready is reading the absence of a measurement as a measurement.</p>
+      <div class="card is-white">
+        <h3>The loop that closes</h3>
+        <p>Each way of teaching is treated as an option to be evaluated per student, and scored by what the student did next. Over time the profile models not just the student, but how that student responds to being taught a particular way.</p>
       </div>
-      <div class="panel">
-        <h3>A tiny attempt is garbage, not data</h3>
-        <p>A three-stroke probe produced a raw speed two to three times anything else in the run. An earlier run let a sample like that through and got a z-score of +10.73. The guard now rejects anything under five strokes or five active seconds and returns nil, so a discarded sample adds no support rather than removing any, and it does not pollute the baseline either.</p>
+      <div class="card is-white">
+        <h3>Absence of evidence is not evidence</h3>
+        <p>&ldquo;We have not checked this yet&rdquo; must never be read as &ldquo;the student failed&rdquo;. Unknown outcomes stay unknown, so the system cannot invent a struggling student out of its own backlog.</p>
       </div>
-    </div>
-
-    <div class="panel" style="margin-top:2rem">
-      <h3>How we decide a number is real</h3>
-      <p>A detector threshold only moves when there is enough separation across enough students to justify it. Four genuinely stuck attempts is not that, so the constants stay where they are and we keep instrumenting rather than tuning toward the data we happen to have. Fitting a threshold to one session is how you ship a detector that works beautifully on the person who built it.</p>
-      <p>The same standard applies to signals we suspect. One student's jerk z-scores ran eight of nine negative, which is plausibly real within-session smoothing rather than residual estimator bias; one session cannot separate those two explanations, so it stays flagged rather than quietly corrected. And the keyword list that scores a student's own words had a real inversion, where "idk how to solve this" scored as a constructive question because the constructive list matched inside it, while the language model read the same sentence as confusion at 0.90 confidence on the next log line. That is exactly why the language family now runs both readers and weights the model's read heavily, rather than trusting the cheap one.</p>
-      <p>All of that is on this page because a page that showed only the parts that worked would tell you nothing about whether the parts that worked are real.</p>
+      <div class="card is-white">
+        <h3>Know when you don't know</h3>
+        <p>The profile carries an explicit readiness verdict: is there enough evidence to act on at all? A new student is treated as unknown, not as average.</p>
+      </div>
     </div>
   </section>
 
-
-  <!-- ============================================================ guided solve -->
   <section class="section wrap" id="guided" aria-labelledby="gs-title">
-    <h2 id="gs-title">Guided solve</h2>
-    <p class="lead">The profile's most visible output. Instead of writing the answer, Klera writes one step, then stops and makes the student produce the next line themselves, watching the canvas until they do. Whether it does that at all is a decision the student never sees and never makes.</p>
-
-    <div class="panel panel-drawn" style="margin-top:2rem">
-      <h3>Why it is a decision and not a setting</h3>
-      <p>A student cannot reasonably be asked whether they are ready to be pushed on this particular problem. That judgement needs the difficulty of what is actually in front of them, how they are doing right now, how much the tutor genuinely knows about them yet, and whether they are already distressed. All of it lives in one pure function, so the decision is inspectable, testable, and able to explain itself in a line of log.</p>
-      <p><strong>The bias is deliberately conservative.</strong> Pushing a student who is not ready is worse than solving a problem for a student who could have done it themselves. Every answer that amounts to "we do not know yet" resolves to showing the solution.</p>
+    <div class="sec-head">
+      <h2 id="gs-title">Guided solve</h2>
+      <p class="sub">The profile's most visible output: deciding when to make a student do it.</p>
     </div>
-
-    <h3 style="margin-top:2.4rem">The eight ways that decision can go</h3>
-    <div class="table-scroll">
-      <table>
-        <caption>Every outcome of the guided-solve policy. Seven of the eight hand the student a worked solution; only the last one pushes.</caption>
-        <thead><tr><th scope="col">Outcome</th><th scope="col">Result</th><th scope="col">What it means</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Profile too cold</th><td>Show it</td><td>Too few observed attempts to judge readiness. A new student is never pushed.</td></tr>
-          <tr><th scope="row">Read too weak</th><td>Show it</td><td>No confident live read right now, so there is nothing to judge readiness from.</td></tr>
-          <tr class="is-struggle"><th scope="row">Student needs support</th><td>Show it</td><td>Distress, or a generous scaffold level. Never push someone who is already struggling.</td></tr>
-          <tr><th scope="row">Problem above their level</th><td>Show it</td><td>The problem outruns demonstrated skill on this topic. Handing it back would just be a wall.</td></tr>
-          <tr><th scope="row">Solution too short</th><td>Show it</td><td>Fewer than three steps. Nothing meaningful to hand over.</td></tr>
-          <tr><th scope="row">Disabled</th><td>Show it</td><td>Kill switch.</td></tr>
-          <tr><th scope="row">Debug forced</th><td>Guide it</td><td>Validation override, developer builds only.</td></tr>
-          <tr><th scope="row">Ready</th><td>Guide it</td><td>Reliable profile, confident read, topic demonstrated, not distressed, enough steps to be worth it.</td></tr>
-        </tbody>
-      </table>
+    <div class="split" style="align-items:start">
+      <div>
+        <h3>A decision, not a setting</h3>
+        <p>A student cannot reasonably be asked whether they are ready to be pushed. That judgement needs the difficulty of the problem, their current state, how well the tutor knows them yet, and whether they are already distressed. It is made per problem, and it is conservative: every answer that amounts to &ldquo;we don't know yet&rdquo; resolves to showing the solution. Pushing a student who is not ready is worse than solving one they could have managed.</p>
+        <h3 style="margin-top:1.8rem">Earned praise</h3>
+        <p>The tutor tracks how much the student actually wrote versus how much it revealed, and the closing words follow from that. A tutor that praises everyone stops being worth listening to.</p>
+      </div>
+      <div>
+        <h3>The turn loop has no button</h3>
+        <ol class="steps" style="margin-top:1rem">
+          <li><div><h3>Clear the wrong path</h3><p>Explain why it went wrong, keep what was right, then hand over from there.</p></div></li>
+          <li><div><h3>Prompt once</h3><p>In a register that follows the student's profile.</p></div></li>
+          <li><div><h3>Watch the canvas</h3><p>The student's handwriting ends the turn, not a tap.</p></div></li>
+          <li><div><h3>Treat silence and errors differently</h3><p>A wrong line gets a nudge that never reveals the answer. Silence gets encouragement, then the step.</p></div></li>
+        </ol>
+      </div>
     </div>
-    <p>The inputs to that call are the live flow band and its confidence, the scaffold level the teaching context resolved to, the difficulty the solver assigned to this problem, the profile readiness verdict, whether the student has demonstrated this topic before, and the step count. It runs per problem, not per session, so the same student is guided on one question and shown the next.</p>
-
-    <h3 style="margin-top:2.6rem">The turn loop, and the fact that there is no button</h3>
-    <p>This is the part that took the longest to get right. Once Klera hands over, it does not show a "done" button and wait to be told. It prompts once, out loud and on the board, and then <strong>watches the canvas</strong>.</p>
-    <ol class="steps" style="margin-top:1.4rem">
-      <li><div><h3>It clears the wrong path first</h3><p>If the student's existing working already went wrong, the tutor says why, out loud, and waits for that to land before touching anything. Then it erases from the error down, keeping the rows that were correct, so the page is never left as a correct solution stacked on top of a wrong one. It writes the right next step, says "now you carry on from here", and hands over from there rather than from the top.</p></div></li>
-      <li><div><h3>It prompts once, in the right register</h3><p>The prompt itself is composed from the current teaching context, so its wording follows the scaffold level and the teaching style the profile resolved to. The same moment reads differently for a student who needs encouragement and one who needs to be left alone.</p></div></li>
-      <li><div><h3>It watches for a handwritten line</h3><p>No tap, no confirm. The student writes, and the stroke stream is what ends the turn. The check that follows returns both a verdict and a short spoken reply: praise when the line is right, and when it is wrong, a nudge that is explicitly forbidden from revealing the answer.</p></div></li>
-      <li><div><h3>It counts wrong tries and silences separately</h3><p>A wrong line and a student sitting still are different failures and are tracked as different counters. Repeated silence earns nudges, and after the second one the tutor writes the step itself and moves on rather than leaving someone stranded in front of a blank page.</p></div></li>
-      <li><div><h3>It can be overridden at any point</h3><p>"Just solve it" switches to the full animated solve from wherever the student has got to, not from the beginning. The work they already did stays on the page.</p></div></li>
-    </ol>
-
-    <div class="panel panel-drawn" style="margin-top:2rem">
-      <h3>The closing line has to be earned</h3>
-      <p>The run tracks two counters the whole way through: how many steps the student actually wrote, and how many the tutor ended up revealing. The closing remark is composed from those.</p>
-      <p>It matters because the obvious implementation congratulates everyone. Saying "great work, you finished it" to a student who went silent and had every step written for them is hollow praise, it is the exact thing the tone guardrail exists to prevent, and students detect it instantly. A tutor that praises indiscriminately stops being worth listening to, which costs you every honest piece of praise afterwards.</p>
-    </div>
-
-    <p style="margin-top:1.6rem">Every guided run is also an unusually rich measurement. It produces exactly the evidence the profile is short of elsewhere: whether the student could produce the next line unaided, at a known difficulty, on a known topic, with a known amount of help given first. That is the highest-quality row the profile ever gets, and it exists because the tutor asked instead of told.</p>
   </section>
 
-  <!-- ============================================================ hiring -->
+  <section class="section wrap" aria-labelledby="lin-title">
+    <div class="sec-head">
+      <h2 id="lin-title">Research we build on</h2>
+      <p class="sub">None of these ideas are ours. Making them work on a live canvas is.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card is-white"><h3>Flow</h3><p>Csikszentmihalyi. Learning happens when challenge sits just above skill; boredom and anxiety sit either side.</p></div>
+      <div class="card is-white"><h3>Zone of proximal development</h3><p>Vygotsky. The next problem should be reachable with a little help, not without any.</p></div>
+      <div class="card is-white"><h3>Productive failure and desirable difficulty</h3><p>Kapur; Bjork. Struggle that ends in progress is the goal, not something to rescue students from.</p></div>
+      <div class="card is-white"><h3>The assistance dilemma</h3><p>Koedinger and Aleven. Too much help and too little both hurt; the right amount depends on the learner.</p></div>
+      <div class="card is-white"><h3>Confusion in learning</h3><p>D'Mello and Graesser. Confusion that resolves helps learning; confusion that does not becomes frustration.</p></div>
+      <div class="card is-white"><h3>Self-determination</h3><p>Deci and Ryan. Autonomy and competence sustain motivation; scores and streaks crowd it out.</p></div>
+    </div>
+  </section>
+
   <section class="section wrap" id="hiring" aria-labelledby="hire-title">
-    <div class="waitlist">
+    <div class="cta-block">
       <span class="perk">We are hiring</span>
       <h2 id="hire-title">Come and work on this</h2>
-      <p class="lead">We are a small team with more measurement problems than we can get through. If any of the above is the kind of thing you want to spend your time on, write to us. Tell us what you would do differently, and point at the part of this page you think is wrong.</p>
-      <div class="grid grid-2" style="margin-top:1.8rem;align-items:start">
-        <div class="panel">
-          <h3>AI and applied modelling</h3>
-          <p>Prompt and model architecture for the tutoring loop, the conversational state reader, silent verification, and calibrated problem generation. The interesting problem is not getting a model to answer maths. It is getting one to withhold the answer correctly.</p>
-        </div>
-        <div class="panel">
-          <h3>Data and pattern work</h3>
-          <p>The learner profile: estimator design, per-student baselines, detector thresholds that survive contact with a second student, and the study design that would let us move a constant without fitting to noise. Bring an opinion about our n of 4.</p>
-        </div>
+      <p class="lead">A small team with more open problems than we can get through. If any of the above is what you want to spend your time on, write to us, and tell us which part of this page you think is wrong.</p>
+      <div class="grid grid-2" style="margin-top:1.8rem">
+        <div class="card is-white"><h3>AI and applied modelling</h3><p>The tutoring loop, silent verification and calibrated problem generation. The hard problem is not getting a model to answer maths. It is getting one to withhold the answer correctly.</p></div>
+        <div class="card is-white"><h3>Data and learning science</h3><p>Per-student baselines, evidence fusion, and the study design that lets us change a model without fitting it to noise.</p></div>
       </div>
       <div class="actions">
-        <a class="btn" href="mailto:filip.lukasiewicz@studbocconi.it,darius.farcas@studbocconi.it?subject=Klera%20engineering" data-magnetic>Email us</a>
+        <a class="btn btn-dark" href="mailto:filip@klera.tech,darius@klera.tech?subject=Klera%20engineering" data-magnetic>Email both founders</a>
         <a class="btn btn-quiet" href="../#early-access" data-magnetic>Or just try the app</a>
       </div>
-      <p class="form-note">No formal posting and no process. A short email to both founders about what you have built is plenty.</p>
+      <p class="form-note">No formal posting and no process. A short email about what you have built is plenty.</p>
     </div>
   </section>
 
@@ -497,12 +241,14 @@
 
 <footer class="foot">
   <div class="wrap foot-grid">
-    <p style="margin:0">Klera. Founded by two people who got tired of tutors that cannot see the page.</p>
+    <p>Klera. Two Bocconi students building the tutor we wished we had.</p>
     <nav aria-label="Footer">
       <a href="../">Home</a>
       <a href="../for-students/">For students</a>
       <a href="../for-investors/">For investors</a>
+      <a href="../for-engineers/">For engineers</a>
       <a href="../about/">About</a>
+      <a href="mailto:filip@klera.tech,darius@klera.tech?subject=Klera">filip@klera.tech</a>
       <a href="https://fifilukasiewicz.github.io/neuraboard-legal/">Privacy</a>
     </nav>
   </div>

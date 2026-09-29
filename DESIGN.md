@@ -38,94 +38,55 @@ for one. Everything that shows data is a real measurement from a device run, or 
 drawn. When a run publishes a range but not its individual values, the figure draws the range
 and says so; it does not interpolate points to make the row look fuller.
 
+## Visual source: the pitch deck
+
+Since September 2026 the site follows the TEF Ignition deck (`Klera — TEF Ignition Pitch
+Deck/*.png`): warm off-white ground, uppercase condensed section titles (Oswald) with an 8px
+yellow bar on the left (`.sec-head`), bronze subtitles (`.sub`), big-number cards on pale
+yellow with one solid-yellow card (`.stat`, `.stat.is-yellow`), black pill bars
+(`.pillbar`), overlapping circles for the three-step story (`.circles`), numbered timelines
+that darken pale to bronze (`.timeline`, `.steps`), week blocks (`.weeks`), the competition
+quadrant (`.quad`), the market funnel (`.funnel`) and a full-bleed yellow band (`.band`).
+Body type is Figtree.
+
 ## Tokens
 
 | Token | Value | Role |
 |---|---|---|
-| `--paper` | `#FEFCF3` | page ground. Sampled from the logo's own background |
-| `--card` | `#FFFDF7` | raised surfaces |
-| `--sunk` | `#F7F1DF` | wells, code blocks, formula blocks |
-| `--ink` | `#171307` | primary text, 18.0:1 on paper |
-| `--ink-soft` | `#5B5340` | secondary text, 7.4:1 |
-| `--muted` | `#7D7360` | tertiary text, 4.6:1 |
-| `--rule` | `#E6DCC2` | hairlines, decorative only |
-| `--rule-firm` | `#CFC2A0` | borders around interactive things |
-| `--yellow` | `#E9B11E` | the logo's exact ink. **Graphic colour only** |
-| `--yellow-pale` | `#FBEDC4` | washes |
-| `--amber` | `#7A4E00` | accent text and links, 7.00:1 |
-| `--calm` | `#2563EB` | data only |
-| `--struggle` | `#C2410C` | data only |
+| `--paper` / `--paper-2` | `#FAF7F0` / `#FDFCF9` | page ground and its lighter gradient end |
+| `--pale` | `#FBF0DA` | card ground |
+| `--mid` | `#F2D48C` | second progression step |
+| `--yellow` | `#E0A92E` | the deck yellow. **Fill only.** Ink on it is 8:1, white is 2.1:1, so never white text on yellow |
+| `--gold` / `--bronze-g` | `#C8921F` / `#8C6A1F` | third and fourth progression steps, graphic |
+| `--bronze` | `#7A5A14` | accent text, 5.9:1 |
+| `--gold-num` | `#A87A12` | big numbers only (large text, 3.4:1 on pale) |
+| `--ink` | `#1B1A17` | text |
+| `--pill` | `#1B1B1B` | black pills and dark buttons |
+| `--calm` / `--struggle` | `#2563EB` / `#C2410C` | data only |
 
-**The yellow is 1.90:1 on cream.** It can be a fill, a highlighter sweep, a step marker, a
-button background (ink on yellow is 9.51:1), a border. It can never be text, and never a
-hairline that has to be read. Anything that must be read and is not ink uses `--amber`.
-
-Data colours were validated as a categorical pair on `#FEFCF3`: lightness band, chroma floor,
-CVD separation (dE 31.7 protan, 31.6 tritan), normal-vision floor (dE 36.1) and 5.0:1
-contrast, all pass. The palette is capped at two on purpose, because the data itself is
-two-valued (calm range, struggle points). A third series gets small multiples, not a third
-hue picked by eye. Never use these as UI colour.
-
-## Type
-
-- **Display:** Fraunces, variable, `opsz` high, weight ~380. Headlines only. Sentence case.
-- **Body:** Geist, 17px base, line-height 1.62, measure 64ch.
-- **Data:** Geist Mono with `tabular-nums`, inside figures, tables, formulas and kickers only.
+The deck puts white text on yellow; the site deliberately does not (contrast).
 
 ## Measured vs modelled
 
-The site makes two different kinds of numeric claim and they are never allowed to blur.
-
-- **Measured.** Real per-attempt values from instrumented device runs. These carry the run
-  context in the caption and appear in `two-students.svg`, `pause-run005.svg`,
-  `separation-run005.svg`, `baseline-debias.svg` and the attempt table.
-- **Modelled or illustrative.** Everything else. `channel-coverage.svg` and
-  `profile-at-term.svg` are generated from a model to show the shape of the thing at scale.
-  Each says so **inside the figure itself**, not only in the caption, and the caption repeats
-  it in bold.
-
-Never relabel a modelled figure as measured, never put one next to a measured table without
-the word, and never invent rows for a table that is presented as a log. The engineering page
-is the page that makes the rest of the site believable; a single fabricated row there costs
-more than every figure on it is worth.
-
-## The hand-drawn line
-
-The logo is one continuous uneven stroke, so the boxes that matter echo it: `--drawn` is four
-unequal corner radii, used on the three doors, prose panels (`.panel-drawn`), the early-access
-block and the numbered step markers. Everything else keeps an even `--radius`. Used on every
-box it would read as a gimmick; used on the ones carrying an argument it reads as the logo.
-
-**The sweep** is the same idea on text: a ragged marker swipe drawn as an inline SVG, covering
-the lower two thirds of the glyphs. It replaced a flat rectangle sitting on the baseline, which
-read as a strikethrough and cut through descenders. It sets `white-space: nowrap`, because a
-swept phrase breaking across two lines leaves an orphan word wearing half a highlight. **Keep
-swept phrases to two or three words**, or the nowrap overflows a narrow screen. One per page.
+Any number presented as a measurement came from a real session or the May 2026 survey (98
+university students), and its source is printed under it. Anything modelled says so on the
+figure. Never fabricate rows or round away an uncomfortable number.
 
 ## Layout
 
-- **Nav:** floating cream pill, the wordmark at 26px, current page marked with a yellow chip.
-- **Hero:** text left, a real capture in a device frame right; stacked below 900px.
-- **Families:** hero, three doors, statement grid, stepper, filmstrip of real frames,
-  data figure with legend and caption, wide diagram in a scroller, comparison table,
-  stat tiles, the early-access block. No family twice on a page.
-- **Prose panels are capped at 78ch**, not stretched to the grid, so a paragraph never runs
-  to a 110-character measure.
+- **Nav:** full-width sticky bar, wordmark left, current page underlined in yellow, black
+  "Early access" pill on the right.
+- **Home hero:** the deck cover. Large logo (`klera-cover-mark.png`, cut from the cover
+  slide, transparent), the tagline in bronze, then slot H1.
+- **Other heroes:** uppercase title and lead left, a media slot right; stacked below 900px.
+- **Build pages from `.sec-head` sections**, one deck pattern per section, no pattern twice
+  in a row.
 
-## Figures and diagrams
+## Figures
 
-Both are generated, not hand-placed, and the generators are committed:
-
-    python3 tools/build_figures.py     # the four data figures
-    python3 tools/build_diagrams.py    # the three architecture diagrams
-
-Output lands in `assets/figures/` and is committed too, because the site has no build step.
-Re-run and commit whenever a number or a pipeline changes. Every figure carries real alt text
-describing the values, and the engineering page also prints the underlying run as a table, so
-the data is reachable without seeing the picture.
-
-Diagrams are wide by nature. They keep their width inside a `.diagram` scroller rather than
-shrinking their labels to nothing, with a `.scroll-hint` line below that hides above 1200px.
+One data figure remains, `assets/figures/two-students.svg`, generated by
+`python3 tools/build_figures.py`. The other figures and the architecture diagram generator
+were deleted in the September 2026 cleanup.
 
 ## Early access
 
@@ -155,33 +116,15 @@ Curly quotes. Say the uncomfortable number rather than rounding it away.
 
 ## Media
 
-Real recordings from the app, trimmed from screen captures with `avconvert` (no ffmpeg on this
-machine; `--start` and `--duration` trim, and `PresetAppleM4V720pHD` writes `.m4v`, renamed to
-`.mp4`). Frames are pulled with a small AVFoundation script run through `swift`, not a GUI.
+All app screenshots and recordings were removed in the September 2026 cleanup. Every place
+one belongs shows a `.slot` box naming the exact shot and size; `MEDIA_SLOTS.md` is the list.
+Fill slots with real captures only. Clips with narration ship with `controls`, never autoplay.
 
-| File | What it is |
-|---|---|
-| `solve-handwriting.mp4` | 24 s, portrait. The current engine writing a full quadratic solution in captured handwriting, with the voice tutor narrating. **Has audio**, so it ships with `controls` and never autoplays. |
-| `solve-step-1..4.png` | Four frames from that same recording, in order, for the filmstrip |
-| `viz-detect.mp4` | 6.6 s, silent. A handwritten quadratic detected, and a live card generated from it. The internal flow read-out is visible top left |
-| `viz-explore.mp4` | 9.1 s, silent. The card full screen, with the discriminant slider dragged and roots merging |
-| `*-poster.png` | Poster frames, so nothing loads as a black rectangle |
+## Engineering page: theory, not code
 
-Silent clips carry `data-loop` and are handled by `klera.js`: they autoplay muted, pause when
-scrolled off screen, hold on their poster under `prefers-reduced-motion`, and have a visible
-play/pause button either way. `video.play()` rejecting is caught and ignored, because it does
-so routinely in a background tab or low power mode and the poster is a fine resting state.
-
-The previous pink-ink GIF and its frames are gone: they were the old engine, and showing an
-outdated render of the thing the product is judged on is worse than showing nothing.
-
-## Images: the ✱ rule
-
-Where a real capture belongs and none exists yet, a visible `.ph` slot marked **✱ Replace**
-states the exact shot and size. Search the repo for `✱`. Each slot reserves its space.
-
-Outstanding, and deliberately confined to `/about/`: the about hero photo, and both founder
-portraits and bios. Every other page ships with real media only. Contact is a real address.
+`/for-engineers/` explains principles and ideas, and cites the research they come from. It
+must not publish formulas, constants, weights, thresholds, class or type names, internal run
+tables, or bug post-mortems. Architecture diagrams that named internal types were deleted.
 
 ## Theme
 
@@ -195,7 +138,8 @@ are accessible and need no WebGL. Both are recoverable from commit `34b538e`.
 - [ ] No handwriting drawn in code anywhere
 - [ ] Zero em or en dashes in visible text
 - [ ] Every number traceable to a device run, and ranges drawn as ranges
-- [ ] No ✱ placeholder anywhere
+- [ ] Every `.slot` is listed in MEDIA_SLOTS.md
+- [ ] Nothing on /for-engineers/ reads like code: no formulas, constants or type names
 - [ ] Every figure is captioned measured, modelled or illustrative, and says which on its face
 - [ ] Swept phrases are three words or fewer
 - [ ] Any clip with audio has `controls` and does not autoplay

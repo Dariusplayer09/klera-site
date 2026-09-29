@@ -46,12 +46,30 @@
       return;
     }
 
+    const appleId = String(data.get("apple_id_email") || "").trim();
+    if (appleId && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(appleId)) {
+      say("The Apple ID email does not look right. Fix it or leave it empty.", "err");
+      form.querySelector("#wl-apple").focus();
+      return;
+    }
+
+    /* Consent is a hard requirement (EU signups), and the database re-checks it. */
+    if (!data.get("consent")) {
+      say("Tick the box so we are allowed to email you the invite.", "err");
+      form.querySelector("#wl-consent").focus();
+      return;
+    }
+
     const row = {
       email,
       name: String(data.get("name") || "").trim().slice(0, 120) || null,
       role: data.get("role") || "student",
+      university: String(data.get("university") || "").trim().slice(0, 120) || null,
       device: data.get("device") || "unsure",
       note: String(data.get("note") || "").trim().slice(0, 500) || null,
+      apple_id_email: appleId || null,
+      consent: true,
+      page: location.pathname.includes("for-students") ? "students" : "home",
       source: "site",
     };
 
@@ -73,7 +91,7 @@
       if (res.ok) {
         sent = true;
         form.hidden = true;
-        say("You are in. Your lifetime Klera Premium is reserved against this email, and we will write when the first build is ready to hand out.", "ok");
+        say("You are in. Your lifetime Klera Premium is reserved against this email, and we will email your TestFlight invite when your batch opens.", "ok");
         return;
       }
 
