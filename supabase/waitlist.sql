@@ -7,7 +7,7 @@
 -- may INSERT a signup, and only into the columns a visitor is allowed to set. There is no
 -- SELECT policy and no SELECT grant, so a visitor holding the key cannot read the list back,
 -- not their own row and not anyone else's. The ops columns (status, invited_at,
--- premium_lifetime, ...) are writable only from the dashboard or with the service-role key,
+-- premium_granted, ...) are writable only from the dashboard or with the service-role key,
 -- neither of which ever reaches the browser.
 
 create extension if not exists pgcrypto;
@@ -35,15 +35,27 @@ alter table public.waitlist add column if not exists status           text not n
 alter table public.waitlist add column if not exists batch            int;
 alter table public.waitlist add column if not exists invited_at       timestamptz;
 alter table public.waitlist add column if not exists first_session_at timestamptz;
-alter table public.waitlist add column if not exists premium_lifetime boolean not null default false;
+-- The offer changed from lifetime Premium to a free year (Sept 2026). If an older version of
+-- this file created premium_lifetime, rename it rather than keeping two flags.
+do $$
+begin
+  if exists (select 1 from information_schema.columns
+             where table_schema = 'public' and table_name = 'waitlist' and column_name = 'premium_lifetime') then
+    alter table public.waitlist rename column premium_lifetime to premium_granted;
+  end if;
+end $$;
+alter table public.waitlist add column if not exists premium_granted  boolean not null default false;
+alter table public.waitlist add column if not exists premium_until    date;
 alter table public.waitlist add column if not exists ops_note         text;
 
 comment on table public.waitlist is
   'Early-access signups from the Klera site. Insert-only for the publishable key; never readable client side.';
 comment on column public.waitlist.status is
-  'waiting -> invited (TestFlight invite sent) -> active (used the build) -> premium (lifetime Premium granted). Also: declined, removed.';
-comment on column public.waitlist.premium_lifetime is
-  'The early-access promise. Set true once a tester has actually used the build. Never flip back.';
+  'waiting -> invited (TestFlight invite sent) -> active (used the build) -> premium (free year granted). Also: declined, removed.';
+comment on column public.waitlist.premium_granted is
+  'The early-access promise: a free year of Premium. Set true once a tester has actually used the build.';
+comment on column public.waitlist.premium_until is
+  'Last day of the free year. Set to grant date + 1 year when premium_granted is set.';
 
 -- ---------------------------------------------------------------- constraints
 alter table public.waitlist drop constraint if exists waitlist_status_check;
@@ -60,7 +72,7 @@ create index if not exists waitlist_status_idx     on public.waitlist (status);
 alter table public.waitlist enable row level security;
 
 -- Column-level insert grant: the anon key can only fill the visitor columns. Any attempt to
--- set status / premium_lifetime / batch from the browser is rejected by Postgres itself.
+-- set status / premium_granted / batch from the browser is rejected by Postgres itself.
 revoke all on public.waitlist from anon, authenticated;
 grant insert (email, name, role, university, device, note, apple_id_email, consent, page, source)
   on public.waitlist to anon, authenticated;

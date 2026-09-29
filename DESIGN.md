@@ -76,8 +76,8 @@ figure. Never fabricate rows or round away an uncomfortable number.
 
 - **Nav:** full-width sticky bar, wordmark left, current page underlined in yellow, black
   "Early access" pill on the right.
-- **Home hero:** the deck cover. Large logo (`klera-cover-mark.png`, cut from the cover
-  slide, transparent), the tagline in bronze, then slot H1.
+- **Home hero:** the deck cover. Large logo (`klera-logo-full.png`, bulb and wordmark,
+  transparent), the tagline in bronze, then slot H1.
 - **Other heroes:** uppercase title and lead left, a media slot right; stacked below 900px.
 - **Build pages from `.sec-head` sections**, one deck pattern per section, no pattern twice
   in a row.
@@ -97,7 +97,7 @@ grant, so it cannot read the list back. Run that SQL once per project. If the ke
 the form disables itself and says so rather than silently dropping signups.
 
 The offer, stated the same way everywhere: **anyone who signs up and tests the app keeps
-unlimited Klera Premium for life.**
+a free year of Klera Premium.**
 
 ## Interaction and motion
 

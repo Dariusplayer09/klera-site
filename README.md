@@ -50,5 +50,5 @@ must ship with `controls` and must not autoplay.
 ## The waitlist
 
 **Not switched on yet.** Run `supabase/waitlist.sql` once. The full early-access checklist
-(table, klera.tech mailboxes, TestFlight, invite batches, lifetime Premium) is in
+(table, klera.tech mailboxes, TestFlight, invite batches, free year of Premium) is in
 [`supabase/SETUP.md`](supabase/SETUP.md).

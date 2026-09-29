@@ -18,7 +18,7 @@ table. **Until step 1 is done, the form shows an error instead of signing anyone
       group ("Early access"), upload a build, submit it for Beta App Review (first build only,
       usually about a day). Needs the paid Apple Developer Program.
 - [ ] **5. Invite in batches** (see "Running early access"). Pencil owners first.
-- [ ] **6. Grant the lifetime Premium** to everyone who actually used the build.
+- [ ] **6. Grant the free year of Premium** to everyone who actually used the build.
 - [ ] **7. Rename the privacy repo** `neuraboard-legal` to `klera-legal` (GitHub keeps a
       redirect) and add a line to the policy covering the waitlist: what is stored (the form
       fields), why (early-access invites), how to get deleted (email filip@klera.tech).
@@ -33,7 +33,7 @@ table. **Until step 1 is done, the form shows an error instead of signing anyone
 
 Check: **Table Editor** shows `public.waitlist` with columns `id, email, name, role, device,
 note, source, created_at, university, apple_id_email, consent, page, status, batch,
-invited_at, first_session_at, premium_lifetime, ops_note`.
+invited_at, first_session_at, premium_granted, premium_until, ops_note`.
 
 ## What each column is for
 
@@ -50,7 +50,8 @@ invited_at, first_session_at, premium_lifetime, ops_note`.
 | `status` | **you** | `waiting` → `invited` → `active` → `premium`, or `declined` / `removed` |
 | `batch` | **you** | Which invite wave (1, 2, 3...) |
 | `invited_at`, `first_session_at` | **you** | Dates, for the pilot write-up |
-| `premium_lifetime` | **you** | The promise. True once they tested. Never flip back |
+| `premium_granted` | **you** | The promise: a free year. True once they tested |
+| `premium_until` | **you** | Last day of their free year |
 | `ops_note` | **you** | Anything else |
 
 The browser key physically cannot write the "you" columns: they are not in its insert grant.
@@ -79,7 +80,9 @@ where lower(coalesce(apple_id_email, email)) in (
 
 ```sql
 update public.waitlist
-set status = 'premium', premium_lifetime = true, first_session_at = coalesce(first_session_at, now())
+set status = 'premium', premium_granted = true,
+    premium_until = (current_date + interval '1 year')::date,
+    first_session_at = coalesce(first_session_at, now())
 where lower(email) = 'someone@studbocconi.it';
 ```
 
@@ -95,12 +98,12 @@ select coalesce(university, '(blank)') u, count(*) from public.waitlist group by
 
 **Export everything:** Table Editor, `waitlist`, **Export to CSV**.
 
-## Wiring lifetime Premium into the app (later)
+## Wiring the free year into the app (later)
 
 When the app has a paywall, the simplest correct wiring: on sign-in, look up the user's
 email in `waitlist` from a server-side function (service role, never the client) and, if
-`premium_lifetime` is true, unlock Premium. Until the app sells anything, the column is the
-record of who was promised it.
+`premium_granted` is true and `premium_until` is today or later, unlock Premium. Until the app sells anything, the column is the
+record of who was promised it and until when.
 
 ## Why the key in the site is safe
 

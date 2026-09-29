@@ -127,7 +127,7 @@ a:hover { text-decoration-color: var(--bronze); }
 }
 .nav-inner { display: flex; align-items: center; gap: 1.2rem; min-height: 68px; }
 .brand { display: inline-flex; align-items: center; }
-.brand img { height: 30px; width: auto; display: block; }
+.brand img { height: 34px; width: auto; display: block; }
 .nav-links { display: flex; gap: .2rem; margin-left: auto; flex-wrap: wrap; align-items: center; }
 .nav-links a {
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 .8rem;
@@ -170,8 +170,8 @@ a:hover { text-decoration-color: var(--bronze); }
 
 /* ------------------------------------------------------------------ cover hero (deck slide 1) */
 .cover { padding-block: clamp(3.5rem, 9vw, 7rem) 0; text-align: center; }
-/* Cropped from the deck cover and knocked out to transparent (yellow ink, alpha from the paper). */
-.cover-mark { display: block; width: min(620px, 92%); height: auto; margin: 0 auto 2rem; }
+/* klera-logo-full.png: the combined bulb and wordmark, transparent. */
+.cover-mark { display: block; width: min(640px, 92%); height: auto; margin: 0 auto 2rem; }
 .cover .tagline { max-width: 34ch; margin-inline: auto; }
 .cover .lead { max-width: 60ch; margin-inline: auto; }
 
