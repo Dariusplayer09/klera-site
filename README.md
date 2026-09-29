@@ -3,7 +3,7 @@
 The Klera marketing site. Static HTML, CSS and JavaScript. **No build step and no
 dependencies** — what is in the repo is what is served.
 
-Live at <https://dariusplayer09.github.io/klera-site/> from `main`.
+Live at <https://klera.tech> (Vercel, auto-deploys from `main`). Also mirrored on GitHub Pages at dariusplayer09.github.io/klera-site.
 
 ## Run it locally
 
@@ -19,6 +19,7 @@ paths and the waitlist fetch will not behave the way they do in production.
     for-investors/          for the person who funds it
     for-engineers/          for the person who would build it
     about/                  who is building it
+    privacy/                privacy policy, rendered from the app repo's legal/PRIVACY_POLICY.md
     how-it-works/           redirect, folded into for-students
     learner-profile/        redirect, folded into for-engineers
     exams/                  redirect, folded into for-students

@@ -472,3 +472,9 @@ tbody tr:last-child > * { border-bottom: 0; }
 .who-card.is-yellow .who-line { color: var(--ink); }
 .who-go { margin-top: auto; padding-top: .8rem; font-weight: 700; }
 .who-go::after { content: "  \2192"; }
+
+/* ------------------------------------------------------------------ privacy policy */
+.policy { max-width: 72ch; margin-top: 1rem; }
+.policy h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin: 2.2rem 0 .6rem; }
+.policy ul { padding-left: 1.2rem; margin: 0 0 1.1em; }
+.policy li { margin-bottom: .5rem; }

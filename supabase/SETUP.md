@@ -20,7 +20,7 @@ table. **Until step 1 is done, the form shows an error instead of signing anyone
 - [ ] **5. Invite in batches** (see "Running early access"). Pencil owners first.
 - [ ] **6. Grant the free year of Premium** to everyone who actually used the build.
 - [x] **7. Privacy policy** renamed to Klera AI, now at
-      <https://fifilukasiewicz.github.io/klera-legal/>, with a section covering the waitlist.
+      <https://klera.tech/privacy/>, with a section covering the waitlist.
 
 ## Switching it on (step 1)
 
@@ -127,4 +127,4 @@ Paste them this:
 > statement is idempotent and nothing else in the project is touched.
 >
 > Afterwards please confirm `waitlist` shows in the Table Editor and submit the form once on
-> https://dariusplayer09.github.io/klera-site/ to check a row lands.
+> https://klera.tech/for-students/ to check a row lands.
