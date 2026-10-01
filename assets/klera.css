@@ -373,6 +373,7 @@ a:hover { text-decoration-color: var(--bronze); }
 .mock { display: block; width: 100%; height: auto; }
 .mock.is-tall { max-width: 420px; margin-inline: auto; }
 .media .shot, .frames .shot { border: 1px solid var(--rule); }
+.shot.is-exam { max-width: 520px; margin-inline: auto; }
 .shot.is-photo { max-width: 520px; margin-inline: auto; border: 0; }
 .media .slot-note { text-align: center; }
 .clip { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--rule); background: var(--sunk, #F4EEDD); }
