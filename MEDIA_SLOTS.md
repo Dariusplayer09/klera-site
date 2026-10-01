@@ -18,7 +18,7 @@ student photo, `video/` are silent loops with `-poster.jpg` frames (`video[data-
 | I3 | Investors, Where we are | `photos/student-using-klera-full.webp` |
 | E1 | Engineers, hero | `video/demo-multi-problem.mp4` (silent loop) |
 | E2 | Engineers, visual engine | `mockups/equation-to-interactive-graph.webp` |
-| S5 | Students, exams | `screens/exam-marked-answers.webp` (crop of an exam results screen) |
+| S5 | Students, exams | `screens/exam-graded-q3.webp` + `exam-graded-q6.webp`, side by side |
 | new | Students, How it works | the three landscape mockups, one per step |
 
 ## Still open

@@ -377,7 +377,23 @@ a:hover { text-decoration-color: var(--bronze); }
 .person { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
 .person .card-label { margin: 0 0 .2rem; }
 .headshot { width: 96px; height: 96px; flex: none; border-radius: 50%; object-fit: cover; border: 3px solid var(--yellow); background: var(--pale); }
-.shot.is-exam { max-width: 520px; margin-inline: auto; }
+/* Marked exam answers: two graded cards side by side, tilted a touch like papers on a desk. */
+.marked { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.2rem, 3vw, 2.4rem); margin-top: 2.2rem; }
+.marked-card { margin: 0; position: relative; }
+.marked-card .shot { box-shadow: 0 18px 40px -22px rgba(23, 19, 7, .35); }
+.marked-card:first-child { transform: rotate(-1.2deg); }
+.marked-card:last-child { transform: rotate(1.2deg) translateY(1.4rem); }
+.marked-tag {
+  position: absolute; z-index: 1; top: -.8rem; left: 1rem;
+  background: var(--ink); color: var(--paper); font: 600 .78rem/1 var(--body);
+  padding: .45rem .75rem; border-radius: 999px;
+}
+.marked-note { text-align: center; max-width: none; margin-top: 2.8rem; }
+@media (max-width: 900px) {
+  .marked-note { margin-top: 1.2rem; }
+  .marked { grid-template-columns: 1fr; gap: 2.2rem; }
+  .marked-card:first-child, .marked-card:last-child { transform: none; }
+}
 .shot.is-photo { max-width: 520px; margin-inline: auto; border: 0; }
 .media .slot-note { text-align: center; }
 .clip { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--rule); background: var(--sunk, #F4EEDD); }
