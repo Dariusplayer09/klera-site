@@ -373,6 +373,10 @@ a:hover { text-decoration-color: var(--bronze); }
 .mock { display: block; width: 100%; height: auto; }
 .mock.is-tall { max-width: 420px; margin-inline: auto; }
 .media .shot, .frames .shot { border: 1px solid var(--rule); }
+/* Founder cards on /about/: round headshot beside name and role. */
+.person { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.person .card-label { margin: 0 0 .2rem; }
+.headshot { width: 96px; height: 96px; flex: none; border-radius: 50%; object-fit: cover; border: 3px solid var(--yellow); background: var(--pale); }
 .shot.is-exam { max-width: 520px; margin-inline: auto; }
 .shot.is-photo { max-width: 520px; margin-inline: auto; border: 0; }
 .media .slot-note { text-align: center; }
