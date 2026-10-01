@@ -46,9 +46,27 @@
         </div>
       </div>
       <div>
-        <div class="slot is-portrait" role="img" aria-label="Placeholder for Screen recording, 20 to 30 s, sound on: Klera writing a worked solution under the student's problem while the voice tutor narrates. Portrait, 1080 x 1440."><b>Slot S1</b><span>Screen recording, 20 to 30 s, sound on: Klera writing a worked solution under the student's problem while the voice tutor narrates. Portrait, 1080 x 1440.</span></div>
+        <figure class="media">
+          <video class="clip" id="s-solve" width="960" height="688" muted loop playsinline preload="metadata" poster="../assets/klera-assets/video/demo-solve-quadratic-poster.jpg" data-loop aria-label="Recording from the app: a student writes f(x) = x squared minus 6x plus 5, a live graph of the parabola appears beside it, and Klera starts solving it step by step">
+            <source src="../assets/klera-assets/video/demo-solve-quadratic.mp4" type="video/mp4">
+          </video>
+          <figcaption class="media-bar"><button class="btn btn-quiet btn-small" type="button" data-video-toggle="s-solve" aria-pressed="false">Pause</button><span>Recorded in the app, no sound. You write in black, a live graph appears, and Klera solves it in gold.</span></figcaption>
+        </figure>
       </div>
     </div>
+  </section>
+
+  <section class="section wrap" id="how" aria-labelledby="how-title">
+    <div class="sec-head">
+      <h2 id="how-title">How it works</h2>
+      <p class="sub">Three things, every session.</p>
+    </div>
+    <ol class="how">
+      <li><figure><img class="mock" src="../assets/klera-assets/mockups/handwritten-integral.webp" width="1600" height="1258" alt="A handwritten integral of (sin squared x plus cos squared x) cubed plus 5x on the Klera board" loading="lazy" decoding="async"><figcaption><span class="how-n">1</span><h3>You write with Apple Pencil</h3><p>Work the problem the way you normally would. No typing, no photos.</p></figcaption></figure></li>
+      <li><figure><img class="mock" src="../assets/klera-assets/mockups/hint-where-is-fprime-zero.webp" width="1600" height="1259" alt="Handwritten f(x) = x squared minus 6x plus 5 and f prime of x = 2x minus 6, with a Klera hint bubble asking where f prime of x is zero" loading="lazy" decoding="async"><figcaption><span class="how-n">2</span><h3>Klera sees where you get stuck</h3><p>It reads your working as you go, line by line.</p></figcaption></figure></li>
+      <li><figure><img class="mock" src="../assets/klera-assets/mockups/equation-to-interactive-graph.webp" width="1600" height="1258" alt="A handwritten derivative problem with an arrow to the interactive tangent slope graph Klera built from it" loading="lazy" decoding="async"><figcaption><span class="how-n">3</span><h3>It hints, asks, or stays silent</h3><p>Sometimes a nudge, sometimes a question, sometimes a live graph. Sometimes nothing.</p></figcaption></figure></li>
+    </ol>
+    <p class="pillbar">Every session updates your learner profile, so you need less help next time.</p>
   </section>
 
   <section class="section wrap" aria-labelledby="diff-title">
@@ -88,7 +106,7 @@
         </ol>
       </div>
       <div>
-        <div class="slot is-portrait" role="img" aria-label="Placeholder for Screenshot of the help menu open on the board (Hint, Next step, Explain, Find my mistake, Solve) next to a half-finished problem. 1200 x 1500."><b>Slot S2</b><span>Screenshot of the help menu open on the board (Hint, Next step, Explain, Find my mistake, Solve) next to a half-finished problem. 1200 x 1500.</span></div>
+        <figure class="media"><img class="shot" src="../assets/klera-assets/screens/quadratic-with-hint.webp" width="2000" height="1431" alt="Klera board with a handwritten f(x) = x squared minus 6x plus 5 and its derivative, a hint bubble asking where f prime of x is zero, and the help menu: Explain, Hint 2, Mistake, Next Step, Quick Solve, Solve" loading="lazy" decoding="async"><figcaption class="slot-note">The help menu sits on the right. The hint lands next to your working.</figcaption></figure>
       </div>
     </div>
   </section>
@@ -109,7 +127,16 @@
         </div>
       </div>
       <div>
-        <div class="slot" role="img" aria-label="Placeholder for Short clip, 10 to 15 s: Klera writes one step, says your turn, the student writes the next line and Klera confirms it. 1600 x 1200."><b>Slot S3</b><span>Short clip, 10 to 15 s: Klera writes one step, says your turn, the student writes the next line and Klera confirms it. 1600 x 1200.</span></div>
+        <figure class="media frames" id="s-steps" data-frames>
+          <div class="frames-stage">
+            <img class="shot" src="../assets/klera-assets/screens/solve-sequence-1.webp" width="2000" height="1334" alt="Klera's handwritten solution of a derivative, after the second step" loading="lazy" decoding="async">
+            <img class="shot" src="../assets/klera-assets/screens/solve-sequence-2.webp" width="2000" height="1334" alt="Klera's handwritten solution of a derivative, after the fourth step" loading="lazy" decoding="async" hidden>
+            <img class="shot" src="../assets/klera-assets/screens/solve-sequence-3.webp" width="2000" height="1334" alt="Klera's handwritten solution of a derivative, after the fifth step" loading="lazy" decoding="async" hidden>
+            <img class="shot" src="../assets/klera-assets/screens/solve-sequence-4.webp" width="2000" height="1334" alt="Klera's handwritten solution of a derivative, after the sixth step" loading="lazy" decoding="async" hidden>
+            <img class="shot" src="../assets/klera-assets/screens/solve-sequence-5.webp" width="2000" height="1334" alt="Klera's handwritten solution of a derivative, finished in seven steps" loading="lazy" decoding="async" hidden>
+          </div>
+          <figcaption class="media-bar"><span class="frames-dots"><button class="frames-dot" type="button" aria-pressed="true" data-frame="0">2</button><button class="frames-dot" type="button" aria-pressed="false" data-frame="1">4</button><button class="frames-dot" type="button" aria-pressed="false" data-frame="2">5</button><button class="frames-dot" type="button" aria-pressed="false" data-frame="3">6</button><button class="frames-dot" type="button" aria-pressed="false" data-frame="4">7</button></span><span>One line at a time, in gold, under the problem.</span></figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -140,7 +167,14 @@
         <p>If it cannot build something honest for your problem, it says so. It will never invent a graph with made-up numbers.</p>
       </div>
       <div>
-        <div class="slot" role="img" aria-label="Placeholder for Silent loop, 6 to 10 s: an interactive graph on the board with a slider being dragged and the curve updating live. 1600 x 1200."><b>Slot S4</b><span>Silent loop, 6 to 10 s: an interactive graph on the board with a slider being dragged and the curve updating live. 1600 x 1200.</span></div>
+        <figure class="media frames" id="s-tangent" data-frames>
+          <div class="frames-stage">
+            <img class="shot" src="../assets/klera-assets/screens/tangent-slope-x0-14.webp" width="2000" height="1061" alt="Interactive graph with the tangent line at x = 0.14, slope 7229.70" loading="lazy" decoding="async">
+            <img class="shot" src="../assets/klera-assets/screens/tangent-slope-x0-28.webp" width="2000" height="1061" alt="The same graph with the tangent moved to x = 0.28, slope 707.00" loading="lazy" decoding="async" hidden>
+            <img class="shot" src="../assets/klera-assets/screens/tangent-slope-x3-00.webp" width="2000" height="1061" alt="The same graph with the tangent moved to x = 3.00, slope 35.81" loading="lazy" decoding="async" hidden>
+          </div>
+          <figcaption class="media-bar"><span class="frames-dots"><button class="frames-dot" type="button" aria-pressed="true" data-frame="0">x = 0.14</button><button class="frames-dot" type="button" aria-pressed="false" data-frame="1">x = 0.28</button><button class="frames-dot" type="button" aria-pressed="false" data-frame="2">x = 3.00</button></span><span>Drag the point and the tangent and its slope follow.</span></figcaption>
+        </figure>
       </div>
     </div>
   </section>

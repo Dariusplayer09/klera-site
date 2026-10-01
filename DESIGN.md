@@ -116,8 +116,9 @@ Curly quotes. Say the uncomfortable number rather than rounding it away.
 
 ## Media
 
-All app screenshots and recordings were removed in the September 2026 cleanup. Every place
-one belongs shows a `.slot` box naming the exact shot and size; `MEDIA_SLOTS.md` is the list.
+Real app media lives in `assets/klera-assets/` (see `MEDIA_SLOTS.md` for what is where and
+what is still a `.slot`). Mockups are pre-framed: `.mock`, no extra radius or shadow. Bare
+captures use `.shot`. Silent loops use `video[data-loop]`; image sequences use `[data-frames]`.
 Fill slots with real captures only. Clips with narration ship with `controls`, never autoplay.
 
 ## Engineering page: theory, not code

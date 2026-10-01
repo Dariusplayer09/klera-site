@@ -1,48 +1,35 @@
 # Media slots
 
-Every app screenshot and screen recording was removed. Each place one belongs now shows a
-dashed **Slot** box naming the shot. Fill them from real app captures only (no mock-ups, no
-handwriting drawn in code). 10 slots. The home page is an introduction and has none.
+Product media lives in `assets/klera-assets/` (from the October 2026 asset pack, file names
+unchanged): `mockups/` are iPad-framed on a transparent canvas (class `.mock`, never crop,
+round or shadow them again), `screens/` are bare captures (`.shot`), `photos/` is the one real
+student photo, `video/` are silent loops with `-poster.jpg` frames (`video[data-loop]`).
 
-To fill a slot: put the file in `assets/shots/`, then in the page swap the
-`<div class="slot ...">...</div>` for
-`<img class="shot" src="../assets/shots/NAME.jpg" width="W" height="H" alt="what it shows">`
-(or a `<video class="shot" ...>`; clips with sound need `controls` and no autoplay).
+## Filled
 
-**Capture tips:** iPad in landscape, Do Not Disturb on, status bar clean (full battery, no
-notifications), developer read-outs OFF, a real problem at university level (not x + 2 = 5).
-Blue ink for the student, Klera writes in black. Export stills as JPG ~80% quality, under
-400 KB each. Keep clips short and under 4 MB.
+| Slot | Page | Now shows |
+|---|---|---|
+| S1 | Students, hero | `video/demo-solve-quadratic.mp4` (silent loop) |
+| S2 | Students, help ladder | `screens/quadratic-with-hint.webp` |
+| S3 | Students, guided solve | `screens/solve-sequence-1..5.webp` as a stepped sequence |
+| S4 | Students, visuals | `screens/tangent-slope-*.webp` as a stepped sequence |
+| I1 | Investors, hero | `mockups/hint-where-is-fprime-zero.webp` |
+| I2 | Investors, What we've built | `mockups/solved-derivative-7-steps.webp` |
+| I3 | Investors, Where we are | `photos/student-using-klera-full.webp` |
+| E1 | Engineers, hero | `video/demo-multi-problem.mp4` (silent loop) |
+| E2 | Engineers, visual engine | `mockups/equation-to-interactive-graph.webp` |
+| new | Students, How it works | the three landscape mockups, one per step |
 
-## Must-have (the site looks empty without these)
+## Still open
 
 | Slot | Page | Shot | Size |
 |---|---|---|---|
-| **S1** | Students, hero | Screen recording 20-30 s, sound on: Klera writing a worked solution while the voice narrates. | 1080 x 1440 (3:4 portrait) |
-| **I1** | Investors, hero | Mid-session: student work plus a Klera hint in handwriting. | 1600 x 1200 (4:3) |
-
-## Feature shots
-
-| Slot | Page | Shot | Size |
-|---|---|---|---|
-| **S2** | Students, help ladder | Help menu open (Hint, Next step, Explain, Find my mistake, Solve) beside half-finished work | 1200 x 1500 (portrait) |
-| **S3** | Students, guided solve | Clip 10-15 s: Klera writes one step, says "your turn", student writes the next line, Klera confirms | 1600 x 1200 |
-| **S4** | Students, visuals | Silent loop 6-10 s: slider dragged on a live graph, curve updating | 1600 x 1200 |
 | **S5** | Students, exams | Past paper laid out on the canvas, answered by hand, with marks written back | 1600 x 1200 |
-| **I2** | Investors, yellow "What we've built" band | Cleanest solved-problem screenshot (can reuse I1) | 1600 x 1200 |
-| **E1** | Engineers, hero | Close-up silent clip 5-8 s: black handwriting forming stroke by stroke | 1600 x 1200 |
-| **E2** | Engineers, visual engine | Live graph generated from a handwritten problem, beside the working | 1600 x 1200 |
 
-## Photo (not an app capture)
+Also worth capturing when there is time: a guided-solve clip (Klera writes one step, says
+"your turn", student writes the next line, Klera confirms) to replace the S3 sequence, which
+shows Klera solving rather than handing the pen back.
 
-| Slot | Page | Shot | Size |
-|---|---|---|---|
-| **I3** | Investors, next seven weeks | Real students testing Klera on an iPad (get their OK to publish) | 2400 x 1350 |
-
-## Reuse to save time
-
-If you only capture four things, capture: **one solved-problem still** (I1, I2), **one
-narrated solve recording** (S1), **one viz clip** (S4, E2) and **one guided-solve clip**
-(S3). That covers 6 of 10 slots.
-
-The founder photo (home and `/about/`) stays; it is not an app capture.
+Unused from the pack, available: `mockups/phase-portrait-visualization.webp`,
+`mockups/onboarding-*.webp`, `mockups/home-dashboard.webp`, `screens/integral-with-hint.webp`,
+`screens/phase-portrait-full.webp`, `photos/student-using-klera-portrait.webp`.

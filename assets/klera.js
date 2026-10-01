@@ -136,4 +136,30 @@
       }, { threshold: 0.15 }).observe(video);
     }
   });
+  /* ---------------------------------------------------------- image sequences
+     Frames stacked in one box. Auto-advances while on screen; a press on a dot takes over
+     and stops the auto-advance. Under reduced motion it never advances on its own. */
+  doc.querySelectorAll("[data-frames]").forEach((fig) => {
+    const imgs = [...fig.querySelectorAll(".frames-stage > img")];
+    const dots = [...fig.querySelectorAll("[data-frame]")];
+    let i = 0, timer = null, manual = false;
+    const show = (n) => {
+      i = (n + imgs.length) % imgs.length;
+      imgs.forEach((im, k) => { im.hidden = k !== i; });
+      dots.forEach((d, k) => d.setAttribute("aria-pressed", String(k === i)));
+    };
+    /* Hidden frames are lazy and never fetched on their own: pull them all in once the
+       sequence is on screen, and only advance onto a frame that has finished loading. */
+    const warm = () => imgs.forEach((im) => { im.loading = "eager"; });
+    const ready = (n) => { const im = imgs[(n + imgs.length) % imgs.length]; return im.complete && im.naturalWidth > 0; };
+    const start = () => {
+      warm();
+      if (!reduce && !manual && !timer) timer = setInterval(() => { if (ready(i + 1)) show(i + 1); }, 2400);
+    };
+    const stop = () => { clearInterval(timer); timer = null; };
+    dots.forEach((d) => d.addEventListener("click", () => { manual = true; stop(); warm(); show(+d.dataset.frame); }));
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? start() : stop())), { threshold: 0.3 }).observe(fig);
+    } else { start(); }
+  });
 })();

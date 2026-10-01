@@ -365,6 +365,44 @@ a:hover { text-decoration-color: var(--bronze); }
 .slot-note { color: var(--muted); font-size: .88rem; margin: .7rem 0 0; }
 .shot { display: block; width: 100%; height: auto; border-radius: var(--radius); }
 
+/* ------------------------------------------------------------------ product media
+   Assets in assets/klera-assets/. `mockups/` already carry their own iPad frame and soft
+   shadow on a transparent canvas: never crop, round or shadow them again. `screens/` are
+   bare captures and take the .shot radius plus a hairline. */
+.media { margin: 0; }
+.mock { display: block; width: 100%; height: auto; }
+.mock.is-tall { max-width: 420px; margin-inline: auto; }
+.media .shot, .frames .shot { border: 1px solid var(--rule); }
+.shot.is-photo { max-width: 520px; margin-inline: auto; border: 0; }
+.media .slot-note { text-align: center; }
+.clip { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--rule); background: var(--sunk, #F4EEDD); }
+.btn-small { padding: .45rem .9rem; min-height: 36px; font-size: .85rem; }
+.media-bar { display: flex; align-items: center; gap: .8rem; margin-top: .7rem; color: var(--muted); font-size: .88rem; flex-wrap: wrap; }
+
+/* An image sequence: frames stacked in one box, one visible, dots to step through. */
+.frames-stage { display: grid; }
+.frames-stage > img { grid-area: 1 / 1; transition: opacity .6s ease, visibility .6s; }
+.frames-stage > img[hidden] { display: block; opacity: 0; visibility: hidden; }
+.frames-dots { display: inline-flex; gap: .35rem; flex-wrap: wrap; }
+.frames-dot {
+  font: 600 .78rem/1 var(--body); padding: .45rem .7rem; min-height: 32px; border-radius: 999px;
+  border: 1px solid var(--rule-firm); background: transparent; color: var(--ink); cursor: pointer;
+}
+.frames-dot[aria-pressed="true"] { background: var(--ink); color: var(--paper, #FEFCF3); border-color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { .frames-stage > img { transition: none; } }
+
+/* How it works: three equal mockups in a row, stacked on narrow screens. */
+.how { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .how { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; } }
+.how figure { margin: 0; }
+.how figcaption { margin-top: .4rem; }
+.how h3 { margin: .5rem 0 .3rem; }
+.how p { margin: 0; color: var(--muted); }
+.how-n {
+  display: inline-grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%;
+  background: var(--yellow); color: var(--ink); font: 700 .95rem/1 var(--body);
+}
+
 /* ------------------------------------------------------------------ doors */
 .doors { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .door {
