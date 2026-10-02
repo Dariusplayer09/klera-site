@@ -107,6 +107,8 @@ a:hover { text-decoration-color: var(--bronze); }
 @media (max-width: 600px) { .grid-2x2 { grid-template-columns: 1fr; } }
 .split { display: grid; gap: clamp(2rem, 4vw, 3.5rem); grid-template-columns: 1fr 1fr; align-items: center; }
 @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+/* Grid columns default to min-width:auto, so a swipe row inside one would widen the page. */
+.split > * { min-width: 0; }
 
 .skip {
   position: absolute; left: -9999px;
