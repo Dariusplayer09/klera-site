@@ -572,5 +572,7 @@ tbody tr:last-child > * { border-bottom: 0; }
   /* Long engineering detail folds behind a toggle on phones only (klera.js adds the button). */
   .more:not(.is-open) { display: none; }
   .more-toggle { display: inline-flex; margin-top: 1.2rem; }
+  /* Portrait photos stay a glance, not a full screen of scrolling. */
+  .shot.is-photo { max-width: 300px; }
 }
 .more-toggle { display: none; }
