@@ -15,10 +15,10 @@ student photo, `video/` are silent loops with `-poster.jpg` frames (`video[data-
 | S4 | Students, visuals | `screens/tangent-slope-*.webp` as a stepped sequence |
 | I1 | Investors, hero | `mockups/hint-where-is-fprime-zero.webp` |
 | I2 | Investors, What we've built | `mockups/solved-derivative-7-steps.webp` |
-| I3 | Investors, Where we are | `photos/student-using-klera-full.webp` |
 | E1 | Engineers, hero | `video/demo-multi-problem.mp4` (silent loop) |
 | E2 | Engineers, visual engine | `mockups/equation-to-interactive-graph.webp` |
 | S5 | Students, exams | `screens/exam-graded-q3.webp` + `exam-graded-q6.webp`, side by side |
+| new | Home, Built by students | `photos/student-library.webp` |
 | new | Students, How it works | the three landscape mockups, one per step |
 
 ## Still open
@@ -31,4 +31,4 @@ shows Klera solving rather than handing the pen back.
 
 Unused from the pack, available: `mockups/phase-portrait-visualization.webp`,
 `mockups/onboarding-*.webp`, `mockups/home-dashboard.webp`, `screens/integral-with-hint.webp`,
-`screens/phase-portrait-full.webp`, `photos/student-using-klera-portrait.webp`.
+`screens/phase-portrait-full.webp`.

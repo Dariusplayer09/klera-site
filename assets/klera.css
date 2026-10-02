@@ -574,5 +574,26 @@ tbody tr:last-child > * { border-bottom: 0; }
   .more-toggle { display: inline-flex; margin-top: 1.2rem; }
   /* Portrait photos stay a glance, not a full screen of scrolling. */
   .shot.is-photo { max-width: 300px; }
+  /* Header: one scrollable row of links under the logo instead of two wrapped rows. */
+  .nav-inner { padding-block: .4rem; gap: .2rem; }
+  .brand img { height: 28px; }
+  .nav-links { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -1rem; padding-inline: 1rem; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-inner { position: relative; }
+  .nav-links { gap: .1rem; }
+  .nav-links a { flex: none; min-height: 40px; padding: 0 .3rem; font-size: .8rem; }
+  /* The CTA sits beside the logo, so the four page links fit one row under it. */
+  .nav-links a.nav-cta { position: absolute; top: .35rem; right: 1rem; min-height: 36px; margin: 0; padding: 0 .9rem; font-size: .82rem; }
+
+  /* Home: the three "ten seconds" circles sit in one overlapping row instead of a tall stack. */
+  .circles { flex-direction: row; justify-content: center; align-items: center; }
+  .circle { width: 124px; margin: 0 -7px; padding: .5rem; }
+  .circle .n { font-size: 1.5rem; margin-bottom: .25rem; }
+  .circle p { font-size: .78rem; }
+
+  /* Home: audience cards shorter. */
+  .who-card { min-height: 0; padding: 1.3rem 1.4rem; gap: .35rem; }
+  .who-name { font-size: 1.9rem; }
+  .who-title { margin-top: 2rem; }
 }
 .more-toggle { display: none; }
