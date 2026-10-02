@@ -162,4 +162,23 @@
       new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? start() : stop())), { threshold: 0.3 }).observe(fig);
     } else { start(); }
   });
+  /* ---------------------------------------------------------- fold on phones
+     `.more` blocks are always shown on wider screens; under 640px CSS hides them and this
+     button opens them, so a phone visitor isn't made to scroll the whole engineering essay. */
+  doc.querySelectorAll(".more").forEach((block, i) => {
+    if (!block.id) block.id = `more-${i}`;
+    const btn = doc.createElement("button");
+    btn.type = "button";
+    btn.className = "btn btn-quiet btn-small more-toggle";
+    btn.setAttribute("aria-controls", block.id);
+    btn.setAttribute("aria-expanded", "false");
+    const label = block.dataset.more || "Read more";
+    btn.textContent = `${label} +`;
+    btn.addEventListener("click", () => {
+      const open = block.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", String(open));
+      btn.textContent = open ? "Show less \u2212" : `${label} +`;
+    });
+    block.before(btn);
+  });
 })();

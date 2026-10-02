@@ -83,7 +83,7 @@
         <h3 style="margin-top:1.8rem">Correlated variation, not jitter</h3>
         <p>The tell of synthetic handwriting is independent randomness: every glyph wobbles on its own. A real hand varies <em>coherently</em>. Slant, size and baseline drift are properties of the writer on that day, and they change slowly across a line. So the variation is decided once per piece of writing and applied smoothly, with only a small, bounded amount left independent per symbol.</p>
       </div>
-      <div>
+      <div class="more" data-more="Fallbacks, determinism and pacing">
         <h3>Degrade gracefully, never visibly</h3>
         <p>Coverage is never complete. When a symbol has no captured template, older rendering generations step in for that symbol, that line, or the whole render, in that order. Every level is silent, and none of them can emit garbage ink. Keeping the old engines is not nostalgia; it is the fallback.</p>
         <h3 style="margin-top:1.8rem">Deterministic by design</h3>
@@ -137,6 +137,7 @@
       </table>
     </div>
 
+    <div class="more" data-more="How the profile turns evidence into teaching">
     <h3 style="margin-top:2.6rem">From raw signal to a teaching decision</h3>
     <div class="stack">
       <div><h3>Measure</h3><p>Every family is observed on every attempt, continuously and invisibly.</p></div>
@@ -183,6 +184,7 @@
         <h3>Know when you don't know</h3>
         <p>The profile carries an explicit readiness verdict: is there enough evidence to act on at all? A new student is treated as unknown, not as average.</p>
       </div>
+    </div>
     </div>
   </section>
 

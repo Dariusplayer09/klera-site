@@ -537,3 +537,40 @@ tbody tr:last-child > * { border-bottom: 0; }
 .policy h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin: 2.2rem 0 .6rem; }
 .policy ul { padding-left: 1.2rem; margin: 0 0 1.1em; }
 .policy li { margin-bottom: .5rem; }
+
+/* ------------------------------------------------------------------ phones
+   Desktop layout is the design; on a narrow portrait screen every grid used to stack into a
+   tall column, which made the student and engineering pages 11-14k px of scrolling. Here card
+   rows become one swipeable row each (the next card peeks in, so it reads as swipeable), the
+   How-it-works steps and the marked exam answers do the same, and vertical rhythm tightens.
+   Nothing is hidden: every card is still one swipe away. */
+@media (max-width: 640px) {
+  :root { --gap: 2.6rem; }
+  .sec-head { margin-bottom: 1.3rem; }
+  .band { padding-block: 2.4rem; }
+  .hero { padding-top: 2rem; }
+
+  .grid:is(.grid-2, .grid-3, .grid-4, .grid-5):not(.no-swipe),
+  .how,
+  .marked {
+    display: flex; gap: .8rem; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: 1rem;
+    margin-inline: -1rem; padding: .2rem 1rem 1rem;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .grid:is(.grid-2, .grid-3, .grid-4, .grid-5):not(.no-swipe)::-webkit-scrollbar,
+  .how::-webkit-scrollbar, .marked::-webkit-scrollbar { display: none; }
+  .grid:is(.grid-2, .grid-3, .grid-4, .grid-5):not(.no-swipe) > *,
+  .how > li, .marked > .marked-card { flex: 0 0 84%; scroll-snap-align: start; }
+  .grid-4:not(.no-swipe) > .stat { flex-basis: 62%; }
+
+  .how { max-width: none; margin-top: 0; }
+  .marked { margin-top: 1.6rem; padding-top: 1.1rem; }
+  .marked-card:first-child, .marked-card:last-child { transform: none; }
+  .marked-note { margin-top: .2rem; }
+
+  /* Long engineering detail folds behind a toggle on phones only (klera.js adds the button). */
+  .more:not(.is-open) { display: none; }
+  .more-toggle { display: inline-flex; margin-top: 1.2rem; }
+}
+.more-toggle { display: none; }
