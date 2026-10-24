@@ -11,7 +11,8 @@
   "use strict";
   const doc = document;
   const reduceMQ = matchMedia("(prefers-reduced-motion: reduce)");
-  const reduce = () => reduceMQ.matches;
+  // Held still until the frames exported from the app's own Swift engine replace this copy.
+  const reduce = () => true;
   const Klera = window.Klera;
   if (!Klera) return;
   const smootherstep = (x) => { const t = Math.min(Math.max(x, 0), 1); return t * t * t * (t * (t * 6 - 15) + 10); };

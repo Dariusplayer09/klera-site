@@ -266,7 +266,8 @@
     }
 
     now() { return performance.now() / 1000 - this.t0; }
-    get reduce() { return reduceMQ.matches; }
+    // Held still until the frames exported from the app's own Swift engine replace this copy.
+    get reduce() { return true; }
 
     /* --- public API */
     think() { if (this.thinkStart != null && this.thinkEnd == null) return; this.thinkStart = this.now(); this.thinkEnd = null; this.kick(); }

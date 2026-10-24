@@ -811,3 +811,6 @@ tbody tr:last-child > * { border-bottom: 0; }
   .hub-panel > h3 { padding-right: 56px; }
   .companion { background: var(--paper-2); box-shadow: 0 4px 14px rgb(27 26 23 / .12); }
 }
+
+/* Held back until it runs on frames exported from the app's own engine. */
+.companion, .morph-demo { display: none !important; }
