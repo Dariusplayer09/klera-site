@@ -25,9 +25,10 @@ paths and the waitlist fetch will not behave the way they do in production.
     exams/                  redirect, folded into the home page
     assets/klera.css        the whole stylesheet
     assets/klera.js         pointer effects, sheets, the demo toggle
-    assets/klera-character.js  the app's Klera character, ported (one line that morphs)
-    assets/klera-live.js    live logo, companion, pad, help hub, mistake and lesson demos
-    assets/data/            klera-wordmark.json, the app's wordmark pen path
+    assets/klera-engine.js  draws frames exported from the app's own engine (see DESIGN.md)
+    assets/klera-live.js    when each piece plays: welcome, board scenes, pad, help hub
+    assets/data/engine/     the exported frames (KleraSiteExportTests in the app repo)
+    assets/data/            klera-wordmark.json, the app's wordmark pen path (no-JS fallback)
     assets/waitlist.js      the early-access form
     assets/site-config.js   Supabase URL and publishable key
     assets/shots/           app captures, when added (see MEDIA_SLOTS.md)

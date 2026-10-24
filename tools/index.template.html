@@ -21,7 +21,7 @@
 <script>document.documentElement.classList.add("js");</script>
 <script src="assets/site-config.js"></script>
 <script src="assets/klera.js" defer></script>
-<script src="assets/klera-character.js" defer></script>
+<script src="assets/klera-engine.js" defer></script>
 <script src="assets/klera-live.js" defer></script>
 <script src="assets/waitlist.js" defer></script>
 </head>
@@ -43,22 +43,19 @@
   </div>
 </header>
 
-<button class="companion" type="button" data-companion aria-label="Klera. Click to see it think."></button>
-
 <main id="main">
 
   <section class="hero-live wrap" aria-labelledby="hero-title">
-    <div class="logo-live" data-live-logo="assets/data/klera-wordmark.json">
+    <div class="logo-live" data-welcome>
       <button class="logo-bulb" type="button" aria-label="Klera"></button>
-      <svg class="logo-word" viewBox="0 0 989 189" aria-hidden="true" focusable="false">
+      <div class="logo-word-host"><svg class="logo-word" viewBox="0 0 989 189" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="wm-sweep" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="989" y2="0">
             <stop offset="0" stop-color="#EF7D1A"/><stop offset=".4" stop-color="#F5A524"/><stop offset=".75" stop-color="#F8CB3C"/><stop offset="1" stop-color="#E9B11E"/>
           </linearGradient>
         </defs>
         <path class="wm-flat" d="{{WM0}}"/><path class="wm-flat" d="{{WM1}}"/>
-        <path class="wm-stroke" d=""/><path class="wm-stroke" d=""/>
-      </svg>
+      </svg></div>
       <span class="visually-hidden">Klera</span>
     </div>
     <h1 id="hero-title">The benefits of a private tutor, for every student with an iPad.</h1>
@@ -108,16 +105,14 @@
     </div>
     <div class="hub" data-hub>
       <div class="hub-tabs" role="tablist" aria-label="Kinds of help">
-        <button class="hub-tab" role="tab" id="t-hint" aria-controls="p-hint" aria-selected="true" data-mode="hint">Hint<small>A nudge, not the answer</small></button>
-        <button class="hub-tab" role="tab" id="t-next" aria-controls="p-next" aria-selected="false" tabindex="-1" data-mode="pen">Next step<small>One line, then it waits</small></button>
-        <button class="hub-tab" role="tab" id="t-why" aria-controls="p-why" aria-selected="false" tabindex="-1" data-mode="talk" data-own-klera>Explain and Teach me why<small>The reason, as a lesson you can touch</small></button>
-        <button class="hub-tab" role="tab" id="t-mistake" aria-controls="p-mistake" aria-selected="false" tabindex="-1" data-mode="highlighter" data-own-klera>Find my mistake<small>The wrong line, in red</small></button>
-        <button class="hub-tab" role="tab" id="t-quick" aria-controls="p-quick" aria-selected="false" tabindex="-1" data-mode="pen">Quick Solve<small>Just the answer</small></button>
-        <button class="hub-tab" role="tab" id="t-solve" aria-controls="p-solve" aria-selected="false" tabindex="-1" data-mode="pen">Solve<small>The whole thing, with you</small></button>
+        <button class="hub-tab" role="tab" id="t-hint" aria-controls="p-hint" aria-selected="true">Hint<small>A nudge, not the answer</small></button>
+        <button class="hub-tab" role="tab" id="t-next" aria-controls="p-next" aria-selected="false" tabindex="-1">Next step<small>One line, then it waits</small></button>
+        <button class="hub-tab" role="tab" id="t-why" aria-controls="p-why" aria-selected="false" tabindex="-1">Explain<small>The reason, not only the step</small></button>
+        <button class="hub-tab" role="tab" id="t-mistake" aria-controls="p-mistake" aria-selected="false" tabindex="-1">Find my mistake<small>The wrong line, in red</small></button>
+        <button class="hub-tab" role="tab" id="t-quick" aria-controls="p-quick" aria-selected="false" tabindex="-1">Quick Solve<small>Just the answer</small></button>
+        <button class="hub-tab" role="tab" id="t-solve" aria-controls="p-solve" aria-selected="false" tabindex="-1">Solve<small>The whole thing, with you</small></button>
       </div>
       <div class="hub-stage">
-        <div class="hub-klera" aria-hidden="true"></div>
-
         <div class="hub-panel" role="tabpanel" id="p-hint" aria-labelledby="t-hint" tabindex="0">
           <h3>A hint lands next to your working</h3>
           <p>A nudge toward the idea you're missing, placed beside the line you're on. Ask again and it gets more specific instead of repeating itself.</p>
@@ -127,52 +122,25 @@
         <div class="hub-panel" role="tabpanel" id="p-next" aria-labelledby="t-next" tabindex="0" hidden>
           <h3>One line, then the pen is yours again</h3>
           <p>Klera checks the lines you've already written, then writes the single move that comes next, in gold, under your working. Then it stops and waits for you.</p>
-          <img class="shot" src="assets/klera-assets/screens/solve-sequence-1.webp" width="2000" height="1334" alt="A handwritten derivative problem with Klera's next lines written in gold handwriting underneath" loading="lazy" decoding="async">
+          <figure class="scene">
+            <div data-board="board-next-step" role="img" aria-label="A whiteboard with 3(x minus 2) = 12 written in black. Klera thinks, turns into a pen, writes x minus 2 = 4 in gold underneath, and flies back to its corner."></div>
+            <figcaption class="media-bar"><button class="btn btn-quiet btn-small" type="button" data-board-replay>Play again</button><span>Not a video. These are the app's own handwriting and Klera's own motion, exported from its code and drawn live by your browser.</span></figcaption>
+          </figure>
         </div>
 
         <div class="hub-panel" role="tabpanel" id="p-why" aria-labelledby="t-why" tabindex="0" hidden>
-          <h3>Teach me why</h3>
-          <p>Explain gives you the reason, spoken and on the board. Tap Teach me why on it and Klera builds a short lesson from your own problem, with things to drag and questions to answer. Here's a taste, built for the web:</p>
-          <div class="lesson" data-lesson>
-            <figure class="lesson-graph">
-              <svg role="group" aria-label="Graph of f(x) = x squared minus 6x plus 5 with a draggable point and its tangent line"></svg>
-              <figcaption class="lesson-read" data-lesson-read aria-live="polite"></figcaption>
-            </figure>
-            <div class="lesson-side">
-              <div class="lesson-voice">
-                <div class="lesson-klera" aria-hidden="true"></div>
-                <p class="lesson-line" data-lesson-line aria-live="polite"></p>
-              </div>
-              <div class="lesson-guess" data-lesson-guess hidden>
-                <button class="tool" type="button" data-answer="neg">Negative</button>
-                <button class="tool" type="button" data-answer="zero">Zero</button>
-                <button class="tool" type="button" data-answer="pos">Positive</button>
-              </div>
-              <button class="btn btn-quiet btn-small" type="button" data-lesson-next hidden>Got it</button>
-            </div>
-          </div>
-          <p class="pad-honest">In the app the lesson is written for the problem on your board, and Klera says each line out loud.</p>
+          <h3>The reason behind the step</h3>
+          <p>Explain gives you why a step works, not just what it is, spoken and on the board, built from the problem you're actually on.</p>
+          <img class="shot" src="assets/klera-assets/screens/quadratic-with-hint.webp" width="2000" height="1431" alt="Klera board with a handwritten f(x) = x squared minus 6x plus 5, its derivative, and Klera's help beside the working" loading="lazy" decoding="async">
         </div>
 
         <div class="hub-panel" role="tabpanel" id="p-mistake" aria-labelledby="t-mistake" tabindex="0" hidden>
           <h3>It marks the line that went wrong</h3>
-          <p>Klera reads your working, turns into its highlighter and swipes red across the exact line, or the exact term, where it went wrong. Then it tells you why, without solving the rest for you. Spot it first: click the line you think is wrong.</p>
-          <div class="mistake" data-mistake>
-            <p><strong>Find the minimum of f(x) = x&sup2; &minus; 6x + 5.</strong></p>
-            <ol class="work">
-              <li class="work-line" tabindex="0"><span class="n">1</span><span>f&prime;(x) = 2x &minus; 6</span></li>
-              <li class="work-line" tabindex="0"><span class="n">2</span><span>2x &minus; 6 = 0</span></li>
-              <li class="work-line is-wrong" tabindex="0"><span class="n">3</span><span class="mark">x = &minus;3</span></li>
-              <li class="work-line" tabindex="0"><span class="n">4</span><span>f(&minus;3) = 32</span></li>
-            </ol>
-            <p class="mistake-note" data-mistake-note hidden>Line 3. Moving the 6 across makes it +6, so 2x = 6. Try that line again.</p>
-            <div class="actions">
-              <button class="btn btn-dark btn-small" type="button" data-mistake-go>Find my mistake</button>
-              <button class="btn btn-quiet btn-small" type="button" data-mistake-reset>Reset</button>
-            </div>
-            <div class="mistake-klera" aria-hidden="true"></div>
-          </div>
-          <p class="pad-honest">Typed here so you can try it. On the iPad the red goes over your own handwriting.</p>
+          <p>Klera reads your working, turns into its highlighter and swipes red across the exact line, or the exact term, where it went wrong. Then it tells you why, without solving the rest for you.</p>
+          <figure class="scene">
+            <div data-board="board-mistake" role="img" aria-label="Three lines of working in black: 2x + 6 = 14, 2x = 14 + 6, 2x = 20. Klera turns into its highlighter, flies to the second line and sweeps red across it, then flies home."></div>
+            <figcaption class="media-bar"><button class="btn btn-quiet btn-small" type="button" data-board-replay>Play again</button><span>Not a video. These are the app's own handwriting and Klera's own motion, exported from its code and drawn live by your browser.</span></figcaption>
+          </figure>
         </div>
 
         <div class="hub-panel" role="tabpanel" id="p-quick" aria-labelledby="t-quick" tabindex="0" hidden>
@@ -184,11 +152,9 @@
         <div class="hub-panel" role="tabpanel" id="p-solve" aria-labelledby="t-solve" tabindex="0" hidden>
           <h3>The whole thing, one line at a time</h3>
           <p>Solve works the problem step by step, in handwriting, at a pace you can follow, and talks you through it. If your working went wrong, the wrong path is cleared first, so the page ends up correct.</p>
-          <figure class="media">
-            <video class="clip" id="s-solve" width="960" height="688" muted loop playsinline preload="metadata" poster="assets/klera-assets/video/demo-solve-quadratic-poster.jpg" data-loop aria-label="Recording from the app: a student writes f(x) = x squared minus 6x plus 5, a live graph appears beside it, and Klera starts solving it step by step">
-              <source src="assets/klera-assets/video/demo-solve-quadratic.mp4" type="video/mp4">
-            </video>
-            <figcaption class="media-bar"><button class="btn btn-quiet btn-small" type="button" data-video-toggle="s-solve" aria-pressed="false">Pause</button><span>Recorded in the app, no sound. You write in black, Klera solves in gold.</span></figcaption>
+          <figure class="scene">
+            <div data-board="board-solve" role="img" aria-label="A whiteboard with 2x + 3 = 11 written in black. Klera thinks, turns into a pen and writes three lines in gold, 2x = 11 minus 3, 2x = 8, x = 4, following its own pen, then flies back."></div>
+            <figcaption class="media-bar"><button class="btn btn-quiet btn-small" type="button" data-board-replay>Play again</button><span>Not a video. These are the app's own handwriting and Klera's own motion, exported from its code and drawn live by your browser.</span></figcaption>
           </figure>
         </div>
       </div>

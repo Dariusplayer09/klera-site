@@ -19,7 +19,7 @@ their URLs go straight into outreach.
 
 | Path | For | Contains |
 |---|---|---|
-| `/` | students (and everyone landing cold) | Live logo, the try-it pad, How it works, the help hub (with the mistake and Teach me why demos), guided solve, what it notices, exams, also in the app, early access |
+| `/` | students (and everyone landing cold) | Welcome wordmark, the try-it pad, How it works, the help hub (with real-engine board scenes for Next step, Find my mistake and Solve), guided solve, what it notices, exams, also in the app, early access |
 | `/investors/` | the person who funds it | Thesis, real recording, why now, answer machines, what we've built, moats, business, where we are, deck request |
 | `/join/` | the person who would build it | The one-line character demo, three hard problems, per-student baseline figure, five principles, roles, research |
 | `/about/` | context | Who is building it, how we work |
@@ -35,13 +35,25 @@ their URLs go straight into outreach.
 **Handwriting is never drawn in code.** No SVG strokes, no 3D tubes, no handwriting fonts
 standing in for the engine.
 
-Two exceptions, both because they ARE the app's own vectors, not imitations of them: the Klera
-character (`assets/klera-character.js`, a port of `KleraGlyph`/`KleraPose` with the traced point
-arrays copied verbatim) and the wordmark write-on (`assets/data/klera-wordmark.json`, the app's
-`KleraWordmarkStroke.json`). If the logo changes in the app, copy the data again. Tutor answers
-and maths on the board stay real captures. The typed worked lines in the mistake demo say on the
-page that they're typed. Hand-built imitations of handwriting look fake next to what the
-app actually produces, and a site about a handwriting engine cannot afford that.
+**Klera and the board scenes are never animated by the site.** The app's own Swift code produces
+every frame and the site only draws them (2026-10-24, after the hand-ported character was rejected
+as "a crappy version" of the real one):
+
+- `NeuraBoardTests/SiteExport/KleraSiteExportTests.swift` in the app repo runs the real engines
+  (KleraPose, KleraDirector's pen choreography, Handwriting2 and its animator writing into a
+  recording surface, MistakeMark, KleraWordmarkStroke) and writes `assets/data/engine/*.json`.
+- `assets/klera-engine.js` draws those frames: a pose the way `KleraRenderer.draw` does, the ink as
+  PencilKit's own interpolated points, the mistake wash as `KleraMistakeMarkLayer` draws it.
+- `assets/klera-live.js` only decides when a piece plays. No motion constants live in it.
+
+Re-export after any change to Klera, the handwriting or the welcome screen:
+
+    TEST_RUNNER_KLERA_SITE_EXPORT=<site>/assets/data/engine xcodebuild -project NeuraBoard.xcodeproj \
+      -scheme NeuraBoard -destination 'platform=iOS Simulator,id=<UDID>' -jobs 3 test \
+      -only-testing:NeuraBoardTests/KleraSiteExportTests
+
+The student lines in the scenes are written by the same engine in black; the page never claims
+they are a student's handwriting.
 
 Everything that shows the product is a real capture from the app, or a visible ✱ slot waiting
 for one. Everything that shows data is a real measurement from a device run, or it is not
@@ -113,22 +125,19 @@ a free year of Klera Premium.**
 
 Klera is the motion. Everything else stays quiet.
 
-- **One load moment:** the pen writes "klera" along the app's wordmark path (3 s, amber-to-gold
-  sweep, settles to Klera yellow), then flies home and becomes the bulb. Same timing as the app's
-  welcome screen.
-- **The companion:** once the hero scrolls away, Klera sits top right (bottom right on phones),
-  as it does on the board. Sections opt in with `data-klera="think|pen|highlighter|hint"` and it
-  reacts once per entry. Nothing else animates on scroll: no fade-up sections.
-- **Every Klera's eyes follow the pointer.** Breath and blink are the app's `scholar` values.
-- **Demos answer the visitor:** the pad (pause = rays flash, rub out = it leaves you alone), the
-  help hub (each rung sends Klera into the matching tool), the mistake sweep (KleraMistakeMark's
-  wash, underline and timing), the Teach me why lesson (drag, guess, narrated text).
+- **One load moment:** the welcome wordmark, exactly as `KleraWelcomeView` plays it (3 s write in
+  the amber-to-gold sweep, 0.7 s to flat Klera yellow, settle 1.18 to 0.86 on
+  cubic-bezier(.2,.8,.2,1)). The bulb fades in beside it afterwards.
+- **Board scenes** (help hub: Next step, Find my mistake, Solve) play when their tab opens or
+  they scroll into view, with a Play again button. After a scene Klera idles at its dock.
+- **The pad** plays the app's clips: rays when you stop for three seconds, thinking when you
+  rub out and carry on.
+- No companion and no pointer-following eyes: the app has neither.
 - Animate `transform`, `opacity` and SVG path data only. Never `transition: all`.
 - Panels and device frames: pointer spotlight and up to 5deg tilt, fine pointers only.
 - Magnetic buttons move up to 6px toward the pointer.
 - The system cursor is never replaced.
-- `prefers-reduced-motion`: the logo shows finished, Klera holds still (no breath, blink or
-  morph), the mistake mark appears without the sweep.
+- `prefers-reduced-motion`: every piece shows its finished state and never animates.
 - Klera's render loop runs only while it is on screen and the tab is visible.
 
 ## Copy

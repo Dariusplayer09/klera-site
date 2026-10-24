@@ -622,18 +622,23 @@ tbody tr:last-child > * { border-bottom: 0; }
 }
 .logo-bulb {
   position: absolute; left: -3%; top: -3.6%; width: 18.4%; aspect-ratio: 1;
-  --klera-ink: #E9B11E;
-  padding: 0; border: 0; background: none; cursor: pointer;
-  transform-origin: 27% 92%; z-index: 2; border-radius: 40%;
+  padding: 0; border: 0; background: none; cursor: pointer; z-index: 2; border-radius: 40%;
 }
-.logo-bulb.is-flying { transition: transform .75s cubic-bezier(.2, .8, .2, 1); }
-.logo-word { position: absolute; left: 13.9%; top: 3%; width: 86%; height: auto; overflow: visible; }
+.logo-word-host {
+  position: absolute; left: 13.9%; top: 3%; width: 86%;
+  transform-origin: 50% 50%;
+  transition: transform 1s cubic-bezier(.2, .8, .2, 1);   /* KleraWelcomeView's settle */
+}
+.logo-word, .engine-word { display: block; width: 100%; height: auto; overflow: visible; }
 .logo-word path { fill: none; stroke-width: 13.5; stroke-linecap: round; stroke-linejoin: round; }
-.wm-stroke { stroke: url(#wm-sweep); }
 .wm-flat { stroke: #E9B11E; }
-.js .logo-live:not(.is-inked) .wm-flat { opacity: 0; }
-.logo-live .wm-flat { transition: opacity .7s ease-in-out; }
-.logo-live.is-inked .wm-stroke { opacity: 0; transition: opacity .7s ease-in-out; }
+/* The app writes the word bigger and settles it 1.18 to 0.86, so it starts 1.37x its resting size. */
+.js .logo-live:not(.is-static) .logo-word-host:not(.is-settled) { transform: scale(1.372); }
+.js .logo-live:not(.is-static) .logo-word { opacity: 0; }
+.engine-word-flat { opacity: 0; transition: opacity .7s ease-in-out; }
+.is-inked .engine-word-flat { opacity: 1; }
+.js .logo-live:not(.has-bulb) .logo-bulb { opacity: 0; }
+.logo-bulb { transition: opacity .6s ease-out; }
 .hero-hint { margin: 1rem auto 0; color: var(--muted); font-size: .95rem; }
 
 /* ---------------------------------------------------------------- the companion, top right */
@@ -812,5 +817,30 @@ tbody tr:last-child > * { border-bottom: 0; }
   .companion { background: var(--paper-2); box-shadow: 0 4px 14px rgb(27 26 23 / .12); }
 }
 
-/* Held back until it runs on frames exported from the app's own engine. */
-.companion, .morph-demo { display: none !important; }
+/* ---------------------------------------------------------------- the app's engine, played back */
+.kf { display: block; width: 100%; height: 100%; }
+.scene { margin: 1.2rem 0 0; }
+.engine-board {
+  position: relative; width: 100%; background: var(--board, #fff);
+  border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+  box-shadow: 0 1px 2px rgb(27 26 23 / .05), 0 12px 32px -18px rgb(27 26 23 / .25);
+}
+.engine-ink { position: absolute; inset: 0; width: 100%; height: 100%; }
+.engine-dock {
+  position: absolute; aspect-ratio: 1; border-radius: 50%;
+  background: rgb(255 255 255 / .7); border: 1px solid rgb(27 26 23 / .08);
+  box-shadow: 0 2px 10px rgb(27 26 23 / .08);
+}
+.engine-klera {
+  position: absolute; aspect-ratio: 1; pointer-events: none;
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / .16));   /* KleraStage's shadow */
+}
+.engine-mark {
+  position: absolute; background: color-mix(in srgb, var(--mark) 16%, transparent);
+}
+.engine-mark::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: var(--uh, 2px);
+  border-radius: 99px; background: color-mix(in srgb, var(--mark) 60%, transparent);
+}
+
+.hero-live { overflow-x: clip; }
