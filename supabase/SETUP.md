@@ -1,6 +1,6 @@
 # Early access: what to do, in order
 
-The signup form on the homepage and on `/for-students/` writes straight into a Supabase
+The signup form on the homepage writes straight into a Supabase
 table. **Until step 1 is done, the form shows an error instead of signing anyone up.**
 
 **Project:** `mstrcjcgsieixmlevrtv` (the same Supabase project the app uses).
@@ -127,4 +127,4 @@ Paste them this:
 > statement is idempotent and nothing else in the project is touched.
 >
 > Afterwards please confirm `waitlist` shows in the Table Editor and submit the form once on
-> https://klera.tech/for-students/ to check a row lands.
+> https://klera.tech/#early-access to check a row lands.

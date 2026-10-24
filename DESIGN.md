@@ -4,33 +4,43 @@ The source of truth for how every page looks and moves.
 
 ## Design read
 
-A product site for an iPad AI tutor, split into three audiences (students, investors,
-engineers), in the logo's own paper-and-ink language: cream stock, one warm yellow, a
+A product site for an iPad AI tutor, written for students first, in the logo's own paper-and-ink
+language: cream stock, one warm yellow, a
 hand-drawn line quality, real captures instead of imitations.
 
 **Dials:** `DESIGN_VARIANCE 6`, `MOTION_INTENSITY 4`, `VISUAL_DENSITY 4`.
 
 ## Structure
 
-`/` is a hub, not a pitch. It states what Klera is, then sends the visitor to the page
-written for them. The three audience pages are the site; everything else supports them.
+Since 2026-10-24 (LLM council review, Filip chose it): **the home page is the student page.**
+No audience picker on the front door. Investors and hires mostly arrive through a link a founder
+sent them, so they get short pages of their own, linked quietly from the nav and footer, and
+their URLs go straight into outreach.
 
 | Path | For | Contains |
 |---|---|---|
-| `/` | everyone | Hero, the three doors, what it is, early access |
-| `/for-students/` | the person who uses it | How it feels, the five-rung help ladder, the real filmstrip, what it notices, the interactive diagram, exams, early access |
-| `/for-investors/` | the person who funds it | Problem, the three moats, comparison, business model and pricing, honest status |
-| `/for-engineers/` | the person who would build it | Handwriting pipeline, visualisation cascade, the six-family learner profile with real measurements, hiring |
+| `/` | students (and everyone landing cold) | Live logo, the try-it pad, How it works, the help hub (with the mistake and Teach me why demos), guided solve, what it notices, exams, also in the app, early access |
+| `/investors/` | the person who funds it | Thesis, real recording, why now, answer machines, what we've built, moats, business, where we are, deck request |
+| `/join/` | the person who would build it | The one-line character demo, three hard problems, per-student baseline figure, five principles, roles, research |
 | `/about/` | context | Who is building it, how we work |
 
-`/how-it-works/`, `/learner-profile/` and `/exams/` were folded into those three. Each keeps
-an `index.html` that redirects and still reads if the redirect is blocked; GitHub Pages has
-no server-side redirect.
+`/for-students/`, `/for-investors/`, `/for-engineers/`, `/how-it-works/`, `/learner-profile/` and
+`/exams/` are redirect stubs (meta refresh + canonical) so old links keep working.
+
+`index.html` is generated: edit `tools/index.template.html`, `tools/early-access.partial.html` and
+`tools/footer.partial.html`, then run `python3 tools/build_home.py`.
 
 ## The rule that overrides the rest: never fake the product
 
 **Handwriting is never drawn in code.** No SVG strokes, no 3D tubes, no handwriting fonts
-standing in for the engine. Hand-built imitations of handwriting look fake next to what the
+standing in for the engine.
+
+Two exceptions, both because they ARE the app's own vectors, not imitations of them: the Klera
+character (`assets/klera-character.js`, a port of `KleraGlyph`/`KleraPose` with the traced point
+arrays copied verbatim) and the wordmark write-on (`assets/data/klera-wordmark.json`, the app's
+`KleraWordmarkStroke.json`). If the logo changes in the app, copy the data again. Tutor answers
+and maths on the board stay real captures. The typed worked lines in the mistake demo say on the
+page that they're typed. Hand-built imitations of handwriting look fake next to what the
 app actually produces, and a site about a handwriting engine cannot afford that.
 
 Everything that shows the product is a real capture from the app, or a visible ✱ slot waiting
@@ -90,7 +100,7 @@ were deleted in the September 2026 cleanup.
 
 ## Early access
 
-One form, on `/` and `/for-students/`, posting straight to Supabase PostgREST. The key in
+One form, on `/`, posting straight to Supabase PostgREST. The key in
 `assets/site-config.js` is a publishable key and is meant to be public; `supabase/waitlist.sql`
 grants it INSERT on the waitlist table and nothing else, with no SELECT policy and no SELECT
 grant, so it cannot read the list back. Run that SQL once per project. If the key is missing
@@ -101,12 +111,25 @@ a free year of Klera Premium.**
 
 ## Interaction and motion
 
-- Animate `transform` and `opacity` only. Never `transition: all`.
+Klera is the motion. Everything else stays quiet.
+
+- **One load moment:** the pen writes "klera" along the app's wordmark path (3 s, amber-to-gold
+  sweep, settles to Klera yellow), then flies home and becomes the bulb. Same timing as the app's
+  welcome screen.
+- **The companion:** once the hero scrolls away, Klera sits top right (bottom right on phones),
+  as it does on the board. Sections opt in with `data-klera="think|pen|highlighter|hint"` and it
+  reacts once per entry. Nothing else animates on scroll: no fade-up sections.
+- **Every Klera's eyes follow the pointer.** Breath and blink are the app's `scholar` values.
+- **Demos answer the visitor:** the pad (pause = rays flash, rub out = it leaves you alone), the
+  help hub (each rung sends Klera into the matching tool), the mistake sweep (KleraMistakeMark's
+  wash, underline and timing), the Teach me why lesson (drag, guess, narrated text).
+- Animate `transform`, `opacity` and SVG path data only. Never `transition: all`.
 - Panels and device frames: pointer spotlight and up to 5deg tilt, fine pointers only.
 - Magnetic buttons move up to 6px toward the pointer.
-- Pop-ups are native `<dialog>` sheets opened only by a click.
 - The system cursor is never replaced.
-- Nothing moves on its own. Every effect answers a pointer or a click.
+- `prefers-reduced-motion`: the logo shows finished, Klera holds still (no breath, blink or
+  morph), the mistake mark appears without the sweep.
+- Klera's render loop runs only while it is on screen and the tab is visible.
 
 ## Copy
 
@@ -121,9 +144,9 @@ what is still a `.slot`). Mockups are pre-framed: `.mock`, no extra radius or sh
 captures use `.shot`. Silent loops use `video[data-loop]`; image sequences use `[data-frames]`.
 Fill slots with real captures only. Clips with narration ship with `controls`, never autoplay.
 
-## Engineering page: theory, not code
+## Join page: theory, not code
 
-`/for-engineers/` explains principles and ideas, and cites the research they come from. It
+`/join/` explains principles and ideas, and cites the research they come from. It
 must not publish formulas, constants, weights, thresholds, class or type names, internal run
 tables, or bug post-mortems. Architecture diagrams that named internal types were deleted.
 
@@ -140,12 +163,13 @@ are accessible and need no WebGL. Both are recoverable from commit `34b538e`.
 - [ ] Zero em or en dashes in visible text
 - [ ] Every number traceable to a device run, and ranges drawn as ranges
 - [ ] Every `.slot` is listed in MEDIA_SLOTS.md
-- [ ] Nothing on /for-engineers/ reads like code: no formulas, constants or type names
+- [ ] Nothing on /join/ reads like code: no formulas, constants or type names
 - [ ] Every figure is captioned measured, modelled or illustrative, and says which on its face
 - [ ] Swept phrases are three words or fewer
 - [ ] Any clip with audio has `controls` and does not autoplay
 - [ ] Every interactive element: visible `:focus-visible`, 44px target, hover state
-- [ ] `prefers-reduced-motion` verified on every animated element
+- [ ] `prefers-reduced-motion` verified on every animated element, including every Klera
+- [ ] Klera point data still matches the app (`KleraGlyph.swift`, `KleraWordmarkStroke.json`)
 - [ ] Images carry width, height and accurate alt text; ✱ slots reserve space
 - [ ] Nothing but diagrams, tables, formulas and `pre` may scroll sideways
 - [ ] Rendered and looked at, at 1440px and at 390px

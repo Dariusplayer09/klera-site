@@ -32,3 +32,14 @@ shows Klera solving rather than handing the pen back.
 Unused from the pack, available: `mockups/phase-portrait-visualization.webp`,
 `mockups/onboarding-*.webp`, `mockups/home-dashboard.webp`, `screens/integral-with-hint.webp`,
 `screens/phase-portrait-full.webp`.
+
+## Clips to record next (2026-10-24 redesign)
+
+The newest features are shown with live web demos for now. Real clips would replace or sit
+beside them. Record on the iPad, silent unless noted:
+
+1. **Find my mistake**: a handwritten wrong line, Klera flies out as the highlighter and sweeps red. Goes in the help hub, Find my mistake panel.
+2. **Teach me why**: the Explain card, the chip, the lesson card opening and one drag. With narration, so `controls`, no autoplay.
+3. **Guided solve hand-back**: Klera writes one step, says your turn, the student writes the next line, Klera confirms. Replaces the S3 sequence.
+4. **Quick Solve**: the typeset answer box being dragged and pinched. The Quick Solve panel has no media today.
+5. **Klera says hello**: the welcome screen, for the About page or a share card.

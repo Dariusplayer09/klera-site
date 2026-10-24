@@ -599,3 +599,215 @@ tbody tr:last-child > * { border-bottom: 0; }
   .who-title { margin-top: 2rem; }
 }
 .more-toggle { display: none; }
+
+/* ================================================================== Klera, alive
+   The app's character and pen on the page (klera-character.js, klera-live.js). One load moment
+   (the logo writes itself), then motion only in answer to the visitor. See DESIGN.md "Motion". */
+:root {
+  --klera-ink: #171307;     /* the character's line, as on the board */
+  --klera-glow: #E9B11E;    /* ray halo when it has a hint */
+  --mark: 229 72 77;        /* the app's mistake red (KleraMistakeMark), used as rgb() */
+  --mark-text: #B42318;     /* readable red for words, 6.2:1 on white */
+}
+.klera-svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+/* ---------------------------------------------------------------- hero: the logo, written */
+.hero-live { padding-top: clamp(2.6rem, 7vw, 5rem); text-align: center; }
+.hero-live h1 { max-width: 18ch; margin-inline: auto; }
+.hero-live .lead { margin-inline: auto; max-width: 58ch; }
+.hero-live .actions { justify-content: center; }
+.logo-live {
+  position: relative; width: min(100%, 720px); aspect-ratio: 1864 / 330;
+  margin: 0 auto clamp(2rem, 5vw, 3.2rem);
+}
+.logo-bulb {
+  position: absolute; left: -3%; top: -3.6%; width: 18.4%; aspect-ratio: 1;
+  --klera-ink: #E9B11E;
+  padding: 0; border: 0; background: none; cursor: pointer;
+  transform-origin: 27% 92%; z-index: 2; border-radius: 40%;
+}
+.logo-bulb.is-flying { transition: transform .75s cubic-bezier(.2, .8, .2, 1); }
+.logo-word { position: absolute; left: 13.9%; top: 3%; width: 86%; height: auto; overflow: visible; }
+.logo-word path { fill: none; stroke-width: 13.5; stroke-linecap: round; stroke-linejoin: round; }
+.wm-stroke { stroke: url(#wm-sweep); }
+.wm-flat { stroke: #E9B11E; }
+.js .logo-live:not(.is-inked) .wm-flat { opacity: 0; }
+.logo-live .wm-flat { transition: opacity .7s ease-in-out; }
+.logo-live.is-inked .wm-stroke { opacity: 0; transition: opacity .7s ease-in-out; }
+.hero-hint { margin: 1rem auto 0; color: var(--muted); font-size: .95rem; }
+
+/* ---------------------------------------------------------------- the companion, top right */
+.companion {
+  position: fixed; z-index: 30; top: 82px;
+  right: max(14px, calc((100vw - var(--wrap)) / 2 - 76px));
+  width: 64px; height: 64px; padding: 7px;
+  border: 1px solid var(--rule); border-radius: 22px;
+  background: color-mix(in srgb, var(--paper-2) 90%, transparent);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  opacity: 0; transform: translateY(-10px) scale(.7); pointer-events: none;
+  transition: opacity .35s ease, transform .5s cubic-bezier(.2, .8, .2, 1);
+}
+.companion.is-shown { opacity: 1; transform: none; pointer-events: auto; }
+@media (max-width: 640px) {
+  .companion { top: auto; bottom: 14px; right: 14px; width: 54px; height: 54px; padding: 5px; }
+}
+
+/* ---------------------------------------------------------------- try it: the pad */
+.pad {
+  position: relative; overflow: hidden;
+  border: 1px solid var(--rule-firm); border-radius: var(--radius);
+  background-color: #FFFDF7;
+  background-image: radial-gradient(circle at 1px 1px, #E6DCC4 1.1px, transparent 1.4px);
+  background-size: 26px 26px;
+}
+.pad canvas { display: block; width: 100%; height: clamp(280px, 40vw, 420px); touch-action: none; cursor: crosshair; }
+.pad canvas.is-erasing { cursor: cell; }
+.pad-klera { position: absolute; top: 14px; right: 14px; width: 72px; height: 72px; pointer-events: none; }
+.pad-prompt {
+  position: absolute; left: 1.4rem; top: 1.2rem; margin: 0; max-width: 60%;
+  color: var(--muted); font-size: .95rem; pointer-events: none;
+}
+.pad-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .5rem;
+  padding: .7rem .8rem; border-top: 1px solid var(--rule); background: var(--card);
+}
+.pad-status { flex: 1 1 280px; margin: 0 0 0 .4rem; color: var(--ink-soft); font-size: .98rem; min-height: 2.6em; display: flex; align-items: center; }
+.tool { min-height: 44px; padding: 0 1rem; border-radius: 999px; border: 1px solid var(--rule-firm); background: var(--card); font: 600 .92rem/1 var(--body); color: var(--ink); cursor: pointer; }
+.tool:hover { border-color: var(--bronze); }
+.tool[aria-pressed="true"] { background: var(--pill); border-color: var(--pill); color: #fff; }
+.pad-honest { color: var(--muted); font-size: .9rem; margin-top: .9rem; }
+
+/* ---------------------------------------------------------------- help hub */
+.hub { display: grid; grid-template-columns: minmax(220px, 280px) 1fr; gap: clamp(1rem, 2.4vw, 1.8rem); align-items: start; }
+.hub-tabs { display: flex; flex-direction: column; gap: .45rem; }
+.hub-tab {
+  display: grid; gap: .15rem; text-align: left; min-height: 44px; padding: .85rem 1rem;
+  border: 1px solid var(--rule); border-radius: 16px; background: var(--card); color: var(--ink);
+  font: 700 1.05rem/1.2 var(--body); cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.hub-tab small { font: 500 .88rem/1.35 var(--body); color: var(--muted); }
+.hub-tab:hover { border-color: var(--mid); }
+.hub-tab[aria-selected="true"] { background: var(--pale); border-color: var(--yellow); }
+.hub-stage {
+  position: relative; min-width: 0;
+  background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius);
+  padding: clamp(1.2rem, 3vw, 2rem);
+}
+.hub-klera { position: absolute; top: 14px; right: 14px; width: 66px; height: 66px; pointer-events: none; z-index: 2; }
+.hub-panel > h3 { padding-right: 84px; font-size: clamp(1.3rem, 2.2vw, 1.6rem); }
+.hub-panel > p { max-width: 60ch; }
+.hub-panel .shot { margin-top: .6rem; }
+@media (max-width: 860px) {
+  .hub { grid-template-columns: 1fr; }
+  .hub-tabs { flex-direction: row; overflow-x: auto; margin-inline: -1rem; padding: .2rem 1rem .4rem; scrollbar-width: none; }
+  .hub-tabs::-webkit-scrollbar { display: none; }
+  .hub-tab { flex: none; }
+  .hub-tab small { display: none; }
+}
+
+/* ---------------------------------------------------------------- find my mistake */
+.mistake { position: relative; }
+.work {
+  list-style: none; margin: .4rem 0 1rem; padding: .6rem; border-radius: 16px;
+  background: #FFFDF7; border: 1px solid var(--rule);
+  font: italic 400 clamp(1.2rem, 2.2vw, 1.45rem)/1.2 "STIX Two Text", "Cambria Math", Cambria, Georgia, serif;
+}
+.work-line {
+  display: flex; align-items: center; gap: 1rem; min-height: 48px; padding: .3rem .7rem;
+  border-radius: 12px; cursor: pointer; outline-offset: 2px;
+}
+.work-line:hover { background: var(--paper); }
+.work-line .n { font: 600 .82rem/1 var(--body); color: var(--muted); width: 1.2rem; font-style: normal; }
+.work-line.is-guess-off { box-shadow: inset 0 0 0 2px var(--rule-firm); }
+.work-line.is-guess-right { box-shadow: inset 0 0 0 2px rgb(var(--mark) / .45); }
+.mark { position: relative; display: inline-block; padding: .12em .3em; z-index: 0; }
+.mark::before, .mark::after {
+  content: ""; position: absolute; left: 0; right: 0; z-index: -1;
+  transform-origin: left center; transform: scaleX(var(--p, 0));
+}
+.mark::before { top: 0; bottom: 0; border-radius: 8px; background: rgb(var(--mark) / .16); }
+.mark::after { bottom: -1px; height: 2px; border-radius: 2px; background: rgb(var(--mark) / .6); }
+.mistake-note { color: var(--mark-text); font-weight: 600; }
+.mistake-klera {
+  position: absolute; left: 0; top: 0; width: 86px; height: 86px; z-index: 3;
+  pointer-events: none; opacity: 0; transition: opacity .3s ease;
+}
+.mistake-klera.is-on { opacity: 1; }
+.mistake-klera.is-flying { transition: transform .8s cubic-bezier(.2, .8, .2, 1), opacity .3s ease; }
+
+/* ---------------------------------------------------------------- teach me why */
+.lesson { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(1rem, 2.5vw, 1.8rem); align-items: start; }
+.lesson-graph { margin: 0; }
+.lesson-graph svg {
+  display: block; width: 100%; height: auto; touch-action: none; cursor: pointer;
+  background: #FFFDF7; border: 1px solid var(--rule); border-radius: 16px;
+}
+.g-grid { stroke: #EFE6D2; stroke-width: 1; }
+.g-axis { stroke: #B9AB8A; stroke-width: 1.4; }
+.g-curve { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.g-tangent { stroke: var(--yellow); stroke-width: 3.5; stroke-linecap: round; }
+.g-point { fill: var(--yellow); stroke: var(--ink); stroke-width: 2.4; cursor: grab; }
+.g-point:focus-visible { outline: none; stroke: var(--bronze); stroke-width: 5; }
+.g-tick { font: 500 12px var(--body); fill: var(--muted); text-anchor: middle; }
+.lesson-read { margin: .6rem 0 0; font: 500 .98rem/1.4 var(--body); font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+.lesson-read b.neg { color: var(--struggle); }
+.lesson-read b.pos { color: var(--calm); }
+.lesson-read b.zero { color: var(--bronze); }
+.lesson-side { display: grid; gap: .9rem; }
+.lesson-voice { display: grid; grid-template-columns: 64px 1fr; gap: .9rem; align-items: start; }
+.lesson-klera { width: 64px; height: 64px; }
+.lesson-line { margin: 0; min-height: 6.6em; font-size: 1.08rem; line-height: 1.5; padding: .8rem 1rem; border-radius: 4px 16px 16px 16px; background: var(--pale); }
+.lesson-guess { display: flex; flex-wrap: wrap; gap: .5rem; }
+@media (max-width: 860px) { .lesson { grid-template-columns: 1fr; } .lesson-line { min-height: 5.4em; } }
+
+/* ---------------------------------------------------------------- what else is in the app */
+.also { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0 2rem; margin: 0; padding: 0; list-style: none; }
+.also li { padding: 1.2rem 0; border-top: 1px solid var(--rule-firm); }
+.also h3 { margin-bottom: .3rem; }
+.also p { margin: 0; color: var(--ink-soft); }
+
+/* ---------------------------------------------------------------- the line, morphing (join page) */
+.morph-demo { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; align-items: center; }
+.morph-klera { width: 200px; height: 200px; }
+.morph-buttons { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+@media (max-width: 700px) { .morph-demo { grid-template-columns: 1fr; justify-items: start; } .morph-klera { width: 150px; height: 150px; } }
+
+/* ---------------------------------------------------------------- nav: audience links sit quietly */
+.nav-links .nav-quiet { color: var(--muted); font-size: .9rem; }
+.nav-links .nav-sep { width: 1px; height: 22px; background: var(--rule-firm); margin: 0 .3rem; }
+@media (max-width: 640px) { .nav-links .nav-sep { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-bulb.is-flying, .companion, .mistake-klera.is-flying, .hub-tab, .logo-live .wm-flat { transition: none; }
+}
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.h3-like { font: 700 clamp(1.15rem, 1.8vw, 1.35rem)/1.25 var(--body); text-transform: none; margin-bottom: .4rem; }
+
+/* `hidden` must win over the display set on these components. */
+.lesson [hidden], .hub [hidden], .mistake [hidden] { display: none !important; }
+.lesson-side > .btn { justify-self: start; }
+/* Panels with their own Klera (the lesson's narrator, the mistake highlighter) send the hub's away. */
+.hub-klera { transition: opacity .25s ease; }
+.hub.has-own .hub-klera { opacity: 0; }
+/* Phones: the plain lists become one swipeable row too, like the card grids. */
+@media (max-width: 640px) {
+  .also {
+    display: flex; gap: .8rem; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: 1rem;
+    margin-inline: -1rem; padding: .2rem 1rem 1rem; scrollbar-width: none;
+  }
+  .also::-webkit-scrollbar { display: none; }
+  .also > li {
+    flex: 0 0 80%; scroll-snap-align: start;
+    padding: 1.1rem 1.2rem; border: 1px solid var(--rule); border-radius: 18px; background: var(--card);
+  }
+}
+.pad-prompt { transition: opacity .3s ease; }
+.pad.has-ink .pad-prompt { opacity: 0; }
+@media (max-width: 640px) {
+  .hub-klera { width: 46px; height: 46px; top: 10px; right: 10px; }
+  .hub-panel > h3 { padding-right: 56px; }
+  .companion { background: var(--paper-2); box-shadow: 0 4px 14px rgb(27 26 23 / .12); }
+}

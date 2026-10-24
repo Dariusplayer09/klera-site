@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klera, the tutor that watches the pen</title>
+<meta name="description" content="Klera is an iPad whiteboard tutor. It watches how you solve with Apple Pencil, notices where you get stuck, and helps only as much as you need, in handwriting on your own page.">
+<meta name="theme-color" content="#FAF7F0">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://klera.tech/">
+<meta property="og:title" content="Klera, the tutor that watches the pen">
+<meta property="og:description" content="An iPad whiteboard that watches how you solve, notices where you get stuck, and helps only as much as you need, on your own page.">
+<meta property="og:image" content="https://klera.tech/assets/klera-logo-full.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/klera.css">
+<script>document.documentElement.classList.add("js");</script>
+<script src="assets/site-config.js"></script>
+<script src="assets/klera.js" defer></script>
+<script src="assets/klera-character.js" defer></script>
+<script src="assets/klera-live.js" defer></script>
+<script src="assets/waitlist.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="./" translate="no" aria-current="page"><img src="assets/klera-logo-full.png" alt="Klera" width="1864" height="330"></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#try">Try it</a>
+      <a href="#help">How it helps</a>
+      <a href="about/">About</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a class="nav-quiet" href="investors/">Investors</a>
+      <a class="nav-quiet" href="join/">Join us</a>
+      <a class="nav-cta" href="#early-access">Early access</a>
+    </nav>
+  </div>
+</header>
+
+<button class="companion" type="button" data-companion aria-label="Klera. Click to see it think."></button>
+
+<main id="main">
+
+  <section class="hero-live wrap" aria-labelledby="hero-title">
+    <div class="logo-live" data-live-logo="assets/data/klera-wordmark.json">
+      <button class="logo-bulb" type="button" aria-label="Klera. Click to see it think."></button>
+      <svg class="logo-word" viewBox="0 0 989 189" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="wm-sweep" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="989" y2="0">
+            <stop offset="0" stop-color="#EF7D1A"/><stop offset=".4" stop-color="#F5A524"/><stop offset=".75" stop-color="#F8CB3C"/><stop offset="1" stop-color="#E9B11E"/>
+          </linearGradient>
+        </defs>
+        <path class="wm-flat" d="{{WM0}}"/><path class="wm-flat" d="{{WM1}}"/>
+        <path class="wm-stroke" d=""/><path class="wm-stroke" d=""/>
+      </svg>
+      <span class="visually-hidden">Klera</span>
+    </div>
+    <h1 id="hero-title">The benefits of a private tutor, for every student with an iPad.</h1>
+    <p class="lead">Klera is an iPad whiteboard that watches how you solve with Apple Pencil, notices where you get stuck, and helps only as much as you need, in handwriting, on your own page.</p>
+    <div class="actions">
+      <a class="btn btn-dark" href="#early-access" data-magnetic>Get free early access</a>
+      <a class="btn btn-quiet" href="#try" data-magnetic>Try the pad</a>
+    </div>
+    <p class="hero-hint">That bulb is Klera. It's watching your pointer. Click it to see it think.</p>
+  </section>
+
+  <section class="section wrap" id="try" data-klera="hint" aria-labelledby="try-title">
+    <div class="sec-head">
+      <h2 id="try-title">Write something. Klera is watching.</h2>
+      <p class="sub">A tutor reacts to how you work, not only to what you ask.</p>
+    </div>
+    <div class="pad" data-pad>
+      <p class="pad-prompt">Write with your mouse, finger or stylus. Then stop for a moment, or rub something out.</p>
+      <canvas aria-label="Writing pad. Draw with a mouse, finger or stylus."></canvas>
+      <div class="pad-klera" aria-hidden="true"></div>
+      <div class="pad-bar">
+        <button class="tool" type="button" data-tool="pen" aria-pressed="true">Pen</button>
+        <button class="tool" type="button" data-tool="erase" aria-pressed="false">Rub out</button>
+        <button class="tool" type="button" data-tool="clear">Clear</button>
+        <p class="pad-status" data-pad-status role="status" aria-live="polite">Write anything: a sum, a word, a doodle.</p>
+      </div>
+    </div>
+    <p class="pad-honest">This pad only knows when you pause and when you rub out. On the iPad, Klera also reads what you wrote, line by line, and how the pen moves.</p>
+  </section>
+
+  <section class="section wrap" id="how" data-klera="think" aria-labelledby="how-title">
+    <div class="sec-head">
+      <h2 id="how-title">How it works</h2>
+      <p class="sub">Three things, every session.</p>
+    </div>
+    <ol class="how">
+      <li><figure><img class="mock" src="assets/klera-assets/mockups/handwritten-integral.webp" width="1600" height="1258" alt="A handwritten integral of (sin squared x plus cos squared x) cubed plus 5x on the Klera board" loading="lazy" decoding="async"><figcaption><span class="how-n">1</span><h3>You write with Apple Pencil</h3><p>Work the problem the way you normally would. No typing, no photos.</p></figcaption></figure></li>
+      <li><figure><img class="mock" src="assets/klera-assets/mockups/hint-where-is-fprime-zero.webp" width="1600" height="1259" alt="Handwritten f(x) = x squared minus 6x plus 5 and f prime of x = 2x minus 6, with a Klera hint bubble asking where f prime of x is zero" loading="lazy" decoding="async"><figcaption><span class="how-n">2</span><h3>Klera sees where you get stuck</h3><p>It reads your working as you go, line by line.</p></figcaption></figure></li>
+      <li><figure><img class="mock" src="assets/klera-assets/mockups/equation-to-interactive-graph.webp" width="1600" height="1258" alt="A handwritten derivative problem with an arrow to the interactive tangent slope graph Klera built from it" loading="lazy" decoding="async"><figcaption><span class="how-n">3</span><h3>It hints, asks, or stays quiet</h3><p>Sometimes a nudge, sometimes a question, sometimes a live graph. Sometimes nothing.</p></figcaption></figure></li>
+    </ol>
+    <p class="pillbar">Every session teaches Klera how you learn, so you need less help next time.</p>
+  </section>
+
+  <section class="section wrap" id="help" data-klera="think" aria-labelledby="help-title">
+    <div class="sec-head">
+      <h2 id="help-title">Ask for exactly what you need</h2>
+      <p class="sub">Six kinds of help. Pick one and watch what Klera does.</p>
+    </div>
+    <div class="hub" data-hub>
+      <div class="hub-tabs" role="tablist" aria-label="Kinds of help">
+        <button class="hub-tab" role="tab" id="t-hint" aria-controls="p-hint" aria-selected="true" data-mode="hint">Hint<small>A nudge, not the answer</small></button>
+        <button class="hub-tab" role="tab" id="t-next" aria-controls="p-next" aria-selected="false" tabindex="-1" data-mode="pen">Next step<small>One line, then it waits</small></button>
+        <button class="hub-tab" role="tab" id="t-why" aria-controls="p-why" aria-selected="false" tabindex="-1" data-mode="talk" data-own-klera>Explain and Teach me why<small>The reason, as a lesson you can touch</small></button>
+        <button class="hub-tab" role="tab" id="t-mistake" aria-controls="p-mistake" aria-selected="false" tabindex="-1" data-mode="highlighter" data-own-klera>Find my mistake<small>The wrong line, in red</small></button>
+        <button class="hub-tab" role="tab" id="t-quick" aria-controls="p-quick" aria-selected="false" tabindex="-1" data-mode="pen">Quick Solve<small>Just the answer</small></button>
+        <button class="hub-tab" role="tab" id="t-solve" aria-controls="p-solve" aria-selected="false" tabindex="-1" data-mode="pen">Solve<small>The whole thing, with you</small></button>
+      </div>
+      <div class="hub-stage">
+        <div class="hub-klera" aria-hidden="true"></div>
+
+        <div class="hub-panel" role="tabpanel" id="p-hint" aria-labelledby="t-hint" tabindex="0">
+          <h3>A hint lands next to your working</h3>
+          <p>A nudge toward the idea you're missing, placed beside the line you're on. Ask again and it gets more specific instead of repeating itself.</p>
+          <img class="shot" src="assets/klera-assets/screens/quadratic-with-hint.webp" width="2000" height="1431" alt="Klera board with a handwritten f(x) = x squared minus 6x plus 5 and its derivative, a hint bubble asking where f prime of x is zero, and the help menu on the right" loading="lazy" decoding="async">
+        </div>
+
+        <div class="hub-panel" role="tabpanel" id="p-next" aria-labelledby="t-next" tabindex="0" hidden>
+          <h3>One line, then the pen is yours again</h3>
+          <p>Klera checks the lines you've already written, then writes the single move that comes next, in gold, under your working. Then it stops and waits for you.</p>
+          <img class="shot" src="assets/klera-assets/screens/solve-sequence-1.webp" width="2000" height="1334" alt="A handwritten derivative problem with Klera's next lines written in gold handwriting underneath" loading="lazy" decoding="async">
+        </div>
+
+        <div class="hub-panel" role="tabpanel" id="p-why" aria-labelledby="t-why" tabindex="0" hidden>
+          <h3>Teach me why</h3>
+          <p>Explain gives you the reason, spoken and on the board. Tap Teach me why on it and Klera builds a short lesson from your own problem, with things to drag and questions to answer. Here's a taste, built for the web:</p>
+          <div class="lesson" data-lesson>
+            <figure class="lesson-graph">
+              <svg role="group" aria-label="Graph of f(x) = x squared minus 6x plus 5 with a draggable point and its tangent line"></svg>
+              <figcaption class="lesson-read" data-lesson-read aria-live="polite"></figcaption>
+            </figure>
+            <div class="lesson-side">
+              <div class="lesson-voice">
+                <div class="lesson-klera" aria-hidden="true"></div>
+                <p class="lesson-line" data-lesson-line aria-live="polite"></p>
+              </div>
+              <div class="lesson-guess" data-lesson-guess hidden>
+                <button class="tool" type="button" data-answer="neg">Negative</button>
+                <button class="tool" type="button" data-answer="zero">Zero</button>
+                <button class="tool" type="button" data-answer="pos">Positive</button>
+              </div>
+              <button class="btn btn-quiet btn-small" type="button" data-lesson-next hidden>Got it</button>
+            </div>
+          </div>
+          <p class="pad-honest">In the app the lesson is written for the problem on your board, and Klera says each line out loud.</p>
+        </div>
+
+        <div class="hub-panel" role="tabpanel" id="p-mistake" aria-labelledby="t-mistake" tabindex="0" hidden>
+          <h3>It marks the line that went wrong</h3>
+          <p>Klera reads your working, turns into its highlighter and swipes red across the exact line, or the exact term, where it went wrong. Then it tells you why, without solving the rest for you. Spot it first: click the line you think is wrong.</p>
+          <div class="mistake" data-mistake>
+            <p><strong>Find the minimum of f(x) = x&sup2; &minus; 6x + 5.</strong></p>
+            <ol class="work">
+              <li class="work-line" tabindex="0"><span class="n">1</span><span>f&prime;(x) = 2x &minus; 6</span></li>
+              <li class="work-line" tabindex="0"><span class="n">2</span><span>2x &minus; 6 = 0</span></li>
+              <li class="work-line is-wrong" tabindex="0"><span class="n">3</span><span class="mark">x = &minus;3</span></li>
+              <li class="work-line" tabindex="0"><span class="n">4</span><span>f(&minus;3) = 32</span></li>
+            </ol>
+            <p class="mistake-note" data-mistake-note hidden>Line 3. Moving the 6 across makes it +6, so 2x = 6. Try that line again.</p>
+            <div class="actions">
+              <button class="btn btn-dark btn-small" type="button" data-mistake-go>Find my mistake</button>
+              <button class="btn btn-quiet btn-small" type="button" data-mistake-reset>Reset</button>
+            </div>
+            <div class="mistake-klera" aria-hidden="true"></div>
+          </div>
+          <p class="pad-honest">Typed here so you can try it. On the iPad the red goes over your own handwriting.</p>
+        </div>
+
+        <div class="hub-panel" role="tabpanel" id="p-quick" aria-labelledby="t-quick" tabindex="0" hidden>
+          <h3>Just the answer, when that's all you want</h3>
+          <p>Checking your result before moving on? Quick Solve puts the answer on the board, typeset as proper maths, in a box you can drag anywhere and pinch to resize.</p>
+          <p>It's the fastest rung on purpose, and Klera notices when you use it, because asking for the answer straight away and solving after one small hint mean very different things.</p>
+        </div>
+
+        <div class="hub-panel" role="tabpanel" id="p-solve" aria-labelledby="t-solve" tabindex="0" hidden>
+          <h3>The whole thing, one line at a time</h3>
+          <p>Solve works the problem step by step, in handwriting, at a pace you can follow, and talks you through it. If your working went wrong, the wrong path is cleared first, so the page ends up correct.</p>
+          <figure class="media">
+            <video class="clip" id="s-solve" width="960" height="688" muted loop playsinline preload="metadata" poster="assets/klera-assets/video/demo-solve-quadratic-poster.jpg" data-loop aria-label="Recording from the app: a student writes f(x) = x squared minus 6x plus 5, a live graph appears beside it, and Klera starts solving it step by step">
+              <source src="assets/klera-assets/video/demo-solve-quadratic.mp4" type="video/mp4">
+            </video>
+            <figcaption class="media-bar"><button class="btn btn-quiet btn-small" type="button" data-video-toggle="s-solve" aria-pressed="false">Pause</button><span>Recorded in the app, no sound. You write in black, Klera solves in gold.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" data-klera="pen" aria-labelledby="guided-title">
+    <div class="sec-head">
+      <h2 id="guided-title">Sometimes it makes you do it</h2>
+      <p class="sub">The part that makes Klera feel like a person, not an answer machine.</p>
+    </div>
+    <div class="split" style="align-items:start">
+      <div>
+        <p>When Klera can tell you're capable of the next line, it doesn't write it. It writes one step, explains it, says your turn, and waits.</p>
+        <p>There's no button. You write the next line and it watches. Right, and it moves on. Wrong, and it tells you something useful without giving the answer away. Properly stuck, and it writes the step itself rather than leaving you staring at a blank page.</p>
+        <div class="card is-white" style="margin-top:1.6rem">
+          <h3>It won't congratulate you for nothing</h3>
+          <p>It keeps track of how much you actually did. Praise you didn't earn is worthless, and it makes the praise you did earn worthless too.</p>
+        </div>
+      </div>
+      <div>
+        <figure class="media frames" id="s-steps" data-frames>
+          <div class="frames-stage">
+            <img class="shot" src="assets/klera-assets/screens/solve-sequence-1.webp" width="2000" height="1334" alt="Klera's handwritten solution of a derivative, after the second step" loading="lazy" decoding="async">
+            <img class="shot" src="assets/klera-assets/screens/solve-sequence-2.webp" width="2000" height="1334" alt="Klera's handwritten solution of a derivative, after the fourth step" loading="lazy" decoding="async" hidden>
+            <img class="shot" src="assets/klera-assets/screens/solve-sequence-3.webp" width="2000" height="1334" alt="Klera's handwritten solution of a derivative, after the fifth step" loading="lazy" decoding="async" hidden>
+            <img class="shot" src="assets/klera-assets/screens/solve-sequence-4.webp" width="2000" height="1334" alt="Klera's handwritten solution of a derivative, after the sixth step" loading="lazy" decoding="async" hidden>
+            <img class="shot" src="assets/klera-assets/screens/solve-sequence-5.webp" width="2000" height="1334" alt="Klera's handwritten solution of a derivative, finished in seven steps" loading="lazy" decoding="async" hidden>
+          </div>
+          <figcaption class="media-bar"><span class="frames-dots"><button class="frames-dot" type="button" aria-pressed="true" data-frame="0">2</button><button class="frames-dot" type="button" aria-pressed="false" data-frame="1">4</button><button class="frames-dot" type="button" aria-pressed="false" data-frame="2">5</button><button class="frames-dot" type="button" aria-pressed="false" data-frame="3">6</button><button class="frames-dot" type="button" aria-pressed="false" data-frame="4">7</button></span><span>One line at a time, in gold, under the problem.</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" data-klera="think" aria-labelledby="see-title">
+    <div class="sec-head">
+      <h2 id="see-title">It notices things you never told it</h2>
+      <p class="sub">Klera reads how the work is going the whole time, not only when you ask.</p>
+    </div>
+    <ul class="also">
+      <li><h3>Bored isn't stuck</h3><p>Everything right, fast, on problems that are too easy? The next one gets harder instead of explaining what you already know.</p></li>
+      <li><h3>Struggling well is good</h3><p>Rubbing something out and fixing it yourself is the best thing that can happen in a session, and it gets left alone.</p></li>
+      <li><h3>It checks work you never asked about</h3><p>Finish something and move on, and it quietly checks whether it was right. Nothing pops up. The next problem is just better aimed.</p></li>
+      <li><h3>It knows if you tried first</h3><p>Solving after one small hint and asking for the whole answer straight away count very differently.</p></li>
+      <li><h3>It learns your normal</h3><p>Some people press harder when they're stuck. Some go completely still before the pen touches the page. It learns which one you are.</p></li>
+      <li><h3>You never see a score</h3><p>No percentage, no streak, no progress bar. They make people work for the number instead of the maths.</p></li>
+    </ul>
+  </section>
+
+  <section class="section wrap" data-klera="pen" aria-labelledby="exam-title">
+    <div class="split" style="align-items:end">
+      <div class="sec-head">
+        <h2 id="exam-title">Sit a real past paper</h2>
+        <p class="sub">Built for handwritten STEM exams.</p>
+      </div>
+      <div>
+        <p>Give Klera a past paper or your study material as a PDF. It pulls out the questions and lays the paper out on the canvas, so you sit it properly, by hand, under time.</p>
+        <p>Then it marks every answer in red pen, right on your handwriting, teaches the corrections instead of just listing them, and brings back the questions you lost marks on.</p>
+      </div>
+    </div>
+    <div class="marked">
+      <figure class="marked-card">
+        <span class="marked-tag">A slip in the arithmetic</span>
+        <img class="shot" src="assets/klera-assets/screens/exam-graded-q3.webp" width="1200" height="766" alt="Graded exam question in Klera: the student differentiated correctly but wrote 12 minus 4 equals 8; Klera crossed out both lines in red and wrote should be 6 minus 4 and final answer should be 2" loading="lazy" decoding="async">
+      </figure>
+      <figure class="marked-card">
+        <span class="marked-tag">The wrong method</span>
+        <img class="shot" src="assets/klera-assets/screens/exam-graded-q6.webp" width="1200" height="775" alt="Graded exam question in Klera: the student factorised the original equation instead of its derivative; Klera struck through each line in red and wrote the right steps beside them, ending with x equals 3" loading="lazy" decoding="async">
+      </figure>
+    </div>
+    <p class="slot-note marked-note">Marked by Klera after submitting. Black is the student, red is Klera.</p>
+  </section>
+
+  <section class="section wrap" data-klera="think" aria-labelledby="also-title">
+    <div class="sec-head">
+      <h2 id="also-title">Also in the app</h2>
+      <p class="sub">The rest of what a good tutor does, between problems.</p>
+    </div>
+    <ul class="also">
+      <li><h3>Live pictures, when they help</h3><p>Klera decides when a diagram is worth drawing and builds it from your problem, in 2D or 3D. Drag it and everything recomputes. If it can't draw something honest, it says so.</p></li>
+      <li><h3>A study plan by board and topic</h3><p>What to revisit next, grouped the way you study. Still no marks out of a hundred.</p></li>
+      <li><h3>A voice that talks you through it</h3><p>Solve and lessons are narrated, so you can watch the page instead of reading a chat.</p></li>
+      <li><h3>Boards that remember</h3><p>Every board keeps its scroll and zoom where you left them, and you can search across all of them.</p></li>
+      <li><h3>For teachers too</h3><p>Classes with join codes, class materials you can mark up with the Pencil, uploaded exams and each student's results.</p></li>
+      <li><h3>The right paper for the subject</h3><p>Blank, graph, geometry or chemistry boards, in light or dark. One theme setting changes the board and every thumbnail with it.</p></li>
+    </ul>
+  </section>
+
+  <section class="section wrap" aria-labelledby="diff-title">
+    <div class="sec-head">
+      <h2 id="diff-title">Why it's different</h2>
+      <p class="sub">A chatbot answers the question. A tutor answers the student.</p>
+    </div>
+    <div class="grid grid-2 no-swipe">
+      <div class="card panel">
+        <p class="card-label">A chatbot</p>
+        <p class="lead" style="color:var(--ink)">Waits to be asked, then hands over the full solution. Same answer for everyone, whether they were one step away or completely lost.</p>
+        <p class="result">Homework done. Nothing learned.</p>
+      </div>
+      <div class="card is-yellow panel">
+        <p class="card-label">Klera</p>
+        <p class="lead" style="color:var(--ink)">Notices the long pause and the rubbing out, knows how this student usually works, and gives the smallest nudge that gets them moving again.</p>
+        <p class="result">The student solves it. And remembers how.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="need-title">
+    <div class="sec-head">
+      <h2 id="need-title">What you need</h2>
+    </div>
+    <div class="grid grid-4">
+      <div class="stat"><span class="num is-word">iPad</span><span class="lbl">Any iPad that works with an Apple Pencil</span></div>
+      <div class="stat"><span class="num is-word">Pencil</span><span class="lbl">The pen is the point. Without one you lose the half that makes Klera different</span></div>
+      <div class="stat"><span class="num is-word">TestFlight</span><span class="lbl">Apple's free beta app. We send the invite to your email</span></div>
+      <div class="stat is-yellow"><span class="num">&euro;0</span><span class="lbl">Free during the beta, and a free year of Premium if you test it</span></div>
+    </div>
+  </section>
+
+{{FORM}}
+
+  <section class="section wrap" aria-labelledby="team-title">
+    <div class="split">
+      <div>
+        <div class="sec-head">
+          <h2 id="team-title">Built by students, for students</h2>
+          <p class="sub">Two Bocconi students building the tutor we wished we'd had.</p>
+        </div>
+        <p>We sit handwritten STEM exams every semester. We are the users. Klera starts at Bocconi and PoliMi, and grows one campus at a time.</p>
+        <div class="actions">
+          <a class="btn btn-quiet" href="about/" data-magnetic>Meet the team</a>
+        </div>
+        <p class="source">Investing in education? <a href="investors/">Read why we're building this</a>. Want to build it with us? <a href="join/">We're hiring</a>.</p>
+      </div>
+      <figure class="media">
+        <img class="shot is-photo" src="assets/klera-assets/photos/student-library.webp" width="1086" height="1448" alt="A student in a university library working on an iPad with Apple Pencil, Klera open on the screen" loading="lazy" decoding="async">
+        <figcaption class="slot-note">Studying with Klera in the library.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+</main>
+
+{{FOOTER}}
+</body>
+</html>

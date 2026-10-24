@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join Klera</title>
+<meta name="description" content="Build a tutor that can see the page: human handwriting, a model of each student from the pen, and knowing when to hold back.">
+<meta name="theme-color" content="#FAF7F0">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://klera.tech/join/">
+<meta property="og:title" content="Join Klera">
+<meta property="og:description" content="Build a tutor that can see the page: human handwriting, a model of each student from the pen, and knowing when to hold back.">
+<meta property="og:image" content="https://klera.tech/assets/klera-logo-full.png">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/klera.css">
+<script>document.documentElement.classList.add("js");</script>
+<script src="../assets/klera.js" defer></script>
+<script src="../assets/klera-character.js" defer></script>
+<script src="../assets/klera-live.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../" translate="no"><img src="../assets/klera-logo-full.png" alt="Klera" width="1864" height="330"></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../#try">Try it</a>
+      <a href="../#help">How it helps</a>
+      <a href="../about/">About</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a class="nav-quiet" href="../investors/">Investors</a>
+      <a class="nav-quiet" href="../join/" aria-current="page">Join us</a>
+      <a class="nav-cta" href="../#early-access">Early access</a>
+    </nav>
+  </div>
+</header>
+
+<button class="companion" type="button" data-companion aria-label="Klera. Click to see it think."></button>
+
+<main id="main">
+
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="split">
+      <div>
+        <span class="kicker">Join us</span>
+        <h1 id="hero-title">Build a tutor that can see the page.</h1>
+        <p class="lead">A small team in Milan with more open problems than we can get through: handwriting that reads as human, a model of each student built from how the pen moves, and a tutor that knows when to hold back.</p>
+        <div class="actions">
+          <a class="btn btn-dark" href="mailto:filip@klera.tech,darius@klera.tech?subject=Joining%20Klera" data-magnetic>Email both founders</a>
+          <a class="btn btn-quiet" href="#problems" data-magnetic>The hard problems</a>
+        </div>
+      </div>
+      <div class="morph-demo" data-morph-demo>
+        <div class="morph-klera" aria-hidden="true"></div>
+        <div>
+          <h2 class="h3-like">Klera is one line</h2>
+          <p>The character in the app is a single line traced from the logo. It reshapes itself to think, to write and to mark a mistake. This is the same geometry, running in your browser.</p>
+          <div class="morph-buttons">
+            <button class="tool" type="button" data-morph="think">Think</button>
+            <button class="tool" type="button" data-morph="pen">Pen</button>
+            <button class="tool" type="button" data-morph="highlighter">Highlighter</button>
+            <button class="tool" type="button" data-morph="hint">Has a hint</button>
+            <button class="tool" type="button" data-morph="home">Home</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="problems" data-klera="think" aria-labelledby="pb-title">
+    <div class="sec-head">
+      <h2 id="pb-title">Three hard problems</h2>
+      <p class="sub">None of them is getting a model to answer maths.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card panel">
+        <h3>Handwriting that reads as human</h3>
+        <p>Synthesised strokes look synthesised. Klera draws from captured human strokes placed into a mathematical layout, and varies the hand the way a real writer does: slowly, across a line, not glyph by glyph.</p>
+      </div>
+      <div class="card panel">
+        <h3>Knowing when to hold back</h3>
+        <p>The hardest thing in tutoring is not answering. Deciding when a student is ready to write the next line themselves needs the problem, their state, and how well we know them yet. When unsure, show.</p>
+      </div>
+      <div class="card is-yellow panel">
+        <h3>Refusing a wrong picture</h3>
+        <p>Generating a diagram is easy. A confidently wrong one teaches something false. Trusted templates come first, generated visuals must pass checks, and the floor never invents maths.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" data-klera="pen" aria-labelledby="ps-title">
+    <div class="sec-head">
+      <h2 id="ps-title">Why every student gets their own baseline</h2>
+      <p class="sub">A measurement from a real iPad, not a model.</p>
+    </div>
+    <p>The obvious design is a global threshold: this much pressure means stress. For one student, being stuck shows up as pressing harder. For another, pressure is flat, and being stuck shows up as going still before the pen touches the page.</p>
+    <figure class="fig">
+      <ul class="legend">
+        <li><span class="key" style="background:#2563EB;opacity:.45"></span>Calm attempts, measured range</li>
+        <li><span class="key" style="background:#C2410C"></span>Genuinely stuck attempts</li>
+      </ul>
+      <img src="../assets/figures/two-students.svg" width="840" height="292" loading="lazy"
+           alt="The same pressure detector on two students. For student A, the stuck attempt sits well outside the calm range. For student B, all three stuck attempts sit inside the calm range.">
+      <figcaption>The same detector, two students, one scale. Per-student baselines fix the difference in scale. Only combining several families fixes the difference in channel, and no tuning of a global constant reaches either.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section wrap" id="principles" data-klera="think" aria-labelledby="pr-title">
+    <div class="sec-head">
+      <h2 id="pr-title">Five principles</h2>
+      <p class="sub">Every design decision traces back to one of these.</p>
+    </div>
+    <div class="grid grid-5">
+      <div class="card panel"><p class="card-label">01</p><h3>Ink, not text</h3><p>The tutor's answer must be erasable, selectable ink on the student's own canvas, in the same coordinate space. A rendered string or a video does not belong to the page.</p></div>
+      <div class="card panel"><p class="card-label">02</p><h3>The individual, not the population</h3><p>Every signal is read against the student's own normal. A threshold that works on the average student is wrong for most real ones.</p></div>
+      <div class="card panel"><p class="card-label">03</p><h3>Fusion, not a detector</h3><p>No single signal is allowed to decide anything. Each is weak and noisy on its own; accuracy comes from the combination.</p></div>
+      <div class="card panel"><p class="card-label">04</p><h3>Withhold by default</h3><p>The hardest thing in tutoring is not answering. When uncertain, show; when confident a student is ready, make them do it.</p></div>
+      <div class="card is-yellow panel"><p class="card-label">05</p><h3>Refuse rather than mislead</h3><p>A confidently wrong diagram or a wrong verdict teaches something false. Every generative step can be refused, and the floor cannot fail.</p></div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="hiring" data-klera="hint" aria-labelledby="hire-title">
+    <div class="sec-head">
+      <h2 id="hire-title">Come and work on this</h2>
+      <p class="sub">No formal posting and no process. A short email about what you've built is plenty.</p>
+    </div>
+    <ul class="also">
+      <li><h3>AI and applied modelling</h3><p>The tutoring loop, silent checking of work nobody asked about, and calibrated problem generation. Getting a model to withhold the answer correctly.</p></li>
+      <li><h3>Data and learning science</h3><p>Per-student baselines, evidence fusion, and study design that lets us change a model without fitting it to noise.</p></li>
+      <li><h3>Something we haven't thought of</h3><p>Tell us which part of this page you think is wrong, and how you'd fix it.</p></li>
+    </ul>
+    <div class="actions">
+      <a class="btn btn-dark" href="mailto:filip@klera.tech,darius@klera.tech?subject=Joining%20Klera" data-magnetic>Email both founders</a>
+      <a class="btn btn-quiet" href="../#try" data-magnetic>Try the pad first</a>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="lin-title">
+    <div class="sec-head">
+      <h2 id="lin-title">Research we build on</h2>
+      <p class="sub">None of these ideas are ours. Making them work on a live canvas is.</p>
+    </div>
+    <ul class="also">
+      <li><h3>Flow</h3><p>Csikszentmihalyi. Learning happens when challenge sits just above skill.</p></li>
+      <li><h3>Zone of proximal development</h3><p>Vygotsky. The next problem should be reachable with a little help.</p></li>
+      <li><h3>Productive failure</h3><p>Kapur; Bjork. Struggle that ends in progress is the goal.</p></li>
+      <li><h3>The assistance dilemma</h3><p>Koedinger and Aleven. Too much help and too little both hurt.</p></li>
+      <li><h3>Confusion in learning</h3><p>D'Mello and Graesser. Confusion that resolves helps; confusion that doesn't becomes frustration.</p></li>
+      <li><h3>Self-determination</h3><p>Deci and Ryan. Autonomy and competence sustain motivation; scores and streaks crowd it out.</p></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <p>Klera. Two Bocconi students building the tutor we wished we had.</p>
+    <nav aria-label="Footer">
+      <a href=".././">Home</a>
+      <a href="../about/">About</a>
+      <a href="../investors/">Investors</a>
+      <a href="../join/">Join us</a>
+      <a href="mailto:filip@klera.tech,darius@klera.tech?subject=Klera">filip@klera.tech</a>
+      <a href="../privacy/">Privacy</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

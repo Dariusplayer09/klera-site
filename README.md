@@ -14,17 +14,20 @@ paths and the waitlist fetch will not behave the way they do in production.
 
 ## Layout
 
-    index.html              the hub
-    for-students/           for the person who uses it
-    for-investors/          for the person who funds it
-    for-engineers/          for the person who would build it
+    index.html              the student home page (generated: python3 tools/build_home.py)
+    investors/              for the person who funds it
+    join/                   for the person who would build it (hiring)
+    for-students/ for-investors/ for-engineers/   redirects to /, /investors/, /join/
     about/                  who is building it
     privacy/                privacy policy, rendered from the app repo's legal/PRIVACY_POLICY.md
-    how-it-works/           redirect, folded into for-students
-    learner-profile/        redirect, folded into for-engineers
-    exams/                  redirect, folded into for-students
+    how-it-works/           redirect, folded into the home page
+    learner-profile/        redirect, folded into join
+    exams/                  redirect, folded into the home page
     assets/klera.css        the whole stylesheet
     assets/klera.js         pointer effects, sheets, the demo toggle
+    assets/klera-character.js  the app's Klera character, ported (one line that morphs)
+    assets/klera-live.js    live logo, companion, pad, help hub, mistake and lesson demos
+    assets/data/            klera-wordmark.json, the app's wordmark pen path
     assets/waitlist.js      the early-access form
     assets/site-config.js   Supabase URL and publishable key
     assets/shots/           app captures, when added (see MEDIA_SLOTS.md)

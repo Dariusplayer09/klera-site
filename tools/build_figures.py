@@ -98,9 +98,9 @@ compare_chart(
     "Pressure strain separates the first student's stuck attempt cleanly from their calm range, "
     "and is completely flat for the second student, whose stuck attempts sit inside their calm range.",
     [
-        {"who": "Student A", "run": "run 004, n=8 calm, 1 stuck", "calm": (0.03, 0.24), "struggle": [0.56],
+        {"who": "Student A", "run": "n=8 calm, 1 stuck", "calm": (0.03, 0.24), "struggle": [0.56],
          "verdict": "Separates cleanly. Struggle sits well outside the calm range."},
-        {"who": "Student B", "run": "run 005, n=7 calm, 3 stuck", "calm": (0.05, 0.12), "struggle": [0.06, 0.11, 0.12],
+        {"who": "Student B", "run": "n=7 calm, 3 stuck", "calm": (0.05, 0.12), "struggle": [0.06, 0.11, 0.12],
          "verdict": "Completely flat. All three stuck attempts sit inside the calm range."},
     ],
     0, 0.7, [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7], threshold=0.60,

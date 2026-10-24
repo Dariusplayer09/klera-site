@@ -13,7 +13,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/klera.css">
 <script src="../assets/site-config.js"></script>
+<script>document.documentElement.classList.add("js");</script>
 <script src="../assets/klera.js" defer></script>
+<script src="../assets/klera-character.js" defer></script>
+<script src="../assets/klera-live.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -22,14 +25,18 @@
   <div class="wrap nav-inner">
     <a class="brand" href="../" translate="no"><img src="../assets/klera-logo-full.png" alt="Klera" width="1864" height="330"></a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="../for-students/">For students</a>
-      <a href="../for-investors/">For investors</a>
-      <a href="../for-engineers/">For engineers</a>
+      <a href="../#try">Try it</a>
+      <a href="../#help">How it helps</a>
       <a href="../about/">About</a>
-      <a class="nav-cta" href="../for-students/#early-access">Early access</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a class="nav-quiet" href="../investors/">Investors</a>
+      <a class="nav-quiet" href="../join/">Join us</a>
+      <a class="nav-cta" href="../#early-access">Early access</a>
     </nav>
   </div>
 </header>
+
+<button class="companion" type="button" data-companion aria-label="Klera. Click to see it think."></button>
 
 <main id="main">
   <section class="hero wrap" aria-labelledby="hero-title">
@@ -72,11 +79,10 @@
   <div class="wrap foot-grid">
     <p>Klera. Two Bocconi students building the tutor we wished we had.</p>
     <nav aria-label="Footer">
-      <a href="../">Home</a>
-      <a href="../for-students/">For students</a>
-      <a href="../for-investors/">For investors</a>
-      <a href="../for-engineers/">For engineers</a>
+      <a href=".././">Home</a>
       <a href="../about/">About</a>
+      <a href="../investors/">Investors</a>
+      <a href="../join/">Join us</a>
       <a href="mailto:filip@klera.tech,darius@klera.tech?subject=Klera">filip@klera.tech</a>
       <a href="../privacy/">Privacy</a>
     </nav>
