@@ -27,6 +27,18 @@
 
   let sent = false;
 
+  /* The under-18 fields only exist for high school students. */
+  const roleSel = form.querySelector("#wl-role");
+  const parentRow = form.querySelector("#wl-parent-row");
+  const under18Row = form.querySelector("#wl-under18-row");
+  const syncMinor = () => {
+    const minor = roleSel.value === "school-student";
+    parentRow.hidden = !minor;
+    under18Row.hidden = !minor;
+  };
+  roleSel.addEventListener("change", syncMinor);
+  syncMinor();
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (sent) return;
@@ -60,6 +72,22 @@
       return;
     }
 
+    /* High school students need a parent or guardian address and the under-18 tick. */
+    const isMinor = data.get("role") === "school-student";
+    const parentEmail = String(data.get("parent_email") || "").trim();
+    if (isMinor) {
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(parentEmail)) {
+        say("Add a parent or guardian email so we can contact them about the pilot.", "err");
+        form.querySelector("#wl-parent").focus();
+        return;
+      }
+      if (!data.get("under18_consent")) {
+        say("Tick the box to confirm your parent or guardian knows you are signing up.", "err");
+        form.querySelector("#wl-under18").focus();
+        return;
+      }
+    }
+
     const row = {
       email,
       name: String(data.get("name") || "").trim().slice(0, 120) || null,
@@ -72,6 +100,11 @@
       page: location.pathname.includes("for-students") ? "students" : "home",
       source: "site",
     };
+    /* Only sent for high school students, so every other submission keeps its old shape. */
+    if (isMinor) {
+      row.parent_email = parentEmail;
+      row.under18_consent = true;
+    }
 
     submit.disabled = true;
     say("Sending…");

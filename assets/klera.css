@@ -495,6 +495,8 @@ tbody tr:last-child > * { border-bottom: 0; }
 .form-status[data-state="ok"] { color: #2F6B1F; }
 .form-status[data-state="err"] { color: #A3310A; }
 .hp { position: absolute; left: -9999px; }
+/* display:grid / flex above would otherwise beat the hidden attribute */
+.form-row[hidden], .check[hidden] { display: none; }
 
 /* ------------------------------------------------------------------ footer */
 .foot { margin-top: var(--gap); border-top: 1px solid var(--rule); padding-block: 2.5rem 3rem; color: var(--muted); font-size: .92rem; }

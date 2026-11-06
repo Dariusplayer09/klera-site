@@ -285,7 +285,7 @@
         <div class="form-row">
           <div class="field">
             <label for="wl-email">Email</label>
-            <input id="wl-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@studbocconi.it">
+            <input id="wl-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@email.com">
           </div>
           <div class="field">
             <label for="wl-name">Name (optional)</label>
@@ -305,7 +305,7 @@
           </div>
           <div class="field">
             <label for="wl-uni">University or school (optional)</label>
-            <input id="wl-uni" name="university" type="text" autocomplete="organization" maxlength="120" placeholder="Bocconi, PoliMi, ...">
+            <input id="wl-uni" name="university" type="text" autocomplete="organization" maxlength="120" placeholder="Transylvania College, Bocconi, ...">
           </div>
         </div>
         <div class="form-row">
@@ -320,7 +320,7 @@
           </div>
           <div class="field">
             <label for="wl-note">What are you studying? (optional)</label>
-            <input id="wl-note" name="note" type="text" maxlength="500" placeholder="Maths for economics, statistics, an exam resit">
+            <input id="wl-note" name="note" type="text" maxlength="500" placeholder="A-level Maths, Physics, economics maths, ...">
           </div>
         </div>
         <div class="form-row">
@@ -329,8 +329,15 @@
             <input id="wl-apple" name="apple_id_email" type="email" autocomplete="off" inputmode="email" placeholder="The address your iPad is signed in with">
           </div>
         </div>
+        <div class="form-row" id="wl-parent-row" hidden>
+          <div class="field">
+            <label for="wl-parent">Parent or guardian email (if you're under 18)</label>
+            <input id="wl-parent" name="parent_email" type="email" autocomplete="off" inputmode="email" placeholder="parent@email.com">
+          </div>
+        </div>
 
         <label class="check"><input id="wl-consent" name="consent" type="checkbox" required> <span>Email me about Klera early access and TestFlight invites. I can ask for my details to be deleted at any time by writing to filip@klera.tech. See the <a href="privacy/">privacy policy</a>.</span></label>
+        <label class="check" id="wl-under18-row" hidden><input id="wl-under18" name="under18_consent" type="checkbox"> <span>I'm under 18 and my parent or guardian knows I'm signing up and can be contacted.</span></label>
 
         <div class="hp" aria-hidden="true">
           <label for="wl-company">Company</label>

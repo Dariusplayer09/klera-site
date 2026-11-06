@@ -29,6 +29,9 @@ alter table public.waitlist add column if not exists university      text;
 alter table public.waitlist add column if not exists apple_id_email  text;
 alter table public.waitlist add column if not exists consent         boolean not null default false;
 alter table public.waitlist add column if not exists page            text;
+-- Under-18 signups (high school students): parent/guardian contact and the tick that says they know
+alter table public.waitlist add column if not exists parent_email     text;
+alter table public.waitlist add column if not exists under18_consent  boolean not null default false;
 
 -- Ops columns: set by us, never by the form
 alter table public.waitlist add column if not exists status           text not null default 'waiting';
@@ -74,7 +77,7 @@ alter table public.waitlist enable row level security;
 -- Column-level insert grant: the anon key can only fill the visitor columns. Any attempt to
 -- set status / premium_granted / batch from the browser is rejected by Postgres itself.
 revoke all on public.waitlist from anon, authenticated;
-grant insert (email, name, role, university, device, note, apple_id_email, consent, page, source)
+grant insert (email, name, role, university, device, note, apple_id_email, consent, page, source, parent_email, under18_consent)
   on public.waitlist to anon, authenticated;
 
 drop policy if exists "anyone may join the waitlist" on public.waitlist;
@@ -89,7 +92,9 @@ create policy "anyone may join the waitlist"
     and (university is null or length(university) <= 120)
     and (note is null or length(note) <= 500)
     and (apple_id_email is null or (apple_id_email ~* '^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]+$' and length(apple_id_email) <= 254))
+    and (parent_email is null or (parent_email ~* '^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]+$' and length(parent_email) <= 254))
     and consent = true
+    and (role <> 'school-student' or (parent_email is not null and under18_consent = true))
     and role   in ('student', 'school-student', 'parent', 'teacher', 'other')
     and device in ('ipad-pencil', 'ipad-no-pencil', 'no-ipad', 'unsure')
     and (page is null or page in ('home', 'students'))
