@@ -1,5 +1,25 @@
 # Klera site design system
 
+> **2026-11-09: student landing redesign (supersedes the Structure, Visual source and type
+> sections below where they conflict).** App is live (App Store id6826322672, Europe only, free,
+> iPadOS 26+, ages 13+), so the site is now a plain student landing page in the layout language
+> of flashka.ai, kept in Klera colours: Inter, cream paper, white cards, the app's yellow
+> highlighter box (`.hl`), floating feature tiles, tabbed feature tour, bento cards, one
+> statement, App Store gallery, App Store button, FAQ card, column footer.
+>
+> - Styles: `assets/site.css` + `assets/site.js` (klera.css/klera.js only serve old redirect stubs).
+> - Build: `python3 tools/build_pages.py` writes `/`, `/about/`, `/join/`, `/support/`, `/privacy/`
+>   from `tools/*.template.html` + `head/nav/footer/icons/store` partials. Support and privacy
+>   bodies are re-wrapped from whatever is inside their `.policy` block, so republish the
+>   policy first, then run the build.
+> - Screens: `assets/app/` = the six App Store screenshots (full, for the gallery) and `-crop`
+>   versions with the baked headline cut off (for the hero and the feature tour).
+> - Hero still plays the real-engine welcome wordmark (`klera-engine.js` + `klera-live.js`).
+> - `/join/` is "Work with us": student builders + investors on one short page. `/investors/`,
+>   `/for-investors/`, `/for-engineers/` redirect there. Early-access waitlist removed (CTA is
+>   the App Store). No usage numbers anywhere, same rule as before.
+
+
 The source of truth for how every page looks and moves.
 
 ## Design read
