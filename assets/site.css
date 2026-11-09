@@ -134,14 +134,34 @@ p { margin: 0; text-wrap: pretty; }
 
 /* Floating feature tiles around the hero, Flashka style. */
 .floaters { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-.floaters .tile { position: absolute; animation: drift 9s ease-in-out infinite; }
-.floaters .tile:nth-child(2n) { animation-duration: 11s; animation-delay: -3s; }
-.floaters .tile:nth-child(3n) { animation-duration: 13s; animation-delay: -6s; }
+/* Floating pieces of the real Klera UI (hint bubble, mistake chip, solve pill, tutor menu). */
+.fchip {
+  position: absolute; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+  font-size: 14px; font-weight: 600; color: var(--ink); letter-spacing: -.01em;
+  padding: 10px 16px; border-radius: 999px;
+  background: rgba(255, 253, 247, .94); border: 1px solid #EDE5CF;
+  box-shadow: 0 1px 2px rgba(23, 19, 7, .05), 0 14px 30px -14px rgba(23, 19, 7, .28);
+  animation: drift 10s ease-in-out infinite;
+}
+.fchip:nth-child(2n) { animation-duration: 12s; animation-delay: -4s; }
+.fchip:nth-child(3n) { animation-duration: 14s; animation-delay: -7s; }
+.fchip .ic { width: 16px; height: 16px; fill: none; stroke: var(--amber); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.fchip .ic.red { stroke: var(--red); }
+.fchip .ic.green { stroke: #1E6B35; }
+.fchip b { font-weight: 700; font-size: 12px; padding: 3px 8px; border-radius: 999px; }
+.fchip .pill-red { background: var(--red-soft); color: var(--red); }
+.fchip .pill-stop { background: #E5483D; color: #fff; }
+.fchip .score { background: #D7EED9; color: #1E6B35; }
+.fchip .spin { width: 12px; height: 12px; border-radius: 50%; border: 2px dashed var(--yellow); }
+.fchip.menu { flex-direction: column; align-items: stretch; gap: 2px; padding: 6px; border-radius: 18px; }
+.fchip.menu b, .fchip.menu span { font-size: 13px; text-align: center; padding: 6px 18px; border-radius: 12px; color: var(--ink-2); }
+.fchip.menu b.on { background: var(--yellow-soft); color: var(--ink); }
 @keyframes drift {
   0%, 100% { transform: translate(0, 0) rotate(var(--r, -6deg)); }
   50% { transform: translate(6px, -14px) rotate(calc(var(--r, -6deg) * -1)); }
 }
-@media (max-width: 760px) { .floaters .tile.far { display: none; } .floaters .tile { scale: .8; } }
+@media (max-width: 1100px) { .floaters .far { display: none; } }
+@media (max-width: 760px) { .fchip { scale: .85; } }
 @media (max-width: 560px) { .floaters { display: none; } }
 
 /* ---------------------------------------------------------------- icon tiles */
@@ -155,13 +175,8 @@ p { margin: 0; text-wrap: pretty; }
 .tile svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .tile.sm { width: 36px; height: 36px; border-radius: 12px; }
 .tile.sm svg { width: 19px; height: 19px; }
-.t-yellow { --bg: #FBEBB8; --fg: #8A5A00; }
-.t-red    { --bg: #FBD9D4; --fg: #B3261E; }
-.t-green  { --bg: #D7EED9; --fg: #1E6B35; }
-.t-blue   { --bg: #DCE6FB; --fg: #1F4FC2; }
-.t-purple { --bg: #E8E0FB; --fg: #5B36B8; }
-.t-orange { --bg: #FCE0C9; --fg: #A3470E; }
-.t-pink   { --bg: #F9DCEB; --fg: #A0306B; }
+.t-yellow, .t-green, .t-blue, .t-purple, .t-orange, .t-pink { --bg: #FBF0D2; --fg: #7A4E00; }
+.t-red { --bg: #FBDDD8; --fg: #B3261E; }
 
 /* ---------------------------------------------------------------- sections */
 .section { padding: clamp(80px, 11vw, 140px) 0 0; }
@@ -316,7 +331,7 @@ p { margin: 0; text-wrap: pretty; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .floaters .tile, .js .tour-panel:not([hidden]) .tour-shot img { animation: none; }
+  .fchip, .js .tour-panel:not([hidden]) .tour-shot img { animation: none; }
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
   .logo-word-host, .logo-bulb, .store-btn, .btn { transition: none; }
 }
