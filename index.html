@@ -25,6 +25,8 @@
 
 <script src="assets/klera-engine.js" defer></script>
 <script src="assets/klera-live.js" defer></script>
+<script src="assets/site-config.js"></script>
+<script src="assets/newsletter.js" defer></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Klera","operatingSystem":"iPadOS 26","applicationCategory":"EducationalApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"downloadUrl":"https://apps.apple.com/gb/app/kleraai/id6826322672","description":"An AI tutor for iPad that works on your handwriting. Write a maths or science problem and Klera helps only as much as you need."}
 </script>
@@ -245,6 +247,35 @@
 </div>
   </section>
 
+  <section class="section wrap" id="newsletter" aria-labelledby="nl-title">
+    <div class="newsletter" data-reveal>
+      <div>
+        <span class="tile t-yellow"><svg><use href="#i-book"/></svg></span>
+        <h2 id="nl-title">Get the Klera newsletter</h2>
+        <p>New features, study tips and the odd behind-the-scenes note. A few emails a term, never spam.</p>
+      </div>
+      <div>
+      <form id="newsletter-form" novalidate>
+        <div class="nl-row">
+          <label class="visually-hidden" for="nl-email">Email</label>
+          <input id="nl-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@email.com">
+          <label class="visually-hidden" for="nl-role">You are a</label>
+          <select id="nl-role" name="role">
+            <option value="student">Student</option>
+            <option value="parent">Parent</option>
+            <option value="teacher">Teacher or tutor</option>
+            <option value="other">Something else</option>
+          </select>
+          <button class="btn btn-dark" type="submit">Subscribe</button>
+        </div>
+        <label class="nl-consent"><input id="nl-consent" name="consent" type="checkbox" value="1"> <span>I'd like emails from Klera. I'm 16 or older, or a parent says it's OK. Unsubscribe any time. <a href="privacy/">Privacy</a></span></label>
+        <div class="hp" aria-hidden="true"><label>Company <input name="company" tabindex="-1" autocomplete="off"></label></div>
+      </form>
+        <p id="newsletter-status" class="nl-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
   <section class="section wrap" id="faq" aria-labelledby="faq-title">
     <div class="faq" data-reveal>
       <h2 id="faq-title">Questions?</h2>
@@ -308,6 +339,7 @@
         <ul>
           <li><a href="./#features">Features</a></li>
           <li><a href="./#faq">FAQ</a></li>
+          <li><a href="./#newsletter">Newsletter</a></li>
           <li><a href="https://apps.apple.com/gb/app/kleraai/id6826322672" data-store="footer">Download</a></li>
         </ul>
       </div>
